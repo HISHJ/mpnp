@@ -1,0 +1,161 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
+
+<%@page import="java.util.List"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" info="scriptlet의 사용" %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>후기관리-메인</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!--JQuery Google CDN -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	
+
+    </head>
+<body class="sb-nav-fixed">
+
+<script type="text/javascript">
+$(function(){
+	$("#signDateSearchBtn").click(function(){
+		$("#rsrvtDate").submit();
+	})//end get date parameter
+	
+	$("#showSatusSearchBtn").click(function(){
+		$("#rsrvtStatus").submit();
+	})//end get status parameter
+})//ready
+</script>
+
+<script> 
+ function getHiddenVal(rid, status,name){
+	 
+    $("#rsrvtId").val(rid);
+    $("#status").val(status);
+    $("#name").val(name);
+
+    var sta = $("#status").val();
+    var name = $("#name").val();
+     
+    if(sta == "예매취소" || name==" " ){
+      alert("취소된 예매나 탈퇴한 회원의 예매상세내역은 열람할 수 없습니다.")	;
+    }else{
+    $("#resultFrm").submit();
+    };
+ 
+ }//getHiddenVal
+</script>
+
+ <!-- 여기서부터 <nav>-->
+<jsp:include page="admin_common_header.jsp"/>      
+<!-- -여기까지 <div id="layoutSidenav_content"> 전  -->
+
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">후기관리</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">review management board</li>
+                        </ol>
+                        
+                        
+                       
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                후기조회
+                            </div>
+                            <div class="card-body">
+                               
+                               <!-- 다 검색으로 조회가능 하지만 우선 만듬 -->
+                            <form name="" id=>
+                           	 <div class="dataTable-top"></div>
+                                <label>닉네임　</label>
+                           	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
+                                <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
+                             </form>
+                             
+                            <form name="" id=>
+                           	 <div class="dataTable-top"></div>
+                                <label>내용　　</label>
+                           	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
+                                <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
+                             </form>
+                             
+                             <form name="" id="">
+                           	 <div class="dataTable-top"></div>
+                               <div>
+                                <label>신고수　</label>
+                                <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+								<option>높은순</option>
+								<option>적은순</option>
+								<option></option>
+								</select>
+								<input type="button" id="genreSearchBtn" name="genreSearchBtn" value="검색">
+                               </div>
+                              </form>
+                           
+                                
+                                </div>
+                            </div>
+                        
+                               
+                           <form id="resultFrm" name="resultFrm" action="rsrvtDetail.jsp" method="post"> 
+                   		  <input type="hidden" name="rsrvtId" id="rsrvtId" >
+		 				  <input type="hidden" name="status" id="status" >
+		 				  <input type="hidden" name="name" id="name" >
+		 				  
+                                <table id="datatablesSimple">
+                               
+                                    <thead>
+                                        <tr>
+                                            <th>후기코드</th>
+                                            <th>닉네임</th>
+                                            <th>내용</th>
+                                            <th>등록일자</th>
+                                            <th>신고수</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>                                         
+                                        <tr>
+                                            <th>후기코드</th>
+                                            <th>닉네임</th>
+                                            <th>내용</th>
+                                            <th>등록일자</th>
+                                            <th>신고수</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                              			<tr>
+                                            <td>R_1234556</td>
+                                            <td>개구리</td>
+                                            <td>개구리한테 줘봤어요</td>
+                                            <td>2022-10-29</td>                                          
+                                            <td>12</td>
+                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('','','')"></td> 
+                                        </tr>
+                                       
+                                    </tbody>                                    
+                                </table>
+                                 
+                                  </form>
+                            </div>
+                            </main>
+                        </div>
+                    </div>
+<!-- 여기서부터<footer -->
+              <jsp:include page="admin_common_footer.jsp"/>
+<!-- 요기까지</html> -->

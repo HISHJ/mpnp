@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300i,400,500,600&display=swap');
+		 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+		body{
+			margin: 0;
+			padding: 0;
+    		font-family: 'Poppins', sans-serif;
+    		background-color: #fcfcfc;
+		}
+		*{
+			box-sizing: border-box; 
+      /* 지정한 CSS width 및 height를 전체 영역에 적용 */
+		}
+		.main-container{
+			max-width: 1170px;
+			margin: 0 auto;
+			text-align: center;
+			padding: 10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			flex-direction: column;
+		}
+.inner-content{
+  margin: 25px 0;
+}
+		.inner-content  input[type="radio"]{
+			display: none;
+		}
+		.inner-content i{
+			color: #dddddd;
+			font-size: 36px;
+			cursor: pointer;
+		}
+		.inner-content  input[type="radio"]:checked ~ label  i{
+			color: #FFD700;
+		}
+		.inner-content {
+      /* direction: ltr; */
+      /* 별점 선택 정방향 */
+			direction: rtl; 
+			width: 100%;
+		}
+	
+
+
+    

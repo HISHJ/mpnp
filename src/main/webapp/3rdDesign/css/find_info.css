@@ -1,0 +1,215 @@
+
+.container {
+  padding: 0px 20px 0px 20px;
+  min-width: 1200px;
+  min-height: 478px;
+}
+
+.sett .container > .inr,
+.login.srch .container > .inr{
+ margin-bottom:100px !important;
+
+}
+
+.container .group{
+  display: block;
+  min-width: 680px;
+  max-width: 780px;
+  height: auto;
+  text-align: center;
+  border:3px solid #f7f7f7;
+  margin-top:80px;;
+  margin-left:-100px;
+  margin-bottom:100px !important;
+}
+
+.group h3.tit-st4{
+  font-size:30rem;
+  margin:30px;
+  font-weight: bold;
+
+}
+
+.login.srch .result {
+  text-align: center;
+  font-size: 20rem;
+  font-weight: 700;
+  line-height: 24rem;
+}
+
+.box{
+  margin-top:50px;
+
+}
+
+.login.srch .result .blue {
+  color:var(--colors-main03);
+}
+
+div.top_find{
+  margin-top:-20px !important;
+  background-color: var(--colors-main03);
+  border-radius: 3px;;
+ border-bottom:2px solid var(--colors-gray04);
+   margin:10px 10px; 
+  padding:30px;
+}
+
+.find_member .form_w {
+  padding: 50px;
+}
+
+
+@media (max-width: 1024px){
+
+.find_member .form_w, .find_confirm .box {
+    padding: 5%;
+}
+}
+
+.find_member .t {
+  text-align: center;
+  font-size: 1.625em;
+  margin-bottom: 1.5em;
+  font-weight: 300;
+}
+
+.find_member .form {
+  max-width: 880px;
+  margin: 0px auto;
+}
+
+.find_member .form > li:first-child {
+  border-top: 0px;
+}
+
+.find_member .form > li {
+  position: relative;
+  display: table;
+  width: 100%;
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.find_member .form > li > * {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 20px 10px;
+}
+
+.find_member input[type="text"], .find_member select {
+  height: 3.75em;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-image: initial;
+}
+
+.find_member .form > li {
+  position: relative;
+  display: table;
+  width: 100%;
+  border-top: 1px solid rgb(221, 221, 221);
+}
+
+.find_member .form .tt {
+  width: 180px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.find_member .form .tt {
+  width: 180px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.find_member .form > li > * {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 20px 10px;
+}
+
+div.cont div.tel_w, div.cont div.birth_w ul.birth, div.cont div.tel_w ul.tel, div.cont ul.tel, div.cont div.birth_w ul.birth li {
+  display: flex;
+  align-items: center;
+}
+
+.find_member .tel_w {
+  position: relative;
+  padding-right: 153px;
+}
+
+.find_member .tel_w button, .find_member .tel_confirm button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.find_member .form button {
+  width: 140px;
+  height: 100%;
+}
+
+/* ul.form li:first-child{
+ margin-bottom:10px;
+
+} */
+
+ul.form li{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+ul.form input[type=text],
+ul.form input[type=tel]{
+  width:300px;
+  height:50px;
+}
+
+li div.cont{
+  margin-top:10px;
+  margin-left:10px;
+}
+
+div.result h4{
+  margin-top:20px;
+  font-size:15rem;
+
+}
+
+span.tt{
+  margin-bottom:100px;
+  margin-left:-3px;
+}
+
+
+
+ul.form label{
+  width:52px;
+}
+/* 
+ul.tel{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+button.bg-black{
+  background-color: var(--colors-main03);
+  /* border:1px solid  var(--colors-main03); */
+  padding:15px 100px;
+  color:#fff;
+  border-radius: 3px;;
+  margin:20px 0;
+  font-weight: bold;
+    font-size: 15rem;
+} 
+
+input[type='text'], input[type='tel'] {
+  padding: 12px 35px 12px 12px;
+  color: #333333;
+  border: #dddddd solid 1px;
+}

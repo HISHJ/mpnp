@@ -1,0 +1,184 @@
+nhn.deskhome_menu={_sServiceName:null,_sExtenstionType:null,_htEvent:{},_htElement:{},_htInitData:null,_htPage:{mail:"http://mail.naver.com",calendar:"http://calendar.naver.com",memo:"http://memo.naver.com",contact:"http://contact.naver.com",ndrive:"http://mybox.naver.com",office:"http://office.naver.com",moneybook:"http://moneybook.naver.com",notify:"http://me.naver.com/tab/noti.nhn",myfeed:"http://me.naver.com/tab/news.nhn"},initialize:function(a){this._sServiceName=a.sServiceName||"naverme";
+this._sExtenstionType=a.sExtenstionType||"";
+this._sUserId=a.sUserId;
+this._htInitData=a.htInitialData||{};
+this._sSkinClass=a.sSkinClass||"";
+this._setElement(a.elContainer);
+this._initElementAttr();
+if(jindo.$Element(this._htElement.header).hasClass("{=OPTION_CLASS}")){jindo.$Element(this._htElement.header).addClass("h_"+this._sServiceName+(this._sExtenstionType!=""?"_"+this._sExtenstionType:""))
+}if(this._sSkinClass!=""){jindo.$Element(this._htElement.header).addClass(this._sSkinClass);
+jindo.$Element(this._htElement.menu_last).addClass(this._sSkinClass)
+}this._attachEvent();
+this.onResize();
+if(this._sServiceName!="mail"){this._loadMailCount()
+}},_attachEvent:function(){this._htEvent.click=jindo.$Fn(this._onClick,this).attach(this._htElement.header,"click")
+},_onClick:function(d){var e=d.element;
+var c=jindo.$Element(e);
+var b="";
+var a="GNB.";
+if(c.hasClass("naver")){b=a+"naver"
+}else{if(c.hasClass("pwe_home")){b=a+this._sServiceName+"logo"
+}else{if(c.hasClass("btn_more")){b=a+"more"
+}else{if(c.hasClass("mail")){b=a+"mail"
+}else{if(c.hasClass("calendar")){b=a+"calendar"
+}else{if(c.hasClass("memo")){b=a+"memo"
+}else{if(c.hasClass("address")){b=a+"contact"
+}else{if(c.hasClass("ndrive")){b=a+"ndrive"
+}else{if(c.hasClass("office")){b=a+"office"
+}else{if(c.hasClass("moneybook")){b=a+"moneybook"
+}else{if(c.hasClass("notify")){b=a+"notify"
+}else{if(c.hasClass("myfeed")){b=a+"myfeed"
+}else{if(c.hasClass("keep")){b=a+"keep"
+}}}}}}}}}}}}}if(c.hasClass("btn_more")){if(c.hasClass("on")){c.removeClass("on");
+jindo.$Element(this._htElement.menu_last).hide()
+}else{c.addClass("on");
+jindo.$Element(this._htElement.menu_last).show()
+}d.stopDefault()
+}if(b){clickcr(e,b,"","",d.$value())
+}},_detachEvent:function(){this._htEvent.click.detach(this._getElement("_root",true),"click")
+},destroy:function(){this._detachEvent();
+this._sServiceName=null;
+this._sServiceType=null;
+this._htElement=null;
+this._htInitData=null;
+this._htLayoutData=null
+},_initElementAttr:function(){var a="";
+jindo.$Element(this._htElement.header_title).html(this._getServiceName());
+jindo.$Element(this._htElement.cnt_mail).css("cursor","pointer");
+jindo.$Element(this._htElement.cnt_calendar).css("cursor","pointer");
+jindo.$Element(this._htElement.mail).attr("title","메일");
+jindo.$Element(this._htElement.calendar).attr("title","캘린더");
+jindo.$Element(this._htElement.memo).attr("title","메모");
+jindo.$Element(this._htElement.contact).attr("title","주소록");
+jindo.$Element(this._htElement.ndrive).attr("title","MYBOX");
+jindo.$Element(this._htElement.office).attr("title","오피스");
+jindo.$Element(this._htElement.moneybook).attr("title","가계부");
+jindo.$Element(this._htElement.notify).attr("title","알림");
+jindo.$Element(this._htElement.myfeed).attr("title","구독");
+jindo.$Element(this._htElement.keep).attr("title","KEEP");
+var b=jindo.cssquery.getSingle(".mail",this._htElement.mail);
+jindo.$Element(b).attr("accesskey","4");
+jindo.$Element(b).attr("href",this._htPage.mail);
+switch(this._sServiceName){case"mail":a="http://mail.naver.com";
+break;
+case"calendar":a="http://calendar.naver.com";
+break;
+case"memo":a="http://memo.naver.com";
+break;
+case"contact":a="http://contact.naver.com";
+break;
+case"ndrive":a="http://mybox.naver.com";
+break;
+case"office":a="http://office.naver.com";
+break;
+case"moneybook":a="http://moneybook.naver.com";
+break;
+case"notify":a="http://me.naver.com/tab/noti.nhn";
+break;
+case"myfeed":a="http://me.naver.com/tab/news.nhn";
+break
+}jindo.$Element(this._htElement.service_link).attr("href",a);
+if(this._sServiceName!="mail"){b=jindo.cssquery.getSingle(".mail",this._htElement.mail);
+jindo.$Element(b).attr("href",this._htPage.mail)
+}if(this._sServiceName!="calendar"){b=jindo.cssquery.getSingle(".calendar",this._htElement.calendar);
+jindo.$Element(b).attr("href",this._htPage.calendar)
+}if(this._sServiceName!="memo"){b=jindo.cssquery.getSingle(".memo",this._htElement.memo);
+jindo.$Element(b).attr("href",this._htPage.memo)
+}if(this._sServiceName!="contact"){b=jindo.cssquery.getSingle(".address",this._htElement.contact);
+jindo.$Element(b).attr("href",this._htPage.contact)
+}if(this._sServiceName!="ndrive"){b=jindo.cssquery.getSingle(".ndrive",this._htElement.ndrive);
+jindo.$Element(b).attr("href",this._htPage.ndrive)
+}if(this._sServiceName!="office"){b=jindo.cssquery.getSingle(".office",this._htElement.office);
+jindo.$Element(b).attr("href",this._htPage.office)
+}if(this._sServiceName!="moneybook"){b=jindo.cssquery.getSingle(".moneybook",this._htElement.moneybook);
+jindo.$Element(b).attr("href",this._htPage.moneybook)
+}if(this._sServiceName!="notify"){b=jindo.cssquery.getSingle(".notify",this._htElement.notify);
+jindo.$Element(b).attr("href",this._htPage.notify)
+}if(this._sServiceName!="myfeed"){b=jindo.cssquery.getSingle(".myfeed",this._htElement.myfeed);
+jindo.$Element(b).attr("href",this._htPage.myfeed)
+}},_setElement:function(a){this._htElement.header=jindo.$("header");
+this._htElement.menu_area=a||jindo.cssquery.getSingle(".gnb_area",jindo.$("header"));
+this._htElement.service_link=jindo.cssquery.getSingle("a._svc_lnk",this._htElement.header);
+this._htElement.header_title=jindo.cssquery.getSingle("span._header_tit",this._htElement.header);
+this._htElement.menu_list=jindo.cssquery.getSingle(".gnb_list_box",this._htElement.menu_area);
+this._htElement.menu_last=jindo.cssquery.getSingle("ul._gnb_last",this._htElement.menu_area);
+this._htElement.btn_more=jindo.cssquery.getSingle("a.btn_more",this._htElement.menu_area);
+this._htElement.mail=jindo.cssquery.getSingle("._mail",this._htElement.menu_list);
+this._htElement.new_mail=jindo.cssquery.getSingle(".article_num",this._htElement.mail);
+this._htElement.cnt_mail=jindo.cssquery.getSingle("._count",this._htElement.new_mail);
+this._htElement.calendar=jindo.cssquery.getSingle("._calendar",this._htElement.menu_list);
+this._htElement.new_calendar=jindo.cssquery.getSingle(".article_num",this._htElement.calendar);
+this._htElement.cnt_calendar=jindo.cssquery.getSingle("._count",this._htElement.new_calendar);
+this._htElement.memo=jindo.cssquery.getSingle("._memo",this._htElement.menu_list);
+this._htElement.new_memo=jindo.cssquery.getSingle(".article_num",this._htElement.memo);
+this._htElement.cnt_memo=jindo.cssquery.getSingle("._count",this._htElement.memo);
+this._htElement.contact=jindo.cssquery.getSingle("._contact",this._htElement.menu_list);
+this._htElement.new_contact=jindo.cssquery.getSingle(".article_num",this._htElement.contact);
+this._htElement.cnt_contact=jindo.cssquery.getSingle("._count",this._htElement.contact);
+this._htElement.ndrive=jindo.cssquery.getSingle("._ndrive",this._htElement.menu_list);
+this._htElement.new_ndrive=jindo.cssquery.getSingle(".article_num",this._htElement.ndrive);
+this._htElement.cnt_ndrive=jindo.cssquery.getSingle("._count",this._htElement.new_ndrive);
+this._htElement.office=jindo.cssquery.getSingle("._office",this._htElement.menu_list);
+this._htElement.new_office=jindo.cssquery.getSingle(".article_num",this._htElement.office);
+this._htElement.cnt_office=jindo.cssquery.getSingle("._count",this._htElement.new_office);
+this._htElement.moneybook=jindo.cssquery.getSingle("._moneybook",this._htElement.menu_list);
+this._htElement.new_moneybook=jindo.cssquery.getSingle(".article_num",this._htElement.moneybook);
+this._htElement.cnt_moneybook=jindo.cssquery.getSingle("._count",this._htElement.new_moneybook);
+this._htElement.notify=jindo.cssquery.getSingle("._notify",this._htElement.menu_list);
+this._htElement.new_notify=jindo.cssquery.getSingle(".article_num",this._htElement.notify);
+this._htElement.cnt_notify=jindo.cssquery.getSingle("._count",this._htElement.new_notify);
+this._htElement.myfeed=jindo.cssquery.getSingle("._myfeed",this._htElement.menu_list);
+this._htElement.new_myfeed=jindo.cssquery.getSingle(".article_num",this._htElement.myfeed);
+this._htElement.cnt_myfeed=jindo.cssquery.getSingle("._count",this._htElement.new_myfeed);
+this._htElement.keep=jindo.cssquery.getSingle("._keep",this._htElement.menu_list)
+},_getDomainInfo:function(){this._htInitData.htDomainInfo={DESK_URL:"http://desk.naver.com",CONTACT_IMAGE_URL:"http://img.contact.naver.com",CONTACT_URL:"http://contact.naver.com",MAIL_URL:"http://mail.naver.com",NDRIVE_URL:"http://mybox.naver.com",NAVER_OFFICE_VIEWR_URL:"http://word.office.naver.com",OFFICE_VIEWR_URL:"http://docviewer.office.naver.com",NPHOTO_URL:"http://nphoto.naver.com",WEBMSG_URL:"http://webmsg.naver.com",HELP_DESK_URL:"http://help.naver.com",PROFILE_POPUP_URL:"http://contact.naver.com/editMyAddressBook.nhn?addressNo=0&openedSupplement=true"}
+},getDomain:function(b){if(!this._htInitData||typeof this._htInitData.htDomainInfo=="undefined"){this._getDomainInfo();
+return false
+}if(!b||!this._htInitData.htDomainInfo[b]){return false
+}var a=this._htInitData.htDomainInfo[b];
+a=/^http:\/\//.test(a)?a:"http://"+a;
+return a
+},_setMailCount:function(a){if(this._sServiceName!=="mail"&&a&&a>0&&this._htElement.new_mail){this._htElement.new_mail.style.display="inline";
+this._htElement.cnt_mail.innerHTML=(a<1000)?a:"999+"
+}else{if(a===0){this._htElement.new_mail.style.display="none"
+}}},_getServiceName:function(){var a="";
+switch(this._sServiceName){case"mail":a="메일";
+break;
+case"calendar":a="캘린더";
+break;
+case"memo":a="메모";
+break;
+case"contact":a="주소록";
+break;
+case"ndrive":a="MYBOX";
+break;
+case"office":a="오피스";
+break;
+case"moneybook":a="가계부";
+break;
+case"health":a="건강기록부";
+break;
+case"notify":a="알림";
+break;
+case"myfeed":a="구독";
+break
+}return a
+},getInfomationForPWE:function(){},setSkinType:function(a){var c=jindo.$Element(this._htElement.header),b=jindo.$Element(this._htElement.menu_last);
+if(this._sSkinClass!=""){c.removeClass(this._sSkinClass);
+b.removeClass(this._sSkinClass)
+}c.addClass(a);
+b.addClass(a);
+this._sSkinClass=a
+},onResize:function(){jindo.$Element(this._htElement.btn_more).removeClass("on");
+jindo.$Element(this._htElement.menu_last).hide()
+},_loadMailCount:function(){var a="__mailCallBack"+new Date().getMilliseconds(),d="https://mail.naver.com/external/mailCount?svc=pnb&callback="+a,c=document.createElement("script"),b=this;
+c.type="text/javascript";
+c.src=d;
+c.id="_PNB_COUNT";
+window[a]=function(e){var g=(e||{COUNT:-1}).COUNT,f=document.getElementById("_PNB_COUNT");
+b._setMailCount(g);
+if(f){document.getElementsByTagName("head")[0].removeChild(f)
+}delete window[a]
+};
+document.getElementsByTagName("head")[0].appendChild(c)
+}};

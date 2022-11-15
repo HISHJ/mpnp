@@ -1,0 +1,315 @@
+.container {
+  padding: 0px 20px 0px 20px;
+  min-width: 1200px;
+  min-height: 478px;
+  margin-top:80px;
+}
+
+ .container > .inr {
+  display: block;
+  min-width: 335px;
+  max-width: 335px;
+  height: auto;
+}
+
+
+
+.container>.inr {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  min-width: 1200px;
+}
+
+.login.srch .contents {
+  margin-top:150px !important;
+  margin-bottom:20px !important;
+  width: 335px;
+  margin: 0 auto;
+}
+
+.container .contents {
+  width: 100%;
+}
+
+ .container > .inr .pc-tit {
+  font-size: 30rem;
+  padding: 0;
+  margin: 42px 0;
+  text-align: center;
+}
+
+
+.fake-pop {
+  padding: 10px 20px;
+}
+
+.login.srch .fake-pop {
+  padding: 0;
+}
+.pc-tit {
+  /* margin: 40px 0 20px; */
+  margin: 40px 0;
+  position: relative;
+}
+
+.login.srch .container > .inr .pc-tit h2 {
+  line-height: 30rem;
+}
+
+.pc-tit h2 {
+  font-size: 30rem;
+  font-weight: 700;
+}
+
+.login.srch .container > .inr .pc-tit h2 {
+  line-height: 30rem;
+}
+
+.pc-tit h2 {
+  font-size: 30rem;
+  font-weight: 700;
+}
+
+.login.srch .fake-pop {
+  padding: 0;
+}
+
+.login.srch .member-input .list > li {
+  margin-bottom: 14px;
+}
+
+/* .input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+} */
+
+.input {
+  display: block;
+  vertical-align: middle;
+  position: relative;
+}
+
+
+.input>input, .textarea>textarea {
+  display: block;
+  width: 100%;
+  padding: 4px 10px 4px 10px;
+  border-radius: 4px;
+  margin: 0px 0;
+  background-image: none;
+  -webkit-appearance: none;
+  color: #333333;
+  border: #dddddd solid 1px;
+  resize: none;
+  outline: none;
+  vertical-align: middle;
+  -webkit-border-radius: 4px;
+  /* box-shadow: inset 0 1px 2px rgb(27 31 35 / 8%); */
+  font-size: 15rem;
+}
+
+.login.srch .member-input .validation-check {
+  padding-left: 12px;
+  letter-spacing: -0.05em;
+}
+
+.input>input[type='text'], .input>input[type='password'] {
+  padding: 12px 35px 12px 12px;
+}
+
+.input>input {
+  height: 48px;
+  line-height: 2;
+}
+
+.member-input .list li {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.login.srch .member-input .validation-check {
+  padding-left: 12px;
+  letter-spacing: -0.05em;
+}
+
+.validation-check {
+  font-size: 13rem;
+  color: #ff7777;
+  margin-top: 7px;
+  padding: 0 5px 0;
+}
+
+/* .login.srch .fake-pop{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+
+} */
+
+/*아이디 저장*/
+.login.srch .check-wrap {
+  margin: 20px 0;
+}
+
+.checkbox {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.checkbox>input {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: 0px;
+  z-index: 10;
+  margin: 0;
+  opacity: 1;
+  width: 24px;
+  height: 24px;
+}
+
+.login.srch .check-wrap .checkbox > .txt {
+  font-size: 13rem;
+  color: #666;
+}
+
+.checkbox>.txt::before {
+  width: 24px;
+  height: 24px;
+  /* background: url(../common/form.png) no-repeat; */
+  display: inline-block;
+  vertical-align: -8px;
+  background-size: 75px auto;
+  margin-right: 5px;
+  content: "";
+}
+
+/*로그인버튼*/
+
+.btnSet {
+  position: relative;
+  display: flex;
+  margin-left: -3.5px;
+  margin-right: -3.5px;
+  justify-content: center;
+}
+
+ .pull .btn.lg.gray {
+  background-color:#dddddd;
+  color: #fff;
+  font-weight: bold;
+  font-size:17rem;
+  cursor: default;
+  width: 100%;
+} 
+
+.pull .btn {
+  width: 100%;
+}
+
+.btnSet .btn {
+  width: 100%;
+  margin: 0 3.5px;
+}
+
+.btn.lg {
+  height: 50px;
+  min-width: 50px;
+  padding: 0 20px;
+  font-size: 15rem;
+  font-weight: 700;
+}
+
+.btn {
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #666666;
+  height: 32px;
+  overflow: hidden;
+  padding: 0 12px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  cursor: pointer !important;
+  white-space: nowrap;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background-color .5s;
+}
+
+.btn:hover{
+  background-color:var(--colors-main03)!important;
+  transition: background-color .5s;
+}
+
+.btnSet + .btnSet {
+  margin-top: 10px;
+}
+
+.btnSet {
+  position: relative;
+  display: flex;
+  margin-left: -3.5px;
+  margin-right: -3.5px;
+  justify-content: center;
+}
+
+.pull .btn {
+  width: 100%;
+}
+
+.btnSet .btn {
+  width: 100%;
+  margin: 0 3.5px;
+}
+
+.btn.a {
+  border-color:#dddddd !important;
+  background-color: #dddddd !important;
+  color: #fff;
+}
+
+.btn.lg {
+  height: 50px;
+  min-width: 50px;
+  padding: 0 20px;
+  font-size: 15rem;
+  font-weight: 700;
+}
+
+.login.srch .lnk-set {
+  width: 100%;
+  margin-top: 16px;
+  display: inline-block;
+  text-align: center;
+}
+
+.login.srch .lnk-set a {
+  font-size: 12rem;
+  color: #666;
+}
+
+.login.srch .lnk-set a:after {
+  margin: 0 20px;
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 10px;
+  background: #9a9a9a;
+  opacity: 0.3;
+}
+
+input[type=checkbox]{
+  accent-color: var(--colors-main03);
+}
