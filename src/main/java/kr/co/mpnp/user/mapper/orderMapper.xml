@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nyangpoom.orderMapper">
+<!--  Orderdomain mapping처리 -->
+<resultMap type="OrderDomain" id="orderDom">
+	<result column="name" property="memberName"/>
+     <result column="phone" property="phone"/>
+	<result column="gradename" property="gradeName"/>
+	<result column="zipcode" property="zipcode"/>
+	<result column="addr" property="addr"/>
+	<result column="addr_detail" property="addrDetail"/>
+	<result column="shipReq" property=" shipReq"/>
+	<result column="discount_rate" property="discountRate"/>
+	<result column="default_flag" property="default_flag"/>
+	<result column="ship_name" property="shipName"/>
+	
+</resultMap>
+
+<resultMap type="MyOrderDomain" id="myOrderDom">
+	<result column="orderid" property="orderId"/>
+	<result column="name" property="prdName"/>
+	<result column="totalcnt" property="totalCnt"/>
+	<result column="name_1" property="memberName"/>
+	<result column="zipcode" property="zipcode"/>
+	<result column="addr" property="addr"/>
+	<result column="addr_detail" property="addrDetail"/>
+	<result column="phone" property="phone"/>
+	<result column="shipreq" property="shipReq"/>
+	<result column="actual_price" property="actualPrice"/>
+	<result column="productid" property="prdId"/>
+</resultMap>
+<!-- 검증완료 -->
+<!-- //기본배송지 설정유무 -->
+<select id="selectOrderChk" parameterType="OrderVO" resultType="String">
+SELECT d.DEFAULT_FLAG
+FROM  DESTINATION d, MEMBER m
+WHERE (d.id = m.id) and m.id= #{id} and d.DEFAULT_FLAG=#{defaultFlag}
+</select>
+
+<!-- 기본배송지가 있는 경우, 해당 아이디의 배송지별칭 조회 -->
+<select id="selectShipName" parameterType="String" resultType="String">
+select NAME
+from DESTINATION
+where id=#{id}
+
+</select>
+
+<!-- //배송지 변경 버튼 -->
+<select id="selectChangeDestination" parameterType="DestinationVO" resultMap="orderDom">
+SELECT d.ZIPCODE, d.ADDR, d.ADDR_DETAIL
+FROM  DESTINATION d,MEMBER m
+WHERE  (d.id = m.id) and m.id=#{id} and d.name=#{name}
+</select>
+<!--	// 주문기본내역조회  -->
+<select id="selectOrderInfo" parameterType="String" resultMap="orderDom">
+
+SELECT m.NAME, m.PHONE, g.GRADEID, g.NAME, g.DISCOUNT_RATE
+FROM MEMBER m, GRADE g
+WHERE (  m.GRADEID = g.GRADEID) and m.ID =#{id}
+
+</select> 
+
+<!--기본배송지 조회 -->
+<select id="selectDestination" parameterType="OrderVO" resultMap="orderDom">
+SELECT  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.DEFAULT_FLAG,d.NAME ship_name
+FROM MEMBER m, DESTINATION d
+WHERE (d.ID = m.ID ) and m.ID =#{id} and d.DEFAULT_FLAG=#{defaultFlag}
+
+</select>
+
+
+<!-- 주문코드 조회 -->
+<select id="selectOrderId" resultType="String">
+select concat('or_',lpad(seq_orders.nextval,7,0)) from dual
+</select>
+
+<!-- 주문정보 추가 -->
+<insert id="insertOrderInfo" parameterType="OrderVO">
+insert into ORDERS(ORDERID, ID, SHIPREQ, INPUTDATE, ACTUAL_PRICE,  STATUS)
+values(#{orderId},#{id},#{shipReq},to_char(sysdate,'yyyy-mm-dd'),#{actualPrice}, '주문완료')
+</insert>
+
+<!-- 주문상세 코드 조회 -->
+<select id="selectOrerDetailId"  resultType="String">
+select concat('od_',lpad(seq_order_detail.nextval,7,0)) from dual
+</select>
+
+<!-- 주문상세 추가
+주문코드는 orderVO에 저장하고자 하는데.. 여기서 MyOderVO를 써버리면,..
+조회된 주문코드는 두 곳에 저장해놔야 하는건가..... -->
+<insert id="insertOrderDetail"  parameterType="MyOrderVO">
+insert into ORDER_DETAIL(ORDER_DETAILID, TOTALCNT, ORDERID, PRODUCTID)
+ values(#{orderDetailId},#{totalPrdCnt},#{orderId},#{prdtId})
+</insert>
+
+<!-- 배송지코드 조회 -->
+<select id="selectdestinationId" resultType="String">
+select concat('de_',lpad(seq_destination.nextval,7,0)) from dual
+</select>
+
+<!-- 배송지 추가 -->
+<insert id="insertShipAddr" parameterType="DestinationVO">
+insert into DESTINATION(DESID, ID, NAME, RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, DEFAULT_FLAG)
+ values(#{ destinationId},#{id},#{name},#{receiver},#{phone},#{zipcode},#{addr},#{addrDetail},#{deafaultFlag})
+</insert>
+
+<!-- 주문완료내역 조회(여러 상품 중 하나만 나와야하니까 상품코드도 받아야 해 -->
+<select id="selectOrderComplete" parameterType="OrderVO" resultMap="myOrderDom">
+SELECT o.ORDERID,p.NAME,od.TOTALCNT, m.NAME, d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.RECEIVER, d.PHONE, o.SHIPREQ, o.ACTUAL_PRICE
+FROM ORDERS o, ORDER_DETAIL od, PRODUCT p, DESTINATION d, MEMBER m
+WHERE (od.ORDERID = o.ORDERID and od.PRODUCTID = p.PRODUCTID
+and o.ID = m.ID and d.ID = m.ID) and o.ORDERID= #{orderId} and p.productId = #{productId}
+</select>
+
+<!-- 주문 후 장바구니에서 해당 상품 삭제 -->
+
+<delete id="deleteCartItem" >
+delete
+from cart c
+where exists (select * from ORDER_DETAIL d
+                  where d.cartid = c.cartid)
+</delete>
+
+
+
+</mapper>

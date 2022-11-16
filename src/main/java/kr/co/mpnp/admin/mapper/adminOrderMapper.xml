@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nyangpoom.adminOrderMapper">
+<resultMap type="AOrderDomain" id="AOrderDom">
+<result column="ORDERID" property="orderId"/>
+<result column="NAME" property="memberName"/>
+ <result column="ID" property="memberId"/>
+ <result column="PHONE" property="phone"/>
+ <result column="ZIPCODE" property="zipcode"/>
+ <result column="ADDR" property="addr"/>
+ <result column="ADDR_DETAIL" property="addrDetail"/>
+ <result column="RECEIVER" property="receiver"/>
+ <result column="receiver_phone" property="receiverPhone"/>
+ <result column="SHIPREQ" property="shipReq"/>
+ <result column="ACTUAL_PRICE" property="actualPrice"/>
+ <result column="STATUS" property="orderStatus"/>
+ <result column="DISCOUNT_RATE" property="discountRate"/>
+ <result column="prd_name" property="phone"/>
+ <result column="inputdate" property="inputdate"/>
+
+</resultMap>
+<resultMap type="AOrderPrdDomain" id="AOrderPrdDom">
+<result column="name" property="productName"/>
+ <result column="price" property="price"/>
+ <result column="totalcnt" property="totalCnt"/>
+</resultMap>
+<!--설빈  
+
+주문내역 첫조회(다이나믹 필요) -->
+ <select id="selectOrderList"  parameterType="AOrderVO" resultMap="AOrderDom" >
+SELECT o.ORDERID, m.NAME memberName, p.NAME, o.ACTUAL_PRICE  actualPrice, o.STATUS orderStatus, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate
+FROM ORDERS o, ORDER_DETAIL d, PRODUCT p, MEMBER m
+WHERE (d.ORDERID=o.ORDERID and o.ID=m.ID and d.PRODUCTID=p.PRODUCTID)
+<if test="o.STATUS != null">
+and o.STATUS =#{orderStatus}
+</if>
+<if test="o.ORDERID != null">
+and o.ORDERID=#{orderID}
+</if>
+</select> 
+
+<!-- 주문상세조회 -->
+<select id="selectOrderDetail" parameterType="String"  resultMap="AOrderDom">
+
+SELECT o.ORDERID,m.NAME, m.ID, m.PHONE,  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.RECEIVER, d.PHONE receiver_phone, o.SHIPREQ,o.ACTUAL_PRICE,o.STATUS,g.DISCOUNT_RATE
+FROM  ORDERS o,MEMBER m,  DESTINATION d,GRADE g
+WHERE  (o.ID = m.ID and d.ID = m.ID and m.GRADEID = g.GRADEID) and o.ORDERID =#{orderId}
+</select>
+
+<!-- 해당 주문코드의 상품조회 -->
+<select id="selectOrderPrdDetail" parameterType="String"  resultMap="AOrderPrdDom">
+
+SELECT p.NAME , p.PRICE , d.TOTALCNT 
+FROM ORDERS o, ORDER_DETAIL d, PRODUCT p
+WHERE (d.ORDERID = o.ORDERID and d.PRODUCTID=p.PRODUCTID) and o.ORDERID=#{orderId}
+
+</select>
+
+<!-- 주문상태 변경 -->
+<update id="updateOrderStatus" parameterType="AOrderVO" >
+
+update ORDERS set STATUS =#{orderStatus} where ORDERID=#{orderID}
+
+</update>
+
+<!-- 주문상태가 구매확정인 경우 구매확정일 업데이트 -->
+<update id="updateCompletionDate" parameterType="String">
+
+update ORDERS set COMPLETIONDATE=sysdate  where STATUS ='구매확정' and ORDERID=#{orderID}
+
+</update>
+
+<!-- 구매확정인 주문코드는 주문상세에서 주문후기를 'N''로 바꿔줘야 하겠지? 쿼리문 계~속 추가된다 -->
+<update id="updateReviewChk" >
+update ORDER_DETAIL
+set REVIEW_CHK ='N'
+where ORDERID in(select ORDERID
+                 from ORDERS
+        where STATUS ='구매확정')
+</update>        
+
+
+
+</mapper>
