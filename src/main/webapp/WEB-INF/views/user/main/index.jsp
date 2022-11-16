@@ -15,10 +15,10 @@
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
-<link rel="stylesheet" href="http://localhost/mfnf/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/mfnf/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
    <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
-<script type="text/javascript" src="http://localhost/mfnf/3rdDesign/_script/crypto.js"></script>
+<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/webHookPolicy.js?v=22102810"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
@@ -30,11 +30,11 @@
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.form.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
-<script type="text/javascript"  src="http://localhost/mfnf/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/mfnf/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript"    src="http://localhost/mfnf/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript"    src="http://localhost/mfnf/3rdDesign/_script/ui_shop.js"></script>
-<script type="text/javascript"    src="http://localhost/mfnf/3rdDesign/_script/deviceChk.js"></script>   <!-- // APP용 Device, Device OS, 위도, 경도 추가 -->
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
+<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/deviceChk.js"></script>   <!-- // APP용 Device, Device OS, 위도, 경도 추가 -->
 
   <!--google icons-->
    <link rel="stylesheet"
@@ -610,7 +610,7 @@ var gogoSwiper = (function() {
 		<!-- NOTE: 랭킹 상품 그룹인 경우 'rank-label' 로 순위 표기 -->
 				<a class="gd-link" href="prddetail.do" data-dispcornno="1257" data-disptype="OnlyApet" data-idx="0" data-content="GI251053225" data-url="/goods/indexGoodsDetail?goodsId=GI251053225">
 						<div class="gd-thumb">
-			<img class="thumb-img" src="http://localhost/mfnf/images/${data.thimg }.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="그르르 캣크다스 참치맛 200g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+			<img class="thumb-img" src="http://localhost/mpnp/images/${data.thimg }.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="그르르 캣크다스 참치맛 200g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 								<div class="gd-flag">
 									</div>
 								<button class="btn-favorite " data-content="GI251053225" data-url="/goods/insertWish?goodsId=GI251053225" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251053225" data-target="goods">찜하기</button>

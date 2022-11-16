@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.admin.mapper.AdminProductMapper">
+
+
+
+
+
+
+<!-- <select id="selectCategory"  resultType="AdminCategoryDomain" >
+select s.sub_id subid,s.sub_name subname ,m.main_id mainid,m.main_name mainname
+from sub_category s,main_category m
+where s.sub_id=m.sub_id
+
+</select> -->
+
+<select id="selectPrd" resultType="kr.co.mpnp.admin.domain.AdminProductDomain">
+select name,price,subname,status
+from product
+
+</select>
+
+<insert id="insertPrd" parameterType="kr.co.mpnp.admin.vo.AdminProductVO2"  >
+
+insert into product(productid,name,price)
+values(#{productid},#{name},#{price})
+
+
+
+</insert>
+
+
+</mapper>

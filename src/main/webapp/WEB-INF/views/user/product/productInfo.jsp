@@ -13,9 +13,9 @@
     <link href="common/favicon/favicon.ico" rel="shrtcut icon">
     <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
-    <link rel="stylesheet" href="http://localhost/mfnf/3rdDesign/common/css/headerFooter.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/mfnf/3rdDesign/_css/main.style.pc.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/mfnf/3rdDesign/css/pupupme.css">
+    <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/css/pupupme.css">
       <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
     <!-- <script type="text/javascript" integrity="sha384-MBHPie4YFudCVszzJY9HtVPk9Gw6aDksZxfvfxib8foDhGnE9A0OriRHh3kbhG3q" crossorigin="anonymous" async="" src="https://cdn.amplitude.com/libs/amplitude-8.16.1-min.gz.js"></script><script type="text/javascript" src="/_script/crypto.js"></script> -->
       <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/webHookPolicy.js?v=22110110"></script>
@@ -29,9 +29,9 @@
     <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.cookie.js"></script>
     <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
     <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
-    <script type="text/javascript" src="http://localhost/mfnf/3rdDesign/_script/common.js?modifiedDate=20221013"></script>
+    <script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013"></script>
     <!-- <script type="text/javascript" src="/_script/popup.js"></script> -->
-    <script type="text/javascript" src="http://localhost/mfnf/3rdDesign/_script/ui.js"></script>
+    <script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
     <!-- <script type="text/javascript" src="/_script/ui_shop.js"></script> -->
    
   
@@ -192,7 +192,7 @@
                   <div class="swiper-container swiper-container-initialized swiper-container-vertical">
                     <ul class="swiper-wrapper slide" style="transform: translate3d(0px, 0px, 0px);">
                       <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
-                        <a href="javascript:" class="box"><span class="pic"><img class="img" src="http://localhost/mfnf/images/${data.thimg}.jpg?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                        <a href="javascript:" class="box"><span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg}.jpg?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
                       </li>
                       </ul>
                   <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -208,7 +208,7 @@
                       <li class="swiper-slide swiper-slide-active" style="width: 500px;">
                         <a href="javascript:" class="box">
                           <span class="pic">
-                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mfnf/images/${data.thimg}.jpg?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
+                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mpnp/images/${data.thimg}.jpg?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
                           </span>
                         </a>
                       </li>
@@ -364,95 +364,11 @@
     <div class="html_editor mo" id="bannerMobile"></div>
     <div class="html_editor pc" id="bannerPc"></div> 
     
-    <!-- 묶음 상품 정보 -->
-    <div class="html_editor mo" id="contentMobile">
-      <p><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/d5fd38ad-1670-4c50-ace5-2114f29b3d52.jpg" alt="img"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/47d31548-19d6-4078-8f25-965c6c9d4063.jpg" alt="img"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/5ea03ed5-325c-4bc2-9e7b-78b09482a42b.jpg" alt="img"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/69a7d19f-c301-4ee4-aff4-c7b5bbbd2452.jpg" alt="img"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/8d117040-a633-4f9c-99f7-9cfc11b680e3.jpg" alt="img"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/goods_desc/202206/b07ec8cd-cd0c-434e-88a5-18b6997727e8.jpg" alt="img">&nbsp;</p><script type="text/javascript">
-    /* console.log("성분 정보 변동 여부 : " + goods.igdtInfoLnkYn); */
-    function sendAbUserProperty(abTestResult) {
-      try {
-        if ('PC' == 'APP') { // 앱인경우 앱 인터페이스 호출
-          var onAnalysisUserInfo = {
-            func : "onAnalysisUserInfo",
-            "A/B_Test_Goods_Description" : abTestResult
-          }
-          if (navigator.userAgent.indexOf('Android') > -1) {
-            window.AppJSInterface.onAnalysisUserInfo(JSON.stringify(onAnalysisUserInfo));
-          } else {
-            window.webkit.messageHandlers.AppJSInterface.postMessage(onAnalysisUserInfo);
-          }
-        } else {
-          var amplitudeInitData = new amplitude.Identify().set("A/B Test : Goods Description", abTestResult);
-          amplitude.getInstance().identify(amplitudeInitData);
-        }
-      } catch (error) {
-        console.log("Amplitude Send Err");
-      }
-    }
-    
-    var ranNum = Math.floor(Math.random() * (100));
-    if (document.cookie.indexOf("abTest=A") > -1) {
-      ranNum = 0;
-    }
-  
-    if (document.cookie.indexOf("abTest=B") > -1) {
-      ranNum = 100;
-    }
-  
-    
-    if (ranNum < 50) {
-      $(".abtest_b").remove();
-      sendAbUserProperty('abtest_a');
-      $.cookie('abTest', 'A', {path : '/'});
-    } else {
-      $(".abtest_a").remove();
-      sendAbUserProperty('abtest_b');
-      $.cookie('abTest', 'B', {path : '/'});
-    }
-  
-  </script>
-  
-  <div class="gdtblset"><!-- @@ 03.03 .gdtblset 영양정보,상세정보 감싸기 -->
-  </div>
-  
-  
-  <div class="gdtbl c">
-    <div class="gdthdt">상품 필수 정보</div>
-    <table class="tblist c" cellpadding="0" cellspacing="0" summary="품명 및 모델명, 제조사,제조국,A/S책임자,인증허가,안정인증여부 테이블">
-      <caption>상품 필수 정보</caption>
-      <colgroup>
-        <col>
-        <col>
-      </colgroup>
-      <tbody>
-      <tr>
-          <th>품명 및 모델명</th>
-          <td>바른 제주 숲내음 탈취제</td>
-        </tr>
-      <tr>
-          <th>법에 의한 인증,허가 등을 받았음을 확인할수 있는 경우 그에 대한 사항</th>
-          <td>상품상세설명 참조</td>
-        </tr>
-      <tr>
-          <th>제조국 또는 원산지</th>
-          <td>대한민국</td>
-        </tr>
-      <tr>
-          <th>제조자,수입품의 경우 수입자를 함께 표기</th>
-          <td>㈜숲에서</td>
-        </tr>
-      <tr>
-          <th>AS책임자와 전화번호 또는 소비자상담 관련 전화번호</th>
-          <td>어바웃펫 // 1644-9601</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
   
     <div class="html_editor pc template_area" id="contentPc">
-      <p><img src="http://localhost/mfnf/images/${data.infoimg}.jpg" alt="img" class="full_img_area">
+      <p><img src="http://localhost/mpnp/images/${data.infoimg}.jpg" alt="img" class="full_img_area">
       &nbsp;</p>
-      <script type="text/javascript">
+    <!--   <script type="text/javascript">
     /* console.log("성분 정보 변동 여부 : " + goods.igdtInfoLnkYn); */
     function sendAbUserProperty(abTestResult) {
       try {
@@ -497,9 +413,9 @@
   
   </script>
   
-  <div class="gdtblset"><!-- @@ 03.03 .gdtblset 영양정보,상세정보 감싸기 -->
+  <div class="gdtblset">@@ 03.03 .gdtblset 영양정보,상세정보 감싸기
   </div>
-  
+   -->
   
  
   
@@ -1556,18 +1472,7 @@
  
   
   
-                <!-- 함께 많이 보는 상품 -->
-                <script type="text/javascript">
-                  var thisParam = "goodsId=GI251050011";
-                  $.get("/goods/listGoodsRecentDetail?"+thisParam,function (html) {$("#qnaArea").after(html);ui.shop.recomd.using();});
-                </script>
-  
-                <!-- 사용자 맞춤 추천상품 -->
-                <script type="text/javascript">
-                  var thisParam = "goodsId=GI251050011&cateCdL=12565&bndNo=1834";
-                  $.get("/goods/listGoodsCustomDetail?"+thisParam,function (html) {$("#goodsCommentArea").before(html);ui.shop.custm.using();});
-                </script>
-  
+       
 
              
               </div>
@@ -1899,7 +1804,7 @@
     // ITEM, SET
     function fnClickItemTotalCnt(itemNo, cartQty){
       var priceCnt = Number(cartQty);
-      var originPrice = Number("7400");
+      var originPrice = Number(${data.price});
       var priceAmt = valid.numberWithCommas(originPrice * priceCnt);
       $("#emPriceTotalCnt").html(priceCnt);
       $("#emPriceTotalAmtItem").html(priceAmt);
@@ -3100,7 +3005,7 @@
               <a href="javascript:" class="box">
                 <!-- <button type="button" class="bt del">삭제</button> -->
                 <div class="infs">
-                  <span class="lk wb_bAll_k0426">바른 제주 숲내음 탈취제</span>
+                  <span class="lk wb_bAll_k0426">${data.productname }</span>
                 </div>	
               </a>
               <div class="cots">
@@ -3110,7 +3015,7 @@
                   <button type="button" class="bt plus">수량더하기</button>
                 </div>
                 <div class="price">
-                  <em class="p" id="emPriceTotalAmtItem">7,400</em><i class="w">원</i>
+                  <em class="p" id="emPriceTotalAmtItem">${data.price }</em><i class="w">원</i>
                 </div>
               </div>
               </div>
@@ -3309,7 +3214,7 @@
           </div>
           <div class="price">
             <i class="t">합계</i>
-            <em class="prc"><i class="i" id="emPriceTotalAmt">7,400</i><i class="s">원</i></em>
+            <em class="prc"><i class="i" id="emPriceTotalAmt">${data.price }</i><i class="s">원</i></em>
           </div>
         </div>
       </div>
@@ -3331,9 +3236,9 @@
   <!-- 				직사각형을 정사각형으로 변경함. frontConstants.IMG_OPT_QRY_210 >>>> frontConstants.IMG_OPT_QRY_756 -->
           <span class="pic"><img class="img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251050011/b37b36c4-c01c-4b8c-8935-10ad59e2ec53.jpg?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt=""></span>
           <div class="disc">
-            <div class="names">바른 제주 숲내음 탈취제</div>
+            <div class="names">${data.productname }</div>
             <div class="price">
-                  <em class="p">7,400</em><i class="w">원</i>
+                  <em class="p">${data.price }</em><i class="w">원</i>
                 </div>
               </div>
         </div>
