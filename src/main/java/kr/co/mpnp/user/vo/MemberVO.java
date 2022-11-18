@@ -3,7 +3,7 @@ package kr.co.mpnp.user.vo;
 public class MemberVO {
 	private String id,pfimg,nick,name,pass,phone;
 	
-	public MemberVO() {
+	public MemberVO()  {
 	}
 
 	public MemberVO(String id, String pfimg, String nick, String name, String pass, String phone) {

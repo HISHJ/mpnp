@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.user.dao.mapper.memberMapper">
+
+
+<!-- 11.14: select 쿼리문 수정하기 -->
+<!-- 11.15: 쿼리문 수정완료. select 쿼리문은 진도 나가는거 따라서 수정해야함 -->
+
+<!-- +.사용자-로그인 ★ -->
+<select id="selectLogin"  parameterType="memVO" resultType="memD">
+select * 
+from member 
+where id=#{id} and pass=#{pass}
+</select>
+
+<!-- 1.사용자-중복확인 ★-->
+<select id="selectDupChk" parameterType="memVO" resultType="memD">
+select id 
+from member 
+where id=#{id}
+</select>
+
+<!-- 2.사용자-회원가입★ 
+	 11.15: 상태, 가입일, 회원등급 추가
+	 sysdate만 써도되지만 코드 딱 떨어지게 하기위해 ..  -->
+<insert id="insertMember" parameterType="memVO">
+insert into member (id,pfimg,nick,name,pass,phone,status,gradeId,inputdate)
+values(#{id},#{pfimg},#{nick},#{name},#{pass},#{phone},'정상','G1',to_char(sysdate,'yyyy-MM-dd'))
+
+</insert>
+
+<!-- 3.사용자-아이디찾기 ★-->
+<select id="selectid" parameterType="memVO" resultType="memD">
+select id,to_char(inputdate,'yyyy-MM-dd')inputdate 
+from member 
+where name=#{name} and phone={phone}
+</select>
+
+<!-- 4.사용자-비번찾기★ -->
+<select id="selectMemberPass" parameterType="memVO" resultType="memD">
+select id,pass 
+from member 
+where id=#{id} and name=#{name} and phone=#{phone}
+</select>
+
+<!-- 5.사용자-비번변경 -->
+<update id="updateMemberPass" parameterType="memVO">
+update member 
+set pass=#{pass}
+where id=#{id}
+</update>
+
+<!-- 6.사용자-회원정보조회 -->
+<select id="selectMemberInfo" parameterType="memVO" resultType="memD">
+select pfimg,nick,id,name,pass
+from member 
+where id=#{id}
+</select>
+
+<!-- 7.사용자-회원정보수정 -->
+<update id="updateMemberInfo" parameterType="memVO">
+update member
+set pfimg=#{pfimg},nick#={nick},phone=#{phone}
+where id=#{id} and pass=#{pass}?
+</update>
+
+<!-- 8.사용자-회원탈퇴1 -->
+<select id="selectMember" parameterType="memVO" resultType="memD">
+select id,pfimg,nick,name,pass,phone
+from member 
+where pass=#{pass}
+</select>
+
+<!-- 9.사용자-회원탈퇴2 -->
+<update id="updateMemberStatus" parameterType="memVO">
+update member 
+set    pfimg='',nick='',name='',phone='',status='탈퇴',gradeId='',inputdate=to_char(sysdate,'yyyy-MM-dd')
+where id=#{id} and  pass=#{pass}
+</update>
+
+
+<!-- 1.사용자-회원탈퇴 -->
+<insert id="insertQuitMember" parameterType="memVO">
+insert into quitmember(id,inputdate) 
+values(#{id},to_char(sysdate,'yyyy-MM-dd')) <!-- inputdate으로만 받아도되나 -->
+</insert>
+
+
+</mapper>

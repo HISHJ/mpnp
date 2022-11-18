@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nyangpoom.admin.dao.mapper.adminLoginMapper">
+
+
+<!-- 1.관리자-로그인 -->
+<select id="selectAdminLogin" parameterType="kr.co.nyangpoom.admin.vo.AdminLoginVO">
+select  id
+from   admin
+where  id=#{id}and pass=#{pass}
+</select>
+
+<!-- 2.관리자-비번변경 -->
+<update id="updateAdminPass" parameterType="kr.co.nyangpoom.admin.vo.AdminLoginVO">
+update admin
+set    pass=#{pass}
+where  id=#{id}
+</update>
+
+</mapper>

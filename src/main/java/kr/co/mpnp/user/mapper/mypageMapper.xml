@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.user.dao.mapper.mypageMapper">
+
+
+<!-- 11.15: 쿼리문 수정완료. select 쿼리문은 진도 나가는거 따라서 수정해야함 -->
+
+<!-- 1. 마이페이지 첫화면 이름등급 조회 -->
+<select id="selectMypageMember"  parameterType="mypageVO" resultType="mypageD">
+select name, gradeId 
+from   member 
+where  id=#{id}
+</select>
+
+<!-- 2.비밀번호확인(아이디) -->
+<select id="selectPass" parameterType="mypageVO" resultType="mypageD">
+select id  <!-- 두둥... -->
+from   member 
+where  id=#{id} and pass=#{pass}
+</select>
+
+<!-- 3.비밀번호변경(아이디) -->
+<update id="updatePass" parameterType="mypageVO" >
+update member 
+set    pass=#{pass}
+where  id=#{id}
+</update>
+
+
+
+</mapper>
