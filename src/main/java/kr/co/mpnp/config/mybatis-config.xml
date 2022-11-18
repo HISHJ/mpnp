@@ -9,6 +9,12 @@
 		<typeAlias type="kr.co.mpnp.user.domain.ProductDomain" alias="product"/>
 		<typeAlias type="kr.co.mpnp.user.domain.ProductReviewDomain" alias="pr"/>
 		<typeAlias type="kr.co.mpnp.user.domain.SearchDomain" alias="Search"/>
+		 <typeAlias type="kr.co.mpnp.user.domain.MemberDomain" alias="memD"/>
+         <typeAlias type="kr.co.mpnp.user.domain.MypageDomain" alias="mypageD"/>
+		 <typeAlias type="kr.co.mpnp.user.vo.MemberVO" alias="memVO"/>
+         <typeAlias type="kr.co.mpnp.user.vo.MypageVO" alias="mypageVO"/>
+		
+		
 	</typeAliases>
 	
   <environments default="development">
@@ -28,6 +34,8 @@
       <mapper resource="kr/co/mpnp/user/mapper/ProductReviewMapper.xml"/>
      <mapper resource="kr/co/mpnp/user/mapper/SearchMapper.xml"/> 
       <mapper resource="kr/co/mpnp/admin/mapper/AdminProductMapper.xml"/>
+       <mapper resource="kr/co/mpnp/dao/mapper/memberMapper.xml"/>
+    <mapper resource="kr/co/mpnp/dao/mapper/mypageMapper.xml"/>
   
  
 
