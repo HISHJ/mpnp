@@ -1,48 +1,25 @@
 package kr.co.mpnp.user.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class ReviewDomain {
 
-//	- pfimg(프로필이미지),nick(닉네임),contents(내용), : String
-//	- starscore(별점),reviewcnt(리뷰개수),starcnt(별점인원수) : int 
-//	- staravg(평균) : double
-//	-reviewimg : List<String>
-//	- inputdate(등록일) : date
-	
-	private String pfimg,nick,contents;
-	private int starscore,reviewcnt,starcnt;
-	private double staravg;
-	private List<String> reviewimg;
-	private Date inputdate;
-	public ReviewDomain() {
-		
+	private String th_img, name, contents, reviewId ;
+	private int price, starScore;
+	private Date purchaseDate, writeDate ;
+	private List<String> reviewImg;
+	public String getTh_img() {
+		return th_img;
 	}
-	public ReviewDomain(String pfimg, String nick, String contents, int starscore, int reviewcnt, int starcnt,
-			double staravg, List<String> reviewimg, Date inputdate) {
-	
-		this.pfimg = pfimg;
-		this.nick = nick;
-		this.contents = contents;
-		this.starscore = starscore;
-		this.reviewcnt = reviewcnt;
-		this.starcnt = starcnt;
-		this.staravg = staravg;
-		this.reviewimg = reviewimg;
-		this.inputdate = inputdate;
+	public void setTh_img(String th_img) {
+		this.th_img = th_img;
 	}
-	public String getPfimg() {
-		return pfimg;
+	public String getName() {
+		return name;
 	}
-	public void setPfimg(String pfimg) {
-		this.pfimg = pfimg;
-	}
-	public String getNick() {
-		return nick;
-	}
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getContents() {
 		return contents;
@@ -50,49 +27,50 @@ public class ReviewDomain {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getStarscore() {
-		return starscore;
+	public String getReviewId() {
+		return reviewId;
 	}
-	public void setStarscore(int starscore) {
-		this.starscore = starscore;
+	public void setReviewId(String reviewId) {
+		this.reviewId = reviewId;
 	}
-	public int getReviewcnt() {
-		return reviewcnt;
+	public int getPrice() {
+		return price;
 	}
-	public void setReviewcnt(int reviewcnt) {
-		this.reviewcnt = reviewcnt;
+	public void setPrice(int price) {
+		this.price = price;
 	}
-	public int getStarcnt() {
-		return starcnt;
+	public int getStarScore() {
+		return starScore;
 	}
-	public void setStarcnt(int starcnt) {
-		this.starcnt = starcnt;
+	public void setStarScore(int starScore) {
+		this.starScore = starScore;
 	}
-	public double getStaravg() {
-		return staravg;
+	public Date getPurchaseDate() {
+		return purchaseDate;
 	}
-	public void setStaravg(double staravg) {
-		this.staravg = staravg;
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
-	public List<String> getReviewimg() {
-		return reviewimg;
+	public Date getWriteDate() {
+		return writeDate;
 	}
-	public void setReviewimg(List<String> reviewimg) {
-		this.reviewimg = reviewimg;
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
 	}
-	public Date getInputdate() {
-		return inputdate;
+	public List<String> getReviewImg() {
+		return reviewImg;
 	}
-	public void setInputdate(Date inputdate) {
-		this.inputdate = inputdate;
+	public void setReviewImg(List<String> reviewImg) {
+		this.reviewImg = reviewImg;
 	}
 	@Override
 	public String toString() {
-		return "ReviewDomain [pfimg=" + pfimg + ", nick=" + nick + ", contents=" + contents + ", starscore=" + starscore
-				+ ", reviewcnt=" + reviewcnt + ", starcnt=" + starcnt + ", staravg=" + staravg + ", reviewimg="
-				+ reviewimg + ", inputdate=" + inputdate + "]";
+		return "ReviewDomain [th_img=" + th_img + ", name=" + name + ", contents=" + contents + ", reviewId=" + reviewId
+				+ ", price=" + price + ", starScore=" + starScore + ", purchaseDate=" + purchaseDate + ", writeDate="
+				+ writeDate + ", reviewImg=" + reviewImg + "]";
 	}
 	
 	
 	
-}//class
+	
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nyangpoom.use.dao.mapper.cartMapper">
+
+
+
+
+  <!-- 장바구니 삭제 ( 장바구니 코드 아이디랑 묶어서 복합키로 쓰나?? ) -->
+  <delete id="deleteCart" parameterType="String" >
+  	delete from cart
+  	where reviewid = #{qqqqqqqqqqqqqqqqqqqqqqq}
+  </delete>
+
+</mapper>

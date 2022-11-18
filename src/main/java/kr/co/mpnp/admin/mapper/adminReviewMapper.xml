@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.nyangpoom.admin.dao.mapper.reviewMapper">
+
+  <insert id="insertReview" parameterType="kr.co.nyangpoom.admin.vo.AdminReviewVO" >
+    insert into review (reviewId, contents, inputdate, order_detailid)
+    <!-- values(#{reviewId},#{contents},sysdate,#{orderDetailId}) 왜안돼 어젠됐잖아-->
+    <!-- values('1234','12341234',sysdate,'od0003')왜이건되는데 -->
+	<!-- values('r0020','111111',sysdate,'od0003')이건안돼 -->
+	<!-- values(#{reviewId},#{contents}, sysdate, 'od0003') -->
+	values('4444','aaaaa', sysdate, 'od0003')
+  </insert>
+  
+  <delete id="deleteReview" parameterType="String" >
+  	delete from review
+  	where reviewid = #{qqqqqqqqqqqqqqqqqqqqqqq}
+  </delete>
+  
+</mapper>
