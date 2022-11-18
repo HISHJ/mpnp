@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="설빈" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -117,7 +117,7 @@ li.open, div.ctset {
 			</div>
 			<div class="cdt" >
 						<div class="schs">
-								<div class="form ">
+								<div class=" ">
 									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
 									<button type="button" class="btnSch" data-content="" data-url="/commonSearch">검색</button>
 									
@@ -177,37 +177,89 @@ li.open, div.ctset {
 						<div class="box">
 							<div class="cdts" id="noMemDiv">
 								<div class="ptset">
-									<span>유설빈</span>
+									<span>${orDom.memberName}</span>
 								</div>
-								<div class="ptt" style="margin-top: 10px"><b class="t">010-1111-1274</b></div>
+								<div class="ptt" style="margin-top: 10px"><b class="t">${orDom.phone}</b></div>
 							</div>
-							<div class="usr" id="memDiv" style="display:none;"><em class="nm" id="memDiv-mbrNm">,</em><i class="tel" id="memDiv-mobile">010-1111-1274</i></div>
+							<div class="usr" id="memDiv" style="display:none;"><em class="nm" id="memDiv-mbrNm">,</em><i class="tel" id="memDiv-mobile">${orDom.phone}</i></div>
 							<!-- <div class="bts"><a href="/mypage/info/indexManageDetail" class="btn c sm btMyMod">개인정보수정</a></div> -->
 							
 							<input type="hidden" id="memberYn" value="N">
 						</div>
 					</div>
 				</section>
-				<section class="sect addr">
-
-							<div class="hdts"><span class="tit">배송지</span></div>
-							<div class="cdts">
-								<ul class="adrlist">
-							
-									<li class="arr">
-										<div class="dt">주소</div>
-										<div class="dd">
-											<div class="adrbox a1">
-												<div class="adr" id="addressInfo">[06252] 서울특별시 강남구 강남대로 328(역삼동)</div>
-												<a href="javascript:;" class="btAdr" onclick="orderDlvra.openPostPop();">주소검색</a>
+	<section class="sect addr">
+									<div class="hdts"><span class="tit">배송지</span></div>
+									<div class="cdts">
+										<div class="adrset">
+											<input type="hidden" id="order_payment_gb_nm" value="${orDom.shipName}">
+											<input type="hidden" id="order_payment_mbr_dlvra_no" value="234898">
+											<input type="hidden" id="order_payment_post_no_new" value="06235">
+											<input type="hidden" id="order_payment_road_addr" value="서울특별시 강남구 테헤란로 132(역삼동)">
+											<input type="hidden" id="order_payment_road_dtl_addr" value="8층">
+											<input type="hidden" id="order_payment_adrs_nm" value="강사님">
+											<input type="hidden" id="order_payment_adrs_mobile" value="01011111111">
+											<input type="hidden" id="order_payment_demand_goods_rcv_pst_cd" value="30">
+											<input type="hidden" id="order_payment_demand_goods_rcv_pst_etc" value="">
+											<input type="hidden" id="order_payment_demand_pbl_gate_ent_mtd_cd" value="30">
+											<input type="hidden" id="order_payment_demand_pbl_gate_pswd" value="">
+											<input type="hidden" id="order_payment_dlvr_demand" value="">
+											<input type="hidden" id="order_payment_dlvr_demand_yn" value="Y">
+											<input type="hidden" id="order_payment_dft_yn" value="Y">
+											<div class="name tx">
+												<em class="t" id="dlvraGbNmEm">${osDom.shipName}</em><em class="bdg" id="dftDelivery">기본배송지</em>
 											</div>
-											<div class="adrbox a2" style="">
-												<span class="input coms"><input type="text" maxlength="30" id="order_payment_road_dtl_addr" placeholder="상세주소를 입력하세요." style="padding-right: 29px;"></span>
+ 											<script type="text/javascript">
+ 											 $(function(){
+ 												 $("#shipName").change(function(){
+ 													 if($("#shipName").val() != "none"){
+ 														// alert("야!")
+ 													setChangeAddr();
+ 												 }//end if
+ 												 });//change
+ 												 
+ 											 })//ready
+ 											
+											  function setChangeAddr(){
+												 $.ajax({
+													 url:"order_ship_addr.do",
+													 data: "shipName="+$("#shipName").val(),
+													 dataType:"json",
+													 error:function(xhr){
+														 alert("배송지 조회 중 문제가 발생하였습니다");
+														 console.log("에러코드" + xhr.status + "뭐지" + xhr.state() + "흐음" + xhr.statusText);
+													 },
+													 success:function(jsonObj){
+														 if(jsonObj.resultFlag){
+															  alert("배송지가 변경되었습니다.");
+															  var addrName = document.getElementById("dlvraGbNmEm");
+															  var addr = document.getElementById("changeAddr");
+															  
+															  addrName.innerHTML = jsonObj.name;
+															  addr.innerHTML = "[ "+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail;
+															//  $("#changeAddr").html( jsonObj.zipcode+ jsonObj.name+" " +jsonObj.addr);
+															 }
+														 }//end if
+												 })
+											 }
+											</script>  
+									
+											<form id="shipFrm" name="shipFrm" >
+											<div class="adrs" id="changeAddr" name="changeAddr">
+												[${osDom.zipcode}] ${osDom.addr}, ${osDom.addrDetail}</div>
+											
+											<!-- <div class="bts"><a href="javascript:;" onclick="orderDlvra.addressListPop();" data-content="layerAlert" data-url="/order/popupAddressList" class="btn c sm btnDeMod">배송지 변경</a></div> -->
+											<div class="bts">
+												<select style="padding:10px;color: #666666;border:1px soid #666;border-radius:3px;" name="shipName" id="shipName">
+												<option value="none">배송지변경</option>
+												<c:forEach items='${list}' var="dname" >
+												 <option>${dname}</option>
+												 </c:forEach>
+												</select>
 											</div>
+										</form>
 										</div>
-									</li>
-								</ul>
-								<div class="adrreq" style="">
+											<div class="adrreq" style="">
 									<div class="tit">배송 요청사항</div>
 									<div class="pwf" id="existDemand" style="display: none">
 										<em class="t" id="demandGoodsRcvPstCd"></em>
@@ -218,13 +270,11 @@ li.open, div.ctset {
 									<div class="pss" id="noExistDemand">
 										<textarea name="delivery_request" id="" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
 
+										<!-- <a href="javascript:;" class="btn btPdPl" onclick="orderDlvra.changeDlvrDemandPop();">상품 수령 장소를 선택해주세요.</a> -->
 									</div>
 								</div>
-								<div class="saves">
-									<div class="pp"><label class="checkbox"><input type="checkbox" id="order_payment_adrs_insert_yn" checked="" value="Y"><span class="txt"><em class="tt">등록한 정보를 회원정보에 반영합니다. (휴대폰번호/주소)</em></span></label></div>
-								</div>
-							</div>
-						</section>
+									</div>
+								</section>
 					<input type="hidden" id="preBookYn" value="N">
 				
 				<div id="dlvrAreaTmpl01" style="display:none;">
@@ -237,12 +287,14 @@ li.open, div.ctset {
 							</div>
 						<div class="cdd pd_tog_box open">
 							<ul class="lst">
+							<c:forEach items="${opVOList}" var="opVO">
 								<li>
-											<div class="tt">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</div>
-											<div class="ts">1개 / 
-												500원
+											<div class="tt">${opVO.prdName}</div>
+											<div class="ts">${opVO.prdCnt}개 / 
+												${opVO.prdPrice}원
 													</div>
 										</li>
+							</c:forEach>
 									</ul>
 						</div>
 					</div>
@@ -280,22 +332,26 @@ li.open, div.ctset {
 				<section class="sect deli">
 					<div class="hdts"><span class="tit">상품정보</span></div>
 					
+				
+							
+						
 						<div class="cdts" id="dlvrArea">
-							<span class="text">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</span>
-							<span class="text">&nbsp;[수량: 1개]</span>
-
+							<span class="text">${param.prdName}</span>
+							<span class="text">&nbsp;[수량: ${param.prdCnt}개]</span>
 					</div>
+					  
+			
 				</section>
 				<section class="sect disc" id="existCoupon">
 					<div class="hdts"><span class="tit">할인 혜택</span></div>
 					<div class="cdts">
 						<div class="cpset"><!-- @@ 02.22 변경 -->
-							<div class="ht">OO등급</div>
+							<div class="ht">${orDom.gradeName }등급</div>
 							<div class="dt">
 								<input type="hidden" id="tot_goods_cp_dc_amt" name="tot_goods_cp_dc_amt" value="0">
 								<input type="hidden" id="tot_dlvr_cp_dc_amt" name="tot_dlvr_cp_dc_amt" value="0">
 								<input type="hidden" id="local_cp_dc_tot_amt" name="local_cp_dc_tot_amt" value="0">
-								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">OO</b><i class="w">%</i></em>
+								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">${orDom.discountRate }</b><i class="w">%</i></em>
 								<span class="txt">할인적용</span>
 							</div>
 						</div>
@@ -329,18 +385,13 @@ li.open, div.ctset {
 									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_1">
 						
 									</div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_2"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_3"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_4"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_5"></div>
+								
 									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_6"></div>
 								</div>
 							</li>
 							</ul>
 						<div class="defbilchk" onclick="checkedDefaultPayMethod();">
-							<!-- <label class="checkbox" onclick="checkedDefaultPayMethod();">
-								<input type="checkbox" id="order_payment_default_pay_method" checked=""> <span class="txt">기본 결제수단으로 저장</span>
-							</label> -->
+						
 						</div>
 					</div>
 					</section>

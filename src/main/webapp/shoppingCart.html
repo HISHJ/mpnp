@@ -1,0 +1,2591 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<title>멍품냥품</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no">
+<meta name="theme-color" content="#ffffff">
+
+<link href="common/favicon/favicon.ico" rel="shrtcut icon">
+<link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
+
+<link rel="stylesheet" href="http://localhost/mungpoom/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mungpoom/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mungpoom/3rdDesign/css/order.css">
+	<link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
+<script type="text/javascript" src="http://localhost/mungpoom/3rdDesign/_script/crypto.js"></script>
+	<script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/webHookPolicy.js?v=22102810"></script>
+	<script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.blockUI.js" charset="utf-8"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.inputmask.bundle.min.js" charset="utf-8"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.number.min.js" charset="utf-8"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.form.min.js" ></script>
+
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
+<script type="text/javascript"  src="http://localhost/mungpoom/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mungpoom/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript" 	src="http://localhost/mungpoom/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript" 	src="http://localhost/mungpoom/3rdDesign/_script/ui_shop.js"></script>
+
+  <!--google icons-->
+	<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<!--google fonts-->
+	<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+	<script>
+		$(function(){
+		 $(".bt_dog").click(function(){
+			$(".bt_cat").removeClass("active"); 
+		 $(this).addClass("active")
+		 $(".open_dog").css('display','block');
+		 $(".open_cat").css('display','none');
+		
+		 })//click
+		
+		 $(".bt_cat").click(function(){
+		 $(".bt_dog").removeClass("active"); 
+		 $(this).addClass("active")
+		 $(".open_cat").css('display','block');
+		 $(".open_dog").css('display','none');
+		
+		 })//click
+		
+		
+		
+		})
+		
+		</script>
+
+
+
+
+<!--라이브 앱과 연동을위한 JS -->
+<script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
+<script type="text/javascript">
+	//검색API 클릭 이벤트(사용자 액션 로그 수집)
+	function userActionLog(contId, action, url, targetUrl){	
+		var mbrNo = "0";
+		if (mbrNo != "0") {
+			$.ajax({
+				type: 'POST'
+				, url : "/common/sendSearchEngineEvent"
+				, dataType: 'json'
+				, data : {
+					"logGb" : "ACTION"
+					, "mbr_no" : mbrNo
+					, "section" : "shop" 
+					, "content_id" : contId
+					, "action" : action
+					, "url" : (url != null && url) != '' ? url : document.location.href
+					, "targetUrl" : (targetUrl != null && targetUrl != '') ? targetUrl : document.location.href
+					, "litd" : ""
+					, "lttd" : ""
+					, "prclAddr" : ""
+					, "roadAddr" : ""
+					, "postNoNew" : ""
+					, "timestamp" : ""
+				}
+			});
+		}
+	}
+</script><script type="text/javascript">
+			var dvsnCornerCnt = '-1';
+			
+			var dataIndex = 0;
+			var startIndex = 0;
+			var endIndex = 0;
+			var dispCornDivList;
+			var dispCornDivListAll;
+			var checkedCornList = [];
+			var cornNewPage = '1';
+			var firstCornersChk = 0; // 처음 3개 코너 로드 완료 체크 변수
+			var bfMainDomClearTime = '30'; // 공통코드에 추가한 세션스토리지 저장시간(분단위)
+			var useMainCache = 'true' == "true" ? true : false; // 세션스토리지 사용 : true, 세션스토리지 사용 안 함 : false
+			
+			// PC/MO 변경시 SHOP 메인 html 세션스토리지 삭제
+			var sessionStorageDeviceGb = window.sessionStorage.getItem('deviceGb');
+			if(sessionStorageDeviceGb && "PC" &&  sessionStorageDeviceGb != "PC"){
+				removeMainAllCache();	
+			}			
+			window.sessionStorage.setItem('deviceGb', "PC");
+			
+			/** onload 에서 보여줄 코너 목록 가져 온다. **/
+			function getShowCornList() {
+				dispCornDivListAll = $("div[name=dispCorn_div]");
+				if('' == '') {
+					startIndex = 0;
+					endIndex = 2;
+					return dispCornDivListAll.slice(0,3);
+				} else {
+					var paramCornerLength = $("#" + '').length;
+					if (paramCornerLength == 0) {
+						startIndex = 0;
+						endIndex = 2;
+					} else {
+						dataIndex = parseInt($("#" + '').attr('data-index'));
+						startIndex = ((dataIndex==0) ? 0:dataIndex - 1);
+					}
+					
+					if(startIndex == 0){
+						endIndex = 2;
+						return dispCornDivListAll.slice(0,3).not($($(window.sessionStorage.getItem('bfMainEmptyConrNo'))));
+					}else{
+						endIndex = ((dataIndex>dispCornDivListAll.length-1) ? dataIndex:dataIndex + 1);
+						return dispCornDivListAll.slice(startIndex,endIndex+1).not($($(window.sessionStorage.getItem('bfMainEmptyConrNo'))));
+					}
+				}
+			}
+			
+			/** 코너 번호 기준으로 div영역 html 셋팅 **/
+			function paintCornHtml(_conr_no, mainReqChk_readFromDB, _cornOrder) {
+				var _item = $("#" + _conr_no);
+				var cornHtml = null;
+				var _dataIndex = parseInt(_item.attr('data-index'));
+				if('' == '' && _cornOrder == '' && _dataIndex =='1'){
+					_cornOrder = 'mid';
+				}
+				
+				if(checkedCornList.indexOf(_conr_no) > -1 ){
+					if(_cornOrder == 'first' && startIndex > 0){
+						paintCornHtml($(dispCornDivListAll[startIndex--]).attr('id'), false, 'first');
+					}else if(_cornOrder == 'first' && startIndex == 0){
+						paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+					}else if(_cornOrder == 'last' && endIndex < dispCornDivListAll.length){
+						paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'last');
+					}else if(_cornOrder == 'last' && endIndex == dispCornDivListAll.length){
+						paintCornHtml2nd(false);
+					}else if(_cornOrder == 'mid'){
+						if((endIndex + 1) < dispCornDivListAll.length) {
+							paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+						}
+					}
+					return;
+				}
+				checkedCornList.push(_conr_no);
+				
+				var emptyConrNoStr = window.sessionStorage.getItem('bfMainEmptyConrNo');
+				var emptyConrNoList;
+				if(emptyConrNoStr != 'undefined' && emptyConrNoStr != "" && emptyConrNoStr != null){
+					emptyConrNoList = emptyConrNoStr.split(',');
+				
+					if(emptyConrNoList.indexOf(_conr_no) > -1){
+						if(_cornOrder == 'first' && startIndex > 0){
+							paintCornHtml($(dispCornDivListAll[startIndex--]).attr('id'), false, 'first');
+						}else if(_cornOrder == 'first' && startIndex == 0){
+							paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+						}else if(_cornOrder == 'last' && endIndex < dispCornDivListAll.length){
+							paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'last');
+						}else if(_cornOrder == 'last' && endIndex == dispCornDivListAll.length){ 
+							paintCornHtml2nd(false); 
+						}else if(_cornOrder == 'mid'){
+							if((endIndex + 1) < dispCornDivListAll.length) {
+								paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+							}
+						}
+						return;
+					}
+				}
+				
+				cornHtml = window.sessionStorage.getItem('bfMainDom'+_conr_no);
+				if (mainReqChk_readFromDB || cornHtml == null || cornHtml == 'undefined') {
+					$.ajax({
+						type: "post",
+						url: "/shop/indexPetShopMain2ND?dfLnbDispClsfNo=300000174&cateCdL=12565&dispCornNo="+_conr_no, // param으로 받은 코너 번호에 해당하는 jsp를 html로 받음. 
+						data: "", 
+						dataType: "text"
+					}).done(function(data){
+						if(data == ''){
+							// useMainCache 값 true면 세션스토리지 사용함. 세션스토리지 저장. (공통코드 사용자정의1값 != 0)
+							if (useMainCache) {
+								window.sessionStorage.setItem('bfMainEmptyConrNo', window.sessionStorage.getItem('bfMainEmptyConrNo')+','+_conr_no);
+							}
+							if(_cornOrder == 'first' && startIndex > 0){
+								paintCornHtml($(dispCornDivListAll[startIndex--]).attr('id'), false, 'first');
+							}else if(_cornOrder == 'first' && startIndex == 0){
+								paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+							}else if(_cornOrder == 'last' && endIndex < dispCornDivListAll.length){
+								paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'last');
+							}else if(_cornOrder == 'last' && endIndex == dispCornDivListAll.length){
+								paintCornHtml2nd(false); 
+							}else if(_cornOrder == 'mid'){
+								paintCornHtml($(dispCornDivListAll[endIndex++]).attr('id'), false, 'mid');
+							}
+							return;
+						}
+						
+						try {
+							var errChk = JSON.parse(data);
+							if(errChk.exCode ) {
+								return;
+							}
+						} catch(e) { }
+						
+						_item.html(data);
+						
+						var cornNoStr = _conr_no;
+						// useMainCache 값 true면 세션스토리지 사용함. 세션스토리지 저장. (공통코드 사용자정의1값 != 0)
+						if (useMainCache) {
+							// 강아지 최상단 배너, 고양이 최상단 배너의 경우 : 세션스토리지 저장 안 함
+							if (cornNoStr != '505' && cornNoStr != '519' 
+									&& cornNoStr != '510' && cornNoStr != '537' //APDO-1677 타임딜 실시간 반영 
+							) {
+								window.sessionStorage.setItem('bfMainDom'+_conr_no, data); // 메인 html
+								window.sessionStorage.setItem('bfMainDomLastTime', new Date().getTime()); // 세션스토리지 저장 시간
+								window.sessionStorage.setItem('bfMainCateCdLBefore', '12565'); // 샵메인 홈 카테고리
+							}
+						}
+
+						// 뒤로가기 시 처음 3개 코너 로드 완료 체크에 필요한 변수 count++;
+						if(dvsnCornerCnt == '100') {
+							if (firstCornersChk < 3) {
+								if (_cornOrder == 'first') {
+									firstCornersChk++;
+								} else if (_cornOrder == 'mid') {
+									if (endIndex == dispCornDivListAll.length) {
+										firstCornersChk = 3;
+									} else {
+										firstCornersChk++;									
+									}
+								} else if (_cornOrder == 'last'){
+									firstCornersChk++;
+								}
+								firstCornerLoadDone(firstCornersChk);
+							}
+						} else {
+							if(_cornOrder == 'last'){
+								paintCornHtml2nd(false);
+							}
+						}
+					});
+				} else {
+					_item.html(cornHtml);
+					
+					// 뒤로가기 시 처음 3개 코너 로드 완료 체크에 필요한 변수 count++;
+					if(dvsnCornerCnt == '100') {
+						if (firstCornersChk < 3) {
+							if (_cornOrder == 'first') {
+								firstCornersChk++;
+							} else if (_cornOrder == 'mid') {
+								if (endIndex == dispCornDivListAll.length) {
+									firstCornersChk = 3;
+								} else {
+									firstCornersChk++;									
+								}
+							} else if (_cornOrder == 'last'){
+								firstCornersChk++;
+							}
+							firstCornerLoadDone(firstCornersChk);
+						}
+					} else {
+						if(_cornOrder == 'last'){
+							paintCornHtml2nd(false);
+						}
+					}
+				}
+			}
+			
+			// 처음 3개 코너 모두 로드 완료되었는 지 체크
+			function firstCornerLoadDone(fcChkCnt){
+				if (fcChkCnt == 3) {
+					// 클릭된 위치로 화면 조정
+					petShopMainResult.chkFirstPage();
+					
+					// 나머지 코너 호출
+					paintCornHtml2nd(false);
+				}
+			}
+			
+			// 나머지 영역 모두 가져오기
+			function paintCornHtml2nd(mainReqChk){
+				dispCornDivListAll.each(function(index, item){
+					setTimeout(function() {
+						paintCornHtml($(item).attr('id'), mainReqChk, '');
+					}, 0);
+				});
+			}
+			
+			// 최우선 실행 - 브라우저가 DOM트리 생성한 직후
+			$(document).ready(function(){
+				var bfMainCateCdLBefore = window.sessionStorage.getItem('bfMainCateCdLBefore');
+				var lastTime = window.sessionStorage.getItem('bfMainDomLastTime');
+				
+				var mainReqChk = false; // 새로 2ND 페이지 호출할 지 체크할 변수
+				if(bfMainCateCdLBefore != null && lastTime != null) {
+					var petshopCurrentTime = new Date().getTime();
+					var bfMainDomTimeDif = petshopCurrentTime - lastTime;
+					
+					// 펫샵 메인 세션 스토리지 생성 후의 초/분/시/일
+					let getSecond = bfMainDomTimeDif / 1000;
+					let getMinute = getSecond / 60;
+					let getHour = getMinute / 60;
+					let getDate = getHour / 24;
+					
+					// 공통코드에서 정의한 사용자정의 1값(분단위) 초과 or 샵메인 카테고리 다름
+					if (getMinute > bfMainDomClearTime || '12565' != bfMainCateCdLBefore) {
+						var bfKeyArr = [];
+						var bfKey;
+						for(var i =0; i < window.sessionStorage.length; i++){
+							bfKey = window.sessionStorage.key(i);
+							if(bfKey.indexOf('bfMain')>-1) {
+								bfKeyArr.push(bfKey);
+							}
+						}
+						if (bfKeyArr.length > 0) {
+							for(var i=0; i<bfKeyArr.length; i++){
+								window.sessionStorage.removeItem(bfKeyArr[i]);
+							}
+						}
+						
+						mainReqChk = true;
+					}
+				} else {
+					mainReqChk = true;
+				}
+				
+				// 코너 목록
+				dispCornDivList = getShowCornList();
+				dispCornDivList.each(function(index, item){
+					var cornOrder = '';
+					if(index==0){
+						cornOrder = 'first';
+					}else if(index==1){
+						cornOrder = 'mid';
+					}else if(index==2){
+						cornOrder = 'last';
+					}
+					setTimeout(function() {
+						paintCornHtml($(item).attr('id'), mainReqChk, cornOrder);
+					}, 0);
+				});
+				
+				// Airbridge Send : 홈화면조회
+				setTimeout(function() {
+					sendAirBridge('airbridge.ecommerce.home.viewed');
+				}, 0);
+				
+				// Amplitude Data : 스토어 메인 페이지 뷰
+				var nowReferrerUrl = (document.referrer)? document.referrer : ((storageReferrer.get() && storageReferrer.get() != 'null') ? storageReferrer.get() : "None");
+				var thisSourceType = "None";
+				if(nowReferrerUrl != ""){
+					var startRef = nowReferrerUrl.indexOf("/", nowReferrerUrl.indexOf(window.location.hostname));
+					var endRef = nowReferrerUrl.indexOf("?", startRef+1);
+					thisSourceType = nowReferrerUrl.substring(startRef+1, (endRef != -1)? endRef:nowReferrerUrl.legnth);   
+				}
+				
+				// Amplitude Send : 스토어 메인 페이지 뷰
+				var amplitudeShopMainData = {
+						source : nowReferrerUrl,
+						sourceType : thisSourceType,
+						categoryName1depth : amplitudeCate1Depth
+					}
+				sendAmplitude("view_store_main_page", amplitudeShopMainData);
+				
+				$(document).off('click', '.gd-link');
+			    $(document).on('click', '.gd-link', function(e) {
+			    	e.preventDefault();
+			    	callAmplitudeMainPd($(this));
+			    	if ($(this).data("disptype") == "BEST") {
+			    		goBestGoods($(this).data("content"), $(this).data("dispcornno"), $(this).data("disptype"), $(this).data("idx"));		
+			    	} else {
+			    		petShopMainResult.goGoods($(this).data("content"), $(this).data("dispcornno"), $(this).data("disptype"), $(this).data("idx"));
+			    	}
+			    	return false;
+			    });
+				
+				$(document).off('click', '.wrap-gd-unit .btn-cart');
+			    $(document).on('click', '.wrap-gd-unit .btn-cart', function(e) {
+			        e.preventDefault();
+			        var goodsId = $(this).data("goodsid");
+			        var itemNo = $(this).data("itemno");
+			        var ordmkiYn = $(this).data("ordmkiyn");
+			        var minOrdQty = $(this).data("minordqty");
+			        var goodsCstrtTpCd = $(this).data("goodscstrttpcd");
+			        var reservationType  = $(this).data("reservationtype");
+			        var reservationStrtDtm = $(this).data("reservationstrtdtm") + "";
+					insertCartGoods(goodsId, itemNo, ordmkiYn, minOrdQty, goodsCstrtTpCd, reservationType, reservationStrtDtm, $(this), 'PC');
+			        return false;
+			    });
+			});
+			
+			// 페이지 벗어날 때 코너별 html 저장이 필요한 경우 세팅
+			window.onbeforeunload = function(){
+				var htmlCornNo;
+				var cornBestHtml;
+				if ('12565' == '12564') { // 강아지 코너
+					htmlCornNo = "514";
+					
+					// 베스트 코너 html 세팅
+					cornBestHtml = $("#" + htmlCornNo).html();
+				} else if ('12565' == '12565') { // 고양이 코너
+					htmlCornNo = "541";
+					
+					// 베스트 코너 html 세팅
+					cornBestHtml = $("#" + htmlCornNo).html();
+				}
+				
+				// html이 빈 값이 아닐 경우 && 세션스토리지 사용 (공통코드 사용자정의1값 != 0)
+				if (cornBestHtml != '' && useMainCache) {
+					window.sessionStorage.setItem("bfMainDom" + htmlCornNo, cornBestHtml);
+				}
+			}
+
+			// Amplitude Send : 중간 배너 클릭(shop)
+			function callAmplitudeMidBnr(obj) {
+				var amplitudeMidBnrData = {
+						mainType : $(obj).data("maintype"),
+						bannerIndex : $(obj).data("bannerindex"),
+						index : $(obj).data("index"),
+						bannerId : $(obj).data("bannerid"),
+						bannerName : $(obj).data("bannername"),
+						bannerType : $(obj).data("bannertype"),
+						categoryName1depth : amplitudeCate1Depth
+					}
+				sendAmplitude("click_banner_mid", amplitudeMidBnrData);
+			};
+			
+			// Amplitude Data : 카테고리
+			var amplitudeCate1Depth;
+			if('12565' == '12564'){
+				amplitudeCate1Depth = '강아지';
+			}else if('12565' == '12565'){
+				amplitudeCate1Depth = '고양이';
+			}
+			
+			// Amplitude Send : 스토어 메인 배너 클릭
+			function callAmplitudeMainBnr(obj) {
+				var thisObj = $(obj).parents('li');
+				var amplitudeMainBnrData = {
+						index : thisObj.data("index")+1,
+						bannerId : thisObj.data("bannerid"),
+						bannerName : thisObj.data("bannername"),
+						bannerType : thisObj.data("bannertype"),
+						categoryName1depth : amplitudeCate1Depth
+					}
+				sendAmplitude("click_store_banner_main", amplitudeMainBnrData);
+			};
+			
+			// Amplitude Send : 스토어 전시구좌 별 상품 리스트 중 클릭
+			function callAmplitudeMainPd(obj) {
+				var thisObj = $(obj).parents('.amplitudeMainData');
+				var thisCate =  (thisObj.data("categorypath"))?thisObj.data("categorypath").replaceAll(" ", "").split('>'):"";
+				var thisPrice = thisObj.data("price");
+				var thisDiscountPrice = thisObj.data("discountprice");
+				var thisDiscountRate;
+				if(thisPrice != "" && thisDiscountPrice !=""){
+					thisDiscountRate = Math.floor(100-((parseInt(thisDiscountPrice) * 100)/parseInt(thisPrice)));
+				}
+				var amplitudeMainPdData = {
+						displayId : thisObj.data("displayid"),
+						displayName : thisObj.data("displayname"),
+						productId : thisObj.data("productid"),
+						productName : thisObj.data("productname"),
+						brandId : thisObj.data("brandid"),
+						brandName : thisObj.data("brandname"),
+						categoryName1depth : thisCate[0],
+						categoryName2depth : thisCate[1],
+						categoryName3depth : thisCate[2],
+						discountRate : thisDiscountRate,
+						price : thisPrice,
+						discountPrice : thisDiscountPrice
+					}
+				sendAmplitude("click_product_list_in_main_section", amplitudeMainPdData);
+			};
+			
+			/*
+			* 	result 페이지 스크립트
+			*/
+			var petShopMainResult = {
+				corner : '',					// 포커스코너
+				cornerParam : '',			// 포커스 코너 더보기 버튼
+				focus : '',						// 마지막 포커스
+				timeDeal : '',				// 타임딜 포커스
+				bestCate : '',				// 베스트 카테고리
+				bestPage : '',				// 더보기 버튼 클릭 
+				newPage : '',				// 더보기 버튼 클릭 
+				firstFocusItv : null,					// 포커스 이동 인터벌
+				chkFirstPage : function() { 			// 각페이지별 다른 ITEM수 제한 / 내용 없을 경우 문구 노출
+					// 스크롤 시점유지 -- YJU.0929
+					if(petShopMainResult.focus != ''){
+						try{
+							if(petShopMainResult.focus.indexOf("topbnr") > -1){							
+								petShopMainResult.firstTopBanner();
+							}
+							else if(petShopMainResult.focus.indexOf("shortcut") > -1){
+								petShopMainResult.firstShortCut();
+							}
+							else if(petShopMainResult.focus.indexOf("adbnr") > -1){
+								petShopMainResult.firstAdBanner();
+							}
+							else if(petShopMainResult.focus.indexOf("btadbnr") > -1){
+								petShopMainResult.firstBtAdBanner();
+							}
+							else if(petShopMainResult.focus.indexOf("OFFEN") > -1){
+								petShopMainResult.firstOffenGoods();
+							}
+//	 						else if(petShopMainResult.focus.indexOf("RCOM") > -1){
+//	 							petShopMainResult.firstRecGoods();
+//	 						}	맞춤추천 -> 랜덤으로 위치는 제외
+							else if(petShopMainResult.focus.indexOf("40") > -1){
+								petShopMainResult.firstExpGoods();
+							}
+							else if(petShopMainResult.focus.indexOf("50") > -1){
+								petShopMainResult.firstStockGoods();
+							}
+							else if(petShopMainResult.focus.indexOf("PACKAGE") > -1){
+								petShopMainResult.firstPackGoods();
+							}
+							else if(petShopMainResult.focus.indexOf("MD") > -1){
+								petShopMainResult.firstMdGoods();
+							}
+							else if(petShopMainResult.focus.indexOf("DEAL") > -1){
+								petShopMainResult.firstTimeDealGoods();
+							}
+							else if("PC" == "PC" && 
+									petShopMainResult.focus.indexOf("PETSHOP") > -1){
+								petShopMainResult.firstOnlyGoods();
+							}
+//	 						else if(petShopMainResult.focus.indexOf("NEW") > -1){
+//	 							petShopMainResult.firstNewGoods();
+//	 						}	NEW -> 랜덤으로 위치는 제외
+//	 						else if(petShopMainResult.focus.indexOf("BEST") > -1){
+//	 							petShopMainResult.firstBestGoods();
+//	 						}
+//	 						else if(petShopMainResult.focus.indexOf("rcntRcmnd") > -1){
+//	 							petShopMainResult.firstRcntRcmndGoods();
+//	 						}	함꼐 비교하면 좋을 상품 -> 랜덤으로 위치는 제외
+							else if(petShopMainResult.focus.indexOf("CMBNT") > -1){
+								petShopMainResult.firstCmbntGoods();
+							}
+							else if("PC" != "PC" && 
+									petShopMainResult.focus.indexOf("pw") > -1){
+								petShopMainResult.firstPopWordGoods();
+							}
+						}catch(e){
+							console.log("swiper slide err : ", e.message);
+						}
+					}
+					petShopMainResult.newPage = '';
+					// 포커스 이동
+					var loopFtn = setInterval(function(){
+						if(petShopMainResult.corner != ""){
+							var thisFocus = $("#corner"+petShopMainResult.corner);
+							if (petShopMainResult.cornerParam.indexOf("Btn") > -1) { // 코너 더보기 시 전체보기버튼 클릭했을 경우
+								thisFocus = $("#corner"+petShopMainResult.cornerParam);
+							}
+							
+							if(petShopMainResult.focus.indexOf("PETSHOP") > -1
+								|| petShopMainResult.focus.indexOf("OnlyApet") > -1
+								|| petShopMainResult.focus.indexOf("AiTEMS") > -1)
+							{
+								var idx = petShopMainResult.focus.replace("PETSHOP","");
+								if (petShopMainResult.focus.indexOf("OnlyApet") > -1) {
+									idx = petShopMainResult.focus.replace("OnlyApet","");
+								} else if (petShopMainResult.focus.indexOf("AiTEMS") > -1){
+									idx = petShopMainResult.focus.replace("AiTEMS","");
+								}
+								thisFocusMore = $("#corner"+petShopMainResult.corner).parent().find('li').eq(idx);
+								thisFocus = (thisFocusMore.length == 0 ? thisFocus : thisFocusMore);	// 더보기를 클릭했을 경우
+								petShopMainResult.focus = "";
+							}
+							if(petShopMainResult.focus.indexOf("NEW") > -1) {
+								var idx = petShopMainResult.focus.replace("NEW","");
+								thisFocusMore = $("#corner"+petShopMainResult.corner).parent().find('div[class*=gdset]').eq(idx);
+								thisFocus = (thisFocusMore.length == 0 ? thisFocus : thisFocusMore);	// 더보기를 클릭했을 경우
+								petShopMainResult.focus = "";
+							}
+							
+							if(thisFocus.length > 0){
+								if("PC" == "PC") {
+									window.scrollTo(100,(thisFocus.offset().top- (window.innerHeight/3)));
+								}else{
+									window.scrollTo(100,(thisFocus.offset().top- (window.innerHeight/4)));
+								}
+								petShopMainResult.corner = "";
+							}
+						}
+						clearInterval(loopFtn);
+					},300)
+				},
+				firstTopBanner : function() {
+					var idx = petShopMainResult.focus.replace("topbnr","");
+					if(idx != 'undefined') {
+						mn_visul_sld[0].slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstShortCut : function() {
+					var idx = petShopMainResult.focus.replace("shortcut","");
+					if(idx != 'undefined') {
+						gogoSwiper.slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstAdBanner : function() {
+					var itemIdx = petShopMainResult.focus.replace("adbnr","");
+					if(itemIdx != 'undefined') {
+						banner01.slideTo(itemIdx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstBtAdBanner : function() {
+					var itemIdx = petShopMainResult.focus.replace("btadbnr","");
+					if(itemIdx != 'undefined') {
+						banner02.slideTo(itemIdx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstOffenGoods : function() {
+					var idx = petShopMainResult.focus.replace("OFFEN","");
+					if(idx != 'undefined') {
+						mn_often_sld.slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstRecGoods : function() {
+					var itemIdx = petShopMainResult.focus.replace("RCOM","");
+					var listIdx = $("#corner"+petShopMainResult.corner).data("listIdx");
+					if(itemIdx != 'undefined' && listIdx != undefined) {
+						recomPet[listIdx].slideTo(itemIdx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstExpGoods : function() {
+					var idx = petShopMainResult.focus.replace("40","");
+					var swiperColumn = idx;
+					if(viewDispClsfNo == '300000173' || viewDispClsfNo == '300000174') {
+						swiperColumn = $(".list02").find("li").eq(idx).data("swiperColumn");
+					}
+					if(idx != 'undefined') {
+						discntList02.slideTo(swiperColumn);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstStockGoods : function() {
+					var idx = petShopMainResult.focus.replace("50","");
+					var swiperColumn = idx;
+					if(viewDispClsfNo == '300000173' || viewDispClsfNo == '300000174') {
+						swiperColumn = $(".list01").find("li").eq(idx).data("swiperColumn");
+					}
+					
+					if(swiperColumn != 'undefined') {
+						discntList01.slideTo(swiperColumn);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstPackGoods : function() {
+					var idx = petShopMainResult.focus.replace("PACKAGE","");
+					var swiperColumn = $(".mn_packg_sld").find("li").eq(idx).data("swiperColumn");
+					if(swiperColumn != 'undefined') {
+						mn_packg_sld.slideTo(swiperColumn);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstMdGoods : function() {
+					var idx = petShopMainResult.focus.replace("MD","");
+					if(idx != 'undefined') {
+						mn_mdpic_sld.slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstTimeDealGoods : function() {
+					var idx = petShopMainResult.focus.replace("DEAL","");
+					if(idx != 'undefined') {
+						if('SOON' != petShopMainResult.timeDeal) {
+							tdeal_1.slideTo(idx);
+						}else {
+							tdeal_2.slideTo(idx);
+						}
+						petShopMainResult.focus = "";
+						petShopMainResult.timeDeal = "";
+					};
+				},
+				firstOnlyGoods : function() {
+					var idx = petShopMainResult.focus.replace("PETSHOP","");
+					if(idx != 'undefined') {
+						mn_exclu_sld.slideTo(idx);
+						petShopMainResult.focus = "";
+					}
+				},
+				firstBestGoods : function() {
+					var goodsIdx = petShopMainResult.focus.replace("BEST","");
+					petShopMainResult.focus = "";
+					
+					if(goodsIdx != 'undefined') {
+						if(isMobile) {
+							galleryThumbs.slideTo(goodsIdx, 500, false)
+						}else {
+							$("li[name=cateLi]").eq(goodsIdx).addClass("active").siblings("li").removeClass("active");
+						}
+						galleryMain.slideTo(goodsIdx, 500, false)
+					};
+				},
+				firstRcntRcmndGoods : function() {
+					var idx = petShopMainResult.focus.replace("rcntRcmnd","");
+					if(idx != 'undefined') {
+						myview.slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstCmbntGoods : function() {
+					var idx = petShopMainResult.focus.replace("CMBNT","");
+					if(idx != 'undefined') {
+						mdMix.slideTo(idx);
+						petShopMainResult.focus = "";
+					};
+				},
+				firstPopWordGoods : function() {
+					var idx = petShopMainResult.focus.replace("pw","");
+					if(idx != 'undefined') {
+						hitKeyword.slideTo(idx); 
+						petShopMainResult.focus = "";
+					};
+				},
+				setHistoryState : function () {					// history replace
+					var stateUrl = "";
+					if(petShopMainResult.focus != ''){
+						stateUrl += '&focus='+petShopMainResult.focus;
+					}
+					if(petShopMainResult.corner != ''){
+						stateUrl += '&corner='+petShopMainResult.corner;
+					}
+					if(petShopMainResult.timeDeal != ''){
+						stateUrl += '&timeDeal='+petShopMainResult.timeDeal;
+					}
+					if(petShopMainResult.bestCate != ''){
+						stateUrl += '&bestCate='+petShopMainResult.bestCate;
+					}
+					if(petShopMainResult.bestPage > 1){
+						stateUrl += '&bestPage='+petShopMainResult.bestPage;
+					}
+					if(petShopMainResult.newPage > 1){
+						stateUrl += '&newPage='+petShopMainResult.newPage;
+					}
+					var url = "/shop/home?dvsnCornerCnt=100"+stateUrl;
+					storageHist.replaceHist(url);
+					history.replaceState("","",url);
+					return url;
+				},				
+				goBannerList : function(goUrl, dispCornNo) {
+					var idx = parseInt($("span[class=swiper-pagination-current]").text()) -1;
+					var focusId = 'topbnr' + idx;
+					petShopMainResult.corner = dispCornNo;
+					petShopMainResult.focus = focusId;
+					petShopMainResult.setHistoryState();
+					location.href = goUrl;
+				},
+				goBanner : function(goUrl, dispCornNo, bnrNo, dispType, shortCutYn) {
+					petShopMainResult.corner = dispCornNo;
+					var stUrl = 'aboutpet.co.kr';
+					
+					if(shortCutYn != undefined) {
+						petShopMainResult.focus = dispType+$(".gogos .swiper-slide-active").index();
+						petShopMainResult.setHistoryState();
+						goLink(goUrl, shortCutYn)
+					}else if("PC" == "APP" && goUrl.indexOf(stUrl) == -1){ 
+						//APP 이면서 다른 사이트로 이동 시 APP에서 새 창으로 배너 화면 띄운 뒤 뒤로가기 UI생성   
+						toNativeData.func = "onOrderPage";
+						toNativeData.url = goUrl;
+						toNative(toNativeData);
+					}else {
+						if(dispType != undefined && dispType.indexOf("topbnr") > -1) {
+							petShopMainResult.focus = dispType;
+						}
+						petShopMainResult.setHistoryState();
+						location.href = goUrl;
+					}
+				},
+				goCornerList : function(dispClsfNo, dispCornNo, dispClsfCornNo, dispType, timeDeal, orderByGoodsIds) {
+					// 이동
+					var fc = dispCornNo
+					if(timeDeal != undefined) {
+						petShopMainResult.timeDeal = timeDeal;
+					}
+					if (dispType == "NEW") {
+						petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, "N");
+					} else {
+						if(dispType == 'DEAL') {
+							petShopMainResult.timeDeal = $("[id^=btn][class~=active]").attr("id").replace("btn", "");
+						}
+						petShopMainResult.corner = fc;
+						petShopMainResult.setHistoryState();
+						loadCornerGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, dispType, timeDeal, orderByGoodsIds);
+					}
+				},
+				goMoreCornerList : function(dispClsfNo, dispCornNo, dispClsfCornNo, itemIdx, dispType, timeDeal, orderByGoodsIds) {
+					// 이동
+					petShopMainResult.focus = dispType+itemIdx;
+					var fc = dispCornNo
+					if(timeDeal != undefined) {
+						petShopMainResult.timeDeal = timeDeal;
+					}
+					if(dispType == 'PETSHOP') {
+						fc = "Btn"+dispCornNo;
+					}
+					if (dispType == "NEW") {
+						petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, "Y");
+					} else {
+						if(dispType == 'DEAL') {
+							petShopMainResult.timeDeal = $("[id^=btn][class~=active]").attr("id").replace("btn", "");
+						}
+						petShopMainResult.corner = fc;
+						petShopMainResult.setHistoryState();
+						loadCornerGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, dispType, timeDeal, orderByGoodsIds);
+					}
+				},
+				goBestGoodsList : function(dispClsfNo, dispCornNo, dispClsfCornNo, dispType, moreYn) {
+					// 이동
+					var fc = dispCornNo
+					if(moreYn == 'Y') {
+						fc = "Btn"+dispCornNo;
+					}
+					petShopMainResult.corner = fc;
+					petShopMainResult.setHistoryState();
+					if(dispType == 'AUTO') {
+						location.href="/shop/indexBestGoodsList?shortCutYn=Y&dispClsfNo="+dispClsfNo+"&dispCornNo="+dispCornNo;
+					}else { 
+						location.href="/shop/indexBestGoodsList?shortCutYn=Y&dispClsfNo="+dispClsfNo+"&dispCornNo="+dispCornNo+"&dispClsfCornNo="+dispClsfCornNo;
+					}
+				},
+				goNewGoodsList : function(dispClsfNo, dispCornNo, dispClsfCornNo, moreYn) {
+					// 이동
+					var fc = dispCornNo
+					if(moreYn == 'Y') {
+						fc = "Btn"+dispCornNo;
+					}
+					petShopMainResult.corner = fc;
+					petShopMainResult.setHistoryState();
+					location.href="/shop/indexNewCategory?dispCornType=NEW&shortCutYn=Y";
+				},
+				goGoods : function(goodsId, dispCornNo, dispType, itemIdx) {
+					var fc = dispCornNo
+					petShopMainResult.focus = dispType + "" + itemIdx;
+					if(dispType == 'RCOM') {
+						petShopMainResult.focus = '';	// 맞춤추천 상품위치는 제외
+					}else if(dispType == 'DEAL') {
+						petShopMainResult.timeDeal = $("[id^=btn][class~=active]").attr("id").replace("btn", "");
+					}else if(dispType == 'rcntRcmnd') {
+						petShopMainResult.focus = '';	// 함꼐 비교하면 좋을 품위치는 제외
+					}
+					petShopMainResult.corner = fc;
+					petShopMainResult.setHistoryState();
+					location.href = "/goods/indexGoodsDetail?goodsId="+goodsId;
+				},
+				goSearch : function(goUrl, dispCornNo, dispType) {
+					var itemIdx = $(".search_list .swiper-pagination-bullet-active").index();
+					if(itemIdx != 'undefined' && itemIdx > 0) {
+						petShopMainResult.focus = dispType+itemIdx;
+					}else {
+						petShopMainResult.focus = '';
+					}
+					
+					petShopMainResult.corner = dispCornNo;
+					var lastUrl = petShopMainResult.setHistoryState();
+					return lastUrl;
+				}
+			}
+			
+			function loadCornerGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, dispType, timeDeal, orderByGoodsIds) {
+				var form = document.createElement("form");
+				document.body.appendChild(form);
+				var url = "/shop/indexGoodsList";
+				form.setAttribute("method", "GET");
+				form.setAttribute("action", url);
+
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "dispClsfNo");
+				hiddenField.setAttribute("value", dispClsfNo);
+				form.appendChild(hiddenField);
+				document.body.appendChild(form);
+				hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "dispCornNo");
+				hiddenField.setAttribute("value", dispCornNo);
+				form.appendChild(hiddenField);
+				document.body.appendChild(form);
+				hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", "dispClsfCornNo");
+				hiddenField.setAttribute("value", dispClsfCornNo);
+				form.appendChild(hiddenField);
+				document.body.appendChild(form);
+				if(dispType != undefined) {
+					hiddenField = document.createElement("input");
+					hiddenField.setAttribute("type", "hidden");
+					hiddenField.setAttribute("name", "dispType");
+					hiddenField.setAttribute("value", dispType);
+					form.appendChild(hiddenField);
+					document.body.appendChild(form);
+				}
+				if(dispType == 'RCOM') {
+					hiddenField = document.createElement("input");
+					hiddenField.setAttribute("type", "hidden");
+					form.appendChild(hiddenField);
+					document.body.appendChild(form);
+				}
+				if(timeDeal != undefined) {
+					hiddenField = document.createElement("input");
+					hiddenField.setAttribute("type", "hidden");
+					hiddenField.setAttribute("name", "timeDeal");
+					hiddenField.setAttribute("value", timeDeal);
+					form.appendChild(hiddenField);
+					document.body.appendChild(form);
+				}
+				if(orderByGoodsIds != undefined) {
+					// get 방식으로 param 제한됨으로 cookie로 처리
+					$.cookie("goodsListOrderByGoodsIds", orderByGoodsIds, {path:'/'});
+				}
+				form.submit();
+			}
+
+			/**
+			 * 금액 콤마 처리
+			 * @param x
+			 * @returns {string}
+			 */
+			function numberWithCommas(x) {
+				x = String(x);
+				var pattern = /(-?\d+)(\d{3})/;
+				while (pattern.test(x))
+					x = x.replace(pattern, "$1,$2");
+				return x;
+			}
+			 
+			// 타임딜 시간 셋팅	
+			function timeBefore(){
+				var curTime = "2022-10-28 22:48:42";
+				var serverTime = new Date(curTime.replace(/\s/, 'T'));
+				$("#orderGoodsListNOW  [id^='timeDeal_']").each(function(index) {
+					var $this = $(this);
+					var dre = $this.val();
+					var timeDeal = new Date(dre.replace(/\s/, 'T'));
+					
+					var serverTime = new Date(curTime.replace(/\s/, 'T'));
+					var now = new Date();
+					var dateGap = serverTime.getTime() - now.getTime();
+					var realTime = timeDeal - dateGap;
+					
+					$this.countdown(realTime, function(event) {
+						var resultTime = ( event.strftime('%D') != 0 ? event.strftime('%D') + '일  ' : '' ) + event.strftime('%H:%M:%S');
+						$("#time_"+goodsArr[index]).text( "⌛️ "+resultTime);
+					}).on('finish.countdown', function () {
+						var timeDealLength = $("#orderGoodsListNOW .gd-item").length;
+						if(timeDealLength > 1) {
+							$this.parents('.amplitudeMainData').hide();
+							shop.disp.sld.tdeal.using();
+						}else {
+							$("section[class~=tdeal]").hide();
+						}
+					});
+				});
+			}
+			
+			var fnGoPetInsert = function() {
+				var options = {
+					url : "/my/pet/getPetBaseTempYn"
+					, done : function (result) {
+						if (result.resultCode === 'S') {
+							var existsYn = result.existsYn;
+							
+							if (existsYn === 'Y') {
+								ui.confirm("등록중인 아이 정보가 있어요.</br>이어서 등록할까요?", { // 컨펌 창 옵션들
+									ycb : function() {
+										storageHist.goBack("/my/pet/petInsertView?petBaseTempSetYn=Y&returnUrl=/shop/home/");
+									},
+									ncb : function() {
+										storageHist.goBack("/my/pet/petInsertView?petBaseTempSetYn=N&returnUrl=/shop/home/");
+									},
+									ybt : "예", // 기본값 "확인"
+									nbt : "아니요" // 기본값 "취소"
+								});
+							} else {
+								storageHist.goBack("/my/pet/petInsertView?returnUrl=/shop/home/");
+							}
+						} else {
+							storageHist.goBack("/my/pet/petInsertView?returnUrl=/shop/home/");
+						}
+					}
+				};
+				
+				ajax.call(options);
+			}
+		</script><!-- 팝업레이어 A 전체 덮는크기 -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		var thisPagePath = "/shop/home/";
+		
+		if(thisPagePath == "/tv/home/" || thisPagePath == "/shop/home/" || thisPagePath == "/log/home/" ){
+			var cookieData = document.cookie;
+			
+			if("true" == "true"){
+				if(cookieData.indexOf("popLayerEvent_PC=done") === -1){
+					ui.popLayer.open("popLayerEvent");
+					//$("#showPopLayerEvent").css("display","block");
+				}
+			}else if("false" == "true"){
+				if(cookieData.indexOf("popLayerEvent_MO=done") === -1){
+					ui.popLayer.open("popLayerEvent");
+					//$("#showPopLayerEvent").css("display","block");
+				}
+			}else if("false" == "true"){
+				if(cookieData.indexOf("popLayerEvent_APP=done") === -1){
+					ui.popLayer.open("popLayerEvent");
+					//$("#showPopLayerEvent").css("display","block");
+				}
+			}
+		}/*else{
+			ui.popLayer.close('popLayerEvent');
+			//$("#showPopLayerEvent").css("display","none");
+		}*/
+	});
+	
+	//링크이동
+	function fncGoUrl(url){
+		if(url){
+			if(url.indexOf("/tv/series/indexTvDetail") > -1 && "false" == "true"){
+				toNativeData.func = "onNewPage";
+				toNativeData.type = "TV";
+				toNativeData.url = url;
+				
+				toNative(toNativeData);
+			}else{
+				if(url.indexOf("/event/detail") > -1){
+					location.href = url+"&returnUrl=/shop/home/'";
+				}else{
+					location.href = url;
+				}
+			}
+		}else{
+			return false;
+		}
+	}
+	
+	//오늘 하루 보지않기
+	function fncTodayClose(){
+		if("true" == "true"){
+			setCookiePopLayerEvent("popLayerEvent_PC", "done", 1);
+		}else if("false" == "true"){
+			setCookiePopLayerEvent("popLayerEvent_MO", "done", 1);
+		}else if("false" == "true"){
+			setCookiePopLayerEvent("popLayerEvent_APP", "done", 1);
+		}
+		
+		ui.popLayer.close('popLayerEvent');
+	}
+	
+	function setCookiePopLayerEvent(name, value, expire){
+		var todayDate = new Date();
+		//todayDate.setDate( todayDate.getDate() + expire );
+		//todayDate.setHours( todayDate.getHours() + expire );
+		//document.cookie = escape(name) + "=" + escape( value ) + "; path=/; expires=" + todayDate.toUTCString() + ";"
+		
+		var newDate = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), "23", "59", "59"); //당일 자정으로 셋팅
+		document.cookie = escape(name) + "=" + escape( value ) + "; path=/; expires=" + newDate.toUTCString() + ";"
+	}
+</script>	
+<!-- 팝업레이어 A 전체 덮는크기 -->
+
+<script>
+	var len = "3";
+	var booleanLoop = false;
+	if(len > 1){
+		booleanLoop = true;
+	}
+	
+	var popSwiper = new Swiper(".swiPopCont .swiper-container", {
+	    slidesPerView: 1,
+	    slidesPerGroup: 1,
+	    freeMode: false,
+	    //loop: true,
+	    loop: booleanLoop,
+	    watchOverflow: true,
+	    /* APET-1151 2021.07.20 추가함 start */
+	    autoplay: {
+		   delay: 3000,
+		   disableOnInteraction: false, // touch or click 시 autoplay 멈춤현상 수정 2021.07.28 추가함
+		 },
+	    /* APET-1151 2021.07.20 추가함 end */
+	    pagination: {
+	      el: ".swiPopCont .swiper-pagination",
+	      clickable: true,
+	    },
+	    navigation: {
+	      nextEl: ".swiPopCont .swiper-button-next",
+	      prevEl: ".swiPopCont .swiper-button-prev",
+	    },
+	});
+</script>
+<style>
+	/* .has_top_banner nav.lnb>.inr{top:182px} */
+</style>
+
+<script type="text/javascript">
+	function goEventInTopBanner() {
+		var eventNo = '';
+		if ('prd'=="local" || 'prd'=="dev" || 'prd'=="dev2" || 'prd'=="dev3" || 'prd'=="pfm"){
+			eventNo = 89;
+		}
+		if ('prd'=="stg"){
+			eventNo = 139;
+		}
+		if ('prd'=="prd"){
+			eventNo = 225;
+		}
+		
+		// Amplitude Send : 100원딜 띠 배너 클릭 후 엠플리튜드에 전송
+		sendAmplitude("click_store_100deal_banner");
+		location.href = "/event/detail?eventNo="+eventNo;
+	}
+</script>
+</head>
+
+<body class="body">
+
+<!-- 기본 컨텐츠 -->
+	<div class="wrap" id="wrap">
+		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
+		
+	<script>
+	
+	function clickLogin(){
+		location.href = "/indexLogin?returnUrl="+location.pathname+location.search;
+	}
+	
+	//장바구니 수 set, 캐시 이슈로 ajax 호출
+	function setCartCnt(){
+		$.ajax({
+			url : "/order/getCartCnt"
+			, dataType : "json"
+			, type : "POST"
+			, success : function(data){
+				var $cartCntObj = $('.header .menu .cart').find('em');
+				var $shopMainCartCntObj = $('#btnCart').find('em');
+				if($cartCntObj.length == 0){
+					if(data.cartCnt != 0){
+						var html = '<em class="n">'+data.cartCnt+'</em>';
+						$('.header .menu .cart').html(html);
+					}
+				}else{
+					if(data.cartCnt == 0){
+						$cartCntObj.remove();
+					}else{
+						$cartCntObj.text(data.cartCnt);
+					}
+				}
+				
+				// 모바일 샵 메인용
+				if($shopMainCartCntObj.length == 0){
+					if(data.cartCnt != 0){
+						var html = '<em class="label cnt-cart">'+data.cartCnt+'</em>';
+						$('#btnCart').append(html);
+					}
+				}else{
+					if(data.cartCnt == 0){
+						$shopMainCartCntObj.remove();
+					}else{
+						$shopMainCartCntObj.text(data.cartCnt);
+					}
+				}
+			}
+		});
+	}
+
+  	//등급 레이어팝업 스크립트 추가 2021.05.13
+	var rankBox = function(){
+		ui.popLayer.open('popLank',{
+			ocb:function(){
+				// console.log("popLank 열림");
+			},
+			ccb:function(){
+				// console.log("popLank 닫힘");
+			}
+		});
+
+		if("PC" == "PC") {
+			$(".rank_pc").addClass("on");
+		}else {										
+			$(".rank_mo").addClass("on");
+		}
+	}
+  	
+	function closeTopbanner() {
+		$('#topBanner').addClass('hide');
+		var cookieName	= getTopbannerCookieName();
+		setCookieTopBanner(cookieName, "done", 1);
+	}
+</script><!-- header pc-->
+<header class="header pc cu mode0" data-header="set0" id="header_pc">
+	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
+	<div class="hdr">
+		<div class="inr">
+			<div class="tdt">
+				<ul class="menu">					
+					<li><a href="/join/indexTerms?header=Y&goSns=Y" class="bt">회원가입</a></li>
+		                <li><a href="javascript:clickLogin();" class="bt">로그인</a></li>
+		                <!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
+				
+					</ul>
+			</div>
+			<div class="hdt">
+				<!-- mobile -->
+				<button class="mo-header-btnType02">취소</button><!-- on 클래스 추가 시 활성화 -->
+				<!-- // mobile -->
+				<button class="btnGnb" type="button">메뉴</button>
+<!-- -->
+				<h1 class="logo shop">
+					<a class="bt" href="javascript:goShopDeleteCookie();">AboutPet</a>
+				</h1>
+				<nav class="menushop">
+							<button type="button" class="bt st" id="headerTxt"></button>
+							<div class="list">
+								<ul class="menu">
+									<li class=""><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000173)"><b class="t" id="b_tag_300000174">강아지</b></a></li>
+									<li class="active"><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000174)"><b class="t" id="b_tag_300000174">고양이</b></a></li>
+								
+								</ul>
+							</div>
+						</nav>
+<!-- -->
+				<!-- mobile -->
+				<button class="mo-header-backNtn" onclick="storageHist.goBack();">뒤로</button>
+					<div class="mo-heade-tit"  >
+					<span class="tit"></span>
+								</div>
+				<div class="mo-header-rightBtn">
+						<button class="mo-header-btnType01">
+							<span class="mo-header-icon"></span>
+							</button>
+					</div>
+				<button class="mo-header-close"></button>
+				<!-- // mobile -->
+				<nav class="tmenu">
+					<ul class="list">
+			
+						<li id="liTag_10" class="active"><a href="/shop/home/" class="bt">스토어</a></li> <!-- APET-1250 210728 kjh02  -->
+						<li id="liTag_00" class=""><a href="/mypage/indexMyPage/" class="bt">MY</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="cdt" >
+						<div class="schs">
+								<div class="form ">
+									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
+									<button type="button" class="btnSch" data-content="" data-url="/commonSearch">검색</button>
+									
+									<!-- 자동완성 드롭박스 -->
+									<div class="key-word-list" id="key-word-list" style="display:none;"><ul></ul></div>
+									<!-- 자동완성 드롭박스 -->
+								</div>
+							</div>
+						<div class="menu">
+							<!-- <button id="alertBtn" class="bt alim  " type="button">알림</button> -->
+							<button class="bt cart" type="button" onclick="location.href='/order/indexCartList/'" >
+									</button>
+							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
+							<div class="alims" id ="alertDiv">
+							</div>
+						</div>
+						</div>
+</div>
+	</div>
+</header>
+
+		
+		<div class="layers">
+			<!-- 레이어팝업 넣을 자리 -->
+			<!-- 등급안내 팝업 추가 2021.05.13 -->
+			<article class="popLayer a popLank " id="popLank">
+				<div class="pbd">
+					<div class="phd">
+						<div class="in">
+							<h1 class="tit"></h1>
+							<button type="button" class="btnPopClose">닫기</button>
+						</div>
+					</div>
+					<div class="pct">
+						<main class="poptents">
+							<div class="rankCont">
+								<div class="rank_imgBox rank_pc">
+											<img src="/_images/common/img-level-pc.png" alt="어바웃펫 패미리 등급별 혜택 이미지">
+										</div>
+									</div>
+						</main>
+					</div>
+				</div>
+			</article>
+			<!-- //등급안내 팝업 추가 2021.05.13 -->
+		</div>
+<!--// header pc--><!-- e : header 영역 -->
+					<!-- s : gnb 영역 -->
+					<script type="text/javascript">
+function setCateList(dispClsfNo, upDispClsfNo) {
+	var viewDispClsfNo = getDispClsfNoFromCateCdL(upDispClsfNo);
+	// 쿠키저장
+	fnDispClsfNoCookie('set', viewDispClsfNo);
+	location.href = "/shop/indexCategory?dispClsfNo="+dispClsfNo+"&cateCdL="+upDispClsfNo+"&cateCdM="+dispClsfNo;
+}
+
+function goIndexLoginSettings() {
+	location.href = "/indexLoginSettings?returnUrl=" + window.location.pathname;
+}
+
+//시리즈 팝업
+function seriesOpen(){
+	var options = {
+		url : "/tv/series/getSeriesList"
+		, type : "POST"
+		, dataType : "html"
+		, data : { }
+		, done : function(result){
+			$("#gnbSrisListPopup").empty();
+			$("#gnbSrisListPopup").html(result);
+			ui.gnb.using("close"); //시리즈 목록 레이어 팝업 실행시 gnb메뉴(전체메뉴) 닫기
+			ui.popLayer.open('popSeriesList');
+		}
+	};
+	ajax.call(options);
+}
+
+
+function goMyPetLogGnb(){
+	if( checkLoginGnb() && checkRegPetGnb() ){
+		location.href = "https://aboutpet.co.kr/log/indexMyPetLog/?mbrNo=0";
+	}
+}
+
+
+function checkLoginGnb(){
+	if( "false" != "true" ){
+		ui.confirm('로그인 후 서비스를 이용할 수 있어요.<br>로그인 할까요?',{ // 컨펌 창 옵션들
+			ycb:function(){
+				location.href = "https://aboutpet.co.kr/indexLogin";
+			},
+			ncb:function(){
+				return false;
+			},
+			ybt:"로그인", // 기본값 "확인"
+			nbt:"취소"  // 기본값 "취소"
+		});
+	}else{
+		return true;
+	}
+}
+
+
+function checkRegPetGnb(){	
+	if( "" == null || "" == ""){
+		ui.confirm('마이펫 등록 후 이용할 수 있어요<br/>펫정보를 등록할까요?',{ // 컨펌 창 옵션들
+			ycb:function(){
+				// 반려동물 등록 화면으로 이동.
+				location.href = "https://aboutpet.co.kr/my/pet/petInsertView";
+			},
+			ncb:function(){
+				//alert('취소');
+				return false;
+			},
+			ybt:"예", // 기본값 "확인"
+			nbt:"아니요"  // 기본값 "취소"
+		});
+	}else{
+		return true;
+	}
+}
+
+function goPageWithClosingGnb(url) { 
+	if(typeof url !== 'string') return;
+
+	ui.gnb.usingWithoutAnimation('close');
+
+	location.href = url;
+}
+
+</script>
+<!--❤️사이드바-->
+
+
+<div class="layers tv seriesHome" id="gnbSrisListPopup"></div>
+<!-- e : gnb 영역 -->			
+					<!-- s : LNB 영역 -->
+					<script type="text/javascript">
+	var rcntList = null;// 최근본 상품 호출여부 판단(petshopShortCut.jsp 에서 사용)
+	
+	var reqUri = '/shop/home/';
+	var thisPath =  window.location.pathname + window.location.search;
+	$(document).ready(function(){
+		// 최근본 상품
+		$.ajax({
+			type: "POST",
+			data : {mbrNo : '0'},
+			url: "/shop/getOneGoodsDtlInqrHist",
+			beforeSend : function name() {
+				rcntList = '';
+			},
+			success: function (result) {
+				$(".rcntImgArea").data('loading','ing');
+				var thisImgPath = '';
+				var thisHtml = 	'<a class="box" href="javascript:void(0);" onclick="location.href=\'/mypage/indexRecentViews/\'" data-content="" data-url="/mypage/indexRecentViews/">';
+				thisHtml += 	'<b class="t">최근본상품</b><div class="thumb" ><div class="pic">';
+				if(result.dtlHist == undefined || result.dtlHist.imgPath == null){
+					thisHtml += 	'<img src="/_images/common/img-rc-vw-gds.jpg" alt="" class="img rcntImgArea">';
+				}else{
+					var imgDomain = "https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images" ;
+					thisImgPath = imgDomain + result.dtlHist.imgPath + "?type=f&w=70&h=70&quality=90&align=4";
+					thisHtml += 	'<img src="'+thisImgPath+'" alt="'+result.dtlHist.goodsNm+'" class="img rcntImgArea">';
+				}
+				thisHtml += '</div></div></a>';
+				$("#rcntThumbArea").html(thisHtml);
+				if($("#contents .rcntImgArea").length > 0 && thisImgPath != ''){	// 샵메인 최근본상품에 적용
+					$("#contents .rcntImgArea").attr("src",thisImgPath);
+					$("#contents .rcntImgArea").attr("alt",result.dtlHist.goodsNm);
+					rcntList = 'done';
+				}else{
+					rcntList = 'fail';
+				}
+			},
+			error : function() {
+				rcntList = 'fail';
+			}
+		});  
+		
+		var cateCdL = "12565"	// 12564
+		
+ 		$.each($('li[id^=shortCut] a'), function(){
+ 			var thisHrefUrl = $(this).data("url").replace(location.origin,"");
+ 			if(thisPath.indexOf(thisHrefUrl) > -1 && thisPath.indexOf("shortCutYn=Y") > -1){
+ 				$(this).parent('li').attr("class", "active");
+ 				if($(this).attr("onclick").indexOf("/event/indexSpecialExhibitionZone") != -1 
+ 						&& $(this).attr("onclick").indexOf('exhbtNo='+'') == -1){
+	 					 $(this).parent('li').attr("class", "");
+	 			}
+	 		}else if(thisPath.indexOf("/shop/indexBestGoodsList") > -1 && thisHrefUrl.indexOf("/shop/indexBestGoodsList") > -1) {
+	 			// 베스트 전체보기로 진입했을 경우
+	 			$(this).parent('li').attr("class", "active");
+	 		}
+ 		});
+		
+		showMyLnbList(cateCdL);
+		$("#lnb").show();
+		$("#contents").show();
+		$("li[id^=menu_tab_]").one('click', function(){
+			var dispClsfNo = $(this).data("dispclsfno");
+			sendDispClsfNo(dispClsfNo);
+		});
+		
+		// 카테고리 버튼 열기/닫기 버튼 쿠키 저장
+		$("li[id^=tab_category_]").children('a').click(function(){
+			var categoryClass = $(this).parent().attr("class");
+			if(categoryClass == 'open') {
+				$.cookie('categoryYn', 'N', {path:'/'});
+			}else{
+				$.cookie('categoryYn', 'Y', {path:'/'});
+			}
+		});
+	});
+	
+	function setCateList(dispClsfNo, upDispClsfNo, scateYN) {
+		var viewDispClsfNo = getDispClsfNoFromCateCdL(upDispClsfNo);
+		// 쿠키저장
+		fnDispClsfNoCookie('set', viewDispClsfNo);
+		var url = "/shop/indexCategory?dispClsfNo="+dispClsfNo+"&cateCdL="+upDispClsfNo+"&cateCdM="+dispClsfNo;
+		var cateCdL = $("#cateCdL").val();
+		var cateCdM = $("#cateCdM").val();
+		if(scateYN == 'Y') {
+			url = "/shop/indexCategory?dispClsfNo="+dispClsfNo+"&cateCdL="+cateCdL+"&cateCdM="+cateCdM;
+		}
+		location.href = url;
+	}
+	
+	// 분류번호 보내기
+	function sendDispClsfNo(dispClsfNo){
+		var cateCdL = dispClsfNo
+		var lnbDispClsfNo = getDispClsfNoFromCateCdL(dispClsfNo);	
+		// 쿠키저장
+		fnDispClsfNoCookie('set', lnbDispClsfNo);
+		var form = document.createElement("form");
+		document.body.appendChild(form);
+		form.setAttribute("method", "POST");
+		var url = "/shop/home/";
+		// 바로가기 영역, 샵홈 상품목록, 펫샵메인 -> 메인으로 이동
+		if(thisPath.indexOf("shortCutYn=Y") == -1 && thisPath.indexOf("&dispCornNo=") == -1 && thisPath.indexOf("/shop/home") == -1 && thisPath.indexOf("/event/indexExhibitionZone") == -1 && thisPath.indexOf("/event/indexSpecialExhibitionZone") == -1 && thisPath.indexOf("/shop/indexBestGoodsList")) {
+			form.setAttribute("method", "GET");
+			url = reqUri;
+		}
+		
+		var hiddenField = document.createElement('input');
+		
+		if(thisPath.indexOf("/shop/indexCategory") > -1) {
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "cateCdL");
+			hiddenField.setAttribute("value", cateCdL);	// 12564
+			form.appendChild(hiddenField);
+			document.body.appendChild(form);
+		}else if(thisPath.indexOf("/brand/indexBrandDetail") > -1) { 
+			var bndNo = $("input[id=bndNo]").val();
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "bndNo");
+			hiddenField.setAttribute("value", bndNo);
+			form.appendChild(hiddenField);
+			document.body.appendChild(form);
+		}
+		
+		form.setAttribute("action", url);
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
+	// 나의 반려 동물로 LNB 셋팅
+	function showMyLnbList(cateCdL) {
+		$("li[id^=tab_category_]").hide();
+		$("#b_tag_"+cateCdL).click();
+		$("#tab_category_"+cateCdL).show();
+	}
+	
+</script>
+
+				<!-- s : 검색 영역 -->
+<!-- e : 검색 영역 -->
+<!--❤️사이드바 끝-->
+<!--❤️main-->
+<main class="container page shop od cart" id="container" style="margin-top:100px;">
+	<!-- 기본배송지 권역 타입 -->
+	<input type="hidden" id="areaType" value="">
+	<input type="hidden" id="cartMbrDlvraNo" value="">
+	<input type="hidden" id="cartPostNoNew" value="">
+	
+	<input type="hidden" id="tempDlvrSelectId" value="">
+	<input type="hidden" id="tempDlvrStartId" value="">
+	<input type="hidden" id="tempMbrDlvraNo" value="">
+	
+	<input type="hidden" id="deviceGb" value="PC">
+	<input type="hidden" id="cartStDomain" value="https://aboutpet.co.kr">
+	
+	<div class="pageHeadPc">
+		<div class="inr">
+			<div class="hdt">
+				<h3 class="tit">장바구니</h3>
+			</div>
+		</div>
+	</div>
+	<div class="inr" style="min-height: 357px;">
+		<!-- 본문 -->
+		<div class="contents" id="contents"><script type="text/javascript">
+$(document).ready(function(){
+		
+	cartGoods.init();
+	
+	ui.spined.init();
+	//전체 선택
+	$("#chkAll").click(function() {
+		var chk = $(this).prop("checked");
+		var arrCart = new Array();
+		
+		$.each($("input[id^=chkCartId]").not(":disabled"), function(){
+			if($(this).prop("checked") != chk){
+				var data = {
+					cartId : $(this).val()
+					,buyQty : $("#buyQty"+$(this).val()).val()
+					,goodsPickYn : chk ? "Y" : "N"
+				}
+				arrCart.push(data);
+			}
+		});
+		
+		$("input[id^=chkCompNo], input[id^=chkCartId]").not(":disabled").prop("checked", chk);
+		
+		cartGoods.setTotalCnt();
+		
+		cartGoods.updateCartBuyQtyAndCheckYn(arrCart, function(){
+			cartGoods.changeCheckInfo(arrCart);
+		});
+	});
+	
+	//그룹핑 업체 선택
+	$("input[id^=chkCompNo]").click(function() {
+		var chk = $(this).prop("checked");
+		
+		var arrCart = new Array();
+		var compNo = $(this).val();
+		var $ul = $("#cartList"+compNo);
+		
+		$.each($ul.find("input[name=cartIds]").not(":disabled"), function(){
+			if($(this).prop("checked") != chk){
+				var data = {
+					cartId : $(this).val()
+					,buyQty : $("#buyQty"+$(this).val()).val()
+					,goodsPickYn : chk ? "Y" : "N"
+				}
+				arrCart.push(data);
+			}
+		});
+		
+		
+		$ul.find("input[name=cartIds]").not(":disabled").prop("checked", chk);
+		
+		var chkLen = $("input[id^=chkCompNo]").filter(function(){
+			var compNo = $(this).val();
+			if($("#cartList"+compNo).find("input[name=cartIds]").not(":disabled").length == 0){
+				return false;
+			}else{
+				return $(this).prop('checked');
+			}
+		}).length;
+		
+		var compLen = $("input[id^=chkCompNo]").filter(function(){
+			var compNo = $(this).val();
+			if($("#cartList"+compNo).find("input[name=cartIds]").not(":disabled").length == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}).length;
+		
+		
+		if(chkLen == compLen){
+			$("#chkAll").prop("checked", true);
+		}else{
+			$("#chkAll").prop("checked", false);
+		}
+		
+		cartGoods.setTotalCnt();
+		
+		cartGoods.updateCartBuyQtyAndCheckYn(arrCart, function(){
+			cartGoods.changeCheckInfo(arrCart);
+		});
+	});
+	
+	//상품 선택			
+	$("input[id^=chkCartId]").not(":disabled").change(function() {
+		var obj = $(this);
+		var compNo = $(this).closest(".cartlist").data("compNo");
+		
+		var $compUl = $(".cartlist").filter(function(){
+			return $(this).data("compNo") == compNo;
+		});
+		
+		var chkLen = $compUl.find("input[id^=chkCartId]").not(":disabled").filter(function(){
+			return $(this).prop('checked');
+		}).length;
+		
+		if(chkLen == $compUl.find("input[id^=chkCartId]").not(":disabled").length){
+			$("#chkCompNo"+compNo).prop("checked", true);
+			var chkCompNoLen = $("input[id^=chkCompNo]").filter(function(){
+				var compNo = $(this).val();
+				if($("#cartList"+compNo).find("input[name=cartIds]").not(":disabled").length == 0){
+					return false;
+				}
+				return $(this).prop('checked');
+			}).length;
+			
+			var compLen = $("input[id^=chkCompNo]").filter(function(){
+				var compNo = $(this).val();
+				if($("#cartList"+compNo).find("input[name=cartIds]").not(":disabled").length == 0){
+					return false;
+				}else{
+					return true;
+				}
+			}).length;
+			
+			if(chkCompNoLen == compLen){
+				$("#chkAll").prop("checked", true);
+			}else{
+				$("#chkAll").prop("checked", false);
+			}
+		}else{
+			$("#chkCompNo"+compNo).prop("checked", false);
+			$("#chkAll").prop("checked", false);
+		}
+		
+		cartGoods.setTotalCnt();
+		
+		var arrCart = new Array();
+		var data = {
+			cartId : $(this).val()
+			,buyQty : $("#buyQty"+$(this).val()).val()
+			,goodsPickYn : $(this).prop('checked') ? "Y" : "N"
+		}
+		arrCart.push(data);
+		
+		cartGoods.updateCartBuyQtyAndCheckYn(arrCart, function(){
+			cartGoods.changeCheckInfo(arrCart);
+		});
+	});
+	
+	
+	var preValue;
+	var preCartId;
+	
+	$(document).off("click",".uispined .bt.mod");
+	$(document).off("change",".uispined select.slt");
+	$(document).off("input",".uispined .amt");
+	$(document).off("focus",".uispined .amt");
+	$(document).off("blur",".uispined .amt");
+	
+	
+	$(document).on("click",".uispined .bt.mod",function(e){
+		e.preventDefault();				
+		ui.spined.using(this,"inp");
+	});
+	
+	$(document).on("change",".uispined select.slt",function(e){
+		e.preventDefault();
+		ui.spined.using(this,"slt");
+		if(preValue != $(this).val() || preCartId != $(this).closest(".uispined").find(".amt").data("cartId")){
+			changeQty($(this).parent(".sel").siblings(".amt"));
+		}
+		preValue = $(this).val();
+		preCartId = $(this).closest(".uispined").find(".amt").data("cartId");
+	});
+	
+	$(document).on("input keyup",".uispined .amt",function(e){
+		e.preventDefault();
+		$(this).val( $(this).val().replace(/[^0-9-]/gi,"") );
+		// _this.using(this,"inp");
+	});
+	
+	$(document).on("focus",".uispined .amt",function(e){
+		e.preventDefault();
+		$(this).closest(".uispined").addClass("bt");
+		preValue = $(this).val();
+		preCartId = $(this).closest(".uispined").find(".amt").data("cartId");
+	});
+	
+	
+	$(document).on("blur",".uispined .amt",function(e){
+		e.preventDefault();
+		var obj = $(this);
+		var chgVal = $(this).val();
+		$(this).closest(".uispined").removeClass("bt");
+		ui.spined.using(this,"inp");
+		if(preValue != chgVal){
+			if(chgVal > $(this).data("maxOrdQty")){
+				ui.toast("최대 "+$(this).data("maxOrdQty")+"개까지 구매할 수 있어요");
+			}
+			var minOrdQty = $(this).data("minOrdQty") ? $(this).data("minOrdQty") : 1;
+			if(chgVal < minOrdQty){
+				ui.toast("최소 "+minOrdQty+"개 이상 구매할 수 있어요");
+				$(this).val(minOrdQty);
+			}
+			
+			changeQty(obj);
+		}
+		preValue = $(this).val();
+		preCartId = $(this).closest(".uispined").find(".amt").data("cartId");
+	});
+	
+	function changeQty(obj){
+		var $qtyObj = obj;
+		
+		var cartQty =$qtyObj.val()
+		
+		var arrCart = new Array();
+		var cartId = $qtyObj.data("cartId");
+		var data = {
+			cartId : cartId
+			,buyQty : cartQty
+			,goodsPickYn : $("#chkCartId"+cartId).prop('checked') ? "Y" : "N"
+		}
+		arrCart.push(data);
+		
+		cartGoods.updateCartBuyQtyAndCheckYn(arrCart, function(){
+			cartGoods.changeQty(arrCart);
+		});
+	}
+});
+
+//주문하기
+ function directOrderSelectFunc(isLogin){
+	if(isLogin == false){
+		ui.confirm('로그인 후 서비스를 이용할 수 있어요.<br>로그인 할까요?', { // 컨펌 창 옵션들
+			ycb: function () {
+				var url = encodeURIComponent(document.location.href);
+				if("false" == "true" && document.location.href.indexOf("/tv/series/indexTvDetail") > -1){
+					fncAppCloseMoveLogin(url);
+				}else{
+					document.location.href = '/indexLogin?returnUrl=' + url;
+				}
+			},
+			ncb: function () {
+				return false;
+			},
+			ybt: '확인', // 기본값 "확인"
+			nbt: '취소'  // 기본값 "취소"
+		});
+	}else{
+		//order.preSelect();
+		chkFstPurchBeneTg();
+	}
+}
+
+//첫구매 혜택적용 체크
+function chkFstPurchBeneTg(){
+	var $cartIds = $("input[name=cartIds]:checked");
+
+	//품절 제외
+	var $cartObj = $cartIds.closest(".untcart").not(".disabled");
+
+	//첫구매상품포함여부
+	var isFstPurchGood  = false;
+
+	//첫구매상품구매수량
+	var fstPurchGoodsCnt = 0;
+
+	//자사 상품주문총금액
+	var totalGoodsAmt = 0;  //상품금액
+	var totalCartCnt = 0;
+	var fstPurchGoodIds = new Array();
+	var fstPurchMbrCpNos = new Array();
+	var fstPurchGoodsCpCnt = 0;
+	$cartObj.each(function(){
+		totalCartCnt += 1;
+		var cart = $(this);
+
+		//APET-1523 스탬프 상품 합계 계산 제외
+		if(cart.find("input[name=dispTpCd]").val() == "20"){
+			return true;
+		}
+		
+		//APET-1582 위탁상품도 첫구매 상품으로 등록가능
+		//단 구매 시 자사상품은 10000원 이상등 구매 관련 조건이 있^고 위탁상품은 모든 조건이 없음
+		//상품중 첫구매상품이 포함되어 있을 경우
+		//APET-1627 첫구매(위탁/자사) 상품 단독 구매 불가
+		if(cart.find("input[name=dispTpCd]").val() == "10" ){
+			isFstPurchGood = true;
+			fstPurchGoodsCnt += Number(cart.find("input[name=buyQty]").val());
+			fstPurchGoodIds.push(cart.find("input[name=goodsId]").val());
+			fstPurchMbrCpNos.push(cart.find("input[name=selMbrCpNo]").val());
+			fstPurchGoodsCpCnt += Number(cart.find("input[name=couponListLen]").val());
+		}
+
+
+		//자사상품 주문총금액 합산, 배송비 제외
+		
+		if(cart.find("input[name=compGbCd]").val() == COMP_GB_10){
+
+			var goodsAmt = (Number(cart.find("input[name=salePrc]").val()) - Number(cart.find("input[name=prmtDcAmt]").val())) * Number(cart.find("input[name=buyQty]").val());
+			var dcAmt = Number(cart.find("input[name=totCpDcAmt]").val());
+
+			totalGoodsAmt += goodsAmt - dcAmt;
+
+		}
+
+	});
+
+	let fstPurchGoodsCpMsg = '';
+
+	//APET-1582 위탁상품도 첫구매 상품으로 등록가능 validation 이 자사 상품과 위탁상품이 다르게 진행됨
+	//첫구매상품이 포함되어 있을 경우
+	//APET-1627 첫구매(위탁/자사) 상품 단독 구매 불가
+	if( isFstPurchGood ){
+		// 첫구매 상품만 있는 경우
+		if (totalCartCnt == 1) {
+			ui.alert("첫구매딜 상품은 단독 구매가 불가합니다.");
+			return;
+		}
+
+		//첫구매 주문상품 수량이 1개 이상일 경우
+		if( 1 < fstPurchGoodsCnt ){
+			ui.alert("첫구매딜 상품은 1개만 구매 가능합니다.");
+			return;
+		}
+		if( 1 < fstPurchGoodIds.length ){
+			ui.alert("첫구매딜 상품은 1개만 구매 가능합니다.");
+			return;
+		}
+
+		//첫구매 혜택 대상이 아닌경우
+		if( "N" == $("#fstPurchBeneTgYn").val() ){
+			ui.alert("아쉽지만 첫 구매딜 대상 고객이 아니에요.<br>상품 구매 내역이 있는지 확인해 주세요 :)<br><br> ※ 어바웃펫 최초 주문 시 구매 가능 ");
+			return;
+		}
+
+		//자사상품 주문총금액이 첫구매 혜택기준금액보다 작은 경우
+		if( "10000" > totalGoodsAmt  ){
+			ui.alert("첫구매딜 상품은 어바웃펫 상품 1만원 이상 주문 시 구매할 수 있습니다.");
+			return;
+		}
+
+		if (fstPurchGoodsCpCnt == 0) {
+			ui.alert("상품 정보가 올바르지 않습니다.<br>관리자에게 문의바랍니다.");
+			return;
+		}
+		
+		//첫구매 상품ID로 쿠폰 실시간 체크
+		fstPurchGoodsCpMsg = commonFunc.validFstPurchGoodsCp(fstPurchGoodIds, fstPurchMbrCpNos);
+	}
+	if (fstPurchGoodsCpMsg != '') {
+		ui.alert(fstPurchGoodsCpMsg);
+		return;
+	} else {
+		order.preSelect();
+	}
+
+}
+
+// Amplitude Send : 장바구니 페이지 뷰
+function amplitudeCartViewEvent() {
+	var amplitudeCartPdId = new Array();
+	var amplitudeCartPdNm = new Array();
+	var amplitudeCartTotAmt = 0;
+	var amplitudeCartTotCnt = 0;
+	
+			amplitudeCartPdId.push("GI251051246");
+			amplitudeCartPdNm.push("가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래");
+			var thisCnt = ('1')?parseInt('1'):0;
+			amplitudeCartTotAmt += ('19800')? (parseInt('19800')*thisCnt):0;
+			amplitudeCartTotCnt += thisCnt;
+	
+			amplitudeCartPdId.push("GS251054025");
+			amplitudeCartPdNm.push("[4개세트] 바른벤토모래 7kg 고양이모래");
+			var thisCnt = ('1')?parseInt('1'):0;
+			amplitudeCartTotAmt += ('44700')? (parseInt('44700')*thisCnt):0;
+			amplitudeCartTotCnt += thisCnt;
+	
+	var amplitudeCartObj = $("input[name=cartIds]:checked").closest(".untcart").not(".disabled");	
+	var amplitudeShippingCost = 0;
+	var amplitudeDlvrPlcNoSet = new Set();
+	amplitudeCartObj.each(function(){
+		amplitudeDlvrPlcNoSet.add($(this).find("input[name=dlvrcPlcNo]").val());
+	});
+	amplitudeDlvrPlcNoSet.forEach(function(dlvrcPlcNo){
+		amplitudeShippingCost += parseInt($("#dlvrcPlcChkAmt"+dlvrcPlcNo).val());
+	});
+	var nowStorageHists = storageHist.getHist();
+	var nowReferrerUrl = (nowStorageHists.length > 1 )? nowStorageHists[nowStorageHists.length -2].url: "None";
+	var thisSourceType = "None";
+	if(nowReferrerUrl != "None"){
+		var startRef = nowReferrerUrl.indexOf("/", nowReferrerUrl.indexOf(window.location.hostname));
+		var endRef = nowReferrerUrl.indexOf("?", startRef+1);
+		thisSourceType = nowReferrerUrl.substring(startRef+1, (endRef != -1)? endRef:nowReferrerUrl.legnth);   
+	}
+	var amplitudeCartViewData = {
+		source : nowReferrerUrl,
+		sourceType : thisSourceType,
+		productId : amplitudeCartPdId, 
+		productName : amplitudeCartPdNm,
+		shippingCost : amplitudeShippingCost,				
+		totalOrderAmount : amplitudeCartTotAmt,
+		totalOrderProductCount : amplitudeCartTotCnt
+	}
+	sendAmplitude("view_cart_page_view", amplitudeCartViewData);	
+}
+
+</script>
+<script>
+	//전체동의 체크, 해제 지우지마세용😍
+	$(function(){
+	 $("#chkAll").click(function(){
+			
+			if($("#chkAll").is(":checked")){
+				
+				$("input[name=cartIds]").prop("checked",true);
+			
+	
+			}else{
+			$("input[name=cartIds]").prop("checked",false);
+	
+			};//end else
+	
+	 })//
+
+	 
+	$("input[name=cartIds]").click(function() {
+		var total = $("input[name=cartIds]").length;
+		var checked = $("input[name=cartIds]:checked").length;
+
+		if(total != checked) $("#chkAll").prop("checked", false);
+		else $("#chkAll").prop("checked", true); 
+	});
+	
+	})
+	
+	
+	
+	
+	</script>
+
+
+<form id="cartForm">
+<input type="hidden" name="fstPurchBeneTgYn" id="fstPurchBeneTgYn" value="N">
+<div class="allcheck scroll_fixed">
+		<div class="inr">
+			<div class="box">
+				<label class="checkbox"><input type="checkbox" id="chkAll" checked="checked"><span class="txt">전체 선택 <i class="i">(2/2)</i></span></label>
+				<a href="javascript:void(0);" class="lk" onclick="cartGoods.del()" data-content="" data-url="https://aboutpet.co.kr/order/deleteCart">선택 삭제</a>
+			</div>
+		</div>
+	</div>
+	<div class="cartWrap">
+		<div class="cartPrds">
+			<!-- APET-1523 스탬프 상품 -->
+			<!-- 자사 -->
+				<section class="sect abt">
+						<div class="frstat" id="apetBarDiv">
+							<label class="checkbox"><input type="checkbox" id="chkCompNo912" value="912" checked="checked" name="cartIds"><span class="txt"><span class="dt"><span class="t">멍품냥품 배송 상품</span></span></span></label>
+							<div class="box">
+								<div class="gage">
+									<div class="inf">
+										<input type="hidden" id="apetDlvrcBuyPrc" value="30000">
+										<!-- 상품 선택이 되지 않아서 무료배송 여부를 알 수 업는 경우 -->
+										<em class="pp" id="noneDlvrBar" style="display: none;">👀 <b class="p">30,000</b><i class="w">원</i></em> <span class="tt" style="display: none;">이상 무료배송</span>
+										<!-- 선택한 상품의 가격이 총 30000원을 넘는 경우 -->
+										<em class="pp" id="fullDlvrBar" style="">🚚 <b class="p">무료배송</b></em>
+										<!-- 선택한 상품의 가격이 30000원 이하인 경우 -->
+										<em class="pp" id="addDlvrBar" style="display:none;">💸 <b class="p"></b><i class="w">원 이상</i></em> <span class="tt" style="display:none;">추가하면 무료배송!</span>
+										<span class="prc"><em class="p">30,000</em><i class="w">원</i></span>
+									</div>
+									<div class="bar">
+										<em class="b free" id="apetBar" style="width: 100%;"></em>
+									</div>
+								</div>
+							</div>
+						</div>
+				<!-- 업체 -->
+				<ui class="cartlist" id="cartList912" data-comp-no="912">
+				<script type="text/javascript">
+
+function directOrderFunc(cartId, isLogin){
+	var cartDispTpCd = $("#untcart"+cartId+" input[name='dispTpCd']").val();
+	if(isLogin == 'false'){
+		ui.confirm('로그인 후 서비스를 이용할 수 있어요.<br>로그인 할까요?', { // 컨펌 창 옵션들
+			ycb: function () {
+				var url = encodeURIComponent(document.location.href);
+				if("false" == "true" && document.location.href.indexOf("/tv/series/indexTvDetail") > -1){
+					fncAppCloseMoveLogin(url);
+				}else{
+					document.location.href = '/indexLogin?returnUrl=' + url;
+				}
+			},
+			ncb: function () {
+				return false;
+			},
+			ybt: '확인', // 기본값 "확인"
+			nbt: '취소'  // 기본값 "취소"
+		});
+	}else if(cartDispTpCd== '10'){
+		//APET-1512  첫구매 100원딜
+		//첫구매 상품 개별상품 구매 불가
+		ui.alert("첫구매딜 상품은 단독 구매가 불가합니다.");
+	}else{
+		
+			order.preSelect(false, 'Y', cartId);
+			
+
+	}
+}
+
+function fnGoGoodsDetail(goodsId){
+	var $btn = $(".petTabHeader .uiTab li[class*='active']").find("button");
+	var callGoodsId = "-"+goodsId;
+	
+	if(document.location.href.indexOf("/tv/series/indexTvDetail") > -1){
+		//App일때 영상상세에서 다른화면으로 이동시 화면 닫고 이동해야함
+		if("false" == "true"){
+			var callParam = "";
+			if(sortCd != ""){
+				callParam = nowVdId+"."+sortCd+"."+listGb+"."+$btn.data("id")+callGoodsId;
+			}else{
+				callParam = nowVdId+"."+listGb+"."+$btn.data("id")+callGoodsId;
+			}
+			
+			// 데이터 세팅
+			toNativeData.func = "onCloseMovePage";
+			toNativeData.moveUrl = "https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId="+goodsId+"&callParam="+callParam;
+			// APP 호출
+			toNative(toNativeData);
+		}else{
+			if("false" == "true"){
+				var replaceUrl = document.location.href+"-"+$btn.data("id")+callGoodsId;
+				history.replaceState("", "", replaceUrl);
+				storageHist.replaceHist(replaceUrl);
+			}
+			
+			location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+		}
+	}else if(document.location.href.indexOf("/tv/school/indexTvDetail") > -1){
+		if("false" == "true"){
+			var replaceUrl = document.location.href+"&goodsVal="+$btn.data("id")+callGoodsId;
+			history.replaceState("", "", replaceUrl);
+			storageHist.replaceHist(replaceUrl);
+		}
+		
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	}else if(document.location.href.indexOf("/log/indexPetLogList") > -1){
+		if("false" == "true"){
+			var replaceUrl = document.location.href.split('&selIdx=')[0];
+			replaceUrl = replaceUrl + "&selIdx="+$("#popconTing").data("idx")+"&page="+$("#popconTing").data("page")+"&goodsVal="+goodsId+"&tag="+$("#popconTing").data("tag");
+			history.replaceState("", "", replaceUrl);
+			storageHist.replaceHist(replaceUrl);
+		}
+		
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	} else if( document.location.href.indexOf("/shop/indexLive") > -1 ) {
+					
+		// 라이브 상세화면에서 이미 storageHist.setHist(); 실행하여 히스토리 저장했음.
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+		
+	} else {
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	}
+}
+</script>
+<li>
+<div class="untcart " id="untcart163361418348766992">
+<input type="hidden" name="salePrc" value="19800">
+<input type="hidden" name="prmtDcAmt" value="0">
+<input type="hidden" name="salePsbCd" value="00">
+<input type="hidden" name="selMbrCpNo" value="">
+<input type="hidden" name="totCpDcAmt" value="0">
+<input type="hidden" name="cpDcAmt" value="0">
+<input type="hidden" name="dlvrcPlcNo" value="1">
+<input type="hidden" name="compGbCd" value="10">
+<input type="hidden" name="goodsId" value="GI251051246">
+<input type="hidden" name="itemNo" value="414045">
+<input type="hidden" name="pakGoodsId" value="">
+<input type="hidden" name="freeDlvrYn" value="N">
+<input type="hidden" name="dispTpCd" value="00">
+<input type="hidden" name="dealStmpCnt" value="0">
+<input type="hidden" name="couponListLen" value="0">
+
+<label class="checkbox">
+	<input type="checkbox" id="chkCartId163361418348766992" name="cartIds" value="163361418348766992" checked="checked">
+	<span class="txt"></span>
+</label>
+<button type="button" class="bt del" onclick="cartGoods.del('163361418348766992', )" data-content="163361418348766992" data-url="https://aboutpet.co.kr/order/deleteCart">삭제</button>
+<div class="box">
+	<div class="tops">
+		<a href="javascript:;" onclick="fnGoGoodsDetail('GI251051246')" class="pic" data-content="GI251051246" data-url="https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId=GI251051246">
+			<img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251051246/23cf8322-0287-4298-8267-af005d6c1486.jpg?type=f&amp;w=259&amp;h=259&amp;quality=90&amp;align=4" alt="가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+			</a>
+		<div class="name">
+			<a href="javascript:;" onclick="fnGoGoodsDetail('GI251051246')" class="tit" data-content="GI251051246" data-url="https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId=GI251051246">가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래</a>
+			</div>
+	</div>
+	
+	<div class="amount ">
+			<span class="uispined st load" data-max="2" data-min="1">
+						<input type="number" class="amt" id="buyQty163361418348766992" name="buyQty" value="1" data-cart-id="163361418348766992" data-min-ord-qty="1" data-max-ord-qty="2" autofocus="autofocus" title="수량입력">
+					<div class="bx sel">	<select class="val slt" title="수량선택"><option type="button" value="1">1</option><option type="button" value="2">2</option></select></div><div class="bx num">	<button type="button" class="bt mod">변경</button></div></span>
+				<div class="prcs">
+				<em class="dispTp00 st" style="display:none">쿠폰적용가</em>
+					<span class="prc"><em class="p">19,800</em><i class="w">원</i></span>
+				<div class="free">
+								2,500원
+								<!-- 조건부 무료배송 - 가격-->
+										<!-- 주문당적용 -->
+											(30,000원 이상 무료배송)
+										</div>
+						</div>
+			</div>
+		
+		<div class="btns">
+			<a href="javascript:;" class="btn sm d cpm" onclick="cartGoods.openCouponPop('163361418348766992')" data-content="163361418348766992" data-url="https://aboutpet.co.kr/order/popupCouponUse" style="display: none;">쿠폰변경</a>
+								<!-- <a href="javascript:;" class="btn sm a buy" id="selCart163361418348766992" data-cart-id="163361418348766992" data-goods-id="GI251051246" data-item-no="414045" data-pak-goods-id="" data-mki-goods-yn="N" data-mki-goods-opt-content="" data-is-mini-cart="" data-goods-nm="가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래" data-opt-goods-nm="" data-goods-amt-tp-cd="10" onclick="directOrderFunc('163361418348766992','true');" data-content="163361418348766992" data-url="https://aboutpet.co.kr/order/indexOrderPayment">바로구매</a> -->
+					</div>
+	</div>
+</div>
+</li>
+<script type="text/javascript">
+
+function directOrderFunc(cartId, isLogin){
+	var cartDispTpCd = $("#untcart"+cartId+" input[name='dispTpCd']").val();
+	if(isLogin == 'false'){
+		ui.confirm('로그인 후 서비스를 이용할 수 있어요.<br>로그인 할까요?', { // 컨펌 창 옵션들
+			ycb: function () {
+				var url = encodeURIComponent(document.location.href);
+				if("false" == "true" && document.location.href.indexOf("/tv/series/indexTvDetail") > -1){
+					fncAppCloseMoveLogin(url);
+				}else{
+					document.location.href = '/indexLogin?returnUrl=' + url;
+				}
+			},
+			ncb: function () {
+				return false;
+			},
+			ybt: '확인', // 기본값 "확인"
+			nbt: '취소'  // 기본값 "취소"
+		});
+	}else if(cartDispTpCd== '10'){
+		//APET-1512  첫구매 100원딜
+		//첫구매 상품 개별상품 구매 불가
+		ui.alert("첫구매딜 상품은 단독 구매가 불가합니다.");
+	}else{
+		
+			order.preSelect(false, 'Y', cartId);
+			
+
+	}
+}
+
+function fnGoGoodsDetail(goodsId){
+	var $btn = $(".petTabHeader .uiTab li[class*='active']").find("button");
+	var callGoodsId = "-"+goodsId;
+	
+	if(document.location.href.indexOf("/tv/series/indexTvDetail") > -1){
+		//App일때 영상상세에서 다른화면으로 이동시 화면 닫고 이동해야함
+		if("false" == "true"){
+			var callParam = "";
+			if(sortCd != ""){
+				callParam = nowVdId+"."+sortCd+"."+listGb+"."+$btn.data("id")+callGoodsId;
+			}else{
+				callParam = nowVdId+"."+listGb+"."+$btn.data("id")+callGoodsId;
+			}
+			
+			// 데이터 세팅
+			toNativeData.func = "onCloseMovePage";
+			toNativeData.moveUrl = "https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId="+goodsId+"&callParam="+callParam;
+			// APP 호출
+			toNative(toNativeData);
+		}else{
+			if("false" == "true"){
+				var replaceUrl = document.location.href+"-"+$btn.data("id")+callGoodsId;
+				history.replaceState("", "", replaceUrl);
+				storageHist.replaceHist(replaceUrl);
+			}
+			
+			location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+		}
+	}else if(document.location.href.indexOf("/tv/school/indexTvDetail") > -1){
+		if("false" == "true"){
+			var replaceUrl = document.location.href+"&goodsVal="+$btn.data("id")+callGoodsId;
+			history.replaceState("", "", replaceUrl);
+			storageHist.replaceHist(replaceUrl);
+		}
+		
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	}else if(document.location.href.indexOf("/log/indexPetLogList") > -1){
+		if("false" == "true"){
+			var replaceUrl = document.location.href.split('&selIdx=')[0];
+			replaceUrl = replaceUrl + "&selIdx="+$("#popconTing").data("idx")+"&page="+$("#popconTing").data("page")+"&goodsVal="+goodsId+"&tag="+$("#popconTing").data("tag");
+			history.replaceState("", "", replaceUrl);
+			storageHist.replaceHist(replaceUrl);
+		}
+		
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	} else if( document.location.href.indexOf("/shop/indexLive") > -1 ) {
+					
+		// 라이브 상세화면에서 이미 storageHist.setHist(); 실행하여 히스토리 저장했음.
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+		
+	} else {
+		location.href = "/goods/indexGoodsDetail?goodsId=" + goodsId;
+	}
+}
+</script>
+<li>
+<div class="untcart " id="untcart163835245642463181">
+<input type="hidden" name="salePrc" value="44700">
+<input type="hidden" name="prmtDcAmt" value="0">
+<input type="hidden" name="salePsbCd" value="00">
+<input type="hidden" name="selMbrCpNo" value="">
+<input type="hidden" name="totCpDcAmt" value="0">
+<input type="hidden" name="cpDcAmt" value="0">
+<input type="hidden" name="dlvrcPlcNo" value="1">
+<input type="hidden" name="compGbCd" value="10">
+<input type="hidden" name="goodsId" value="GS251054025">
+<input type="hidden" name="itemNo" value="416824">
+<input type="hidden" name="pakGoodsId" value="">
+<input type="hidden" name="freeDlvrYn" value="N">
+<input type="hidden" name="dispTpCd" value="00">
+<input type="hidden" name="dealStmpCnt" value="0">
+<input type="hidden" name="couponListLen" value="0">
+
+<label class="checkbox">
+	<input type="checkbox" id="chkCartId163835245642463181" name="cartIds" value="163835245642463181" checked="checked">
+	<span class="txt"></span>
+</label>
+<button type="button" class="bt del" onclick="cartGoods.del('163835245642463181', )" data-content="163835245642463181" data-url="https://aboutpet.co.kr/order/deleteCart">삭제</button>
+<div class="box">
+	<div class="tops">
+		<a href="javascript:;" onclick="fnGoGoodsDetail('GS251054025')" class="pic" data-content="GS251054025" data-url="https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId=GS251054025">
+			<img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GS251054025/c97543a3-2c13-4787-ba8f-e5d363025434.jpg?type=f&amp;w=259&amp;h=259&amp;quality=90&amp;align=4" alt="[4개세트] 바른벤토모래 7kg 고양이모래" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+			</a>
+		<div class="name">
+			<a href="javascript:;" onclick="fnGoGoodsDetail('GS251054025')" class="tit" data-content="GS251054025" data-url="https://aboutpet.co.kr/goods/indexGoodsDetail?goodsId=GS251054025">[4개세트] 바른벤토모래 7kg 고양이모래</a>
+			</div>
+	</div>
+	
+	<div class="amount ">
+			<span class="uispined st load" data-max="100" data-min="1">
+						<input type="number" class="amt" id="buyQty163835245642463181" name="buyQty" value="1" data-cart-id="163835245642463181" data-min-ord-qty="1" data-max-ord-qty="100" autofocus="autofocus" title="수량입력">
+					<div class="bx sel">	<select class="val slt" title="수량선택"><option type="button" value="1">1</option><option type="button" value="2">2</option><option type="button" value="3">3</option><option type="button" value="4">4</option><option type="button" value="5">5</option><option type="button" value="6">6</option><option type="button" value="7">7</option><option type="button" value="8">8</option><option type="button" value="9">9</option><option type="button" value="10">+10</option></select></div><div class="bx num">	<button type="button" class="bt mod">변경</button></div></span>
+				<div class="prcs">
+				<em class="dispTp00 st" style="display:none">쿠폰적용가</em>
+					<span class="prc"><em class="p">44,700</em><i class="w">원</i></span>
+				<div class="free">
+								2,500원
+								<!-- 조건부 무료배송 - 가격-->
+										<!-- 주문당적용 -->
+											(30,000원 이상 무료배송)
+										</div>
+						</div>
+			</div>
+		
+		<div class="btns">
+			<a href="javascript:;" class="btn sm d cpm" onclick="cartGoods.openCouponPop('163835245642463181')" data-content="163835245642463181" data-url="https://aboutpet.co.kr/order/popupCouponUse" style="display: none;">쿠폰변경</a>
+								<!-- <a href="javascript:;" class="btn sm a buy" id="selCart163835245642463181" data-cart-id="163835245642463181" data-goods-id="GS251054025" data-item-no="416824" data-pak-goods-id="" data-mki-goods-yn="N" data-mki-goods-opt-content="" data-is-mini-cart="" data-goods-nm="[4개세트] 바른벤토모래 7kg 고양이모래" data-opt-goods-nm="" data-goods-amt-tp-cd="10" onclick="directOrderFunc('163835245642463181','true');" data-content="163835245642463181" data-url="https://aboutpet.co.kr/order/indexOrderPayment">바로구매</a> -->
+					</div>
+	</div>
+</div>
+</li>
+</ui>
+					
+					<div class="totset">
+						<div class="ptt">
+							<em class="p" id="compTotalGoodsAmt912">64,500</em><i class="w">원</i>
+							<i class="e">+</i>
+							<b class="t">배송비</b><em class="p" id="compTotalDlvrAmt912">0</em><i class="w">원</i>
+							<i class="e q">=</i>
+							<em class="prc"><em class="p" id="compTotalAmt912">64,500</em><i class="w">원</i></em>
+						</div>
+						<div class="gud">장바구니에 담은 상품의 합계금액 입니다.</div>
+					</div>
+					<div class="recoms" style="display: none;">
+							<div class="hdts">
+								<span class="tit">🚚<em class="p"></em><i class="w">원 이상</i>추가하면 무료배송!</span>
+								<span class="txt">지금 함께 구매하면 무료로 배송해드려요.</span>
+							</div>
+							<div class="cdts">
+								<div class="ui_cartrcm_slide">
+								</div>
+							</div>
+						</div>
+					
+					</section>
+				<input type="hidden" name="dlvrcPlcAmt" data-dlvrc-plc-no="1" data-comp-no="912" data-sale-psb-cd="00" id="dlvrcPlcAmt1" value="0">
+			<input type="hidden" name="dlvrcPlcChkAmt" data-dlvrc-plc-no="1" data-comp-no="912" data-sale-psb-cd="00" id="dlvrcPlcChkAmt1" value="0">
+			<div class="cartOrdr">
+				<div class="ctinr" style="bottom: 6.4px;">
+					<div class="odbox">
+						<div class="hdt"><span class="tit">결제 금액</span></div>
+						<ul class="prcset">
+							<li>
+								<div class="dt">상품금액</div>
+								<div class="dd">
+									<span class="prc"><em class="p" id="totalChkGoodsAmt">64,500</em><i class="w">원</i></span>
+								</div>
+							</li>
+							<!-- <li>
+								<div class="dt">할인금액</div>
+								<div class="dd">
+									<span class="prc dis"><em class="p" id="totalChkDcAmt">-0</em><i class="w">원</i></span>
+								</div>
+							</li> -->
+							<li>
+								<div class="dt">배송비</div>
+								<div class="dd">
+									<span class="prc"><em class="p" id="totalChkDlvrAmt">0</em><i class="w">원</i></span>
+								</div>
+							</li>
+						</ul>
+						<div class="tot">
+							<div class="dt">최종 결제금액</div>
+							<div class="dd">
+								<span class="prc"><em class="p" id="totalChkAmt">64,500</em><i class="w">원</i></span>
+							</div>
+						</div>
+						
+						<div class="stamp_cart_sum_box" style="display: none;">
+							<div class="stamp_cart_sum">우리 아이 선물 <em id="stmpChkSumQty">0개</em> 스탬프 <em id="stmpChkSumCnt">0개</em>사용예정</div>
+							<div class="gud">아이 선물은 보유 스탬프에서 수량 차감됩니다.</div>
+						</div>
+								
+					</div>
+					<div class="btntot">
+						<div class="inr">
+							<!-- <a href="javascript:void(0);" class="btn lg a btnOrder" data-content="" onclick="directOrderSelectFunc(true);" data-url="orderPayment_form.do"> -->
+							<a href="orderPayment_form.do;" class="btn lg a btnOrder" data-content="" >
+								<em class="p">총</em> <i class="i" id="goodsOrdCntText">2</i><em class="s">개</em>
+								<em class="prc"><i class="i" id="totalChkAmtText">64,500</i><i class="s">원</i></em>
+								<em class="p" id="orderBtnText">주문하기</em>
+							</a>
+						</div>
+					</div>
+					
+					<!-- APET-1628 스탬프 미노출 처리 -->
+					</div>
+			</div>
+		</div>
+	</div>
+	</form></div>
+	</div>
+</main>
+<!--❤️main-->				
+	
+		<script type="text/template" id="relatedGoodsDetailWrap">
+	<div class="commentBoxAp type01 handHead popconTingBox pop-relation-box uiPdOrdPan ton tabMode bodylock" style="bottom:-100%;" data-priceh="60%" id="goodsRelatedBottomSheet">
+		<!-- tabMode 클래스 추가 시 : 탭해더 부분 display:block ; // backMode 클래스 추가 시 : 뒤로가기 버튼 display:block -->
+		<div class="head h2 bnone" id="divHandHead">
+			<div class="con">
+				<button class="mo-header-backNtn t2" onclick="backToGoodsRelatedList();" id="btnBack" style="display: block;">뒤로</button>
+				<div class="small-pic" id="divSmallPic"></div>
+				<div class="tit type-ab" id="divBackModeTit" ><span></span></div><!--  04.13 -->
+				<a href="javascript:;" class="close" onclick="javascript:fnHandHeadClose(this);"></a>
+			</div>
+		</div>
+	</div>
+</script>
+<nav class="floatNav">
+	<div class="inr">
+		<div class="bts">
+			<!-- 스토어 전환 버튼 -->
+			<div class="float-toggle-store is-cat hide_pc hide_mo">
+				<!-- NOTE: 현재 스토어가 강이지인 경우 'is-dog', 고양이인 경우 'is-cat' 클래스 추가 -->
+				<div class="inner">
+					<button type="button" class="btn-toggle-store btn-dog">
+						<span>강아지</span>
+					</button>
+					<button type="button" class="btn-toggle-store btn-cat">
+						<span>고양이</span>
+					</button>
+				</div>
+			</div>
+			<!-- // 스토어 전환 버튼 -->
+			
+			<div class="pd tp">
+				<button type="button" class="bt tops">페이지위로</button>
+			</div>
+			</div>
+	</div>
+</nav>
+
+<script>
+// 스토어 토글버튼 제어
+const toggleStore = {
+  opt: {
+    currentStore: 'cat',  // NOTE: 현재 스토어 (dog, cat)
+    currentScroll: null,  // 현재 페이지 스크롤 위치 (초기값 : null / init 실행시 현재 스크롤 위치 값 등록됨)
+    chkTop: 400,          // 이벤트 발생 top 스크롤 값
+    scrollDir: null,      // 페이지 스크롤 방향 (up, down / 초기값 null / 스크롤 이벤트 발생시 값 등록됨)
+    _wrapper: $('.float-toggle-store'),
+    _btns: $('.float-toggle-store .btn-toggle-store'),
+  },
+  init: function() {
+    const _this = this;
+    const _chkTop = this.opt.chkTop;
+    const _st = window.pageYOffset || document.documentElement.scrollTop;
+    this.opt.currentScroll = _st;
+    // 페이지 로드시 스크롤 위치 확인하여 토글버튼 펼침
+    if (_chkTop >= _st) this.expand();
+    // 스토어 버튼 클릭 이벤트
+    $(document).off('click', '.float-toggle-store .btn-toggle-store');
+    $(document).on('click', '.float-toggle-store .btn-toggle-store', function() {
+      const _store = _this.opt.currentStore;
+      const _targetStore = $(this).hasClass('btn-dog') ? 'dog' : 'cat';
+      const isExpand =  _this.opt._wrapper.hasClass('expand') ? true : false;
+      if (_store == _targetStore ) {
+        // 현재 스토어와 클릭한 버튼의 타겟이 동일한 경우 토글버튼 영역 확장 처리
+        if (isExpand) {
+          if (_chkTop >= _this.opt.currentScroll) {
+            _this.expand();
+          } else {
+            _this.expand(false);
+          }
+        } else {
+          _this.expand();
+        }
+      } else {
+        // 현재 스토어와 클릭한 버튼의 타겟이 다른 경우 스토어 변경 처리
+        _this.toggle();
+      }
+    });
+    // 페이지 스크롤 이벤트
+    window.addEventListener('scroll', function() {
+      let lastScrollTop = _this.opt.currentScroll;
+      const _st = window.pageYOffset || document.documentElement.scrollTop;
+      _this.opt.scrollDir = _st > lastScrollTop ? 'down' : 'up';  // downscroll / upscroll
+      lastScrollTop = _st <= 0 ? 0 : _st;
+      _this.opt.currentScroll = lastScrollTop;
+      if (_chkTop >= lastScrollTop) {
+        _this.expand(true);
+      } else {
+        _this.expand(false);
+      }
+    }, false);
+  },
+  // 토글버튼 펼침 / 접힘
+  // opt 값 없는 경우 true(펼침)
+  expand: function(opt) {
+    const _wrapper = this.opt._wrapper;
+    const _collapse = opt != undefined ? opt : true;
+    if (_wrapper.length > 0) {
+      if (_collapse == true) {
+        _wrapper.addClass('expand');
+      } else {
+        _wrapper.removeClass('expand');
+      }
+    }
+  },
+  // 스토어 변경 (펼침상태의 버튼 토글동작 후 스토어 변경)
+  toggle: function() {
+    const _wrapper = this.opt._wrapper;
+    const _store = this.opt.currentStore;
+    const _targetStore = _store == 'dog' ? 'cat' : 'dog'; // 변경될 스토어 명칭
+    if (_wrapper.hasClass('expand') == false) return;
+    _wrapper.removeClass('is-dog is-cat');
+    _wrapper.addClass('is-' + _targetStore);
+    this.opt.currentStore = _targetStore;
+    if (_targetStore == "dog") {
+    	sendDispClsfNo("300000173");
+    } else {
+    	sendDispClsfNo("300000174");
+    }
+  },
+}
+
+$(function() {
+  // 스토어 토글버튼 동작
+  if ($('.float-toggle-store').length > 0) toggleStore.init();
+});
+</script><!-- location 영역 포함  -->			
+
+
+<!-- footer -->	
+<footer class="footer" id="footer" style="width: 100%;">
+	<div class="inr">
+		<div class="link">
+			<ul class="list">
+				<li><a href="javascript:void(0);" onclick ="openTerms('2001' , 'Y'); return false;">서비스 이용약관</a></li>
+				<li><a href="javascript:void(0);" onclick ="openTerms('2002' , 'Y'); return false;" class="fc_black">개인정보 처리방침</a></li>
+				<li><a href="javascript:void(0);" onclick ="openPartnershipInquiry();return false;">입점/제휴 문의</a></li>
+				<li class="hide_mo"><a href="http://www.gsretail.com/gsretail/ko/brand/about-pet" target="_blank">회사소개</a></li>
+					<li class="hide_mo"><a href="https://gsretail.recruiter.co.kr/appsite/company/index" target="_blank">채용정보</a></li>
+				<!-- 무조건 모바일웹으로 들어간 1경우에만 나타나게 만들기 -->
+				</div>
+		 <div class="info">
+			<ul class="list">
+				<li>주식회사 멍품냥품</li>
+				<li>대표자명 : 최정민 유원준 정선홍 하지윤 유설빈</li>
+				<li>사업자 등록번호 : 022-10-0025 
+				</li>
+				<li class="dn">통신판매업신고번호 : 제 2020-서울강남-03142호</li>
+				<li>TEL : 1644-1234</li>
+			</ul>
+				<ul class="list">
+					<li>
+						<p class="adr">서울특별시 강남구 테헤란로 한독빌딩 8층</p>
+					</li>
+				
+				</ul>
+			</div>
+	<div class="copy">© copyright (c) www.aboutpet.co.kr all rights reserved.</div>
+	<div class="info escrow">
+			
+		</div>
+	</div>
+</footer>
+<!-- // footer -->
+
+<div id ="layers">
+</div><!-- e : footer 영역 -->
+	</div>
+</body>
+</html>
