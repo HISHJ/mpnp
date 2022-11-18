@@ -13,8 +13,17 @@
          <typeAlias type="kr.co.mpnp.user.domain.MypageDomain" alias="mypageD"/>
 		 <typeAlias type="kr.co.mpnp.user.vo.MemberVO" alias="memVO"/>
          <typeAlias type="kr.co.mpnp.user.vo.MypageVO" alias="mypageVO"/>
-		
-		
+         
+		<typeAlias type="kr.co.mpnp.admin.domain.AdminOrderDomain" alias="AOrderDomain" />
+    		<typeAlias type="kr.co.mpnp.admin.domain.AdminOrderPrdDomain" alias="AOrderPrdDomain" />
+    		<typeAlias type="kr.co.mpnp.admin.vo.AdminOrderVO" alias="AOrderVO" />
+		<typeAlias type="kr.co.mpnp.user.domain.MyOrderDomain" alias="MyOrderDomain" />
+    		<typeAlias type="kr.co.mpnp.user.vo.MyOrderVO" alias="MyOrderVO" />
+    		<typeAlias type="kr.co.mpnp.user.domain.OrderDomain" alias="OrderDomain"/>
+    		<typeAlias type="kr.co.mpnp.user.vo.OrderVO" alias="OrderVO" />
+			<typeAlias type="kr.co.mpnp.user.vo.DestinationVO" alias="DestinationVO" />    	
+			<typeAlias type="kr.co.mpnp.user.vo.ShipNameVO" alias="ShipNameVO" />    	
+    		<typeAlias type="kr.co.mpnp.user.domain.OrderShipDomain" alias="OrderShipDomain"/>
 	</typeAliases>
 	
   <environments default="development">
@@ -36,8 +45,11 @@
       <mapper resource="kr/co/mpnp/admin/mapper/AdminProductMapper.xml"/>
        <mapper resource="kr/co/mpnp/dao/mapper/memberMapper.xml"/>
     <mapper resource="kr/co/mpnp/dao/mapper/mypageMapper.xml"/>
-  
- 
+    
+   <mapper resource="kr/co/mpnp/admin/dao/mapper/adminOrderMapper.xml"/>
+     <mapper resource="kr/co/mpnp/admin/dao/mapper/gradeMapper.xml"/>
+ <mapper resource="kr/co/mpnp/user/dao/mapper/orderMapper.xml"/>
+    <mapper resource="kr/co/mpnp/user/dao/mapper/myOrderMapper.xml"/>
 
   
   

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.nyangpoom.user.dao.mapper.destinationMapper">
-	<insert id="insertDestination" parameterType="kr.co.nyangpoom.user.vo.DestinationVO">
+<mapper namespace="kr.co.mpnp.user.dao.mapper.destinationMapper">
+	<insert id="insertDestination" parameterType="kr.co.mpnp.user.vo.DestinationVO">
 	
 	</insert>
 </mapper>

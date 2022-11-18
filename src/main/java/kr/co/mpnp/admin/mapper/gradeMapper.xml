@@ -2,38 +2,38 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.nyangpoom.gradeMapper">
+<mapper namespace="kr.co.mpnp.gradeMapper">
 <!--설빈  -->
 <!-- 등급전체조회 -->
-<select id="selectGrade"  resultType="kr.co.nyangpoom.admin.domain.AdminGradeDomain" >
+<select id="selectGrade"  resultType="kr.co.mpnp.admin.domain.AdminGradeDomain" >
 select gradeid gradeId,NAME gradeName, GRADELEVEL gradeLevel , DISCOUNT_RATE discountRate 
 from GRADE
 order by DISCOUNT_RATE 
 </select>
 
 <!-- 등급추가 -->
-<insert id="insertGrade" parameterType="kr.co.nyangpoom.admin.vo.AdminGradeVO">
+<insert id="insertGrade" parameterType="kr.co.mpnp.admin.vo.AdminGradeVO">
  insert into grade(gradeid, name, gradelevel, discount_rate, min_price, max_price, info)
  values(#{gradeId}, #{gradeName}, #{level}, #{discountRate}, #{minPrice}, #{maxPrice}, #{gradeInfo})
  
 </insert>
 
 <!-- 등급상세보기 -->
-<select id="selectGradeDetail" parameterType="String"  resultType="kr.co.nyangpoom.admin.domain.AdminGradeDomain" >
+<select id="selectGradeDetail" parameterType="String"  resultType="kr.co.mpnp.admin.domain.AdminGradeDomain" >
 SELECT GRADEID gradeId, NAME gradeName , GRADELEVEL gradeLevel, DISCOUNT_RATE discountRate, MIN_PRICE minPrice, MAX_PRICE maxPrice, INFO gradeInfo
 FROM GRADE
 WHERE GRADEID =#{gradeId}
 </select>
 
 <!-- 등급정보 변경 -->
-<update id="updateGradeInfo" parameterType="kr.co.nyangpoom.admin.vo.AdminGradeVO" >
+<update id="updateGradeInfo" parameterType="kr.co.mpnp.admin.vo.AdminGradeVO" >
 
 update grade set name=#{gradeName}, gradelevel=#{level}, discount_rate =#{discountRate}, min_price=#{minPrice}, max_price=#{maxPrice}, info=#{gradeInfo} where gradeid = '${gradeId}'
 
 </update>
 
 <!-- 등급삭제(변경 -->
-<update id="updateGrade" parameterType="kr.co.nyangpoom.admin.vo.AdminGradeVO" >
+<update id="updateGrade" parameterType="kr.co.mpnp.admin.vo.AdminGradeVO" >
 
 update  grade set NAME=#{gradeName} where GRADEID =#{gradeId}
 

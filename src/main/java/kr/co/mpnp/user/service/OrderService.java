@@ -1,13 +1,19 @@
 package kr.co.mpnp.user.service;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import kr.co.mpnp.user.dao.OrderDAO;
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.domain.OrderDomain;
+import kr.co.mpnp.user.domain.OrderShipDomain;
 import kr.co.mpnp.user.vo.DestinationVO;
 import kr.co.mpnp.user.vo.MyOrderVO;
 import kr.co.mpnp.user.vo.OrderVO;
+import kr.co.mpnp.user.vo.ShipNameVO;
 
 //설빈
 public class OrderService {
@@ -30,15 +36,40 @@ public class OrderService {
 		return list;
 	}
 	
+//	//배송지변경버튼 - 배송지vo,배송지dao 써야 할듯
+//		public   OrderDomain seachChangeDestination(DestinationVO dVO) {
+//			OrderDomain orDOM = null;
+//			
+//			orDOM = oDAO.selectChangeDestination(dVO);
+//			
+//			return orDOM;
+//		}
+	
+	
 
 	//배송지변경버튼 - 배송지vo,배송지dao 써야 할듯
-	public   OrderDomain seachChangeDestination(DestinationVO dVO) {
-		OrderDomain orDOM = null;
-		
-		orDOM = oDAO.selectChangeDestination(dVO);
-		
-		return orDOM;
+	public  String seachChangeDestination(ShipNameVO snVO) {
+		//1.조상
+			JSONObject jsonShipName = new JSONObject();
+		 
+		boolean resultFlag = false;
+		OrderDomain orD= oDAO.selectChangeDestination(snVO);
+		resultFlag= orD!=null;
+		//2.손자
+		jsonShipName.put("resultFlag", resultFlag);
+		jsonShipName.put("searchKeyword", snVO.getId());
+		jsonShipName.put("name", snVO.getName());
+		jsonShipName.put("zipcode", orD.getZipcode());
+		jsonShipName.put("addr", orD.getAddr());
+		jsonShipName.put("addr_detail", orD.getAddrDetail());
+		 
+		return jsonShipName.toJSONString();
+	}//
+	public static void main(String[] a) {
+		OrderService os =new OrderService();
+		System.out.println(os.seachChangeDestination(new ShipNameVO("집","id008")) );
 	}
+		
 
 	// 주문기본내역조회
 	public OrderDomain searchOrderInfo(String id) {
@@ -50,8 +81,8 @@ public class OrderService {
 	}// selectOrderInfo(
 	
 	//기본배송지 조회
-	public OrderDomain  searchDestination(OrderVO oVO) {
-		OrderDomain orDom = null;
+	public OrderShipDomain  searchDestination(OrderVO oVO) {
+		OrderShipDomain orDom = null;
 		
 		orDom = oDAO.selectDestination(oVO);
 		

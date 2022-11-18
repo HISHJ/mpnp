@@ -35,7 +35,7 @@ public class AdminLoginDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		//2.쿼리문실행
-		int cnt=ss.update("kr.co.nyangpoom.admin.dao.mapper.adminLoginMapper.updateAdminPass",alVO);
+		int cnt=ss.update("kr.co.mpnp.admin.dao.mapper.adminLoginMapper.updateAdminPass",alVO);
 		if(cnt!=0) {
 			System.out.println(alVO.getId()+" 비번 변경완료");
 			ss.commit();//와 이거 잊지말자 .... 

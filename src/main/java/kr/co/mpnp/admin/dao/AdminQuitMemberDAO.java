@@ -27,7 +27,7 @@ public class  AdminQuitMemberDAO {
 		System.out.println("sql 세션의 행방 "+ss);
 		
 		//2.쿼리문실행
-		int cnt=ss.insert("kr.co.nyangpoom.admin.dao.mapper.adminMemberMapper.insertQuitMember",id);
+		int cnt=ss.insert("kr.co.mpnp.admin.dao.mapper.adminMemberMapper.insertQuitMember",id);
 		if(cnt!=0) {
 			System.out.println("아이디: "+id+" 탈퇴회원으로 들어왔다");
 			ss.commit();//와 이거 잊지말자 .... 

@@ -38,8 +38,8 @@ public class MyBatisHandler {
 		
 		if(ssf==null) {
 			// 1. 설정파일 연결 
-			//String configPath = "users/user/git/project3/src/main/java/kr/co/nyangpoom/admin/dao/config/mybatis-config.xml";
-			//String configPath = "kr.co.nyangpoom.admin.dao.config.mybatis-config";
+			//String configPath = "users/user/git/project3/src/main/java/kr/co/mpnp/admin/dao/config/mybatis-config.xml";
+			//String configPath = "kr.co.mpnp.admin.dao.config.mybatis-config";
 			String configPath = "kr/co/mpnp/config/mybatis-config.xml";
 			Reader reader = Resources.getResourceAsReader(configPath);
 			

@@ -36,7 +36,7 @@ public class AdminGradeDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		// 쿼리 실행
-		list = ss.selectList("kr.co.nyangpoom.gradeMapper.selectGrade");
+		list = ss.selectList("kr.co.mpnp.gradeMapper.selectGrade");
 
 		for (AdminGradeDomain aod : list) {
 			System.out.println(aod);
@@ -59,7 +59,7 @@ public class AdminGradeDAO {
 		SqlSession ss = mbh.getHandler();
 
 		// 쿼리실행
-		cnt = ss.insert("kr.co.nyangpoom.gradeMapper.insertGrade", agVO);
+		cnt = ss.insert("kr.co.mpnp.gradeMapper.insertGrade", agVO);
 		if (cnt == 1) {
 			ss.commit();
 			System.out.println(cnt + "추가");
@@ -83,7 +83,7 @@ public class AdminGradeDAO {
 		SqlSession ss = mbh.getHandler();
 
 		try {
-			agDom = ss.selectOne("kr.co.nyangpoom.gradeMapper.selectGradeDetail", gId);
+			agDom = ss.selectOne("kr.co.mpnp.gradeMapper.selectGradeDetail", gId);
 			System.out.println(agDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -104,7 +104,7 @@ public class AdminGradeDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.nyangpoom.gradeMapper.updateGradeInfo",agVO);
+		cnt = ss.update("kr.co.mpnp.gradeMapper.updateGradeInfo",agVO);
 		if(cnt==1) {
 			ss.commit();
 			System.out.println(cnt+"건 변경되었습니다");
@@ -125,7 +125,7 @@ public class AdminGradeDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.nyangpoom.gradeMapper.updateGrade",agVO);
+		cnt = ss.update("kr.co.mpnp.gradeMapper.updateGrade",agVO);
 		if(cnt==1) {
 			ss.commit();
 			System.out.println(cnt+"건 변경되었습니다");

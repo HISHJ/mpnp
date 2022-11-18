@@ -36,7 +36,7 @@ public class AdminOrderDAO {
 			MyBatisHandler mbh = MyBatisHandler.getInstance();
 			SqlSession ss = mbh.getHandler();
 			// Äõ¸® ½ÇÇà
-			list = ss.selectList("kr.co.nyangpoom.adminOrderMapper.selectOrderList",aoVO);
+			list = ss.selectList("kr.co.mpnp.adminOrderMapper.selectOrderList",aoVO);
 
 			System.out.println(list);
 
@@ -57,7 +57,7 @@ public class AdminOrderDAO {
 					MyBatisHandler mbh = MyBatisHandler.getInstance();
 					SqlSession ss = mbh.getHandler();
 					// Äõ¸® ½ÇÇà
-					list = ss.selectList("kr.co.nyangpoom.adminOrderMapper.selectOrderPrdDetail",odID);
+					list = ss.selectList("kr.co.mpnp.adminOrderMapper.selectOrderPrdDetail",odID);
 					System.out.println(list);
 					// ¿¬°á²÷±â
 					mbh.closeHandler(ss);
@@ -73,7 +73,7 @@ public class AdminOrderDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		try {
-			aoDom = ss.selectOne("kr.co.nyangpoom.adminOrderMapper.selectOrderDetail", orID);
+			aoDom = ss.selectOne("kr.co.mpnp.adminOrderMapper.selectOrderDetail", orID);
 			System.out.println(aoDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -93,7 +93,7 @@ public class AdminOrderDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.nyangpoom.adminOrderMapper.updateOrderStatus", aoVO);
+		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateOrderStatus", aoVO);
 		
 		if(cnt == 1) { //º¯°æ Àß µÆ´Ï?
 			ss.commit();
@@ -118,7 +118,7 @@ public class AdminOrderDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.nyangpoom.adminOrderMapper.updateCompletionDate",orID);
+		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateCompletionDate",orID);
 		
 		if(cnt == 1) { //º¯°æ Àß µÆ´Ï?
 			ss.commit();
@@ -143,7 +143,7 @@ public class AdminOrderDAO {
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.nyangpoom.adminOrderMapper.updateReviewChk");
+		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk");
 		
 		if(cnt > 1) { //º¯°æ Àß µÆ´Ï?
 			ss.commit();

@@ -38,7 +38,7 @@ public class MyOrderDAO {
 
 		try {
 			// 孽府 角青
-			list = ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderAList", moVO);
+			list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderAList", moVO);
 			System.out.println(list);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -62,7 +62,7 @@ public class MyOrderDAO {
 		SqlSession ss = mbh.getHandler();
 		
 		//孽府 角青
-		moDom = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectOrderDetail", ordId);
+		moDom = ss.selectOne("kr.co.mpnp.myOrderMapper.selectOrderDetail", ordId);
 		System.out.println(moDom);
 		// 楷搬谗扁
 		mbh.closeHandler(ss);
@@ -86,7 +86,7 @@ public class MyOrderDAO {
 
 	 		try {
 	 			// 孽府 角青
-	 			orderStatus= ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderStatusCnt", moVO);
+	 			orderStatus= ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderStatusCnt", moVO);
 	 			System.out.println(orderStatus);
 	 		} catch (PersistenceException pe) {
 	 			pe.printStackTrace();
@@ -113,7 +113,7 @@ public class MyOrderDAO {
 
  		try {
  			// 孽府 角青
- 			price= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceIndivisual", ordId);
+ 			price= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceIndivisual", ordId);
  			System.out.println(price);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -136,7 +136,7 @@ public class MyOrderDAO {
 
 		 		try {
 		 			// 孽府 角青
-		 			totalPrice= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceTotal", orID);
+		 			totalPrice= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceTotal", orID);
 		 			System.out.println(totalPrice);
 		 		} catch (PersistenceException pe) {
 		 			pe.printStackTrace();
@@ -160,7 +160,7 @@ public class MyOrderDAO {
 
  		try {
  			// 孽府 角青
- 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelIndivisual", ordId);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelIndivisual", ordId);
  			if(cnt==1) {
  			 System.out.println(cnt + "扒 昏力");
  			ss.commit();
@@ -188,7 +188,7 @@ public class MyOrderDAO {
 
  		try {
  			// 孽府 角青
- 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelTotal", orID);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelTotal", orID);
  			if(cnt==1) {
  			 System.out.println(cnt + "扒 昏力");
  			 ss.commit();
@@ -219,7 +219,7 @@ public class MyOrderDAO {
 
  		try {
  			// 孽府 角青
- 			totalCnt = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectTotalPageCount");
+ 			totalCnt = ss.selectOne("kr.co.mpnp.myOrderMapper.selectTotalPageCount");
  			System.out.println(totalCnt);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();

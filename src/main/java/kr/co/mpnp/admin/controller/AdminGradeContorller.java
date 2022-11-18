@@ -37,6 +37,7 @@ public class AdminGradeContorller {
 		return "/admin/grade/grade_add";
 	}// adminGAddForm
 
+	////DB전달 완료
 	// 등급추가버튼클릭(완료)
 	@RequestMapping(value = "/admin_g_add_process.do", method = GET)
 	public String adminGAddProcess(HttpSession session, AdminGradeVO agVO) {
@@ -65,12 +66,11 @@ public class AdminGradeContorller {
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 
+	//DB전달 완료
 	// 등급상세정보변경
 	@RequestMapping(value = "/admin_g_modify_process.do", method = GET)
-	public String adminGModifyProcess(HttpSession session) {
-		//파라미터값 받아야 할듯..   
-		AdminGradeVO agVO = new AdminGradeVO();
-		   //agVO.setDiscountRate("discountRate");
+	public String adminGModifyProcess(HttpSession session,AdminGradeVO agVO) {
+	
 		  System.out.println("업데이트 테스트"+agVO);
 		  AdminGradeService agServ = new AdminGradeService(); 
 		  int cnt = agServ.modifyGradeInfo(agVO);
@@ -79,7 +79,7 @@ public class AdminGradeContorller {
 		return "/admin/grade/gradeDetail_modify_process";
 	}// adminGModifyProcess
 
-	// 등급삭제(변경임)
+	// 등급삭제(변경임) - 솔직히 필요 이유를 모르겠음 위에서 수정가능한데 여기서 왜 또 수정해야하지..?
 	@RequestMapping(value = "/admin_g_remove_process.do", method = GET)
 	public String adminGRemoveProcess(HttpSession session,AdminGradeVO agVO) {
 		

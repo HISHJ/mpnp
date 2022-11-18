@@ -45,7 +45,7 @@ public class  AdminMemberDAO {
 		System.out.println("sql 세션의 행방 "+ss);
 		
 		//2.쿼리문실행
-		int cnt=ss.update("kr.co.nyangpoom.admin.dao.mapper.adminMemberMapper.updateMember",id);
+		int cnt=ss.update("kr.co.mpnp.admin.dao.mapper.adminMemberMapper.updateMember",id);
 		if(cnt!=0) {
 			System.out.println("아이디: "+id+" 탈퇴처리되었습니다");
 			ss.commit();//와 이거 잊지말자 .... 
@@ -70,7 +70,7 @@ public class  AdminMemberDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		//2.쿼리문실행
-		int cnt=ss.update("kr.co.nyangpoom.admin.dao.mapper.adminMemberMapper.updateMemberGrade",amVO);
+		int cnt=ss.update("kr.co.mpnp.admin.dao.mapper.adminMemberMapper.updateMemberGrade",amVO);
 		if(cnt!=0) {
 			System.out.println(amVO.getGradeid()+"으로 회원등급변경");
 			ss.commit();

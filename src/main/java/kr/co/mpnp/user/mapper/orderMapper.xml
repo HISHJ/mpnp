@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.nyangpoom.orderMapper">
+<mapper namespace="kr.co.mpnp.orderMapper">
 <!--  Orderdomain mapping처리 -->
 <resultMap type="OrderDomain" id="orderDom">
 	<result column="name" property="memberName"/>
@@ -48,23 +48,23 @@ where id=#{id}
 </select>
 
 <!-- //배송지 변경 버튼 -->
-<select id="selectChangeDestination" parameterType="DestinationVO" resultMap="orderDom">
-SELECT d.ZIPCODE, d.ADDR, d.ADDR_DETAIL
-FROM  DESTINATION d,MEMBER m
-WHERE  (d.id = m.id) and m.id=#{id} and d.name=#{name}
+<select id="selectChangeDestination" parameterType="ShipNameVO" resultMap="orderDom">
+SELECT ZIPCODE, ADDR,ADDR_DETAIL
+FROM  DESTINATION 
+WHERE  id=#{id} and name=#{name}
 </select>
 <!--	// 주문기본내역조회  -->
 <select id="selectOrderInfo" parameterType="String" resultMap="orderDom">
 
-SELECT m.NAME, m.PHONE, g.GRADEID, g.NAME, g.DISCOUNT_RATE
+SELECT m.NAME, m.PHONE, g.GRADEID, g.NAME gradename, g.DISCOUNT_RATE
 FROM MEMBER m, GRADE g
 WHERE (  m.GRADEID = g.GRADEID) and m.ID =#{id}
 
 </select> 
 
 <!--기본배송지 조회 -->
-<select id="selectDestination" parameterType="OrderVO" resultMap="orderDom">
-SELECT  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.DEFAULT_FLAG,d.NAME ship_name
+<select id="selectDestination" parameterType="OrderVO" resultType="OrderShipDomain">
+SELECT  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL addrDetail, d.DEFAULT_FLAG,d.NAME shipName
 FROM MEMBER m, DESTINATION d
 WHERE (d.ID = m.ID ) and m.ID =#{id} and d.DEFAULT_FLAG=#{defaultFlag}
 
@@ -90,9 +90,10 @@ select concat('od_',lpad(seq_order_detail.nextval,7,0)) from dual
 <!-- 주문상세 추가
 주문코드는 orderVO에 저장하고자 하는데.. 여기서 MyOderVO를 써버리면,..
 조회된 주문코드는 두 곳에 저장해놔야 하는건가..... -->
+<!--주문상세 추가할 때 카트아이디가 null이면 ""을 변수에 담아 추가시키자 -->
 <insert id="insertOrderDetail"  parameterType="MyOrderVO">
-insert into ORDER_DETAIL(ORDER_DETAILID, TOTALCNT, ORDERID, PRODUCTID)
- values(#{orderDetailId},#{totalPrdCnt},#{orderId},#{prdtId})
+insert into ORDER_DETAIL(ORDER_DETAILID, TOTALCNT, ORDERID, PRODUCTID,CARTID)
+ values(#{orderDetailId},#{totalPrdCnt},#{orderId},#{prdtId},#{cartID})
 </insert>
 
 <!-- 배송지코드 조회 -->

@@ -26,10 +26,10 @@ public class AdminReviewDAO {
 		System.out.println("여기서?");
 		System.out.println("arVO : "+arVO);
 		
-		//int cnt = ss.insert("kr.co.nyangpoom.admin.dao.mapper.reviewMapper.insertReview",arVO);
-		int cnt = ss.insert("kr.co.nyangpoom.admin.dao.mapper.reviewMapper.insertReview");
+		//int cnt = ss.insert("kr.co.mpnp.admin.dao.mapper.reviewMapper.insertReview",arVO);
+		int cnt = ss.insert("kr.co.mpnp.admin.dao.mapper.reviewMapper.insertReview");
 		System.out.println(cnt);
-		//System.out.println(ss.insert("kr.co.nyangpoom.admin.dao.mapper.reviewMapper.insertReview",arVO)==null?"oo":"xx");
+		//System.out.println(ss.insert("kr.co.mpnp.admin.dao.mapper.reviewMapper.insertReview",arVO)==null?"oo":"xx");
 
 		// autocommit이 안되기때문에 직접 해줘야한다.
 		// 내가원한만큼 실행됐을때를 비교하기위해 cnt==1 ㅇㅇ
@@ -59,7 +59,7 @@ public class AdminReviewDAO {
 		
 		// 2. 쿼리실행 insert("Mapper아이디",값)
 		System.out.println("여기서?");
-		int cnt = ss.delete("kr.co.nyangpoom.admin.dao.mapper.reviewMapper.deleteReview",reviewId);
+		int cnt = ss.delete("kr.co.mpnp.admin.dao.mapper.reviewMapper.deleteReview",reviewId);
 		
 		if(cnt==1) {
 			System.out.println(reviewId+"번 후기 삭제");
