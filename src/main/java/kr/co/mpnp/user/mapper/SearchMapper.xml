@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.user.mapper.SearchMapper">
+
+<!-- 검색어 상품 조회   -->
+
+<resultMap type="Search" id="shResult">
+	<result column="productid" property="productid"/>
+	<result column="name" property="productname"/>
+	<result column="status" property="status"/>
+	
+</resultMap>
+
+
+<!-- 검색결과 총 갯수-->
+
+<select id= "selectTotalCnt " resultType="int" parameterType="String">
+
+select count(productid) cnt from product
+where
+name like '%'||#{name}||'%'
+
+</select>
+
+<!-- 검색결과 -->
+<select id ="searchPrd" resultType="Search" parameterType="String">
+
+select productid,name,price
+from product
+where name like replace(name,' ','') like '%'||?||'%'
+
+
+</select> 
+
+
+<!-- 베스트 상품 조회  : 뭘로 조회함...???????? -->
+<select id="selectBest" resultMap="shResult">
+select name,productid
+from(
+select p.name,p.productid,count(o.status),row_number()over(order by count(o.status) desc) rnum
+from product p,order_detail od,orders o
+where p.productid=od.productid and o.orderid = od.orderid
+		and  o.status='구매확정'
+group by p.name,p.productid,o.status
+)
+where rnum between 1 and 5
+
+</select>
+
+</mapper>

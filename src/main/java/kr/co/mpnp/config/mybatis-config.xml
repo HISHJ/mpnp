@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="properties/database.properties"/>
+		<typeAliases>
+		<typeAlias type="kr.co.mpnp.user.domain.MainDomain" alias="main"/>
+		<typeAlias type="kr.co.mpnp.user.domain.ProductDomain" alias="product"/>
+		<typeAlias type="kr.co.mpnp.user.domain.ProductReviewDomain" alias="pr"/>
+		<typeAlias type="kr.co.mpnp.user.domain.SearchDomain" alias="Search"/>
+	</typeAliases>
 	
   <environments default="development">
     <environment id="development">
@@ -17,33 +23,14 @@
     </environment>
   </environments>
   <mappers>
+      <mapper resource="kr/co/mpnp/user/mapper/MainMapper.xml"/>
+      <mapper resource="kr/co/mpnp/user/mapper/ProductMapper.xml"/>
+      <mapper resource="kr/co/mpnp/user/mapper/ProductReviewMapper.xml"/>
+     <mapper resource="kr/co/mpnp/user/mapper/SearchMapper.xml"/> 
+      <mapper resource="kr/co/mpnp/admin/mapper/AdminProductMapper.xml"/>
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+ 
+
   
   
   

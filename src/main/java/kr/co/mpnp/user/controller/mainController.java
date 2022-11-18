@@ -19,11 +19,13 @@ public class mainController {
 	public String main(HttpSession session,Model model,String mainid) {
 		
 		
-		/*
-		 * MainService ms = new MainService(); List<MainDomain> list =
-		 * ms.searchPrdList("m0001"); System.out.println(list);
-		 * model.addAttribute("prdList",list);
-		 */
+		
+		 MainService ms = new MainService(); 
+		 List<MainDomain> list =
+		 ms.searchPrdList("m0001"); 
+		
+		 model.addAttribute("prdList",list);
+		 
 		
 		return"user/main/index";
 	}

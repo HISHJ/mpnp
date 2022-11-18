@@ -64,7 +64,7 @@ public class MainDAO {
 		
 		// mDAO.selectProductList("m0001"); 
 		 
-		 System.out.println(mDAO.selectStar("p0001"));
+	
 		 System.out.println(mDAO.selectPrdList("m0001"));
 		
 		

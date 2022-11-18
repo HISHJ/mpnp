@@ -2,25 +2,61 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.use.dao.mapper.productMapper">
+<mapper namespace="kr.co.mpnp.user.mapper.ProductReviewMapper">
 <!-- resultType : 조회 결과 값을 저장하기 위한 데이터타입(데이터 하나에 대한 타입 지정)
        parameterType:전달받은 파라메터 데이터 타입 지정(선택적)
  -->
+<resultMap type="pr" id="productReview">
+	<result column="id" property="id"/>
+	<result column="productid" property="productid"/>
+	<result column="name" property="productname"/>
+	<result column="contents" property="contents"/>
+	<result column="pfimg" property="pfimg"/>
+	<result column="nick" property="nick"/>
+	<result column="reviewid" property="reviewid"/>
+	<result column="star_score" property="starscore"/>
+	<result column="price" property="price"/>
+	<result column="inputdate" property="reviewdate"/>
+
+	
+ 
+	
+	
+</resultMap>
+
 
  
  <!--  상품후기 별점(상품코드)-->
  <select id="selectStarAvg" resultType="double"  parameterType="String">
 select ROUND(Avg(r.star_score),1)
 from product p,order_detail o, review r
-where p.productid=o.productid and o.order_detailid=r.order_detailid and p.productid=#{productid}
+where p.productid=o.productid and o.order_detailid=r.order_detailid and p.productid=#{p.productid}
  
  </select>
+ 
+
  
  
  <!-- 상품후기리스트 -->
- <select id="selectProductReview" resultType="PreviewReviewDomain " parameterType="String">
- 
+ <select id="selectProductReview" resultMap="productReview" parameterType="String">
+select m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate
+from member m, orders o, order_detail od ,review r
+where m.id=o.id and o.orderid=od.orderid and od.order_detailid =  r.order_detailid and od.productid=#{od.productid}
+
  
  
  </select>
+  <!-- 상품후기 별점 인원수 -->
+ <select id="selectStarCnt"  resultType="int[]" parameterType="String">
+select r.star_score, count(r.star_score) totalpeople
+from review r,order_detail od, product p
+where p.productid =od.productid and od.order_detailid=r.order_detailid  and p.productid=#{p.productid}
+group by star_score
+
+ 
+ 
+ </select>
+ 
+
+ 
  </mapper>

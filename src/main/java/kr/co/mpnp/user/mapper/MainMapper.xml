@@ -15,7 +15,8 @@
 	<result column="sub_id" property="subid"/>	
 	<result column="main_id" property="mainid"/>	
 	<result column="reviewid" property="reviewid"/>
-	<result column="star_score" property="starScoreAvg"/> 
+	<result column="star_score" property="star_score"/> 
+	
 	
 	
 
@@ -27,6 +28,7 @@
 from  product p,order_detail o,review r ,sub_category s
 where p.productid =o.productid and o.order_detailid=r.order_detailid and p.sub_id=s.sub_id and s.main_id=#{s.main_id}
 group by p.name,p.price,p.th_img,p.productid,p.sub_id,s.main_id
+order by productid 
  
  </select> 
 <!--  -->
