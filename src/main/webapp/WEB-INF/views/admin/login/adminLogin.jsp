@@ -26,13 +26,13 @@
 <script type="text/javascript">
 $(function(){
 	//아이디 키코드
-	$('#adminId').keydown(function(evt){
+	$('#id').keydown(function(evt){
 		if(evt.which == 13){
 		chkNull()
 		};//end if
 	});//keydown
 	//비밀번호키코드
-	$('#adminPassword').keydown(function(evt){
+	$('#pass').keydown(function(evt){
 		if(evt.which ==13){
 		chkNull()
 		};//end if
@@ -45,28 +45,28 @@ $(function(){
 })//end ready
 
 function chkNull(){
-//아이디 입력값 얻기
-let id=$("#adminId").val();
-if(id.trim() == ""){
-	alert("아이디를 입력해주세요.")
-	$("#adminId").val(""); //초기화
-	$("#adminId").focus(); //아이디 입력안하면 아이디 입력란으로 focus
-	return false; //submit안함
-}else{
-	//아이디값 넣으면 비밀번호 입력칸으로 focus
-	$("#adminPassword").focus(); 
-}
-//비밀번호 입력값 얻기
-let pass = $("#lobinBtn").val();
-if(pass.trim() == ""){
-	alert("비밀번호를 입력해주세요.");
-	$("#lobinBtn").val("");//초기화	
-	return false; //submit안함
-}//endif
-//데이터 전송(일단 다 입력했으니 값 전송(값에 대한 유효성 검증은 다음jsp에서))
-$("#adminLoginFrm").submit();
+	//아이디 입력값 얻기
+	let id=$("#id").val();
+	if(id.trim() == ""){
+		alert("아이디를 입력해주세요.")
+		$("#id").val(""); //초기화
+		$("#id").focus(); //아이디 입력안하면 아이디 입력란으로 focus
+		return false; //submit안함
+	}else{
+		//아이디값 넣으면 비밀번호 입력칸으로 focus
+		$("#pass").focus(); 
+	}
+	//비밀번호 입력값 얻기
+	let pass = $("#lobinBtn").val();
+	if(pass.trim() == ""){
+		alert("비밀번호를 입력해주세요.");
+		$("#lobinBtn").val("");//초기화	
+		return false; //submit안함
+	}//endif
+	//데이터 전송(일단 다 입력했으니 값 전송(값에 대한 유효성 검증은 다음jsp에서))
+	$("#adminLoginFrm").submit();
 	
-}
+}//chkNull 
 
 //null 유효성 검사 함수
 </script>
@@ -82,13 +82,13 @@ $("#adminLoginFrm").submit();
                                     <div class="card-body">
                                      	<h1 class="text-center text-info fw-bold my-4 font_header " >C&nbsp;M&nbsp;S&nbsp;</h1>
                                     	<h6 class="text-center fw-bold my-4 ">관리자계정입니다.</h6>
-                                        <form id="adminLoginFrm" name="adminLoginFrm" action="adminLogin_process.jsp" method="get">
+                                        <form id="adminLoginFrm" name="adminLoginFrm" action="admin_login_process.do" method="get">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="adminId" name="adminId" type="text" placeholder="name@example.com" autofocus="autofocus"/>
+                                                <input class="form-control" id="id" name="id" type="text" placeholder="ID" autofocus="autofocus" value="admin"/>
                                                 <label for="inputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="adminPassword" name="adminPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" id="pass" name="pass" type="text" placeholder="Password" value="asdf"/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                           

@@ -1,21 +1,15 @@
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
-    
-    
-    
-
+ 
 <%-- <%
  //로그인되어있지 않은 경우 로그인페이지로 이동
 if( session.getAttribute("adminId") == null){
    response.sendRedirect("admingLogin.jsp");
 }
 %>  --%>
-    
-
-
     
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +21,8 @@ if( session.getAttribute("adminId") == null){
         <meta name="author" content="" />
         <title>회원관리-메인</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <!-- <link href="css/styles.css" rel="stylesheet" /> -->
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         
       
@@ -60,7 +55,8 @@ if( session.getAttribute("adminId") == null){
     <body class="sb-nav-fixed">
     
      <!-- 여기서부터 <nav>-->
-<%-- <jsp:include page="admin_common_header.jsp"/>    --%>   
+<%-- <jsp:include page="admin_common_header.jsp"/> --%> 
+<c:import url="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp"/>
 <!-- -여기까지 <div id="layoutSidenav_content"> 전  -->
  
             <div id="layoutSidenav_content">
@@ -80,8 +76,8 @@ if( session.getAttribute("adminId") == null){
                            <form name="idFrm" id="idFrm">
                            	<div class="dataTable-top"></div>
                                 <label>닉네임　　</label>
-                           	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
-                                <input type="button" id="idSearchBtn" name="name" value="검색">
+                           	  	<input type="text"  name="nick" class="dataTable-input" style="width: auto; display: inline-block;"> 
+                                <input type="button" id="idSearchBtn" name="nick" value="검색">
                              </form>
                            
                            
@@ -89,11 +85,11 @@ if( session.getAttribute("adminId") == null){
                            <form name="chkFrm" id="chkFrm">
                                 <div class="dataTable-top"></div>
                                 <label>회원등급　</label>
-                                <select name="" class="dataTable-selector" aria-label="Default select example">
-								<option>NEW</option>
-								<option>SILVER</option>
-								<option>GOLD</option>
-								<option>VIP</option>
+                                <select name="gradeid" class="dataTable-selector" aria-label="Default select example">
+								<option>G1</option>
+								<option>G2</option>
+								<option>G3</option>
+								<option>G4</option>
 								</select>
                                 <input type="button" id="ChkSearchBtn" value="검색">
                                 
@@ -115,12 +111,11 @@ if( session.getAttribute("adminId") == null){
                                 <a href="http://localhost/group2_prj/admin/useBoard.jsp"><button id="addBtn" type="button" class="btn btn-outline-info float-end mx-md-4" >전체보기</button></a>
                                 </div>
                             </div>
-                        	<form id="userFrm" name="userFrm" action="http://localhost/group2_prj/admin/useDetail.jsp" method="post">
+                        	<form id="userFrm" name="userFrm" action="" method="post">
                                <input type="hidden" name="memberId" id="memberId">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
                                             <th>아이디</th>
                                             <th>닉네임</th>
                                             <th>회원등급</th>
@@ -131,7 +126,6 @@ if( session.getAttribute("adminId") == null){
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                            <th>번호</th>
                                             <th>아이디</th>
                                             <th>닉네임</th>
                                             <th>회원등급</th>
@@ -141,15 +135,16 @@ if( session.getAttribute("adminId") == null){
                                         </tr>
                                         </tfoot>
                                      <tbody>
+                                     <c:forEach items="${memberList }" var="member">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><input type="button" value="상세보기" onclick="HiddenVal('')"></td>
+                                            <td>${member.id }</td>
+                                            <td>${member.nick }</td>
+                                            <td>${member.gradeid }</td>
+                                            <td>${member.status }</td>
+                                            <td>${member.inputdate }</td>
+                                            <td><a href="admin_m_detail_form.do?id=${member.id}"><input type="button" value="상세보기"></a></td>
                                         </tr>
+                                    </c:forEach> 
                                     </tbody>
                                 </table>
                               </form>
@@ -157,7 +152,7 @@ if( session.getAttribute("adminId") == null){
                         </div>
                     </div>
                 </main>
-                <!--  -->
+                <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_footer.jsp"/>
                 <%-- <jsp:include page="admin_common_footer.jsp"/> --%>
                 
              

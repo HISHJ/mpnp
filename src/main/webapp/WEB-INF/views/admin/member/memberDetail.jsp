@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="회원관리 상세내역"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 
 
@@ -25,19 +26,14 @@
       <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
       <script type="text/javascript">
       $(function(){
-    	 $("#btnClose").click(function(){
-    		 	//location.href="";
-    	 });//click
-    	 
-    	 $("#btnDelete").click(function(){
-    		 	if(confirm("삭제하시겠습니까?")){
-			 		 $("#userDetail").submit();  
-				}//confirm 
-				
-    		 
-    	 });//click
-    	 
-      });//ready
+    	  $("#btnRemoveMember").click(function(){
+    		$("#removeMemberFrm").submit();
+  		 });
+    	  
+    	  $("#btnModifyGrade").click(function(){
+    		$("#modifyGradeFrm").submit();
+  		 });
+      });
       
       
       </script>
@@ -46,14 +42,9 @@
     <body>
      
 
-	    
-    <jsp:setProperty property="*" name="admVO"/> 
-     
-     
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-               <form name="userDetail" id="userDetail" method="post" action="">
                     <div class="container">
                         <div class="row justify-content-center">
                             <!-- col lg 5 - 크기 조정 -->
@@ -64,27 +55,19 @@
 
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-2"><b>이름</b></div> <div class="col-4"></div>
+                                            <div class="col-2"><b>이름</b></div> <div class="col-4">${member.name }</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-2"><b>아이디</b></div> <div class="col-4"></div>
+                                            <div class="col-2"><b>아이디</b></div> <div class="col-4">${member.id }</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-2"><b>닉네임</b></div> <div class="col-4"></div>
+                                            <div class="col-2"><b>닉네임</b></div> <div class="col-4">${member.nick }</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-2"><b>이메일</b></div> <div class="col-4"></div>
-                                        </div>
-                                        <div class="dataTable-top"></div>
-                                        <div class="row">
-                                            <div class="col-2"><b>휴대전화</b></div> <div class="col-4"></div>
-                                        </div>
-                                        <div class="dataTable-top"></div>
-                                        <div class="row">
-                                            <div class="col-2"><b>성별</b></div> <div class="col-4"></div>
+                                            <div class="col-2"><b>휴대전화</b></div> <div class="col-4">${member.phone }</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -92,31 +75,50 @@
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-2"><b>상태</b></div><div class="col-2">정상</div>
+                                        <form id="removeMemberFrm" action="admin_m_remove_process.do" method="get">
+                                        <input type="hidden" name="id" id="id" value="${member.id }">
+                                            <div class="col-2"><b>상태</b></div><div class="col-2">${member.status }</div>
                                             <div class="col-2">
-                                            	<input type="button" name="userDeleteBtn" id="btnDelete" value="회원삭제">
+                                            	<input type="button" name="btnRemoveMember" id="btnRemoveMember" value="회원삭제">
                                             </div>
-                                        </div>												
+                                        </form>
+                                        </div>	
                                         <div class="dataTable-top"></div>
                                         <div class="row">
+                                        <form id="modifyGradeFrm" action="admin_m_grade_process.do" method="get">
+                                        <input type="hidden" name="id" id="id" value="${member.id }">
                                             <div class="col-2"><b>회원등급</b></div> 
                                             <div class="col-2">
-	                                            <select name="genreId" class="dataTable-dropdown dataTable-selector" >
-	                                            <option>NEW</option>
-												<option>SILVER</option>
-												<option>GOLD</option>
-												<option>VIP</option>
+	                                            <select name="gradeid" class="dataTable-dropdown dataTable-selector" >
+	                                            <option ${member.gradeid eq 'G1'?"selected='selected'":""}>G1</option>
+												<option ${member.gradeid eq 'G2'?"selected='selected'":""}>G2</option>
+					 							<option ${member.gradeid eq 'G3'?"selected='selected'":""}>G3</option>
+												<option ${member.gradeid eq 'G4'?"selected='selected'":""}>G4</option>
 	                                            </select>
                                             </div>
                                             <div class="col-2">
-                                            	<input type="button" name="userDeleteBtn" id="btnDelete" value="등급변경">
+                                            	<input type="button" name="btnModifyGrade" id="btnModifyGrade" value="등급변경">
                                             </div>
+                                            </form>
+                                        <!-- 가입한 친구면 가입일, 탈퇴한 친구면 탈퇴일 -->
+                                        <div class="dataTable-top"></div>
+                                        <div class="row">
+                                            <div class="col-2"><b>가입일</b></div> <div class="col-4">${member.inputdate }</div>
                                         </div>
+                                        </div>
+                                        <c:if test="${ not empty quitmember.id }">
+                                        <div class="dataTable-top"></div>
+                                        <div class="row">
+                                            <div class="col-2"><b>탈퇴일</b></div> <div class="col-4">${quitmember.inputdate }</div>
+                                        </div>
+                                        </c:if>
+                                        </div>
+                                        
 								
                                             
                                                 <div class="mt-4 mb-0">
                                                     <div class="col text-center">
-                                                        <button type="button" class="btn btn-light btn-sm"  id ="btnClose">닫기</button>
+                                                        <button type="button" class="btn btn-light btn-sm" id="btnClose" onclick="history.back()">닫기</button>
                                                    
                                                 </div>
                                             </div>
@@ -127,7 +129,6 @@
                             </div>
                         </div>
                     </div>
-                  </form> 
                </main>
             </div>
             <div id="layoutAuthentication_footer">

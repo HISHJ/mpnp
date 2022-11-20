@@ -2,33 +2,63 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.admin.dao.mapper.adminMemberMapper">
+<mapper namespace="kr.co.mpnp.adminMemberMapper">
+<resultMap type="adminMemberDomain" id="amd">
+	<result column="id" property="id"/>
+	<result column="nick" property="nick"/>
+	<result column="status" property="status"/>
+	<result column="gradeid" property="gradeid"/>
+	<result column="inputdate" property="inputdate"/>
+</resultMap>
 
 <!-- 1.관리자-회원조회 -->
-<select id="selectMember" parameterType="kr.co.mpnp.admin.vo.AdminMemberVO">
+<select id="selectMember" parameterType="adminMemberVO" resultType="adminMemberDomain">
+select  m.id, m.nick, m.status, g.gradeid, m.inputdate
+from    member m, grade g
+where   m.gradeid=g.gradeid
+<if test="nick != null">
+and m.nick=#{nick}
+</if>
+<if test=" gradeid != null">
+and  m.gradeid =#{gradeid}
+</if>
 </select>
 <!-- 2.관리자-회원상세정보 -->
-<select id="selectMemberDetail" parameterType="kr.co.mpnp.admin.vo.AdminMemberVO">
+<select id="selectMemberDetail" parameterType="adminMemberVO" resultType="adminMemberDomain">
+<!-- 누적금액은 우선킵  -->
+select  m.id, m.nick, m.name, m.phone, m.status, m.inputdate, g.gradeid	
+from	member m, grade g
+where	m.gradeid=g.gradeid and m.id=#{id}
 </select>
 
 <!-- 3.관리자-회원삭제 -->
-<update id="updateMember" parameterType="kr.co.mpnp.admin.vo.AdminMemberVO">
+<update id="updateMember" parameterType="adminMemberVO">
 update  member
-set    status='탈퇴' <!-- <<테스트한거고 서비스 들어갈때는 #{}로 바꿔줘야함 -->
+set    status='탈퇴'
 where  id=#{id}
 </update>
 
 <!-- 4.관리자-등급변경 -->
-<update id="updateMemberGrade" parameterType="kr.co.mpnp.admin.vo.AdminMemberVO">
+<update id="updateMemberGrade" parameterType="adminMemberVO">
 update member
-set    gradeid=#{gradeid}
+<set>
+	<if test="gradeid != null and gradeid != '' ">
+		gradeid=#{gradeid}
+	</if>
+</set>
 where  id=#{id}
 </update>
 
 <!-- 5.관리자-탈퇴회원 -->
-<insert id="insertQuitMember" parameterType="kr.co.mpnp.admin.vo.AdminMemberVO">
-insert into QUITMEMBER(ID, INPUTDATE)
-values (#{ID},sysdate)
+<insert id="insertQuitMember" parameterType="adminMemberVO">
+insert into quitmember(id, inputdate)
+values (#{id},sysdate)
 </insert>
 
+<!-- 6.관리자-탈퇴회원 검색 -->
+<select id="selectQuitMember" parameterType="adminMemberVO" resultType="adminMemberDomain">
+select id,inputdate
+from   quitmember
+where  id=#{id} 
+</select>
 </mapper>
