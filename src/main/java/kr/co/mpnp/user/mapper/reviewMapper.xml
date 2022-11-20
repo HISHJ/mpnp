@@ -2,5 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.user.dao.mapper.reviewMapper">
+<mapper namespace="kr.co.mpnp.user.mapper.reviewMapper">
+
+<select id="writableReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
+	select p.th_img thImg, p.name name, o.inputdate purchaseDate, od.order_detailid orderDetailId
+	from product p, order_detail od, orders o, member m
+	where (m.id = o.id and o.orderid = od.orderid and od.productid = p.productid) and
+	od.review_chk = 'N' and m.id= #{id}
+	
+</select>
 </mapper>

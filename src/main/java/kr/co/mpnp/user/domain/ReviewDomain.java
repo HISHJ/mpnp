@@ -5,15 +5,15 @@ import java.util.List;
 
 public class ReviewDomain {
 
-	private String th_img, name, contents, reviewId ;
+	private String thImg, name, contents, reviewId, orderDetailId ;
 	private int price, starScore;
 	private Date purchaseDate, writeDate ;
 	private List<String> reviewImg;
-	public String getTh_img() {
-		return th_img;
+	public String getThImg() {
+		return thImg;
 	}
-	public void setTh_img(String th_img) {
-		this.th_img = th_img;
+	public void setThImg(String thImg) {
+		this.thImg = thImg;
 	}
 	public String getName() {
 		return name;
@@ -32,6 +32,12 @@ public class ReviewDomain {
 	}
 	public void setReviewId(String reviewId) {
 		this.reviewId = reviewId;
+	}
+	public String getOrderDetailId() {
+		return orderDetailId;
+	}
+	public void setOrderDetailId(String orderDetailId) {
+		this.orderDetailId = orderDetailId;
 	}
 	public int getPrice() {
 		return price;
@@ -65,11 +71,10 @@ public class ReviewDomain {
 	}
 	@Override
 	public String toString() {
-		return "ReviewDomain [th_img=" + th_img + ", name=" + name + ", contents=" + contents + ", reviewId=" + reviewId
-				+ ", price=" + price + ", starScore=" + starScore + ", purchaseDate=" + purchaseDate + ", writeDate="
-				+ writeDate + ", reviewImg=" + reviewImg + "]";
+		return "ReviewDomain [thImg=" + thImg + ", name=" + name + ", contents=" + contents + ", reviewId=" + reviewId
+				+ ", orderDetailId=" + orderDetailId + ", price=" + price + ", starScore=" + starScore
+				+ ", purchaseDate=" + purchaseDate + ", writeDate=" + writeDate + ", reviewImg=" + reviewImg + "]";
 	}
-	
 	
 	
 	

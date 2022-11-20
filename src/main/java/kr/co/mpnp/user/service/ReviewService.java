@@ -2,15 +2,19 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import kr.co.mpnp.user.dao.ReviewDAO;
 import kr.co.mpnp.user.domain.ReviewDomain;
 import kr.co.mpnp.user.vo.ReviewVO;
 
 public class ReviewService {
 
 	// 작성가능후기 조회
-	public List<ReviewDomain> searchWritableReview(ReviewVO rVO){
+	public List<ReviewDomain> searchWritableReview(String id){
 		List<ReviewDomain> list = null;
 		
+		System.out.println("ReviewService : id - "+id);
+		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		list = reviewDAO.selectWritableReview(id);
 		
 		return list;
 	}

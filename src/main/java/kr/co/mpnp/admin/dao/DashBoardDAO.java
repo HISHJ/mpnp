@@ -1,5 +1,5 @@
 package kr.co.mpnp.admin.dao;
 
-public class AdminDashBoardDAO {
+public class DashBoardDAO {
 
 }

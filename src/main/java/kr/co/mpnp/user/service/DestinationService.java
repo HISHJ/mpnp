@@ -2,6 +2,7 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import kr.co.mpnp.user.dao.DestinationDAO;
 import kr.co.mpnp.user.domain.DestinationDomain;
 import kr.co.mpnp.user.vo.DestinationVO;
 
@@ -11,6 +12,9 @@ public class DestinationService {
 	public List<DestinationDomain> searchDes(String id){
 		List<DestinationDomain> list = null;
 		
+		System.out.println("DestinationService : id - "+id);
+		DestinationDAO desDAO = DestinationDAO.getInstance();
+		list = desDAO.selectDes(id);
 		
 		return list;
 	}

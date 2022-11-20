@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.admin.mapper.dashBoardMapper">
+
+	<select id="selectMemByGrade" resultType="kr.co.mpnp.admin.domain.DashMemberDomain">
+		select g.gradelevel level, g.name gradeName, g.min_price minPrice, g.max_price maxPrice,count(m.gradeid) memCnt
+		from member m, grade g
+		where m.gradeid = g.gradeid
+		group by g.gradeid, g.name, g.min_price, g.max_price, g.gradelevel
+		order by g.gradelevel 
+	</select>
+	
+	
+	<select id="selectMemBye" resultType="kr.co.mpnp.admin.domain.DashMemberDomain">
+		select count(p.sub_id), sc.sub_name
+		from product p
+		right outer join sub_category sc
+		on p.sub_id = sc.sub_id
+		where sc.main_id='m0002'
+		group by p.sub_id, sc.sub_name, sc.sub_id
+		order by sc.sub_id
+	</select>
+
+	
+
+	
+
+</mapper>

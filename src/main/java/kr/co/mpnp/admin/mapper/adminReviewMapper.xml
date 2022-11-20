@@ -2,20 +2,42 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.admin.dao.mapper.reviewMapper">
+<mapper namespace="kr.co.mpnp.admin.mapper.reviewMapper">
 
-  <insert id="insertReview" parameterType="kr.co.mpnp.admin.vo.AdminReviewVO" >
-    insert into review (reviewId, contents, inputdate, order_detailid)
-    <!-- values(#{reviewId},#{contents},sysdate,#{orderDetailId}) 왜안돼 어젠됐잖아-->
-    <!-- values('1234','12341234',sysdate,'od0003')왜이건되는데 -->
-	<!-- values('r0020','111111',sysdate,'od0003')이건안돼 -->
-	<!-- values(#{reviewId},#{contents}, sysdate, 'od0003') -->
-	values('4444','aaaaa', sysdate, 'od0003')
-  </insert>
-  
-  <delete id="deleteReview" parameterType="String" >
-  	delete from review
-  	where reviewid = #{qqqqqqqqqqqqqqqqqqqqqqq}
-  </delete>
+	<!-- 리뷰리스트조회 전체, 조건 -->
+	<select id="selectReviewList" resultType="kr.co.mpnp.admin.domain.AdminReviewDomain" parameterType="kr.co.mpnp.admin.vo.AdminReviewVO">
+		select r.reviewid reviewId, m.nick nick, r.contents contents, r.inputdate inputDate
+		from review r, order_detail od, orders o, member m
+		<where>
+			r.order_detailid = od.order_detailid and od.orderid = o.orderid and o.id = m.id 
+			<if test=" !''.equals(nick) and nick!=null ">
+				and m.nick like '%'||#{nick}||'%'
+			</if>
+			<if test=" !''.equals(contents) and contents!=null ">
+				and r.contents like '%'||#{contents}||'%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 리뷰상세 -->
+	<select id="selectReviewDetail" resultType="kr.co.mpnp.admin.domain.AdminReviewDomain" parameterType="String">
+		select r.reviewid reviewId, od.productid productId, m.nick nick, r.star_score starScore, r.inputdate inputDate,
+				images reviewImgs, r.contents contents
+		from review r, product p, order_detail od, orders o, member m,
+		(
+			select listagg(review_img,',') within group (order by review_img) images
+			from review_img
+			where reviewid = #{reviewId}
+		)
+		where r.order_detailid = od.order_detailid and od.productid = p.productid
+		and od.orderid = o.orderid and o.id = m.id and
+		r.reviewid = #{reviewId}
+	</select>
+
+ 	<!-- 리뷰삭제 -->
+    <delete id="deleteReview" parameterType="String" >
+      delete from review
+      where reviewid = #{reviewId}
+    </delete>
   
 </mapper>

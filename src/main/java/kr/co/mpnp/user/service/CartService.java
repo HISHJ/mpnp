@@ -2,6 +2,7 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import kr.co.mpnp.user.dao.CartDAO;
 import kr.co.mpnp.user.domain.CartDomain;
 import kr.co.mpnp.user.vo.CartVO;
 
@@ -19,6 +20,10 @@ public class CartService {
 	// 장바구니 조회
 	public List<CartDomain> searchCartList(String id){
 		List<CartDomain> list = null;
+		
+		System.out.println("CartService : id - "+id);
+		CartDAO cartDAO = CartDAO.getInstance();
+		list = cartDAO.selectCartList(id);
 		
 		return list;
 	}

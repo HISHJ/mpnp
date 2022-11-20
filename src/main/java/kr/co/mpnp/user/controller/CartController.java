@@ -1,5 +1,7 @@
 package kr.co.mpnp.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.co.mpnp.user.domain.CartDomain;
+import kr.co.mpnp.user.service.CartService;
 import kr.co.mpnp.user.vo.CartVO;
 
 @Controller
@@ -16,8 +20,20 @@ public class CartController {
 	@RequestMapping(value="/cart_list.do",method=RequestMethod.GET)
 	public String searchCartList(HttpSession session, Model model) {
 		
+		String id = (String)session.getAttribute("id");
+		System.out.println("CartController : id - "+id);
 		
-		return "user/cart/cart";
+		CartService cartService = new CartService(); 
+		
+		List<CartDomain> cartList = cartService.searchCartList("id001");
+		for(CartDomain cd : cartList) {
+			System.out.println("CartController : cartId - "+cd.getCartId());
+		}
+		model.addAttribute("cartList",cartList);
+		
+		
+		
+		return "/user/cart/cart";
 	}
 	
 	// 장바구니 갯수변경

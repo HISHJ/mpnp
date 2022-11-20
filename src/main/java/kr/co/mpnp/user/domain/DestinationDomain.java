@@ -2,23 +2,7 @@ package kr.co.mpnp.user.domain;
 
 public class DestinationDomain {
 
-	private String destinationId, name, id, receiver, phone, zipcode, addr, addrDetail, deafaultFlag;
-	
-	public DestinationDomain() {
-	}
-
-	public DestinationDomain(String destinationId, String name, String id, String receiver, String phone, String zipcode,
-			String addr, String addrDetail, String deafaultFlag) {
-		this.destinationId = destinationId;
-		this.name = name;
-		this.id = id;
-		this.receiver = receiver;
-		this.phone = phone;
-		this.zipcode = zipcode;
-		this.addr = addr;
-		this.addrDetail = addrDetail;
-		this.deafaultFlag = deafaultFlag;
-	}
+	private String destinationId, name, id, receiver, phone, zipcode, addr, addrDetail, defaultFlag;
 
 	public String getDestinationId() {
 		return destinationId;
@@ -84,21 +68,20 @@ public class DestinationDomain {
 		this.addrDetail = addrDetail;
 	}
 
-	public String getDeafaultFlag() {
-		return deafaultFlag;
+	public String getDefaultFlag() {
+		return defaultFlag;
 	}
 
-	public void setDeafaultFlag(String deafaultFlag) {
-		this.deafaultFlag = deafaultFlag;
+	public void setDefaultFlag(String defaultFlag) {
+		this.defaultFlag = defaultFlag;
 	}
 
 	@Override
 	public String toString() {
 		return "DestinationDomain [destinationId=" + destinationId + ", name=" + name + ", id=" + id + ", receiver="
 				+ receiver + ", phone=" + phone + ", zipcode=" + zipcode + ", addr=" + addr + ", addrDetail="
-				+ addrDetail + ", deafaultFlag=" + deafaultFlag + "]";
+				+ addrDetail + ", defaultFlag=" + defaultFlag + "]";
 	}
-	
 	
 	
 }

@@ -2,15 +2,20 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.use.dao.mapper.cartMapper">
+<mapper namespace="kr.co.mpnp.user.mapper.cartMapper">
+
+	<select id="selectCartList" resultType="kr.co.mpnp.user.domain.CartDomain" parameterType="String">
+		select c.cartid cartId, c.cartcnt totalCnt, c.inputdate inputDate, p.productid productId, p.th_img thImg, p.name productName, p.price productPrice
+		from cart c, product p
+		where c.productid = p.productid and id = 'id001'
+	</select>
 
 
 
-
-  <!-- 장바구니 삭제 ( 장바구니 코드 아이디랑 묶어서 복합키로 쓰나?? ) -->
-  <delete id="deleteCart" parameterType="String" >
-  	delete from cart
-  	where reviewid = #{qqqqqqqqqqqqqqqqqqqqqqq}
-  </delete>
+	  <!-- 장바구니 삭제 ( 장바구니 코드 아이디랑 묶어서 복합키로 쓰나?? ) -->
+	  <delete id="deleteCart" parameterType="String" >
+	  	delete from cart
+	  	where reviewid = #{qqqqqqqqqqqqqqqqqqqqqqq}
+	  </delete>
 
 </mapper>

@@ -1,9 +1,12 @@
 package kr.co.mpnp.user.domain;
 
+import java.sql.Date;
+
 public class CartDomain {
 
 	private String cartId, productId, thImg, productName;
 	private int productPrice, actualPrice, totalCnt;
+	private Date inputDate;
 	public String getCartId() {
 		return cartId;
 	}
@@ -46,11 +49,17 @@ public class CartDomain {
 	public void setTotalCnt(int totalCnt) {
 		this.totalCnt = totalCnt;
 	}
+	public Date getInputDate() {
+		return inputDate;
+	}
+	public void setInputDate(Date inputDate) {
+		this.inputDate = inputDate;
+	}
 	@Override
 	public String toString() {
 		return "CartDomain [cartId=" + cartId + ", productId=" + productId + ", thImg=" + thImg + ", productName="
 				+ productName + ", productPrice=" + productPrice + ", actualPrice=" + actualPrice + ", totalCnt="
-				+ totalCnt + "]";
+				+ totalCnt + ", inputDate=" + inputDate + "]";
 	}
 	
 	
