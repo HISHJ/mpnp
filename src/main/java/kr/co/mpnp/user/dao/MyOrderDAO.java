@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.MyOrderDomain;
-import kr.co.mpnp.user.vo.MyOrderVO;
 //설빈
 //모든 쿼리 검증 완료
 public class MyOrderDAO {
@@ -28,7 +27,7 @@ public class MyOrderDAO {
 
 	//검증
 	// 기간별 주문내역조회
-	public List<MyOrderDomain> selectOrderAList(MyOrderVO moVO) {
+	public List<MyOrderDomain> selectOrderAList(String orID) {
 		List<MyOrderDomain> list = null;
 		
 		// MyBatisHandler얻기
@@ -38,7 +37,7 @@ public class MyOrderDAO {
 
 		try {
 			// 쿼리 실행
-			list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderAList", moVO);
+			list = ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderAList", orID);
 			System.out.println(list);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -62,7 +61,7 @@ public class MyOrderDAO {
 		SqlSession ss = mbh.getHandler();
 		
 		//쿼리 실행
-		moDom = ss.selectOne("kr.co.mpnp.myOrderMapper.selectOrderDetail", ordId);
+		moDom = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectOrderDetail", ordId);
 		System.out.println(moDom);
 		// 연결끊기
 		mbh.closeHandler(ss);
@@ -76,7 +75,7 @@ public class MyOrderDAO {
 	//--해당 주문코드의 총 주문상태... (모르겠다..)
 	//일단 여기서는 count하는게 말이 안되고, 주문상태를 조회해
 	//그리고 java에서  각 주문상태의 갯수만큼 반복문을 돌려서 count친 다음 출력ㅎ해
-	public List<String> selectOrderStatusCnt(MyOrderVO moVO) {
+	public List<String> selectOrderStatusCnt(String id) {
 		List<String> orderStatus = null;
 	    
 	 // MyBatisHandler얻기
@@ -86,7 +85,7 @@ public class MyOrderDAO {
 
 	 		try {
 	 			// 쿼리 실행
-	 			orderStatus= ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderStatusCnt", moVO);
+	 			orderStatus= ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderStatusCnt", id);
 	 			System.out.println(orderStatus);
 	 		} catch (PersistenceException pe) {
 	 			pe.printStackTrace();
@@ -113,7 +112,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			price= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceIndivisual", ordId);
+ 			price= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceIndivisual", ordId);
  			System.out.println(price);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -136,7 +135,7 @@ public class MyOrderDAO {
 
 		 		try {
 		 			// 쿼리 실행
-		 			totalPrice= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceTotal", orID);
+		 			totalPrice= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceTotal", orID);
 		 			System.out.println(totalPrice);
 		 		} catch (PersistenceException pe) {
 		 			pe.printStackTrace();
@@ -160,7 +159,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelIndivisual", ordId);
+ 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelIndivisual", ordId);
  			if(cnt==1) {
  			 System.out.println(cnt + "건 삭제");
  			ss.commit();
@@ -188,7 +187,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelTotal", orID);
+ 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelTotal", orID);
  			if(cnt==1) {
  			 System.out.println(cnt + "건 삭제");
  			 ss.commit();
@@ -219,7 +218,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			totalCnt = ss.selectOne("kr.co.mpnp.myOrderMapper.selectTotalPageCount");
+ 			totalCnt = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectTotalPageCount");
  			System.out.println(totalCnt);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();

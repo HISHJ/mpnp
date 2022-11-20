@@ -2,6 +2,7 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import kr.co.mpnp.user.dao.MyOrderDAO;
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.vo.MyOrderVO;
 //설빈
@@ -11,8 +12,11 @@ public class MyOrderService {
 	}//
 
 	// 기간별 주문내역조회
-	public List<MyOrderDomain> searchOrderList(MyOrderVO moVO) {
+	public List<MyOrderDomain> searchOrderList(String id) {
 		List<MyOrderDomain> list = null;
+		
+		MyOrderDAO oDAO =MyOrderDAO.getInstance();
+		list = oDAO.selectOrderAList(id);
 
 		return list;
 	}// searchOrderList
@@ -24,9 +28,28 @@ public class MyOrderService {
 		return moDom;
 	}// searchOrderDetail
 
-	// 기간별 주문상태조회
-	public int searchOrderStatusCnt(MyOrderVO moVO) {
-		int cnt = 0;
+	// 주문상태조회
+	public int[] searchOrderStatusCnt(String id) {
+		int[] cnt  = {0,0,0};
+		
+		List<String> list = null;
+		String[] staArr = {"주문완료","배송완료","구매확정"};
+		
+		
+		//id= "id010";
+		MyOrderDAO  oDAO =MyOrderDAO.getInstance();
+		list = oDAO.selectOrderStatusCnt(id);
+	
+		
+		for(String sta : list) {
+			if(sta.equals(staArr[0])) {
+				cnt[0]++;
+			}else if(sta.equals(staArr[1])) {
+				cnt[1]++;
+			}else {
+				cnt[2]++;
+			}
+		}//end for
 
 		return cnt;
 	}// searchOrderStatusCnt

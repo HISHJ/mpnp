@@ -6,7 +6,7 @@
 <!-- domain mapping -->
 <resultMap type="MyOrderDomain" id="myOrderDom">
 	<result column="inputdate" property="inputDateS"/>
-	<result column="status" property="prdName"/>
+	<result column="status" property="status"/>
 	<result column="totalcnt" property="totalCnt"/>
 	<result column="name_1" property="memberName"/>
 	<result column="zipcode" property="zipcode"/>
@@ -20,14 +20,14 @@
 	<result column="product_img" property="prdImg"/>
 </resultMap>
 
-<!-- 기간별 주문내역 조회 -->
-<select id="selectOrderAList" parameterType="MyOrderVO" resultMap="myOrderDom">
- <![CDATA[
-SELECT to_char(o.INPUTDATE,'yyyy-mm-dd'), o.STATUS, o.ACTUAL_PRICE, r.TOTALCNT, p.NAME,i.PRODUCT_IMG
+<!-- 기간별 주문내역 조
+ and #{findStartDate}< to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') < #{findEndDate} -->
+
+<select id="selectOrderAList" parameterType="String" resultMap="myOrderDom">
+
+SELECT to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate, o.STATUS status, o.ACTUAL_PRICE actual_price, r.TOTALCNT totalcnt, p.NAME name,i.PRODUCT_IMG product_img
 FROM ORDERS o, PRODUCT p, ORDER_DETAIL r,PRODUCT_IMG i
-WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID and i.PRODUCTID = p.PRODUCTID) and o.ORDERID='or_0000004'
-  and #{findStartDate}< to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') < #{findEndDate}
-]]>
+WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID and i.PRODUCTID = p.PRODUCTID) and id=#{id}
 </select>
 
 <!-- 주문 상세내역 조회 -->
@@ -37,13 +37,15 @@ FROM ORDERS o, ORDER_DETAIL r, PRODUCT p, DESTINATION d,MEMBER m
 WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID and o.ID = m.ID and d.ID = m.ID) and r.ORDER_DETAILID=#{orderDetailId}
 </select>
 
-<!-- 기간 내 주문상태 조회(아이디,시작,끝)-->
-<select id="selectOrderStatusCnt" parameterType="MyOrderVO" resultType="String">
+<!-- 기간 내 주문상태 조회(아이디,시작,끝)
+and #{findStartDate} < to_char(o.INPUTDATE,'yyyy-mm-dd') and to_char(o.INPUTDATE,'yyyy-mm-dd') <#{findEndDate}
+-->
+<select id="selectOrderStatusCnt" parameterType="String" resultType="String">
  <![CDATA[
 SELECT o.status
 FROM ORDERS o,MEMBER m
 WHERE (o.id = m.id ) and  m.id=#{id}
-and #{findStartDate} < to_char(o.INPUTDATE,'yyyy-mm-dd') and to_char(o.INPUTDATE,'yyyy-mm-dd') <#{findEndDate}
+
 ]]>
 </select>
 

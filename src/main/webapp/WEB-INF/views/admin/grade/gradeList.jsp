@@ -12,7 +12,7 @@
         <meta name="author" content="" />
         <title>등급관리-메인</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="http://localhost/nyangpoom/3rdAdmin/css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!--JQuery Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -32,7 +32,7 @@ function addDBtn(gradeId){
 </script>
  -->
  <!-- 여기서부터 <nav>-->
- <c:import url="http://localhost/nyangpoom/3rdAdmin/admin_common_header.jsp"/>
+ <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp"/>
    
 <!-- -여기까지 <div id="layoutSidenav_content"> 전  -->
 
@@ -97,6 +97,6 @@ function addDBtn(gradeId){
                     </div>
 <!-- 여기서부터<footer -->
 
-          <c:import url="http://localhost/nyangpoom/3rdAdmin/admin_common_footer.jsp"/>
+          <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_footer.jsp"/>
    
 <!-- 요기까지</html> -->

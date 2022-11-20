@@ -13,10 +13,10 @@
 
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
-<link rel="stylesheet" href="http://localhost/nyangpoom/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/_css/main.style.pc.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/css/order.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/_css/pc/common.css">
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/css/order.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/pc/common.css">
 
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
@@ -25,12 +25,13 @@
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.form.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript" 	src="http://localhost/nyangpoom/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript" 	src="http://localhost/nyangpoom/3rdDesign/_script/ui_shop.js"></script>
-
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
+<!-- 우편번호API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <!--google icons-->
 	<link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -47,7 +48,162 @@ li.open, div.ctset {
     border-radius: 10px 10px 30px 10px;
 }
 
+#memberZipCd,#memberAddr1,#memberAddr2{
+    display: block;
+    width: 100%;
+    padding: 13px 10px 13px 10px !important;;
+    border-radius: 4px;
+    margin: 0px 0;
+    background-image: none;
+    -webkit-appearance: none;
+    color: #333333;
+    border: #dddddd solid 1px;
+    resize: none;
+    outline: none;
+    vertical-align: middle;
+    -webkit-border-radius: 4px;
+    /* box-shadow: inset 0 1px 2px rgb(27 31 35 / 8%); */
+    font-size: 15rem;
+    margin:10px 0px;
+}
+
+#memberZipCd{
+  width:50% !important;
+  margin:0px 0px !important; 
+
+}
+
+.zipcode{
+  display: flex;
+  align-items: center;
+  
+}
+
+.bg-black{
+  background-color: var(--colors-main03);
+  padding:13px 10px;
+  border-radius: 4px;
+  color:#fff;
+}
+
 	</style>
+<script>
+   //우편번호
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+/* 우편번호시작 API */
+			 function execDaumPostcode() {
+			        new daum.Postcode({
+			            oncomplete: function(data) {
+			                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			
+			                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+			                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			                var roadAddr = data.roadAddress; // 도로명 주소 변수
+			                var extraRoadAddr = ''; // 참고 항목 변수
+			
+			                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                    extraRoadAddr += data.bname;
+			                }
+			                // 건물명이 있고, 공동주택일 경우 추가한다.
+			                if(data.buildingName !== '' && data.apartment === 'Y'){
+			                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			                }
+			                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			                if(extraRoadAddr !== ''){
+			                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+			                }
+			
+			                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			                document.getElementById("memberZipCd").value = data.zonecode;
+			                document.getElementById("memberAddr1").value = roadAddr
+			                //커서를 상세주소로 이동
+			                document.getElementById("memberAddr2").focus();
+			     
+			
+			            }
+			        }).open();
+			    }//execDaumPostcode() 
+			    
+</script>
+<script>
+//결제하기 유효성 검사
+	$(function(){
+		$(".btnBill").click(function(){
+		//	check();
+		})//end click
+		
+	})
+	
+		 function check(){
+		
+			var zipcode=$("#memberZipCd").val();
+			if(zipcode.trim()==""){
+				alert("우편번호를 입력해주세요..");
+				$("#memberZipCd").focus();
+				return ;
+			}//addr2
+			
+
+			var addr1=$("#memberAddr1").val();
+			if(addr1.trim()==""){
+				alert("주소를 입력해주세요..");
+				$("#memberAddr1").focus();
+				return ;
+			}//addr2
+			
+			
+
+			var addr2=$("#memberAddr2").val();
+			if(addr2.trim()==""){
+				alert("상세주소를 입력해주세요..");
+				$("#memberAddr2").focus();
+				return ;
+			}//addr2
+			
+			//var shipReq=$("#shipReq").val();
+			if($("#shipReq").val().length ==0 ){
+				alert("배송요청사항을 입력해주세요.");
+				
+			  $("#shipReq").focus();
+				return ;
+			}//addr2
+			
+			if($("#shipReq").val().length < 10){
+				alert("요청사항은 최소 10자 이상 입력가능합니다");
+				$("#shipReq").focus();
+				return ;
+			}
+			
+			var mailChk =$(':checkbox[id=chk1]:checked' );
+			if(mailChk.length<1){
+				alert("구매동의 여부를 체크해주세요");
+				return ;
+				
+			}//mailChk
+			
+			var smsChk =$(':checkbox[id=terms_72]:checked');
+			if(smsChk.length<1){
+				alert("개인정보 수집 및 이용에 동의해주세요");
+				return;
+				
+			}//smsChk
+			
+			var perChk =$(':checkbox[id=terms_44]:checked');
+			if(perChk.length<1){
+				alert("개인정보 제공여부에 동의해주세요");
+				return;
+				
+			}//perChk
+			
+			if(confirm("결제하시겠습니까?")){
+				$("#orderFrm").submit();
+				
+			}//confirm
+				
+			}//check
+</script>	
 </head>
 
 <body class="body">
@@ -156,17 +312,36 @@ li.open, div.ctset {
 
 	<div class="inr" style="min-height: 357px;">
 
-		<!-- 본문 -->
-		<form id="order_payment_form" name="order_payment_form">
 
-			<!-- 카카오페이 옵션 -->
-			<input type="hidden" name="EasyPayCardCode" id="easyPayCardCode" value="">				<!-- 간편결제 카드코드 -->
-			<input type="hidden" name="EasyPayQuota" id="easyPayQuota" value="">				<!-- 간편결제 할부개월 -->
+<!--본문  -->
 
-		</form>
+		<!-- 상품정보 -->
+		<c:forEach  items="${opvo}" var="op">
+		<div class="product_info_div">
+		 <input type="hidden" class="indi_prdId"  value="${op.prdId}">			
+		 <input type="hidden" class="indi_prdName"  value="${op.prdName}">			
+		 <input type="hidden" class="indi_prdPrice" value="${op.prdPrice}">			
+		 <input type="hidden" class="indi_prdCnt"  value="${op.prdCnt}">			
+		</div>
+		</c:forEach>
+		
+		<!-- 주문정보 넘기기 -->
+		<form action="orderPayment_process.do" id="orderFrm" name="orderFrm">
+
+					<input type="hidden" name="memberName" id="memberName" value="${orDom.memberName}">
+                    <input type="hidden" name="phone" id="phone" value="${orDom.phone}"> 
+                    
+                     <input type="hidden" name="ship_name" id="ship_name" value=""> 
+                     
+                     <input type="hidden" name="receiver" id="receiver" value=""> 
+                     <input type="hidden" name="receiver_phone" id="receiver_phone" value=""> <input type="hidden" name="actualPrice" id="actualPrice" value="">
+
+
+
+			
+		<!-- 끝 -->
 		<!-- 상품상세 배송선택 param -->
-		<input type="hidden" id="dlvrSelectId" value="">
-		<input type="hidden" id="dlvrStartId" value="">
+
 		
 		
 		<div class="contents" id="contents">
@@ -177,12 +352,13 @@ li.open, div.ctset {
 						<div class="box">
 							<div class="cdts" id="noMemDiv">
 								<div class="ptset">
-									<span>유설빈</span>
+									<span>${orDom.memberName}</span>
 								</div>
-								<div class="ptt" style="margin-top: 10px"><b class="t">010-1111-1274</b></div>
+								<div class="ptt" style="margin-top: 10px"><b class="t">${orDom.phone}</b></div>
 							</div>
-							<div class="usr" id="memDiv" style="display:none;"><em class="nm" id="memDiv-mbrNm">,</em><i class="tel" id="memDiv-mobile">010-1111-1274</i></div>
-							<!-- <div class="bts"><a href="/mypage/info/indexManageDetail" class="btn c sm btMyMod">개인정보수정</a></div> -->
+							<div class="usr" id="memDiv" style="display:none;"><em class="nm" id="memDiv-mbrNm">,</em><i class="tel" id="memDiv-mobile">${orDom.phone}</i></div>
+							<!-- <div class="bts"><a href="/mypage/info/indexManageDetail" class="btn c sm btMyMod">
+수정</a></div> -->
 							
 							<input type="hidden" id="memberYn" value="N">
 						</div>
@@ -197,13 +373,29 @@ li.open, div.ctset {
 									<li class="arr">
 										<div class="dt">주소</div>
 										<div class="dd">
-											<div class="adrbox a1">
-												<div class="adr" id="addressInfo">[06252] 서울특별시 강남구 강남대로 328(역삼동)</div>
-												<a href="javascript:;" class="btAdr" onclick="orderDlvra.openPostPop();">주소검색</a>
-											</div>
-											<div class="adrbox a2" style="">
-												<span class="input coms"><input type="text" maxlength="30" id="order_payment_road_dtl_addr" placeholder="상세주소를 입력하세요." style="padding-right: 29px;"></span>
-											</div>
+											<div class="cont">
+								<ul class="add">
+									<li class="clearfix a1">
+										<div class="zipcode">
+										<!--	<label for="memberZipCd" class="hide">우편번호</label>  -->
+											<input type="text" name="zipcode" id="memberZipCd" placeholder="우편번호" readonly/> 
+											<button id="addrBtn" type="button" class="bg-black" title="새창으로 열립니다." onclick="execDaumPostcode()">우편번호 찾기</button>
+											
+										</div>
+									</li>
+									<li class="clearfix a2">
+										<span class="l">
+											<!-- <label for="memberAddr1" class="hide">주소</label> -->
+											<input type="text" name="addr" id="memberAddr1" placeholder="주소" readonly />
+										</span>
+										<span class="r">
+											<!-- <label for="memberAddr2" class="hide">나머지 주소</label> -->
+											<input type="text" name="addrDetail" id="memberAddr2"  placeholder="상세주소를 입력하세요" value="" class="long" />
+										</span>
+									</li>
+								</ul>
+							</div>
+											
 										</div>
 									</li>
 								</ul>
@@ -216,86 +408,52 @@ li.open, div.ctset {
 										<div class="btt"><a href="javascript:;" class="btn sm btMod" onclick="orderDlvra.changeDlvrDemandPop();">변경</a></div>
 									</div>
 									<div class="pss" id="noExistDemand">
-										<textarea name="delivery_request" id="" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
+										<textarea name="shipReq" id="shipReq" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
 
 									</div>
 								</div>
+							
 								<div class="saves">
-									<div class="pp"><label class="checkbox"><input type="checkbox" id="order_payment_adrs_insert_yn" checked="" value="Y"><span class="txt"><em class="tt">등록한 정보를 회원정보에 반영합니다. (휴대폰번호/주소)</em></span></label></div>
+									<div class="pp"><label class="checkbox"><input type="checkbox" id="deafaultFlag" name="deafaultFlag" checked="" value="O"><span class="txt"><em class="tt">기본 배송지로 설정</em></span></label></div>
 								</div>
 							</div>
 						</section>
 					<input type="hidden" id="preBookYn" value="N">
 				
-				<div id="dlvrAreaTmpl01" style="display:none;">
-					<div class="delivery_choice" id="localCompDlvr">
-						<div class="hdd">
-							<span class="delivery_item"></span>
-							<span class="arrival_info"></span>
-							<!-- 사전예약 상품인경우 배송선택 없음. -->
-							<button type="button" class="btn sm" onclick="orderArea.popupSelDelivery()">변경</button>
-							</div>
-						<div class="cdd pd_tog_box open">
-							<ul class="lst">
-								<li>
-											<div class="tt">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</div>
-											<div class="ts">1개 / 
-												500원
-													</div>
-										</li>
-									</ul>
-						</div>
-					</div>
-				</div>
+			
 				
-				<div id="dlvrAreaTmpl03" style="display:none;">
-					<div class="delivery_choice" id="localCompDlvr">
-						<div class="hdd delivery_gs">
-							<span class="delivery_item"></span>
-							<div class="arrival_info_wrap">
-								<span class="arrival_info">1~2일 소요 예정</span>
-								<!--
-								<span class="arrival_info sub">밤 12시 전 주문 : 다음날 도착(98%)</span>
-								<span class="arrival_info sub">밤 12시 이후 주문 : 2일 이내 도착</span>
-								-->
-							</div>
-							<!-- 사전예약 상품인경우 배송선택 없음. -->
-							<button type="button" class="btn sm" onclick="orderArea.popupSelDelivery()">변경</button>
-							</div>
-						<div class="cdd pd_tog_box open">
-							<ul class="lst">
-								<li>
-											<div class="tt">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</div>
-											<div class="ts">1개 / 
-												500원
-													</div>
-										</li>
-									</ul>
-						</div>
-					</div>
-				</div>
 					
 				<div id="dlvrAreaTmpl02" style="display:none;">
 					</div>
 				<section class="sect deli">
 					<div class="hdts"><span class="tit">상품정보</span></div>
 					
-						<div class="cdts" id="dlvrArea">
-							<span class="text">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</span>
-							<span class="text">&nbsp;[수량: 1개]</span>
+					<ul class="lst"> 
+					
+							<c:forEach  items="${opvo}" var="op">
+								<li>
+											<div class="tt">${op.prdName}</div>
+											<div class="ts">${op.prdCnt}개 / 
+												${op.prdPrice}원
+													</div>
+										</li>
+						</c:forEach>
+									</ul>
+				
 
-					</div>
+				
+			
 				</section>
 				<section class="sect disc" id="existCoupon">
 					<div class="hdts"><span class="tit">할인 혜택</span></div>
 					<div class="cdts">
 						<div class="cpset"><!-- @@ 02.22 변경 -->
-							<div class="ht">OO등급</div>
+							<div class="ht">${orDom.gradeName }등급</div>
 							<div class="dt">
 								<input type="hidden" id="tot_goods_cp_dc_amt" name="tot_goods_cp_dc_amt" value="0">
 								<input type="hidden" id="tot_dlvr_cp_dc_amt" name="tot_dlvr_cp_dc_amt" value="0">
 								<input type="hidden" id="local_cp_dc_tot_amt" name="local_cp_dc_tot_amt" value="0">
-								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">OO</b><i class="w">%</i></em>
+								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">${orDom.discountRate }</b><i class="w">%</i></em>
 								<span class="txt">할인적용</span>
 							</div>
 						</div>
@@ -329,18 +487,12 @@ li.open, div.ctset {
 									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_1">
 						
 									</div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_2"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_3"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_4"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_5"></div>
-									<div data-ui-tab-ctn="tab_bils" data-ui-tab-val="tab_bils_6"></div>
+									
 								</div>
 							</li>
 							</ul>
 						<div class="defbilchk" onclick="checkedDefaultPayMethod();">
-							<!-- <label class="checkbox" onclick="checkedDefaultPayMethod();">
-								<input type="checkbox" id="order_payment_default_pay_method" checked=""> <span class="txt">기본 결제수단으로 저장</span>
-							</label> -->
+						
 						</div>
 					</div>
 					</section>
@@ -391,9 +543,7 @@ li.open, div.ctset {
 									<input type="hidden" id="order_payment_total_pay_amt" value="94000">
 								</div>
 							</div>
-							<!-- 01 주문서-리테일멤버십 가입 안한 경우 -->
-						
-							<!-- 02 주문서-리테일멤버십 등록 한 경우 -->
+							
 					
 						</div>
 					</section>
@@ -435,7 +585,7 @@ li.open, div.ctset {
 						<ul class="agreeset">
 							<li class="all">
 								<span class="checkbox">
-									<input type="checkbox" id="chkAllTerms" name="chkAllTerms" onclick="selectAll(this)">
+									<input type="checkbox" id="chkAllTerms" name="chkAllTerms">
 									<span class="txt"><em class="tt st">주문상품 및 결제대행 이용약관에 모두 동의합니다.</em></span>
 								</span>
 							</li>
@@ -455,13 +605,7 @@ li.open, div.ctset {
 										<a href="javascript:;" name="contentPopBtn" title="내용보기" data-content="" data-url="" data-index="6"></a>
 									</li>
 								<!-- 나이스페이먼츠 -->
-							<li class="nicePaymentTerms" style="display: block;">
-										<span class="checkbox">
-											<input type="checkbox" class="chkNiceTerms" name="ordTerms" id="terms_47" data-idx="1" data-terms-no="47" onclick="checkSelectAll()">
-											<span class="txt"><a href="javascript:;" name="termPopBtn" data-index="1" class="tt lk">NICE페이먼츠 전자금융거래 이용약관</a></span>
-										</span>
-										<a href="javascript:;" name="contentPopBtn" title="내용보기" data-content="" data-url="" data-index="1"></a>
-									</li>
+						
 								<li class="nicePaymentTerms" style="display: block;">
 										<span class="checkbox">
 											<input type="checkbox" class="chkNiceTerms" name="ordTerms" id="terms_72" data-idx="4" data-terms-no="72" onclick="checkSelectAll()">
@@ -478,7 +622,7 @@ li.open, div.ctset {
 									</li>
 								</ul>
 						<div class="bts">
-							<a href="javascript:;" name="contentPopBtn" class="btn a lg btnBill" onclick="validNonMember();">
+							<a href="javascript:;" name="contentPopBtn"  class="btn a lg btnBill" >
 								<span class="prc"><em class="p" id="order_payment_end_pay_amt_view">51,800</em><i class="w">원</i></span> <span class="txt">결제하기</span>
 							</a>
 						</div>
@@ -497,6 +641,7 @@ li.open, div.ctset {
 				</div>
 			</div>
 		</div>
+		</form>
 
 	</div>
 </main>

@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+       <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>주문관리-메인</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!--JQuery Google CDN -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -25,13 +25,29 @@
 <body class="sb-nav-fixed">
 
 <script type="text/javascript">
+$(function(){
+	$("#nameSearchBtn").click(function(){
+		$("#memberName").submit();
+	})
+	
+	
+	$("#nameSearchBtn").click(function(){
+		$("#orderStatus").submit();
+	})
+})
+
+function getHiddenVal(orderId){
+	 $("#orderId").val(orderId);
+	 $("#resultFrm").submit();
+	
+}
 </script>
 
 <%-- 
  <!-- 여기서부터 <nav>-->
-<jsp:include page="http://localhost/nyangpoom/3rdAdmin/admin_common_header.jsp"/>      
+<jsp:include page="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp"/>      
 <!-- -여기까지 <div id="layoutSidenav_content"> 전  --> --%>
- <c:import url="http://localhost/nyangpoom/3rdAdmin/admin_common_header.jsp"/>
+ <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp"/>
 
 
             <div id="layoutSidenav_content">
@@ -52,19 +68,19 @@
                             <div class="card-body">
                                
                                <!-- 다 검색으로 조회가능 하지만 우선 만듬 -->
-                            <form name="" id=>
+                            <form name="memberName" id="memberName"" action="orderMain_process.do">
                            	 <div class="dataTable-top"></div>
-                                <label>아이디　</label>
+                                <label>회원명</label>
                            	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
                                 <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
                              </form>
                              
-                            <form name="" id=>
+                            <form name="orderStatus" id="orderStatus"  action="orderMain_list.do">
                            	 <div class="dataTable-top"></div>
                                 <label>상태　　</label>
                                 <select name="genreId" class="dataTable-selector" aria-label="Default select example">
-								<option>입금대기</option>
-								<option>결제완료</option>
+								<option>주문취소</option>
+								<option>주문완료</option>
 								<option>배송완료</option>
 								<option>구매확정</option>
 								</select>
@@ -73,13 +89,12 @@
                                 
                                 </div>
                             </div>
+                   
                         
                                
-                           <form id="resultFrm" name="resultFrm" action="rsrvtDetail.jsp" method="post"> 
-                   		  <input type="hidden" name="rsrvtId" id="rsrvtId" >
-		 				  <input type="hidden" name="status" id="status" >
-		 				  <input type="hidden" name="name" id="name" >
-		 				  
+                           <form id="resultFrm" name="resultFrm" action="orderDetail_form.do" method="get"> 
+                   		  <input type="hidden" name="orderId" id="orderId" >
+		 				
                                 <table id="datatablesSimple">
                                
                                     <thead>
@@ -108,13 +123,13 @@
 						
 									 <c:forEach items="${orderList}" var="order">
                               	 		<tr>
-                                            <td>${order.orderid}</td>
+                                            <td>${order.orderId}</td>
                                             <td>${order.memberName}</td>
-                                            <td>${order.p_name}</td>
+                                            <td>${order.prdName}</td>
                                             <td>${order.orderStatus}</td>
                                             <td>${order.actualPrice}</td>
                                             <td>${order.inputdate}</td>                                          
-                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('','','')"></td> 
+                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('${order.orderId}')"></td> 
                                         </tr>
                                      </c:forEach>  
                                     </tbody>                                    
@@ -128,4 +143,4 @@
 <%-- <!-- 여기서부터<footer -->
               <jsp:include page="admin_common_footer.jsp"/>
 <!-- 요기까지</html> --> --%>
- <c:import url="http://localhost/nyangpoom/3rdAdmin/admin_common_header.jsp"/>
+ <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_footer.jsp"/>

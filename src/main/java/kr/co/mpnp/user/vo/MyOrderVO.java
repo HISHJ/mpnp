@@ -7,7 +7,7 @@ import java.util.Date;
 //endNum(끝번호), pageScale(한페이지에 보여줄 게시물 수)
 public class MyOrderVO {
 	 private String id, orderId, review_chk,deliveryId, deliveryName, zipcode, addr, addrDetail, phone, receiver, shipReq, orderStatus,
-	  orderDetailId, prdtId, prdName, thImg, findStartDate, findEndDate,inputDateS;
+	  orderDetailId, prdtId, prdName, thImg, findStartDate, findEndDate,inputDateS,cartID;
 	  private int actualPrice, totalPrdCnt, productPrice, totalPageCnt, totalPage, currentPage, startNum, endNum, pageScale;
 	  private Date inputDate, completionDate;
 
@@ -17,8 +17,8 @@ public class MyOrderVO {
 	public MyOrderVO(String id, String orderId, String review_chk, String deliveryId, String deliveryName,
 			String zipcode, String addr, String addrDetail, String phone, String receiver, String shipReq,
 			String orderStatus, String orderDetailId, String prdtId, String prdName, String thImg, String findStartDate,
-			String findEndDate, String inputDateS, int actualPrice, int totalPrdCnt, int productPrice, int totalPageCnt,
-			int totalPage, int currentPage, int startNum, int endNum, int pageScale, Date inputDate,
+			String findEndDate, String inputDateS, String cartID, int actualPrice, int totalPrdCnt, int productPrice,
+			int totalPageCnt, int totalPage, int currentPage, int startNum, int endNum, int pageScale, Date inputDate,
 			Date completionDate) {
 		super();
 		this.id = id;
@@ -40,6 +40,7 @@ public class MyOrderVO {
 		this.findStartDate = findStartDate;
 		this.findEndDate = findEndDate;
 		this.inputDateS = inputDateS;
+		this.cartID = cartID;
 		this.actualPrice = actualPrice;
 		this.totalPrdCnt = totalPrdCnt;
 		this.productPrice = productPrice;
@@ -205,6 +206,14 @@ public class MyOrderVO {
 		this.inputDateS = inputDateS;
 	}
 
+	public String getCartID() {
+		return cartID;
+	}
+
+	public void setCartID(String cartID) {
+		this.cartID = cartID;
+	}
+
 	public int getActualPrice() {
 		return actualPrice;
 	}
@@ -300,10 +309,11 @@ public class MyOrderVO {
 				+ ", addrDetail=" + addrDetail + ", phone=" + phone + ", receiver=" + receiver + ", shipReq=" + shipReq
 				+ ", orderStatus=" + orderStatus + ", orderDetailId=" + orderDetailId + ", prdtId=" + prdtId
 				+ ", prdName=" + prdName + ", thImg=" + thImg + ", findStartDate=" + findStartDate + ", findEndDate="
-				+ findEndDate + ", inputDateS=" + inputDateS + ", actualPrice=" + actualPrice + ", totalPrdCnt="
-				+ totalPrdCnt + ", productPrice=" + productPrice + ", totalPageCnt=" + totalPageCnt + ", totalPage="
-				+ totalPage + ", currentPage=" + currentPage + ", startNum=" + startNum + ", endNum=" + endNum
-				+ ", pageScale=" + pageScale + ", inputDate=" + inputDate + ", completionDate=" + completionDate + "]";
+				+ findEndDate + ", inputDateS=" + inputDateS + ", cartID=" + cartID + ", actualPrice=" + actualPrice
+				+ ", totalPrdCnt=" + totalPrdCnt + ", productPrice=" + productPrice + ", totalPageCnt=" + totalPageCnt
+				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNum=" + startNum + ", endNum="
+				+ endNum + ", pageScale=" + pageScale + ", inputDate=" + inputDate + ", completionDate="
+				+ completionDate + "]";
 	}
 
 	

@@ -1,19 +1,21 @@
 package kr.co.mpnp.user.vo;
-//?„¤ë¹?
+//¼³ºó
 import java.util.Date;
 
 public class OrderVO {
 	private String memberName,phone, orderId, productId, zipcode,addr,addrDetail,
-	shipReq,cartId,inputDate, id,status, defaultFlag ;
+	shipReq,cartId,inputDate, id,status, defaultFlag, ship_name,receiver,  receiver_phone,deafaultFlag;
 	private int discountPrice, totalPrdPrice, actualPrice, cartCnt;
 	
 	public OrderVO() {
 	}
 
+	
+	
 	public OrderVO(String memberName, String phone, String orderId, String productId, String zipcode, String addr,
 			String addrDetail, String shipReq, String cartId, String inputDate, String id, String status,
-			String defaultFlag, int discountPrice, int totalPrdPrice, int actualPrice, int cartCnt) {
-		super();
+			String defaultFlag, String ship_name, String receiver, String receiver_phone, String deafaultFlag,
+			int discountPrice, int totalPrdPrice, int actualPrice, int cartCnt) {
 		this.memberName = memberName;
 		this.phone = phone;
 		this.orderId = orderId;
@@ -27,11 +29,17 @@ public class OrderVO {
 		this.id = id;
 		this.status = status;
 		this.defaultFlag = defaultFlag;
+		this.ship_name = ship_name;
+		this.receiver = receiver;
+		this.receiver_phone = receiver_phone;
+		this.deafaultFlag = deafaultFlag;
 		this.discountPrice = discountPrice;
 		this.totalPrdPrice = totalPrdPrice;
 		this.actualPrice = actualPrice;
 		this.cartCnt = cartCnt;
 	}
+
+
 
 	public String getMemberName() {
 		return memberName;
@@ -137,6 +145,38 @@ public class OrderVO {
 		this.defaultFlag = defaultFlag;
 	}
 
+	public String getShip_name() {
+		return ship_name;
+	}
+
+	public void setShip_name(String ship_name) {
+		this.ship_name = ship_name;
+	}
+
+	public String getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getReceiver_phone() {
+		return receiver_phone;
+	}
+
+	public void setReceiver_phone(String receiver_phone) {
+		this.receiver_phone = receiver_phone;
+	}
+
+	public String getDeafaultFlag() {
+		return deafaultFlag;
+	}
+
+	public void setDeafaultFlag(String deafaultFlag) {
+		this.deafaultFlag = deafaultFlag;
+	}
+
 	public int getDiscountPrice() {
 		return discountPrice;
 	}
@@ -174,8 +214,10 @@ public class OrderVO {
 		return "OrderVO [memberName=" + memberName + ", phone=" + phone + ", orderId=" + orderId + ", productId="
 				+ productId + ", zipcode=" + zipcode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", shipReq="
 				+ shipReq + ", cartId=" + cartId + ", inputDate=" + inputDate + ", id=" + id + ", status=" + status
-				+ ", defaultFlag=" + defaultFlag + ", discountPrice=" + discountPrice + ", totalPrdPrice="
-				+ totalPrdPrice + ", actualPrice=" + actualPrice + ", cartCnt=" + cartCnt + "]";
+				+ ", defaultFlag=" + defaultFlag + ", ship_name=" + ship_name + ", receiver=" + receiver
+				+ ", receiver_phone=" + receiver_phone + ", deafaultFlag=" + deafaultFlag + ", discountPrice="
+				+ discountPrice + ", totalPrdPrice=" + totalPrdPrice + ", actualPrice=" + actualPrice + ", cartCnt="
+				+ cartCnt + "]";
 	}
 
 	

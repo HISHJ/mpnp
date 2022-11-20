@@ -13,10 +13,10 @@
 
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
-<link rel="stylesheet" href="http://localhost/nyangpoom/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/_css/main.style.pc.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/css/order.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/nyangpoom/3rdDesign/_css/pc/common.css">
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/css/order.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/pc/common.css">
 
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
@@ -25,11 +25,11 @@
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.form.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript"  src="http://localhost/nyangpoom/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript" 	src="http://localhost/nyangpoom/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript" 	src="http://localhost/nyangpoom/3rdDesign/_script/ui_shop.js"></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
 
   <!--google icons-->
 	<link rel="stylesheet"
@@ -259,7 +259,7 @@ li.open, div.ctset {
 											</div>
 										</form>
 										</div>
-											<div class="adrreq" style="">
+											<div class="adrreq" style="display:none">
 									<div class="tit">배송 요청사항</div>
 									<div class="pwf" id="existDemand" style="display: none">
 										<em class="t" id="demandGoodsRcvPstCd"></em>
@@ -277,68 +277,28 @@ li.open, div.ctset {
 								</section>
 					<input type="hidden" id="preBookYn" value="N">
 				
-				<div id="dlvrAreaTmpl01" style="display:none;">
-					<div class="delivery_choice" id="localCompDlvr">
-						<div class="hdd">
-							<span class="delivery_item"></span>
-							<span class="arrival_info"></span>
-							<!-- 사전예약 상품인경우 배송선택 없음. -->
-							<button type="button" class="btn sm" onclick="orderArea.popupSelDelivery()">변경</button>
-							</div>
-						<div class="cdd pd_tog_box open">
-							<ul class="lst">
-							<c:forEach items="${opVOList}" var="opVO">
-								<li>
-											<div class="tt">${opVO.prdName}</div>
-											<div class="ts">${opVO.prdCnt}개 / 
-												${opVO.prdPrice}원
-													</div>
-										</li>
-							</c:forEach>
-									</ul>
-						</div>
-					</div>
-				</div>
+
 				
-				<div id="dlvrAreaTmpl03" style="display:none;">
-					<div class="delivery_choice" id="localCompDlvr">
-						<div class="hdd delivery_gs">
-							<span class="delivery_item"></span>
-							<div class="arrival_info_wrap">
-								<span class="arrival_info">1~2일 소요 예정</span>
-								<!--
-								<span class="arrival_info sub">밤 12시 전 주문 : 다음날 도착(98%)</span>
-								<span class="arrival_info sub">밤 12시 이후 주문 : 2일 이내 도착</span>
-								-->
-							</div>
-							<!-- 사전예약 상품인경우 배송선택 없음. -->
-							<button type="button" class="btn sm" onclick="orderArea.popupSelDelivery()">변경</button>
-							</div>
-						<div class="cdd pd_tog_box open">
-							<ul class="lst">
-								<li>
-											<div class="tt">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</div>
-											<div class="ts">1개 / 
-												500원
-													</div>
-										</li>
-									</ul>
-						</div>
-					</div>
-				</div>
+				
 					
-				<div id="dlvrAreaTmpl02" style="display:none;">
-					</div>
+		
 				<section class="sect deli">
 					<div class="hdts"><span class="tit">상품정보</span></div>
+					<ul class="lst"> 
 					
+							<c:forEach  items="${opvo}" var="op">
+								<li>
+											<div class="tt">${op.prdName}</div>
+											<div class="ts">${op.prdCnt}개 / 
+												${op.prdPrice}원
+													</div>
+										</li>
+						</c:forEach>
+									</ul>
 				
 							
 						
-						<div class="cdts" id="dlvrArea">
-							<span class="text">${param.prdName}</span>
-							<span class="text">&nbsp;[수량: ${param.prdCnt}개]</span>
-					</div>
+		
 					  
 			
 				</section>
@@ -405,7 +365,7 @@ li.open, div.ctset {
 								<li>
 									<div class="dt">총 상품금액</div>
 									<div class="dd">
-										<span class="prc"><em class="p">99,000</em><i class="w">원</i></span>
+										<span class="prc"><em class="p"></em><i class="w">원</i></span>
 										<input type="hidden" id="order_payment_total_goods_amt" value="99000">
 										<input type="hidden" id="order_payment_total_local_goods_amt" value="">
 										<input type="hidden" id="fstPurchGoodsIncYn" value="N">

@@ -8,11 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.domain.OrderDomain;
-import kr.co.mpnp.user.vo.DestinationVO;
-import kr.co.mpnp.user.vo.MyOrderVO;
-import kr.co.mpnp.user.vo.OrderVO;
-import kr.co.mpnp.user.dao.OrderDAO;
 import kr.co.mpnp.user.domain.OrderShipDomain;
+import kr.co.mpnp.user.vo.MyOrderVO;
+import kr.co.mpnp.user.vo.OrderPrdVO;
+import kr.co.mpnp.user.vo.OrderVO;
 import kr.co.mpnp.user.vo.ShipNameVO;
 
 //설빈 [모든 검증 완료]
@@ -45,7 +44,7 @@ public class OrderDAO {
 
 		try {
 			// 쿼리 실행
-			flag = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderChk", oVO);
+			flag = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderChk", oVO);
 			System.out.println(flag + "/n");
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -70,7 +69,7 @@ public class OrderDAO {
 
 		try {
 			// 쿼리 실행
-			 list = ss.selectList("kr.co.mpnp.orderMapper.selectShipName", id);
+			 list = ss.selectList("kr.co.nyangpoom.orderMapper.selectShipName", id);
 			System.out.println( list + "/n");
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -99,7 +98,7 @@ public class OrderDAO {
 		try {
 			// 쿼리 실행
 			System.out.println("------"+snVO);
-			orDOM = ss.selectOne("kr.co.mpnp.orderMapper.selectChangeDestination", snVO);
+			orDOM = ss.selectOne("kr.co.nyangpoom.orderMapper.selectChangeDestination", snVO);
 			System.out.println("===="+orDOM);
 		} catch (PersistenceException pe) { 
 			pe.printStackTrace();
@@ -122,7 +121,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderInfo", id);
+			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderInfo", id);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -143,7 +142,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectDestination",  oVO);
+			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectDestination",  oVO);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -153,7 +152,27 @@ public class OrderDAO {
 
 		return orDom;
 	}
+	
+	//해당 상품코드의 상품 조회
+	public OrderPrdVO selectProduct(String prdId){ 
+			OrderPrdVO opVO = null;
+	
+	MyBatisHandler mbh = MyBatisHandler.getInstance();
+	SqlSession ss = mbh.getHandler();
+	try {
+		// 쿼리 실행
+		opVO = ss.selectOne("kr.co.nyangpoom.orderMapper.selectProduct", prdId);
+		//System.out.println(orDom);
+	} catch (PersistenceException pe) {
+		pe.printStackTrace();
+	}
+	// 연결끊기
+	mbh.closeHandler(ss);
+	
+			return opVO;
 
+ }//
+	
 	// 검증완료
 	// 주문코드조회
 	public String selectOrderId() {
@@ -165,7 +184,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orID = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderId");
+			orID = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderId");
 			// System.out.println(orID);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -186,7 +205,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderInfo", orVO);
+			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertOrderInfo", orVO);
 			if (cnt == 1) {
 				ss.commit();
 				System.out.println(cnt + "건 추가");
@@ -212,7 +231,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			ordId = ss.selectOne("kr.co.mpnp.orderMapper.selectOrerDetailId");
+			ordId = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrerDetailId");
 			// System.out.println(ordId);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -237,7 +256,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderDetail", moVO);
+			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertOrderDetail", moVO);
 			if (cnt == 1) {
 				System.out.println(cnt + "건 추가");
 				ss.commit();
@@ -263,7 +282,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			dId = ss.selectOne("kr.co.mpnp.orderMapper.selectdestinationId");
+			dId = ss.selectOne("kr.co.nyangpoom.orderMapper.selectdestinationId");
 			System.out.println(dId);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -276,7 +295,7 @@ public class OrderDAO {
 
 	// 검증완료
 	// 배송지추가-destinatioVO사용예정
-	public int insertShipAddr(DestinationVO dVO) {
+	public int insertShipAddr(OrderVO dVO) {
 		int cnt = 0;
 
 		// 핸들러 얻기
@@ -285,7 +304,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.mpnp.orderMapper.insertShipAddr", dVO);
+			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertShipAddr", dVO);
 			cnt++;
 			if (cnt > 1) {
 				System.out.println(cnt + "건 추가");
@@ -312,7 +331,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderComplete", orVO);
+			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderComplete", orVO);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -322,6 +341,8 @@ public class OrderDAO {
 
 		return orDom;
 	}// selectOrderComplete
+	
+	
 
 	// 검증완료
 	// 주문후 장바구니에서 해당상품삭제 - 상품코드- cartVO, cartDomiain써야 함
@@ -334,7 +355,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.delete("kr.co.mpnp.orderMapper.deleteCartItem");
+			cnt = ss.delete("kr.co.nyangpoom.orderMapper.deleteCartItem");
 			if (cnt == 1) {
 				System.out.println(cnt + "건 삭제");
 				ss.commit();
@@ -351,7 +372,7 @@ public class OrderDAO {
 	}// deleteCartItem
 
 	public static void main(String[] args) {
-		OrderDAO oD = OrderDAO.getInstance();
+	//	OrderDAO oD = OrdSerDAO.getInstance();
 		//OrderVO ov = new OrderVO();
 		//oD.selectShipName("id002");
 		//ov.setId("id002");
