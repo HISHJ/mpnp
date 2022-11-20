@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -43,6 +44,7 @@
    <link
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
    rel="stylesheet">
+   <!--버튼클릭시 카테고리 변경  -->
 		<script>
 		$(function(){
 		 $(".bt_dog").click(function(){
@@ -62,12 +64,38 @@
 		 $(".open_cat").css('display','block');
 		 $(".open_dog").css('display','none');
 		 $(".quickCat").addClass("active")
-		
+	
 		 })//click
 		
 		
 		
-		})
+		})//
+		
+		
+		/* 카테고리 	버튼 클릭시 상품 변경 */
+		
+/* 	 $(function(){
+    	$("button").on('click',function(){
+    			var kind = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var kind로 가져와서	
+    			$.ajax({
+    				 url : './index.do', // 이 주소로 
+    	              type : "get", // 포스트 방식으로 보내는데
+    	              cache: false,
+    	              headers: {"cache-control":"no-cache", "pragma": "no-cache"},
+    	              data : {"kind" : kind}, // kind를 kind로 명명하여 보내겠다
+    	              success : function(data){ 
+    	                 console.log(data);
+    	                
+    	                 $('body').html(data); //성공할시에 body부분에 data라는 html문장들을 다 적용시키겠다
+    	              },
+    	              error : function(data){
+    	            	 alert('error');
+    	               
+    	              }//error
+    			})//ajax
+    		});//click
+    });//ready */
+		
 		
 		</script>
 
@@ -102,6 +130,11 @@
 	      prevEl: ".swiPopCont .swiper-button-prev",
 	    },
 	});
+	
+	function search(){
+
+		location.href="search_prd_list.do"
+	}
 </script>
 <style>
 	/* .has_top_banner nav.lnb>.inr{top:182px} */
@@ -170,14 +203,14 @@
 			</div>
 			<div class="cdt" >
 						<div class="schs">
+						<form action="search_prd_list.do" method="get">
 								<div class="form ">
-									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
-									<button type="button" class="btnSch" data-content="" data-url="/commonSearch">검색</button>
-									
-									<!-- 자동완성 드롭박스 -->
-									<div class="key-word-list" id="key-word-list" style="display:none;"><ul></ul></div>
-									<!-- 자동완성 드롭박스 -->
+									<div class="input del kwd">
+									<input id="srchWord" name="productname"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." >
+									</div>
+									<button type="submit" class="btnSch" >검색</button>
 								</div>
+									</form>
 							</div>
 						<div class="menu">
 							
@@ -194,6 +227,16 @@
 
 		
 		
+		<script >
+			function setCateList(subid){
+				
+				location.href="prdList.do?subid="+subid
+				
+			}
+		
+		
+		</script>
+		
 
 
 
@@ -204,32 +247,33 @@
 		<nav class="menushop">
 			<h2 class="bt bt_store">스토어</h2>
 			<div class="button_wrap">
-			<button type="button" class="bt st bt_dog active">강아지</button>
-			<button type="button" class="bt st  bt_cat">고양이</button>
+			<button type="button" class="bt st bt_dog active" value="m0001">강아지</button>
+			<button type="button" class="bt st  bt_cat" value="m0002">고양이</button>
 		</div>
 
 				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
 								<ul class="sm">
-									<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">강쥐사료</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0001');"><b class="t">강쥐사료</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0002');"><b class="t">간식</b></a></li>
 								</ul>
 								<ul class="sm_2">
-									<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0003');"><b class="t">패션/의류</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0004');"><b class="t">기타</b></a></li>
 								 </ul> 
 				</li>
 
 				<li class="open open_cat" id="tab_category_12565" style="width:200px;display:none;">
 					<ul class="sm">
-						<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">냥이사료</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0005');"><b class="t">냥이사료</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0006');"><b class="t">간식</b></a></li>
 					</ul>
 					<ul class="sm_2">
-						<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0007');"><b class="t">패션/의류</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0008');"><b class="t">기타</b></a></li>
 					 </ul> 
 	</li>
 		</nav>
+		
 		<nav class="menushop"style="margin-right:20px;margin-top:30px;">
 			<h2 class="bt bt_my">MY</h2>
 		
@@ -599,7 +643,7 @@ var gogoSwiper = (function() {
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
-			<button class="btn-more" onclick="petShopMainResult.goCornerList('300000174','1257','1342','OnlyApet', undefined, petshopOnlyApetGoodsArrStr);return false;">전체보기</button>
+			<button class="btn-more" ><a href="mainList.do">전체보기</a></button>
 		</h3>
 			<div id="corner1257" class="wrap-gd-unit gd-sd gd-col-4 is-cart">
 			<div class="gd-unit swiper swiper-container-initialized swiper-container-horizontal swiper-container-multirow">
@@ -625,17 +669,17 @@ var gogoSwiper = (function() {
 								<div class="gd-body">
 										<span class="tit">${data.productname }</span>
 										<div class="wrap-price">
-						<span class="price"><em>${data.price }</em>원</span>
+						<span class="price"><em><fmt:formatNumber value="${data.price }" pattern="#,###"/></em>원</span>
 										</div>
 										</div>
-								<div class="gd-bottom">
-										<div class="rate">
+						 	<div class="gd-bottom">
+										 <div class="rate">
 
 					<span class="star">${data.starScoreAvg }</span>
 												<span class="review">후기 ${data.reviewcnt }</span>
-												</div>
+												</div>  
 										<div class="gd-flag">
-											</div>
+											</div> 
 								</div>
 						</div>
 				</a>

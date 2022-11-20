@@ -28,9 +28,9 @@
  
  <!--  상품후기 별점(상품코드)-->
  <select id="selectStarAvg" resultType="double"  parameterType="String">
-select ROUND(Avg(r.star_score),1)
+select round(nvl(avg(r.star_score),0),1) staravg 
 from product p,order_detail o, review r
-where p.productid=o.productid and o.order_detailid=r.order_detailid and p.productid=#{p.productid}
+where p.productid=o.productid(+) and o.order_detailid=r.order_detaili(+)d and p.productid=#{p.productid}
  
  </select>
  
@@ -41,7 +41,7 @@ where p.productid=o.productid and o.order_detailid=r.order_detailid and p.produc
  <select id="selectProductReview" resultMap="productReview" parameterType="String">
 select m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate
 from member m, orders o, order_detail od ,review r
-where m.id=o.id and o.orderid=od.orderid and od.order_detailid =  r.order_detailid and od.productid=#{od.productid}
+where m.id=o.id(+) and o.orderid=od.orderid(+) and od.order_detailid =  r.order_detailid(+) and od.productid=#{od.productid}
 
  
  

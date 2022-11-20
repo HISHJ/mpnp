@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.use.dao.mapper.ProductMapper">
+<mapper namespace="kr.co.mpnp.use.mapper.ProductMapper">
 <!-- resultType : 조회 결과 값을 저장하기 위한 데이터타입(데이터 하나에 대한 타입 지정)
        parameterType:전달받은 파라메터 데이터 타입 지정(선택적) select( 여기 들어가는거)
        domain과 setter명이 같아야함!!  
@@ -25,13 +25,13 @@
 
 
 <!-- 상품 중분류 리스트 코드 -->
-<select id="selectprdList" resultType="product"
-parameterType="kr.co.mpnp.user.vo.ProductVO">
+<select id="selectprdList" resultMap="prdResult" 
+parameterType="String">
 
-select p.name,p.price,p.th_img,o.productid,count(r.reviewid) as reviewcnt ,Avg(r.star_score)  as staravg
+select p.name,p.price,p.th_img,p.productid,round(nvl(avg(r.star_score),0),1) staravg , nvl(count(r.reviewid),0) reviewcnt
 from product p,order_detail o,review r
-where p.productid=o.productid and o.order_detailid=r.order_detailid and p.sub_id=#{p.sub_id}
-group by p.name,p.price,p.th_img,o.productid;
+where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.sub_id=#{p.sub_id}
+group by p.name,p.price,p.th_img,p.productid
 
 </select>
 
@@ -40,12 +40,20 @@ group by p.name,p.price,p.th_img,o.productid;
 <!-- 상품상세보기코드  -->
 <select id="selectPrddetail" resultMap="prdResult" parameterType="String">
 
-select p.name,p.price,p.th_img,p.info_img,p.status,o.productid,count(r.reviewid) as reviewcnt ,round(avg(r.star_score),1) staravg
+select p.name,p.price,p.th_img,p.info_img,p.status,p.productid,round(nvl(avg(r.star_score),0),1) staravg , nvl(count(r.reviewid),0) reviewcnt
 from product p,order_detail o,review r
-where p.productid=o.productid and o.order_detailid=r.order_detailid and o.productid=#{productid}
-group by p.name,p.price,p.th_img,o.productid,p.info_img,p.status
+where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.productid=#{p.productid}
+group by p.name,p.price,p.th_img,p.productid,p.info_img,p.status
 	
 </select>
+
+
+<!-- 상품 총 갯수  -->
+<select id="selectprdCnt" resultType="int" parameterType="String">
+select count(*) from product where sub_id=#{sub_id}
+
+</select>
+
 
 <!-- 장바구니 있는지 확인 코드 -->
 
@@ -70,10 +78,10 @@ values(#{id},#{productid})
 </insert>
 
 <!-- 장바구니 추가  : 장바구니코드 시퀀스 추가후 넣는걸로~~-->
-<!-- <insert id="insertWishList" parameterType="kr.co.mpnp.user.vo.CartVO">
-insert into cart(id,productid)
-values(#{id},#{productid})
-</insert> -->
+ <insert id="insertCart" parameterType="kr.co.mpnp.user.vo.ProductCartVO">
+insert into cart(cartid,id,productid,cartcnt,inputdate)
+values(concat('ca_',lpad(seq_cart.nextval,7,0)),#{id},#{productid},#{cartcnt},sysdate)
+</insert> 
 
 
 <!-- 찜 추가되어있으면 버튼 업데이트 -->

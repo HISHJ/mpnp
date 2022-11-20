@@ -11,6 +11,7 @@ import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.domain.ProductReviewDomain;
 import kr.co.mpnp.user.service.ProductReviewService;
 import kr.co.mpnp.user.service.ProductService;
+import kr.co.mpnp.user.vo.ProductCartVO;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -22,15 +23,22 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
-
+//상품중분류
 @RequestMapping(value="/prdList.do", method=GET)
-public String searchPrdList(String mainid,String subid) {
+public String searchPrdList(String subid,Model model) {
 	
-		
+	ProductService ps=new ProductService();
+	List<ProductDomain> list=ps.searchPrdList(subid);
+	int cnt =ps.searchPrdCnt(subid);
+	model.addAttribute("sub", list);
+	model.addAttribute("prdcnt", cnt);
+	System.out.println(subid);
+	
+	
 	return "user/product/prdList";
 }
 
-/* @PathVariable("productid") */
+//상품상세보기
 @RequestMapping(value="/prddetail.do", method=GET)
 public String searchPrdDetail(@RequestParam(value="productid")  String productid,HttpSession session,Model model) {
 	
@@ -49,8 +57,21 @@ public String searchPrdDetail(@RequestParam(value="productid")  String productid
 	
 	
 	return "user/product/productInfo2";
-}
+
+}//searchPrdDetail
+
+@RequestMapping(value="cart_insert.do",method=GET)
+public String addCart(ProductCartVO cVO,HttpSession session) {
+
+	//로그인 확인
 	
+	
+	//장바구니추가
+	ProductService ps=new ProductService();
+	int result = ps.addCart(cVO);
+	return result+" ";
+}
+
 
 
 	

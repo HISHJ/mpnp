@@ -22,20 +22,25 @@
 
 </resultMap>
 
+
 <!-- 대분류 조회  -->
  <select id="selectPrdList" resultMap="mainResult" parameterType="String">
- select p.name  ,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id,round(avg(r.star_score),1) starScoreAvg, count(r.reviewid) reviewcnt
+<!--  select p.name  ,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id
 from  product p,order_detail o,review r ,sub_category s
-where p.productid =o.productid and o.order_detailid=r.order_detailid and p.sub_id=s.sub_id and s.main_id=#{s.main_id}
-group by p.name,p.price,p.th_img,p.productid,p.sub_id,s.main_id
-order by productid 
- 
- </select> 
-<!--  -->
- <select id="selectStar" resultType="double" parameterType="String">
-select round(avg(r.star_score),1) starScoreAvg
-from product p,order_detail o, review r
-where p.productid=o.productid and o.order_detailid=r.order_detailid and p.productid=#{productid}
- </select>
+where p.productid =o.productid and o.order_detailid=r.order_detailid and p.sub_id=s.sub_id and s.main_id=#{s.main_id} -->
 
+select p.name,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id,p.inputdate,round(nvl(avg(r.star_score),0),1) starScoreAvg , nvl(count(r.reviewid),0) reviewcnt
+from  product p ,order_detail o, review r ,sub_category s
+where  p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and  p.sub_id = s.sub_id(+) and s.main_id=#{s.main_id}
+group by p.name,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id,p.inputdate
+order by p.inputdate desc
+
+ </select> 
+<!-- 대분류 상품 총 갯수  -->
+<select id="selectprdCnt" resultType="int" parameterType="String">
+select count(*)
+from product p, sub_category s 
+where p.sub_id=s.sub_id and s.main_id=#{s.main_id}
+
+</select>
  </mapper>

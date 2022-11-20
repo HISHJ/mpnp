@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+ <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -98,7 +99,7 @@
 				<button class="btnGnb" type="button">메뉴</button>
 <!-- -->
 				<h1 class="logo shop">
-					<a class="bt" href="javascript:goShopDeleteCookie();">AboutPet</a>
+					<a class="bt" href="index.do">AboutPet</a>
 				</h1>
 				<nav class="menushop">
 							<button type="button" class="bt st" id="headerTxt"></button>
@@ -189,9 +190,22 @@
 <!-- e : gnb 영역 -->			
 					<!-- s : LNB 영역 -->
 
+		<script >
+			function setCateList(subid){
+				
+				location.href="prdList.do?subid="+subid
+				
+			}
+		
+		
+		</script>
+		
+
+
+
 <nav class="lnb shop" id="lnb">
 	<div class="inr" style="width:220px;">
-		<nav class="menushop">
+			<nav class="menushop">
 			<h2 class="bt bt_store">스토어</h2>
 			<div class="button_wrap">
 			<button type="button" class="bt st bt_dog active">강아지</button>
@@ -200,23 +214,23 @@
 
 				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
 								<ul class="sm">
-									<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">강쥐사료</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0001');"><b class="t">강쥐사료</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0002');"><b class="t">간식</b></a></li>
 								</ul>
 								<ul class="sm_2">
-									<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0003');"><b class="t">패션/의류</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('s0004');"><b class="t">기타</b></a></li>
 								 </ul> 
 				</li>
 
 				<li class="open open_cat" id="tab_category_12565" style="width:200px;display:none;">
 					<ul class="sm">
-						<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">냥이사료</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0005');"><b class="t">냥이사료</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0006');"><b class="t">간식</b></a></li>
 					</ul>
 					<ul class="sm_2">
-						<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0007');"><b class="t">패션/의류</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('s0008');"><b class="t">기타</b></a></li>
 					 </ul> 
 	</li>
 		</nav>
@@ -342,7 +356,7 @@
 					<div class="inr" style="margin-bottom:10px;">
 						<div class="uioptsorts cates">
 							<div class="dx lt">
-								<div class="tot">총 <em class="n" id="goodsCount">8</em>개 상품</div>
+								<div class="tot">총 <em class="n" id="goodsCount">${prdcnt }</em>개 상품</div>
 							</div>
 							<!-- <div class="dx rt">
 								<nav class="filter">
@@ -374,14 +388,16 @@
 				</div>
 				<div id="sCateGoodsList" class="wrap-gd-unit gd-md gd-col-4 is-cart no-padding">
 					<div class="gd-unit">
-						<div class="inner"><script>
+						<div class="inner">
+<!-- <script>
 var goodsCount = '21';
 $('#goodsCount').text(goodsCount);
-</script>
+</script> -->
+<c:forEach var="list" items="${sub }">
 <div class="gd-item  amplitudeMainData airbridge" data-idx="0" data-index="1" data-goodsid="GI251033031" data-displayid="" data-displayname="" data-productid="GI251033031" data-productname="ANF 캣 홀리스틱 헬시 키튼 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033031" data-dispcornno="" data-disptype="10" data-idx="0" data-content="GI251033031" data-url="/goods/indexGoodsDetail?goodsId=GI251033031">
+		<a class="gd-link" href="prddetail.do?productid=${list.productid}" data-dispcornno="" data-disptype="10" data-idx="0" data-content="GI251033031" data-url="/goods/indexGoodsDetail?goodsId=GI251033031">
 			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033031/0c4c5fd2-dd1b-4ac6-adf9-0395e786966f.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="ANF 캣 홀리스틱 헬시 키튼 샘플 40g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+				<img class="thumb-img" src="http://localhost/mpnp/images/${list.thimg}.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="${list.productname }" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 				<div class="gd-flag">
 					</div>
 				<button class="btn-favorite " data-content="GI251033031" data-url="/goods/insertWish?goodsId=GI251033031" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033031" data-target="goods">찜하기</button>
@@ -394,15 +410,15 @@ $('#goodsCount').text(goodsCount);
 					<button class="btn-cart" data-goodsid="GI251033031" data-itemno="395860" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
 					</div>
 				<div class="gd-body">
-					<span class="tit">ANF 캣 홀리스틱 헬시 키튼 샘플 40g</span>
+					<span class="tit">${list.productname }</span>
 					<div class="wrap-price">
-						<span class="price"><em>500</em>원</span>
+						<span class="price"><em><fmt:formatNumber value="${list.price }" pattern="#,###"/></em>원</span>
 					</div>
 					</div>
 				<div class="gd-bottom">
 					<div class="rate">
-						<span class="star">4.8</span>
-							<span class="review">후기 118</span>
+						<span class="star">${list.staravg }</span>
+							<span class="review">후기 ${list.reviewcnt }</span>
 						</div>
 					<div class="gd-flag">
 						</div>
@@ -410,228 +426,8 @@ $('#goodsCount').text(goodsCount);
 				</div>
 		</a>
 	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="1" data-index="2" data-goodsid="GI251033016" data-displayid="" data-displayname="" data-productid="GI251033016" data-productname="ANF 유기농 6Free 인도어 캣 어덜트 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033016" data-dispcornno="" data-disptype="10" data-idx="1" data-content="GI251033016" data-url="/goods/indexGoodsDetail?goodsId=GI251033016">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033016/9db14129-4693-4e69-bcf5-469dcfb11ab9.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="ANF 유기농 6Free 인도어 캣 어덜트 샘플 40g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251033016" data-url="/goods/insertWish?goodsId=GI251033016" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033016" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251033016" data-itemno="395845" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251033016" data-itemno="395845" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">ANF 유기농 6Free 인도어 캣 어덜트 샘플 40g</span>
-					<div class="wrap-price">
-						<span class="price"><em>500</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">4.8</span>
-							<span class="review">후기 51</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="2" data-index="3" data-goodsid="GI251064540" data-displayid="" data-displayname="" data-productid="GI251064540" data-productname="퓨리나 원 캣 키튼 치킨 샘플 50g" data-brandid="677" data-brandname="퓨리나" data-categorypath="" data-price="3000" data-discountprice="1000" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251064540" data-dispcornno="" data-disptype="10" data-idx="2" data-content="GI251064540" data-url="/goods/indexGoodsDetail?goodsId=GI251064540">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251064540/f6fa4b01-e210-4eaf-a5e7-c962bdecb9d1.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="퓨리나 원 캣 키튼 치킨 샘플 50g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251064540" data-url="/goods/insertWish?goodsId=GI251064540" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251064540" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251064540" data-itemno="427339" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251064540" data-itemno="427339" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">퓨리나 원 캣 키튼 치킨 샘플 50g</span>
-					<div class="wrap-price">
-							<span class="price"><em>1,000</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">5.0</span>
-							<span class="review">후기 1</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="3" data-index="4" data-goodsid="GI251033011" data-displayid="" data-displayname="" data-productid="GI251033011" data-productname="ANF 유기농 6Free 인도어 캣 키튼 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033011" data-dispcornno="" data-disptype="10" data-idx="3" data-content="GI251033011" data-url="/goods/indexGoodsDetail?goodsId=GI251033011">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033011/9b8bfe10-ff27-471f-9347-e4a11fe7f5ce.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="ANF 유기농 6Free 인도어 캣 키튼 샘플 40g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251033011" data-url="/goods/insertWish?goodsId=GI251033011" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033011" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251033011" data-itemno="395840" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251033011" data-itemno="395840" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">ANF 유기농 6Free 인도어 캣 키튼 샘플 40g</span>
-					<div class="wrap-price">
-						<span class="price"><em>500</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">4.9</span>
-							<span class="review">후기 54</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="4" data-index="5" data-goodsid="GI251033017" data-displayid="" data-displayname="" data-productid="GI251033017" data-productname="ANF 유기농 6Free 인도어 캣 웨이트케어 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033017" data-dispcornno="" data-disptype="10" data-idx="4" data-content="GI251033017" data-url="/goods/indexGoodsDetail?goodsId=GI251033017">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033017/4d321c40-3a00-4cb5-bec0-f0a8a0b3c8cc.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="ANF 유기농 6Free 인도어 캣 웨이트케어 샘플 40g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251033017" data-url="/goods/insertWish?goodsId=GI251033017" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033017" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251033017" data-itemno="395846" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251033017" data-itemno="395846" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">ANF 유기농 6Free 인도어 캣 웨이트케어 샘플 40g</span>
-					<div class="wrap-price">
-						<span class="price"><em>500</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">4.8</span>
-							<span class="review">후기 88</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
+</c:forEach>
 
-<div class="gd-item  amplitudeMainData airbridge" data-idx="9" data-index="10" data-goodsid="GI251064538" data-displayid="" data-displayname="" data-productid="GI251064538" data-productname="퓨리나 원 캣 성묘용 연어&amp;참치 샘플 50g" data-brandid="677" data-brandname="퓨리나" data-categorypath="" data-price="3000" data-discountprice="1000" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251064538" data-dispcornno="" data-disptype="10" data-idx="9" data-content="GI251064538" data-url="/goods/indexGoodsDetail?goodsId=GI251064538">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251064538/65bf01c1-b58d-4eb3-a029-2c2185ccd798.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="퓨리나 원 캣 성묘용 연어&amp;참치 샘플 50g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251064538" data-url="/goods/insertWish?goodsId=GI251064538" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251064538" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251064538" data-itemno="427337" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251064538" data-itemno="427337" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">퓨리나 원 캣 성묘용 연어&amp;참치 샘플 50g</span>
-					<div class="wrap-price">
-							<span class="price"><em>1,000</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">4.5</span>
-							<span class="review">후기 2</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="10" data-index="11" data-goodsid="GI251033646" data-displayid="" data-displayname="" data-productid="GI251033646" data-productname="위시본 양고기 캣 샘플 40g" data-brandid="1070" data-brandname="위시본" data-categorypath="" data-price="1000" data-discountprice="1000" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033646" data-dispcornno="" data-disptype="10" data-idx="10" data-content="GI251033646" data-url="/goods/indexGoodsDetail?goodsId=GI251033646">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033646/7a69c14f-66e9-4b09-847a-f97e86291e6e.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="위시본 양고기 캣 샘플 40g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251033646" data-url="/goods/insertWish?goodsId=GI251033646" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033646" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251033646" data-itemno="396475" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251033646" data-itemno="396475" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">위시본 양고기 캣 샘플 40g</span>
-					<div class="wrap-price">
-						<span class="price"><em>1,000</em>원</span>
-					</div>
-					</div>
-				</div>
-		</a>
-	</div>
-<div class="gd-item  amplitudeMainData airbridge" data-idx="11" data-index="12" data-goodsid="GI251033029" data-displayid="" data-displayname="" data-productid="GI251033029" data-productname="HALO 키튼 연어&amp;흰살생선 샘플 50g" data-brandid="699" data-brandname="HALO" data-categorypath="" data-price="1000" data-discountprice="1000" data-petgbcd="">
-		<a class="gd-link" href="/goods/indexGoodsDetail?goodsId=GI251033029" data-dispcornno="" data-disptype="10" data-idx="11" data-content="GI251033029" data-url="/goods/indexGoodsDetail?goodsId=GI251033029">
-			<div class="gd-thumb">
-				<img class="thumb-img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251033029/2500562_detail_021.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="HALO 키튼 연어&amp;흰살생선 샘플 50g" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
-				<div class="gd-flag">
-					</div>
-				<button class="btn-favorite " data-content="GI251033029" data-url="/goods/insertWish?goodsId=GI251033029" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033029" data-target="goods">찜하기</button>
-				<button class="btn-cart" data-goodsid="GI251033029" data-itemno="395858" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-				</div>
-			<div class="gd-info">
-				<div class="gd-top">
-					<div class="gd-flag">
-						</div>
-					<button class="btn-cart" data-goodsid="GI251033029" data-itemno="395858" data-reservationtype="" data-reservationstrtdtm="" data-ordmkiyn="" data-minordqty="1" data-goodscstrttpcd="ITEM">장바구니 담기</button>
-					</div>
-				<div class="gd-body">
-					<span class="tit">HALO 키튼 연어&amp;흰살생선 샘플 50g</span>
-					<div class="wrap-price">
-						<span class="price"><em>1,000</em>원</span>
-					</div>
-					</div>
-				<div class="gd-bottom">
-					<div class="rate">
-						<span class="star">4.5</span>
-							<span class="review">후기 5</span>
-						</div>
-					<div class="gd-flag">
-						</div>
-				</div>
-				</div>
-		</a>
-	</div>
-
-
-</div>
-					</div>
-				</div>
 			</section>
 			</div>
 	</div>

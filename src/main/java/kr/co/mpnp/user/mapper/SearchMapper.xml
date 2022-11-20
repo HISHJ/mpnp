@@ -10,26 +10,28 @@
 	<result column="productid" property="productid"/>
 	<result column="name" property="productname"/>
 	<result column="status" property="status"/>
+	<result column="price" property="price"/>
+	<result column="th_img" property="thimg"/>
 	
 </resultMap>
 
 
 <!-- 검색결과 총 갯수-->
 
-<select id= "selectTotalCnt " resultType="int" parameterType="String">
+<select id= "selectTotalCnt" resultType="int" parameterType="String">
 
 select count(productid) cnt from product
 where
-name like '%'||#{name}||'%'
+name like '%'||#{keyword}||'%'
 
 </select>
 
 <!-- 검색결과 -->
-<select id ="searchPrd" resultType="Search" parameterType="String">
+<select id ="searchPrd" resultMap="shResult" parameterType="String">
 
-select productid,name,price
+select productid,name,price,th_img
 from product
-where name like replace(name,' ','') like '%'||?||'%'
+where replace(name,' ','') like '%'||#{name}||'%'
 
 
 </select> 
