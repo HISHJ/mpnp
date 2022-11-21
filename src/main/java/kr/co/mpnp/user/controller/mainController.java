@@ -19,16 +19,15 @@ public class mainController {
 	//메인화면
 	@RequestMapping(value="/index.do", method=GET)
 	public String main(HttpSession session,Model model,String mainid ) {
+	
 		
-		
-		
+		session.setAttribute("id", "id002");
 		 MainService ms = new MainService(); 
 		 List<MainDomain> list =
 		 ms.searchPrdList("m0001"); 
 
-		 model.addAttribute("prdList",list);
-		 
-		
+		model.addAttribute("prdList",list);
+		System.out.println(session.getAttribute("id"));
 		return"user/main/index";
 	}
 	

@@ -227,7 +227,11 @@
               
                 <!-- 상품명 -->
                 <div class="names">${data.productname }</div>
-  
+  				<input type="hidden" id="productid" value="${data.productid }"/>
+  				<!--로그인 했을때 id  -->
+  				<c:if test="${not empty id }">
+  				<input type="hidden" id="id" value="${id }"/>
+  				</c:if>
                 <!-- 후기 평점 -->
                 <div class="starpoint">
                     <span class="stars sm p_4_5"></span>
@@ -290,7 +294,7 @@
 
             </div>
   <!-- 배송 추가 정보 -->
-    <div class="deliguides">
+<!--     <div class="deliguides">
       <ul class="gdlist">
                 <li class="dl1" style="">
                   <div class="ht">당일배송</div>
@@ -301,14 +305,10 @@
                 </li>
                 
               </ul>
-            </div>
+            </div> -->
   
     <!-- 사전예약상품일 때 ends -->
-  
-    <input type="hidden" id="areaType" value="">
-    <input type="hidden" id="tempDlvrSelectId" value="">
-    <input type="hidden" id="tempDlvrStartId" value="">
-    <input type="hidden" id="tempMbrDlvraNo" value=""></div>
+</div>
                 <!-- APETQA-7511 일반정책 미등록 시 취소/교환/환불 영역 비노출 -->
                 <div class="gifts return_info" style="">
                   <div class="tit">주문 취소 안내</div>
@@ -478,16 +478,16 @@
         <div class="pnt">${data.staravg }</div>
         <div class="sta starpoint"><span class="stars p_4_5"></span></div>
       </div>
-     >
+     
       <div class="ptlit">
         <ul class="plist">
           <li class="act">
-          <c:forEach var="slist" items="${slist }">
+     <%--      <c:forEach var="slist" items="${slist }">
             <span class="pnt"><b class="p">${slist.starscore }</b><i class="w">점</i></span>
    	<!-- 	    <span class="gage"><em class="bar" style="width: 78.94736842105263%;"></em></span>  -->
             <span class="pct"><b class="p">${slist.totalpeople }</b><i class="w">명</i></span>
             </c:forEach>
-          </li>
+          </li> --%>
          
           </ul>
       </div>
@@ -574,14 +574,7 @@
               <!-- // 작성자 기본정보  -->
               <!-- 수정/삭제 메뉴 -->
               <!-- 로그 후기 -->
-                  <form id="updateForm377692">
-                    <input type="hidden" name="goodsId" value="GI251050011">
-                    <input type="hidden" name="ordNo" value="">
-                    <input type="hidden" name="ordDtlSeq" value="">
-                    <input type="hidden" name="goodsEstmTp" value="PLG">
-                    <input type="hidden" name="goodsEstmNo" value="591871">
-                     <input type="hidden" name="petLogNo" value="377692">
-                  </form>
+              
                   <nav class="uidropmu dmenu">
                     <button type="button" class="bt st gb" name="menuBtn">	<span class="material-symbols-outlined">
 									expand_more
@@ -729,20 +722,6 @@
       <div class="cdtwrap" style="max-height: 548.8px;">
 
 
-<script>
-
-$(function(){
-	
-	
-	var productcnt=document.getElementByld("buyQty412810")
-	var price = ${data.price}*productcnt
-	document.getElementByld("emPriceTotalAmtItem,p")=price
-	
-	
-});
-
-
-</script>
 
  
   
@@ -776,24 +755,12 @@ $(function(){
     </div>
     
    
-  <script>
-    $(function(){
 
-
-
-    });
-    </script>
     
  
   </div>
   
-  <script>
- /*찜하기 구현 */
-  
-  
-  
-  </script>
-  
+
   
       <div class="tots">
         <div class="inr">
@@ -839,7 +806,7 @@ $(function(){
       <div class="btns">
         <!-- 스탬프 상품은 찜하기 불가 -->
         <div class="zims">
-            <button type="button" class="bt btZZim " id="goodsWish" onclick="saveWish()"><span class="t"><span class="material-symbols-outlined">
+            <button type="button" class="bt btZZim " id="goodsWish" ><span class="t"><span class="material-symbols-outlined">
               bookmark
               </span></span></button><!-- .on class명 있으면 찜한 상태임 -->
           </div>
@@ -847,14 +814,108 @@ $(function(){
         <div class="obts">
           <!-- 사전예약 상품이 아니면 -->
               <!-- 스탬프 상품은 장바구니 없음 -->
-                <button type="button" class="bt btCart" onclick="fnCartItems('N')"><span class="t">장바구니</span></button>
+                <button type="button" class="bt btCart" id="addCart_btn"><span class="t">장바구니</span></button>
               <!-- 판매가능 -->
                 <!-- 판매가능 -->
-                    <button type="button" class="bt btOrde" onclick="fnCartItems('Y')"><span class="t">구매하기</span></button>
+                    <button type="button" class="bt btOrde" id="addBuy_btn"><span class="t">구매하기</span></button>
                     </div>
       </div>
     </div>
   </nav>
+  
+  <script>
+  
+  //장바구니 추가-> 1번클릭했을때는 창을 띄우고 2번째 클릭했을때 장바구니 추가 되어야함(수정)
+  
+  
+  $("#addCart_btn").dblclick(function(){
+
+	 var cartcnt = $("#buyQty412810").val();
+	 var id = $("#id").val();
+ 	 var data={
+			  cartcnt : cartcnt,
+			  productid : "${data.productid}",
+			  id:id
+	 	};
+  
+  console.log(data);
+   
+	  $.ajax({
+		 
+		  url :"cart_insert.do",
+		  type:"post",
+		  data : data,
+		  success : function(result){
+			  if(result.equals("0")){
+					 alert("result 0 : 잠시후에 다시 시도해주세요") ;
+				  }else if(result.eqauls("1")){
+					  alert("장바구니에 추가되었습니다.");
+				  }else if(result.equals("2")){
+					  alert("장바구니에 이미 추가되었습니다.");
+				  }else{
+					  alert("로그인 후에 시도해주세요.")
+				  }
+			 console.log(result);
+		  },
+		  error : function(){
+			  alert(" error : 잠시후 다시 시도해주세요.");
+		  }
+		  
+		  
+	  }); //ajax
+	  
+
+	  
+	  
+  });//addCart
+</script>
+<script>
+  
+	$("#goodsWish").click(function(){
+	
+	  var productid=$("#productid").val();
+	  var id=$("#id").val();
+	  
+  	var data={
+  			id : id,
+  			productid : productid
+  	
+  	};//data
+  	
+  	console.log(data);
+ $.ajax({
+  			url : "addWish.do",
+  			type:"post",
+  			data : data,
+  			success : function(result){
+  				 if(result.equals("1")){
+	  					alert("찜리스트에 추가되었습니다.");
+				  }else if(result.equals("-1")){
+					  alert("로그인 후에 사용해주세요.");
+				  }else if(result.equals("2")){
+					  alert("이미 추가되었습니다.!") ;
+				  }
+				  
+  				 console.log(result);
+  			},
+  			error : function(result){
+  				
+  				alert("잠시후에 다시 시도해주세요.")
+  			
+  			}
+  			
+
+	});//jax
+  
+	});//add
+	  
+  
+  
+  
+  
+
+	 
+  </script>
   <script type="text/template" id="relatedGoodsDetailWrap">
     <div class="commentBoxAp type01 handHead popconTingBox pop-relation-box uiPdOrdPan ton tabMode bodylock" style="bottom:-100%;" data-priceh="60%" id="goodsRelatedBottomSheet">
       <!-- tabMode 클래스 추가 시 : 탭해더 부분 display:block ; // backMode 클래스 추가 시 : 뒤로가기 버튼 display:block -->
@@ -982,19 +1043,7 @@ $(function(){
 
   
   </style>
-  <script>
-    	//신고 팝업창 
-		$(function() {
-			$(".bt_warn").click(function() {
-				$('.popLayers').bPopup();
-			})
 
-			// $(".close").click(function() {
-			// 	window.location.reload();
-			// })
-
-		})
-  </script>
 
             
             

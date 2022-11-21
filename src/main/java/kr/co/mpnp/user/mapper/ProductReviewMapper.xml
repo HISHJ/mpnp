@@ -46,8 +46,8 @@ where m.id=o.id(+) and o.orderid=od.orderid(+) and od.order_detailid =  r.order_
  
  
  </select>
-  <!-- 상품후기 별점 인원수 -->
- <select id="selectStarCnt"  resultType="int[]" parameterType="String">
+   <!-- 상품후기 별점 인원수 -->
+ <select id="selectStarCnt"  resultType="int" parameterType="String">
 select r.star_score, count(r.star_score) totalpeople
 from review r,order_detail od, product p
 where p.productid =od.productid and od.order_detailid=r.order_detailid  and p.productid=#{p.productid}
@@ -56,7 +56,7 @@ group by star_score
  
  
  </select>
- 
+  
 
  
  </mapper>

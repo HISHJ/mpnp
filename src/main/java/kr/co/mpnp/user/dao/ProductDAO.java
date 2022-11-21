@@ -6,6 +6,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.handler.MyBatisHandler;
+import kr.co.mpnp.user.domain.CartDomain;
 import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.vo.CartVO;
 import kr.co.mpnp.user.vo.ProductCartVO;
@@ -98,25 +99,96 @@ private static ProductDAO pDAO;
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}
-		
+		//3.연결끊기
+		mbh.closeHandler(ss);
 		
 		
 		return cnt;
 	}
 	
+	//장바구니목록에 들어가있는지 확인
+	public int  checkCart(ProductCartVO cVO) {
+		
+		//1.MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		int check=0;
+		try {
+		check=	ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectConfirmCart",cVO);
+		
+			ss.commit();
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		//3.연결끊기
+		mbh.closeHandler(ss);
+		
+		return check;
+	
+		
+	}
+	
+	//찜추가
+	public int insertWishList(ProductCartVO cVO) {
+		int cnt=0;
+		//1.MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		try {
+			cnt=ss.insert("kr.co.mpnp.use.mapper.ProductMapper.insertWishList",cVO);
+			ss.commit();
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		//3.연결끊기
+		mbh.closeHandler(ss);
+		
+		
+		return cnt;
+	}
+	
+	//찜 여부
+	public int  checkWish(ProductCartVO cVO) {
+		
+		//1.MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		int check=0;
+		try {
+		check=	ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectConfirmWish",cVO);
+		
+			ss.commit();
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		//3.연결끊기
+		mbh.closeHandler(ss);
+		
+		return check;
+	
+		
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		
 		ProductDAO pDAO= new ProductDAO();
-		ProductCartVO cVO = new ProductCartVO("p0003", "id001", 2);
+		ProductCartVO cVO = new ProductCartVO();
+		cVO.setId("id002");
+		cVO.setProductid("p0001");
+	
+		//System.out.println(pDAO.checkCart(cVO));
+		//System.out.println(pDAO.insertWishList(cVO));
 		
-		// mDAO.selectProductList("m0001"); 
 		 
 	
 		// System.out.println(mDAO.selectPrdList("m0001")); 
-System.out.println(pDAO.selectPrdDetail("p0001"));
-System.out.println(pDAO.selectprdList("s0001"));
-System.out.println(pDAO.selectprdCnt("s0001"));
-System.out.println(pDAO.insertCart(cVO));
+//System.out.println(pDAO.selectPrdDetail("p0001"));
+//System.out.println(pDAO.selectprdList("s0001"));
+//System.out.println(pDAO.selectprdCnt("s0001"));
+
+
 
 
 		

@@ -8,7 +8,7 @@
        domain과 setter명이 같아야함!!  
  -->
  
- <resultMap type="product" id="prdResult">
+ <resultMap type="productDomain" id="prdResult">
 	<result column="productid" property="productid"/>
 	<result column="name" property="productname"/>	
 	<result column="price" property="price"/>	
@@ -57,28 +57,28 @@ select count(*) from product where sub_id=#{sub_id}
 
 <!-- 장바구니 있는지 확인 코드 -->
 
-<select id="selectConfirmCart" resultType="boolean" parameterType="kr.co.mpnp.user.vo.ProductVO">
-select id,productid
+<select id="selectConfirmCart" resultType="int" parameterType="productCartVO" >
+select count(*)
 from cart
 where id=#{id} and productid=#{productid}
 </select>
 
 <!-- 찜여부 -->
-<select id="selectConfirmWish"  resultType="boolean" parameterType="kr.co.mpnp.user.vo.ProductVO">
-select id,productid
+<select id="selectConfirmWish" resultType="int" parameterType="productCartVO">
+select count(*)
 from wish
 where id=#{id} and productid=#{productid}
 </select>
 
 
 <!-- 찜추가 -->
-<insert id="insertWishList" parameterType="kr.co.mpnp.user.vo.ProductVO">
-insert into wish(id,productid)
-values(#{id},#{productid})
+<insert id="insertWishList" parameterType="productCartVO">
+insert into wish(id,productid,inputdate)
+values(#{id},#{productid},sysdate)
 </insert>
 
 <!-- 장바구니 추가  : 장바구니코드 시퀀스 추가후 넣는걸로~~-->
- <insert id="insertCart" parameterType="kr.co.mpnp.user.vo.ProductCartVO">
+ <insert id="insertCart" parameterType="productCartVO">
 insert into cart(cartid,id,productid,cartcnt,inputdate)
 values(concat('ca_',lpad(seq_cart.nextval,7,0)),#{id},#{productid},#{cartcnt},sysdate)
 </insert> 
