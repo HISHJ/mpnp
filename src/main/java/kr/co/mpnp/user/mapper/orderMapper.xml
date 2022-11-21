@@ -105,17 +105,17 @@ values(concat('or_',lpad(seq_orders.nextval,7,0)),#{id},#{shipReq},to_char(sysda
 주문코드는 orderVO에 저장하고자 하는데.. 여기서 MyOderVO를 써버리면,..
 조회된 주문코드는 두 곳에 저장해놔야 하는건가..... -->
 <!--주문상세 추가할 때 카트아이디가 null이면 ""을 변수에 담아 추가시키자 -->
-<insert id="insertOrderDetail"  parameterType="MyOrderVO">
+<insert id="insertOrderDetail"  parameterType="OrderVO">
 insert into ORDER_DETAIL(ORDER_DETAILID, TOTALCNT, ORDERID, PRODUCTID,CARTID)
- values(concat('od_',lpad(seq_order_detail.nextval,7,0)),#{totalPrdCnt},#{orderId},#{prdtId},#{cartID})
+ values(concat('od_',lpad(seq_order_detail.nextval,7,0)),#{totalPrdCnt},#{orderId},#{prdId},#{cartId, jdbcType=VARCHAR})
 </insert>
 
 
 
 <!-- 배송지 추가 -->
 <insert id="insertShipAddr" parameterType="OrderVO">
-insert into DESTINATION(DESID, ID, NAME, RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, DEFAULT_FLAG)
- values(concat('de_',lpad(seq_destination.nextval,7,0)) ,#{id},#{ship_name},#{receiver},#{receiver_phone},#{zipcode},#{addr},#{addrDetail},#{deafaultFlag})
+insert into DESTINATION(DESID, ID,  RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, DEFAULT_FLAG,NAME)
+ values(concat('des_',lpad(seq_destination.nextval,6,0)) ,#{id},#{receiver},#{receiver_phone},#{zipcode},#{addr},#{addrDetail},#{defaultFlag, jdbcType=VARCHAR},#{ship_name})
 </insert>
 
 <!-- 주문완료내역 조회(여러 상품 중 하나만 나와야하니까 상품코드도 받아야 해 -->

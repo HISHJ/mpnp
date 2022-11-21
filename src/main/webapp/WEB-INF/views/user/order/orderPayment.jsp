@@ -48,7 +48,7 @@ li.open, div.ctset {
     border-radius: 10px 10px 30px 10px;
 }
 
-#memberZipCd,#memberAddr1,#memberAddr2{
+#memberZipCd,#memberAddr1,#memberAddr2,#memberAddr3,#receiver_phone,#receiver,#ship_name{
     display: block;
     width: 100%;
     padding: 13px 10px 13px 10px !important;;
@@ -88,8 +88,6 @@ li.open, div.ctset {
 
 	</style>
 <script>
-   //우편번호
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 /* 우편번호시작 API */
 			 function execDaumPostcode() {
 			        new daum.Postcode({
@@ -129,14 +127,16 @@ li.open, div.ctset {
 </script>
 <script>
 //결제하기 유효성 검사
-	$(function(){
-		$(".btnBill").click(function(){
-		//	check();
-		})//end click
-		
-	})
+		$(function(){
+			$(".btnBill").click(function(){
+				//alert("야 안돼?")
+				check();
+			})//end click
+		})//end ready
+
 	
 		 function check(){
+		// addPrd();
 		
 			var zipcode=$("#memberZipCd").val();
 			if(zipcode.trim()==""){
@@ -152,8 +152,6 @@ li.open, div.ctset {
 				$("#memberAddr1").focus();
 				return ;
 			}//addr2
-			
-			
 
 			var addr2=$("#memberAddr2").val();
 			if(addr2.trim()==""){
@@ -197,13 +195,92 @@ li.open, div.ctset {
 				
 			}//perChk
 			
-			if(confirm("결제하시겠습니까?")){
+	       if(confirm("결제하시겠습니까?")){
+	    	   product_submit();
 				$("#orderFrm").submit();
 				
 			}//confirm
+			
+			//submitPrdArry();
+		
 				
 			}//check
-</script>	
+</script>
+				<script type="text/javascript">
+					  $(function(){
+						var form_data = ""; //히든으로 넣을 공간
+						var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+						var priceArr = new Array();
+						//상품의 개별 총 가격 배열에 넣기
+					  $(".totalPrice_info").each(function(i,element){
+						 var price = $(element).find("#totalP").val()*1;
+						 priceArr.push(price);
+					  })//en each
+					 
+					  //상품 총 합계 구하기
+					  var sum = 0;
+					  priceArr.forEach((item)=>{
+						  sum += item;
+					  });//end forEach
+					  
+					  
+					  //할인액 구하기
+					  //할인율 가져오기
+					  var rate = ($("#discount_rate").val()*1)/100;
+					  //해당 상품에 적용되는 할인 액
+					  var rate_price = sum * rate;
+					  
+					
+					  //총 결제금액 구하기
+					  var deli_fee = 2500;
+					  
+					   var actual_price;
+					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
+						  deli_fee = 0;
+					  } //end if
+				
+					  actual_price = sum - rate_price -deli_fee ; 
+					 
+					  
+					  //숫자에 단위 넣기
+					  const rate_ = rate_price.toString()
+                      .replace(expression, ","); //할인금액
+					  const total_pri = actual_price.toString()
+                      .replace(expression, ","); //상품 총가격
+					  const cn1 = sum.toString()
+                      .replace(expression, ","); // 총 결제금액
+					  const ship_fee = deli_fee.toString()
+                      .replace(expression, ","); // 배송비
+                     
+					  $(".totalProductPrice").html(total_pri); //상품 총 금액
+					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
+					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
+					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
+					  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+					  
+					 $('#actualPrice').attr("value",sum);
+					 $('#discountPrice').attr("value",rate_price);
+					 $('#totalPrice').attr("value",actual_price);
+					 
+					  })//reay
+					</script>
+					<script>
+					//전화번호 하이픈
+					const autoHyphen2 = (target) => {
+						 target.value = target.value
+						   .replace(/[^0-9]/g, '')
+						  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+						}
+					
+					//기본배송지 값 설정(안됨..)
+				  $(function(){
+					  if(document.getElementById("defaultFlag").checked) {
+						    document.getElementById("input_check_hidden").disabled = true;
+						}
+					  
+				  })
+					</script>
+
 </head>
 
 <body class="body">
@@ -309,34 +386,83 @@ li.open, div.ctset {
 			</div>
 		</div>
 	</div>
+	         <!-- 상품 hidden -->
+         <c:forEach  items="${opvo}" var="op">
+         <div class="prd_hid">
+		 <input type="hidden" class="indi_prdId"  id="prdId" name="prdId" value="${op.prdId}">			
+		 <input type="hidden" class="indi_prdName" id="prdName" name="prdName"  value="${op.prdName}">			
+		 <input type="hidden" class="indi_prdPrice" id="prdPrice" name="prdPrice"   value="${op.prdPrice}">			
+		 <input type="hidden" class="indi_prdCnt" id="prdCnt" name="prdCnt"  value="${op.prdCnt}">	
+		 <input type="hidden" class="indi_cartId"  id="cartId" name="cartId"   value="${op.cartId}">	
+         </div>
+		</c:forEach>
+         <!--  -->
+         <form id="test" name="test" action="orderPayment_process.do">
+         
+         </form>
+	
+	<script type="text/javascript">
+	
+	
+		 function product_submit(){
+		
+			var form_contents = "";
+			var orderNumber = 0;
+			
+			
+			//hidden 동적 추가
+			$(".prd_hid").each(function(i, element){
+			
+				var cartId = $(element).find(".indi_cartId").val(); //카트 아이디
+				var prdId= $(element).find(".indi_prdId").val()
+				var prdCnt = $(element).find(".indi_prdCnt").val() ; //상품 수량
+				var prdPrice = $(element).find(".indi_prdPrice").val() ;  // 상품가격 
+				var prdName =$(element).find(".indi_prdName").val()  //상품명
+				
+				var cartId_Input  = "<input name='orders["+ orderNumber  +"].cartId' type='hidden' value='" + cartId+"'>"; 
+				form_contents += cartId_Input;
+			 	var prd_id_Input  = "<input name='orders["+ orderNumber  +"].prdId' type='hidden' value='" + prdId+"'>"; 
+				form_contents += prd_id_Input;
+				var prdCnt_Input  = "<input name='orders["+ orderNumber  +"].prdCnt' type='hidden' value='" +prdCnt+"'>"; 
+				form_contents += prdCnt_Input;
+				var price_Input  = "<input name='orders["+ orderNumber  +"].prdPrice' type='hidden' value='" + prdPrice+"'>"; 
+				form_contents += price_Input;  
+				var name_Input  = "<input name='orders["+ orderNumber  +"].prdName' type='hidden' value='" + prdName+"'>"; 
+				form_contents += name_Input;  
+				
+				orderNumber += 1;
+			
+			});//end cart Info
+			
+			$("#productArea").html(form_contents);
+			
+			}//end function
+			
+
+	</script>
+	
 
 	<div class="inr" style="min-height: 357px;">
 
 
+
 <!--본문  -->
 
-		<!-- 상품정보 -->
-		<c:forEach  items="${opvo}" var="op">
-		<div class="product_info_div">
-		 <input type="hidden" class="indi_prdId"  value="${op.prdId}">			
-		 <input type="hidden" class="indi_prdName"  value="${op.prdName}">			
-		 <input type="hidden" class="indi_prdPrice" value="${op.prdPrice}">			
-		 <input type="hidden" class="indi_prdCnt"  value="${op.prdCnt}">			
-		</div>
-		</c:forEach>
+
+		
 		
 		<!-- 주문정보 넘기기 -->
 		<form action="orderPayment_process.do" id="orderFrm" name="orderFrm">
 
-					<input type="hidden" name="memberName" id="memberName" value="${orDom.memberName}">
-                    <input type="hidden" name="phone" id="phone" value="${orDom.phone}"> 
+		    <input type="hidden" name="memberName" id="memberName" value="${orDom.memberName}">
+            <input type="hidden" name="phone" id="phone" value="${orDom.phone}"> 
+        
+        <div id="productArea">
+        
+        
+        </div>
                     
-                     <input type="hidden" name="ship_name" id="ship_name" value=""> 
-                     
-                     <input type="hidden" name="receiver" id="receiver" value=""> 
-                     <input type="hidden" name="receiver_phone" id="receiver_phone" value=""> <input type="hidden" name="actualPrice" id="actualPrice" value="">
-
-
+                   
 
 			
 		<!-- 끝 -->
@@ -385,12 +511,23 @@ li.open, div.ctset {
 									</li>
 									<li class="clearfix a2">
 										<span class="l">
-											<!-- <label for="memberAddr1" class="hide">주소</label> -->
 											<input type="text" name="addr" id="memberAddr1" placeholder="주소" readonly />
 										</span>
 										<span class="r">
-											<!-- <label for="memberAddr2" class="hide">나머지 주소</label> -->
 											<input type="text" name="addrDetail" id="memberAddr2"  placeholder="상세주소를 입력하세요" value="" class="long" />
+										</span>
+										<span class="r">
+											<div class="dt">배송지 별칭 지정</div>
+											<input type="text" name="ship_name" id="ship_name" maxlength="6" placeholder="배송지 별칭을 지정해주세요 ex) 집" value="" style="width:280px;"/>
+										</span>
+									</li>
+									<div class="dt">받는 사람</div>
+									<li class="clearfix a3"  style="display: flex; flex-direction: column;">
+										<span class="l">
+											<input type="text" name="receiver" id="receiver" placeholder="수령인"  />
+										</span>
+										<span class="r">
+											<input type="text" oninput="autoHyphen2(this)" maxlength="13" name="receiver_phone" id="receiver_phone"  placeholder="수령인 번호" value="" class="long" />
 										</span>
 									</li>
 								</ul>
@@ -414,27 +551,36 @@ li.open, div.ctset {
 								</div>
 							
 								<div class="saves">
-									<div class="pp"><label class="checkbox"><input type="checkbox" id="deafaultFlag" name="deafaultFlag" checked="" value="O"><span class="txt"><em class="tt">기본 배송지로 설정</em></span></label></div>
+									<div class="pp"><label class="checkbox"><input type="checkbox" id="defaultFlag" name="defaultFlag" checked value="O">
+															<input type="hidden" name="defaultFlag" value='X'  id="input_check_hidden"/>
+									<span class="txt"><em class="tt">기본 배송지로 설정</em></span>
+															
+									</label></div>
+
 								</div>
 							</div>
 						</section>
-					<input type="hidden" id="preBookYn" value="N">
-				
-			
-				
+	
 					
+					<div class="price_hidden">
+					
+					
+					</div>
+			
 				<div id="dlvrAreaTmpl02" style="display:none;">
 					</div>
 				<section class="sect deli">
 					<div class="hdts"><span class="tit">상품정보</span></div>
-					
+		
 					<ul class="lst"> 
 					
 							<c:forEach  items="${opvo}" var="op">
-								<li>
-											<div class="tt">${op.prdName}</div>
-											<div class="ts">${op.prdCnt}개 / 
-												${op.prdPrice}원
+								<li style="margin:10px 0px;">
+											<div class="tt" style="font-weight:bold">👀 ${op.prdName} </div>
+											<div class="ts totalPrice_info" style="margin-left:25px;">
+												[${op.prdCnt}개 * ${op.prdPrice}원 = 총 ${op.totalPrice}원]
+												<input type="hidden" id="totalP" name="totalP" value="${op.totalPrice}"/>
+												
 													</div>
 										</li>
 						</c:forEach>
@@ -453,8 +599,9 @@ li.open, div.ctset {
 								<input type="hidden" id="tot_goods_cp_dc_amt" name="tot_goods_cp_dc_amt" value="0">
 								<input type="hidden" id="tot_dlvr_cp_dc_amt" name="tot_dlvr_cp_dc_amt" value="0">
 								<input type="hidden" id="local_cp_dc_tot_amt" name="local_cp_dc_tot_amt" value="0">
-								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">${orDom.discountRate }</b><i class="w">%</i></em>
+								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view" >${orDom.discountRate }</b><i class="w">%</i></em>
 								<span class="txt">할인적용</span>
+								<input type="hidden" id="discount_rate"" value="${orDom.discountRate}"/>
 							</div>
 						</div>
 						
@@ -506,25 +653,19 @@ li.open, div.ctset {
 								<li>
 									<div class="dt">총 상품금액</div>
 									<div class="dd">
-										<span class="prc"><em class="p">99,000</em><i class="w">원</i></span>
-										<input type="hidden" id="order_payment_total_goods_amt" value="99000">
-										<input type="hidden" id="order_payment_total_local_goods_amt" value="">
-										<input type="hidden" id="fstPurchGoodsIncYn" value="N">
+										<span class="prc"><em class="p totalProductPrice">99,000</em><i class="w">원</i></span>
+										<input type="hidden" id="totalPrice"  name="totalPrice"value="">
+										
 									</div>
 								</li>
 								<li id="couponDcLi">
 									<div class="dt">등급할인</div>
 									<div class="dd">
 										<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-5,000</em><i class="w">원</i></span>
-										<input type="hidden" id="order_payment_total_dc_amt" value="5000">
+										<input type="hidden" id="discountPrice" name="discountPrice" value="">
 									</div>
 								</li>
-								<li id="svmnDcLi" style="display:none;">
-									<div class="dt">적립금 사용</div>
-									<div class="dd">
-										<span class="prc dis"><em class="p" id="order_payment_svmn_amt_view">0</em><i class="w">점</i></span>
-									</div>
-								</li>
+								
 						
 								<li>
 									<div class="dt">배송비</div>
@@ -540,7 +681,7 @@ li.open, div.ctset {
 								<div class="dt">총 결제금액</div>
 								<div class="dd">
 									<span class="prc"><em class="p" id="order_payment_total_pay_amt_view">94,000</em><i class="w">원</i></span>
-									<input type="hidden" id="order_payment_total_pay_amt" value="94000">
+									<input type="hidden" id="actualPrice" name="actualPrice" value="">
 								</div>
 							</div>
 							

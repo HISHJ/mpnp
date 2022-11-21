@@ -39,61 +39,20 @@ public class OrderService {
 
 
 	//DB상품처리
-	public List<OrderPrdVO>searchProduct(List<OrderPrdVO> orders){
+	public List<OrderPrdVO>searchProduct(OrdersInfoVO orders){
 		List<OrderPrdVO> list = new ArrayList<OrderPrdVO>();
 		
-		OrderPrdVO opvo = new OrderPrdVO();
-		for(OrderPrdVO oVO : orders) {
-		opvo =	oDAO.selectProduct(oVO.getPrdId());
-		 opvo.setPrdCnt(oVO.getPrdCnt()); 
-		 opvo.setCartId(oVO.getCartId()); 
-		 opvo.initSaleTotal();
+		
+		for(OrderPrdVO oVO : orders.getOrders()) {
+		OrderPrdVO opvo =	oDAO.selectProduct(oVO.getPrdId());
+		opvo.setPrdCnt(oVO.getPrdCnt()); 
+		opvo.setCartId(oVO.getCartId()); 
+		opvo.initSaleTotal();
 		 
-		 list.add(oVO);
+		 list.add(opvo);
 		}
 		return list;
 	}
-
-	
-	 //상품넘겨받은거 처리 
-	 public List<OrderPrdVO> getPrdInfo(OrdersInfoVO orders){
-	  List<OrderPrdVO> result = null;
-	
-	  OrderPrdVO oVO = new OrderPrdVO();
-	 // OrderPrdVO oVO2 = new OrderPrdVO();
-	  result = new ArrayList<OrderPrdVO>();
-	  for(OrderPrdVO opVO : orders.getOrders()) {
-		  oVO.setPrdId(opVO.getPrdId()); // DB의 where절
-		  oVO.setPrdCnt(opVO.getPrdCnt()); //DB와는 무관한 넘어오는 값
-		  oVO.setCartId(opVO.getCartId());  // DB와는 무관한 넘어오는 값
-
-		  result.add(oVO);
-	  }
-
-	  return result;
-  
-	  }
-	 //상품 갯수, 장바구니코드파라메터 따로 처리(안돼서..ㅠㅠ)
-	 public List<OrderPrdVO> getPrdInFoOther(List<OrderPrdVO> orders){
-		  List<OrderPrdVO> result = null;
-		  OrderPrdVO oVO = new OrderPrdVO();
-		  
-		  result = new ArrayList<OrderPrdVO>();
-		  for(OrderPrdVO opVO : orders) {
-			  oVO.setPrdCnt(opVO.getPrdCnt());
-			  oVO.setCartId(opVO.getCartId());
-			  oVO.setPrdPrice(opVO.getPrdPrice());
-			  oVO.initSaleTotal();
-			  oVO.getTotalProductPrice();
-
-			  result.add(oVO);
-		  }
-
-
-		 return result;
-		  
-			  }
-	 
 
 
 	// 배송지변경버튼 - 배송지vo,배송지dao 써야 할듯
@@ -110,7 +69,7 @@ public class OrderService {
 		jsonShipName.put("name", snVO.getName());
 		jsonShipName.put("zipcode", orD.getZipcode());
 		jsonShipName.put("addr", orD.getAddr());
-		jsonShipName.put("addr_detail", orD.getAddrDetail());
+		jsonShipName.put("addrDetail", orD.getAddrDetail());
 
 		return jsonShipName.toJSONString();
 	}//
@@ -135,6 +94,7 @@ public class OrderService {
 	}
 
 	// 주문코드조회
+	
 	public String searchOrderId() {
 		String orID = "";
 
@@ -152,32 +112,37 @@ public class OrderService {
 		return cnt;
 	}// insertOrderInfo
 
-	// 주문상세코드조회
-	public String searchOrerDetailId() {
-		String ordId = "";
+	//트랜잭션 처리
+	public void searchOrerDetailId(OrderVO oVO) {
+		String orId = "";
 
-		ordId = oDAO.selectOrerDetailId();
-
-		return ordId;
+		orId = oDAO.selectOrderId();// 주문코드 조회
+		oVO.setOrderId(orId);  //vo에 코드 저장
+		if(oVO.getOrderId() != null) {
+			oDAO.insertOrderInfo(oVO); //주문테이블 추가
+			for(OrderPrdVO opVO :oVO.getOrders()) {
+				oVO.setTotalPrdCnt(opVO.getPrdCnt());
+				oVO.setPrdId(opVO.getPrdId());
+				oVO.setOrderId(orId);
+				
+			oDAO.insertOrderDetail(oVO); //주문 상세테이블 추가
+			}//end for
+			oDAO.deleteCartItem(); //주문한 해당 아이템 장바구니에서 삭제
+			oDAO.insertShipAddr(oVO); // 배송지 추가
+		}//end if
+		
 	}// searchOrerDetailId
 
 	// 주문상세추가-- mypageOrderVO사용예정
-	public int addOrderDetail(MyOrderVO moVO) {
+	public int addOrderDetail(OrderVO oVO) {
 		int cnt = 0;
 
-		cnt = oDAO.insertOrderDetail(moVO);
+		cnt = oDAO.insertOrderDetail(oVO);
 
 		return cnt;
 	} // insertOrderDetail
 
-	// 배송지 코드 조회
-	public String searchDestinationId() {
-		String dId = "";
 
-		dId = oDAO.selectdestinationId();
-
-		return dId;
-	}
 
 	// 배송지추가-destinatioVO사용예정
 	public int addShipAddr(OrderVO dVO) {

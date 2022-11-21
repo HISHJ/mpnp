@@ -306,16 +306,9 @@
       <label class="checkbox">
 	<input type="checkbox"  class="indi_checkbox" checked="checked">
 	 </label>
-	
-
-	
-	<input type="hidden" class="indi_prdId"  value="pr_0000009"/>
-
-	<input type="hidden" class="indi_prdCnt"  value="2"/>
-	
-<!-- 	<input type="hidden" class="indi_prdPrice"  value="1000"/> -->
-		
-	<input type="hidden" class="indi_cartId"  value="cart_00008"/>
+	<input type="hidden" class="indi_prdId"  value="pr_0000017"/>
+	<input type="hidden" class="indi_prdCnt"  value="5"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000027"/>
 
 	
 	<div class="cart_info">
@@ -323,10 +316,9 @@
 	<input type="checkbox"  class="indi_checkbox" checked="checked">
 	 </label>
 	 
-	<input type="hidden" class="indi_prdId"  value="pr_0000010"/>
-	<input type="hidden" class="indi_prdCnt"  value="5"/>
-	<!-- <input type="hidden" class="indi_prdPrice"  value="2500"/> -->
-	<input type="hidden" class="indi_cartId"  value="cart_00009"/>
+	<input type="hidden" class="indi_prdId"  value="p0012"/>
+	<input type="hidden" class="indi_prdCnt"  value="1"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000022"/>
 	
 	</div>
 		<script>

@@ -44,7 +44,7 @@ public class OrderDAO {
 
 		try {
 			// 쿼리 실행
-			flag = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderChk", oVO);
+			flag = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderChk", oVO);
 			System.out.println(flag + "/n");
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -69,7 +69,7 @@ public class OrderDAO {
 
 		try {
 			// 쿼리 실행
-			 list = ss.selectList("kr.co.nyangpoom.orderMapper.selectShipName", id);
+			 list = ss.selectList("kr.co.mpnp.orderMapper.selectShipName", id);
 			System.out.println( list + "/n");
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -98,7 +98,7 @@ public class OrderDAO {
 		try {
 			// 쿼리 실행
 			System.out.println("------"+snVO);
-			orDOM = ss.selectOne("kr.co.nyangpoom.orderMapper.selectChangeDestination", snVO);
+			orDOM = ss.selectOne("kr.co.mpnp.orderMapper.selectChangeDestination", snVO);
 			System.out.println("===="+orDOM);
 		} catch (PersistenceException pe) { 
 			pe.printStackTrace();
@@ -121,7 +121,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderInfo", id);
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderInfo", id);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -142,7 +142,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectDestination",  oVO);
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectDestination",  oVO);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -161,7 +161,7 @@ public class OrderDAO {
 	SqlSession ss = mbh.getHandler();
 	try {
 		// 쿼리 실행
-		opVO = ss.selectOne("kr.co.nyangpoom.orderMapper.selectProduct", prdId);
+		opVO = ss.selectOne("kr.co.mpnp.orderMapper.selectProduct", prdId);
 		//System.out.println(orDom);
 	} catch (PersistenceException pe) {
 		pe.printStackTrace();
@@ -184,7 +184,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orID = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderId");
+			orID = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderId");
 			// System.out.println(orID);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -205,10 +205,10 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertOrderInfo", orVO);
+			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderInfo", orVO);
 			if (cnt == 1) {
 				ss.commit();
-				System.out.println(cnt + "건 추가");
+				System.out.println(cnt + "건 추가(주문)");
 			}
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -220,34 +220,14 @@ public class OrderDAO {
 
 	}
 
-	// 검증완료
-	// 주문상세코드조회
-	public String selectOrerDetailId() {
-		String ordId = "";
-
-		// 핸들러 얻기
-		// MyBatisHandler얻기
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getHandler();
-		try {
-			// 쿼리 실행
-			ordId = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrerDetailId");
-			// System.out.println(ordId);
-		} catch (PersistenceException pe) {
-			pe.printStackTrace();
-		}
-		// 연결끊기
-		mbh.closeHandler(ss);
-
-		return ordId;
-	}// selectOrerDetailId()
+	
 
 	//
 	// 어떤 원리로 여러개를 한번에,그것도 자동화해서추가시켜야하는지를 모르겠다
 	// 상품갯수만큼 반복문 돌리고.. 그 안에서 상세코드 조회 및 insert작업 수행하면 되는건가?
 	// 주문상세추가-- mypageOrderVO사용예정
 	//검증완료
-	public int insertOrderDetail(MyOrderVO moVO) {
+	public int insertOrderDetail(OrderVO oVO) {
 		int cnt = 0;
 
 		// 핸들러 얻기
@@ -256,9 +236,9 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertOrderDetail", moVO);
+			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderDetail", oVO);
 			if (cnt == 1) {
-				System.out.println(cnt + "건 추가");
+				System.out.println(cnt + "건 추가(주문상세)");
 				ss.commit();
 			}
 			;
@@ -272,26 +252,7 @@ public class OrderDAO {
 	} // insertOrderDetail
 
 	// 검증완료
-	// 배송지 코드 조회
-	public String selectdestinationId() {
-		String dId = "";
 
-		// 핸들러 얻기
-		// MyBatisHandler얻기
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getHandler();
-		try {
-			// 쿼리 실행
-			dId = ss.selectOne("kr.co.nyangpoom.orderMapper.selectdestinationId");
-			System.out.println(dId);
-		} catch (PersistenceException pe) {
-			pe.printStackTrace();
-		}
-		// 연결끊기
-		mbh.closeHandler(ss);
-
-		return dId;
-	}
 
 	// 검증완료
 	// 배송지추가-destinatioVO사용예정
@@ -304,10 +265,10 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.insert("kr.co.nyangpoom.orderMapper.insertShipAddr", dVO);
+			cnt = ss.insert("kr.co.mpnp.orderMapper.insertShipAddr", dVO);
 			cnt++;
-			if (cnt > 1) {
-				System.out.println(cnt + "건 추가");
+			if (cnt == 1) {
+				System.out.println(cnt + "건 추가(배송지)");
 				ss.commit();
 			}
 		} catch (PersistenceException pe) {
@@ -331,7 +292,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.nyangpoom.orderMapper.selectOrderComplete", orVO);
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderComplete", orVO);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -355,7 +316,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			cnt = ss.delete("kr.co.nyangpoom.orderMapper.deleteCartItem");
+			cnt = ss.delete("kr.co.mpnp.orderMapper.deleteCartItem");
 			if (cnt == 1) {
 				System.out.println(cnt + "건 삭제");
 				ss.commit();

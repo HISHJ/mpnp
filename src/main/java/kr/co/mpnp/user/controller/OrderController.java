@@ -38,31 +38,24 @@ public class OrderController {
      }
      
 	// 주문페이지로 이동(ok)
-     //값 여러개 넘기는건 성공했는데 뿌리는건 실패
 	@RequestMapping(value = "/orderPayment_form.do", method = GET)
 	public String orderPayment(HttpSession session,OrderVO oVO,OrdersInfoVO oIfVO ,  Model model) {
 		String url="";
 		
-		//prdCnt가 서비스에서 가공됐음에도 가져와지지않는다.....
-	    OrderPrdVO ovo = new OrderPrdVO();
-		List<OrderPrdVO> opvo = new ArrayList<OrderPrdVO>();
-		List<OrderPrdVO> opvoO = new ArrayList<OrderPrdVO>();
-		opvo = ordSer.searchProduct(oIfVO.getOrders()); //DB
-		opvoO = ordSer.getPrdInFoOther(oIfVO.getOrders()); //파라미터
-		model.addAttribute("opvo",opvo);
-		model.addAttribute("opvoO",opvoO);
-		System.out.println("야!" +oIfVO);
-		System.out.println("야야야야야양제발ㄷ조 ㅁ돼라" + opvo);
-		System.out.println("야야야야야양" + opvoO);
+		List<OrderPrdVO> opvo = ordSer.searchProduct(oIfVO);
+	     System.out.println("p@@@@@@"+oIfVO); //파라메터
+	     System.out.println("db@@@@@@"+opvo ); //성공 ㅠㅠ
+	     model.addAttribute("opvo", opvo);
 		/////////////////////////////////////////////////////////
-		oVO.setId("id001");
+		oVO.setId("id005");
 		oVO.setDefaultFlag("O");
-		String flag = ordSer.searchOrderChk(oVO);
+		 String flag = ordSer.searchOrderChk(oVO);
 		 String id= oVO.getId();
 		//내역조회
 		 OrderDomain orDom = null;
 		orDom = ordSer.searchOrderInfo(id);
 		model.addAttribute("orDom", orDom); 
+
 		
 		 if(flag == null || "".equals(flag)) { // 기본배송지설정이 안된 회원일 경우
 			 url ="/user/order/orderPayment";
@@ -88,7 +81,7 @@ public class OrderController {
 	@RequestMapping(value = "/order_ship_addr.do", method = GET, produces = "application/json;charset=UTF-8")
 	public String changeShipAddr(HttpSession session, String shipName,Model model) {
 		ShipNameVO snVO = new ShipNameVO();
-		snVO.setId("id008");
+		snVO.setId("id001");
 		snVO.setName(shipName);
 		String jsonObj =ordSer.seachChangeDestination(snVO);
 		return jsonObj;
@@ -96,22 +89,27 @@ public class OrderController {
 	
 	// 결제완료버튼
 	@RequestMapping(value = "/orderPayment_process.do", method = GET)
-	public String orderCompleteProcess(HttpSession session, OrderVO oVO,OrdersInfoVO oIfVO,MyOrderVO moVO, Model model) {
-		System.out.println("오더" +oVO);
-		System.out.println("상품배열" +oIfVO);
-		System.out.println("상세"+moVO);
+	public String orderCompleteProcess(HttpSession session, OrderVO oVO,Model model) {
+		System.out.println("오더" +oVO); //ok
 		oVO.setId("id001");
-		moVO.setId("id001");
-	
-		//주문코드 조회
-		oVO.setOrderId(ordSer.searchOrderId());
-		// 주문결제정보 추가
-		ordSer.addOrderInfo(oVO);
+		//트랜잭션 처리(서비스에서 처리하려면 beans에서 트랜잭션 처리를 해줘ㅑ 함 
+		//ordSer.searchOrerDetailId(oVO);
+		String orId = "";
+		orId = ordSer.searchOrderId();
+		oVO.setOrderId(orId);
+		if(oVO.getOrderId() != null) {
+			ordSer.addOrderInfo(oVO);// //주문테이블 추가
+			for(OrderPrdVO opVO :oVO.getOrders()) {
+				oVO.setTotalPrdCnt(opVO.getPrdCnt());
+				oVO.setPrdId(opVO.getPrdId());
+				//oVO.setOrderId(orId);
+			ordSer.addOrderDetail(oVO);////주문 상세테이블 추가	
+			}//end for
+			ordSer.removeCartItem(oVO);// //주문한 해당 아이템 장바구니에서 삭제
+			ordSer.addShipAddr(oVO);// // 배송지 추가
+		}//end if
 		
-		//주문상세추가
-		ordSer.addOrderDetail(moVO);
-		//배송지 추가
-		ordSer.addShipAddr(oVO);		
+		
 		return "/user/order/orderPayment_process";
 	}// end orderComplete
 

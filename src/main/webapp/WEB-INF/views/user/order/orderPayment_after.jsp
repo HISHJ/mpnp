@@ -48,6 +48,141 @@ li.open, div.ctset {
 }
 
 	</style>
+	<script type="text/javascript">
+		$(function(){
+			$(".btnBill").click(function(){
+				//alert("야 안돼?")
+				check();
+			})//end click
+		})//end ready
+
+	
+		 function check(){
+		// addPrd();
+		
+			
+			//var shipReq=$("#shipReq").val();
+			if($("#shipReq").val().length ==0 ){
+				alert("배송요청사항을 입력해주세요.");
+				
+			  $("#shipReq").focus();
+				return ;
+			}//addr2
+			
+			if($("#shipReq").val().length < 5){
+				alert("요청사항은 최소 5자 이상 입력가능합니다");
+				$("#shipReq").focus();
+				return ;
+			}
+			
+			var mailChk =$(':checkbox[id=chk1]:checked' );
+			if(mailChk.length<1){
+				alert("구매동의 여부를 체크해주세요");
+				return ;
+				
+			}//mailChk
+			
+			var smsChk =$(':checkbox[id=terms_72]:checked');
+			if(smsChk.length<1){
+				alert("개인정보 수집 및 이용에 동의해주세요");
+				return;
+				
+			}//smsChk
+			
+			var perChk =$(':checkbox[id=terms_44]:checked');
+			if(perChk.length<1){
+				alert("개인정보 제공여부에 동의해주세요");
+				return;
+				
+			}//perChk
+			
+	       if(confirm("결제하시겠습니까?")){
+	    	   product_submit();
+				$("#orderFrm").submit();
+				
+			}//confirm
+			
+			//submitPrdArry();
+		
+				
+			}//check
+</script>
+				<script type="text/javascript">
+					  $(function(){
+						var form_data = ""; //히든으로 넣을 공간
+						var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+						var priceArr = new Array();
+						//상품의 개별 총 가격 배열에 넣기
+					  $(".totalPrice_info").each(function(i,element){
+						 var price = $(element).find("#totalP").val()*1;
+						 priceArr.push(price);
+					  })//en each
+					 
+					  //상품 총 합계 구하기
+					  var sum = 0;
+					  priceArr.forEach((item)=>{
+						  sum += item;
+					  });//end forEach
+					  
+					  
+					  //할인액 구하기
+					  //할인율 가져오기
+					  var rate = ($("#discount_rate").val()*1)/100;
+					  //해당 상품에 적용되는 할인 액
+					  var rate_price = sum * rate;
+					  
+					
+					  //총 결제금액 구하기
+					  var deli_fee = 2500;
+					  
+					   var actual_price;
+					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
+						  deli_fee = 0;
+					  } //end if
+				
+					  actual_price = sum - rate_price -deli_fee ; 
+					 
+					  
+					  //숫자에 단위 넣기
+					  const rate_ = rate_price.toString()
+                      .replace(expression, ","); //할인금액
+					  const total_pri = actual_price.toString()
+                      .replace(expression, ","); //상품 총가격
+					  const cn1 = sum.toString()
+                      .replace(expression, ","); // 총 결제금액
+					  const ship_fee = deli_fee.toString()
+                      .replace(expression, ","); // 배송비
+                     
+					  $(".totalProductPrice").html(total_pri); //상품 총 금액
+					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
+					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
+					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
+					  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+					  
+					 $('#actualPrice').attr("value",sum);
+					 $('#discountPrice').attr("value",rate_price);
+					 $('#totalPrice').attr("value",actual_price);
+					 
+					  })//reay
+					</script>
+					<script>
+					//전화번호 하이픈
+					const autoHyphen2 = (target) => {
+						 target.value = target.value
+						   .replace(/[^0-9]/g, '')
+						  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+						}
+					
+					//기본배송지 값 설정(안됨..)
+				  $(function(){
+					  if(document.getElementById("defaultFlag").checked) {
+						    document.getElementById("input_check_hidden").disabled = true;
+						}
+					  
+				  })
+					</script>
+	
+	
 </head>
 
 <body class="body">
@@ -154,16 +289,78 @@ li.open, div.ctset {
 		</div>
 	</div>
 
+		         <!-- 상품 hidden -->
+         <c:forEach  items="${opvo}" var="op">
+         <div class="prd_hid">
+		 <input type="hidden" class="indi_prdId"  id="prdId" name="prdId" value="${op.prdId}">			
+		 <input type="hidden" class="indi_prdName" id="prdName" name="prdName"  value="${op.prdName}">			
+		 <input type="hidden" class="indi_prdPrice" id="prdPrice" name="prdPrice"   value="${op.prdPrice}">			
+		 <input type="hidden" class="indi_prdCnt" id="prdCnt" name="prdCnt"  value="${op.prdCnt}">	
+		 <input type="hidden" class="indi_cartId"  id="cartId" name="cartId"   value="${op.cartId}">	
+         </div>
+		</c:forEach>
+         <!--  -->
+         <form id="test" name="test" action="orderPayment_process.do">
+         
+         </form>
+	
+	<script type="text/javascript">
+	
+	
+		 function product_submit(){
+		
+			var form_contents = "";
+			var orderNumber = 0;
+			
+			
+			//hidden 동적 추가
+			$(".prd_hid").each(function(i, element){
+			
+				var cartId = $(element).find(".indi_cartId").val(); //카트 아이디
+				var prdId= $(element).find(".indi_prdId").val()
+				var prdCnt = $(element).find(".indi_prdCnt").val() ; //상품 수량
+				var prdPrice = $(element).find(".indi_prdPrice").val() ;  // 상품가격 
+				var prdName =$(element).find(".indi_prdName").val()  //상품명
+				
+				var cartId_Input  = "<input name='orders["+ orderNumber  +"].cartId' type='hidden' value='" + cartId+"'>"; 
+				form_contents += cartId_Input;
+			 	var prd_id_Input  = "<input name='orders["+ orderNumber  +"].prdId' type='hidden' value='" + prdId+"'>"; 
+				form_contents += prd_id_Input;
+				var prdCnt_Input  = "<input name='orders["+ orderNumber  +"].prdCnt' type='hidden' value='" +prdCnt+"'>"; 
+				form_contents += prdCnt_Input;
+				var price_Input  = "<input name='orders["+ orderNumber  +"].prdPrice' type='hidden' value='" + prdPrice+"'>"; 
+				form_contents += price_Input;  
+				var name_Input  = "<input name='orders["+ orderNumber  +"].prdName' type='hidden' value='" + prdName+"'>"; 
+				form_contents += name_Input;  
+				
+				orderNumber += 1;
+			
+			});//end cart Info
+			
+			$("#productArea").html(form_contents);
+			
+			}//end function
+			
+
+	</script>
+	
+
 	<div class="inr" style="min-height: 357px;">
 
-		<!-- 본문 -->
-		<form id="order_payment_form" name="order_payment_form">
 
-			<!-- 카카오페이 옵션 -->
-			<input type="hidden" name="EasyPayCardCode" id="easyPayCardCode" value="">				<!-- 간편결제 카드코드 -->
-			<input type="hidden" name="EasyPayQuota" id="easyPayQuota" value="">				<!-- 간편결제 할부개월 -->
 
-		</form>
+	<!-- 주문정보 넘기기 -->
+		<form action="orderPayment_process.do" id="orderFrm" name="orderFrm">
+		<input type="hidden" name="memberName" id="memberName" value="${orDom.memberName}">
+            <input type="hidden" name="phone" id="phone" value="${orDom.phone}"> 
+            
+            <div id="productArea">
+        
+        
+        </div>
+                    
+
+
 		<!-- 상품상세 배송선택 param -->
 		<input type="hidden" id="dlvrSelectId" value="">
 		<input type="hidden" id="dlvrStartId" value="">
@@ -192,20 +389,7 @@ li.open, div.ctset {
 									<div class="hdts"><span class="tit">배송지</span></div>
 									<div class="cdts">
 										<div class="adrset">
-											<input type="hidden" id="order_payment_gb_nm" value="${orDom.shipName}">
-											<input type="hidden" id="order_payment_mbr_dlvra_no" value="234898">
-											<input type="hidden" id="order_payment_post_no_new" value="06235">
-											<input type="hidden" id="order_payment_road_addr" value="서울특별시 강남구 테헤란로 132(역삼동)">
-											<input type="hidden" id="order_payment_road_dtl_addr" value="8층">
-											<input type="hidden" id="order_payment_adrs_nm" value="강사님">
-											<input type="hidden" id="order_payment_adrs_mobile" value="01011111111">
-											<input type="hidden" id="order_payment_demand_goods_rcv_pst_cd" value="30">
-											<input type="hidden" id="order_payment_demand_goods_rcv_pst_etc" value="">
-											<input type="hidden" id="order_payment_demand_pbl_gate_ent_mtd_cd" value="30">
-											<input type="hidden" id="order_payment_demand_pbl_gate_pswd" value="">
-											<input type="hidden" id="order_payment_dlvr_demand" value="">
-											<input type="hidden" id="order_payment_dlvr_demand_yn" value="Y">
-											<input type="hidden" id="order_payment_dft_yn" value="Y">
+											
 											<div class="name tx">
 												<em class="t" id="dlvraGbNmEm">${osDom.shipName}</em><em class="bdg" id="dftDelivery">기본배송지</em>
 											</div>
@@ -508,7 +692,7 @@ li.open, div.ctset {
 				</div>
 			</div>
 		</div>
-
+	</form>
 	</div>
 </main>
 <!--❤️main-->
