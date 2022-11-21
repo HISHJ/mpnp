@@ -8,6 +8,32 @@
 		select desid destinationId, name, receiver, phone, zipcode, addr, addr_detail addrDetail, default_flag defaultFlag
 		from destination
 		where id = #{id}
+		order by default_flag
 	</select>
 
+	<update id="updateDefault" parameterType="String">
+		update destination
+		set default_flag = 'X'
+		where id = #{id}
+	</update>
+	
+	<insert id="insertDes" parameterType="kr.co.mpnp.user.vo.DestinationVO">
+		insert into destination (desid, id, name, receiver, phone, zipcode, addr, addr_detail, default_flag)
+		values( concat('des_',lpad(SEQ_DESTINATION.nextval,6,0)),
+				#{id}, #{name}, #{receiver}, #{phone}, #{zipcode}, #{addr}, #{addrDetail}, #{defaultFlag})
+	</insert>
+	
+	<delete id="deleteDes" parameterType="String">
+		delete from destination
+		where desid = #{desId}
+	</delete>
+	
+	<update id="updateDes" parameterType="kr.co.mpnp.user.vo.DestinationVO">
+		update destination
+		set name = #{name}, receiver = #{receiver}, phone = #{phone}, zipcode = #{zipcode},
+			addr = #{addr}, addr_detail = #{addrDetail}, default_flag = #{defaultFlag}
+		where desid = #{destinationId} and id = #{id}
+	
+	</update>
+	
 </mapper>

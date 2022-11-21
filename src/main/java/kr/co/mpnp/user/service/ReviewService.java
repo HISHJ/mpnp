@@ -20,9 +20,12 @@ public class ReviewService {
 	}
 	
  	// 작성후기 조회
-	public List<ReviewDomain> searchWritenReview(ReviewVO rVO){
+	public List<ReviewDomain> searchWritenReview(String id){
 		List<ReviewDomain> list = null;
 		
+		System.out.println("ReviewService : id - "+id);
+		ReviewDAO reviewDAO = ReviewDAO.getInstance();
+		list = reviewDAO.selectWritenReview(id);
 		
 		return list;
 	}

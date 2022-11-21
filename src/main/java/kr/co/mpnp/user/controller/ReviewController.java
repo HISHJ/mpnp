@@ -31,7 +31,13 @@ public class ReviewController {
 			System.out.println("ReviewController :  - "+rd.getPurchaseDate());
 		}
 		model.addAttribute("writableList",writableList);
+		////////////////////////////////////////////////////////////////////////
 		
+		List<ReviewDomain> writenList = reviewService.searchWritenReview("id001");
+		model.addAttribute("writenList",writenList);
+		
+		
+		/////////////////////////////////////////////////////////////////////////
 		return "/user/review/writable_review";
 	}
 	
@@ -57,14 +63,24 @@ public class ReviewController {
 	@RequestMapping(value="/writen_review_list.do",method=RequestMethod.GET)
 	public String writenReviewList(ReviewVO rVO, HttpSession session, Model model) {
 		
+		String id = (String)session.getAttribute("id");
+		System.out.println("ReviewController : id - "+id);
+		
+		ReviewService reviewService = new ReviewService(); 
+		
+		List<ReviewDomain> writenList = reviewService.searchWritenReview("id001");
+		for(ReviewDomain rd : writenList) {
+			System.out.println("ReviewController :  - "+rd.getWriteDate());
+		}
+		model.addAttribute("writableList",writenList);
 		
 		return "";
 	}
 	
-	// 작성리뷰 상세보기   writen_review_detail_form.do 고려
-	@RequestMapping(value="/modify_review_form.do",method=RequestMethod.GET)
-	public String modifyReviewForm(ReviewVO rVO, HttpSession session, Model model) {
-		// reviewDetailForm 고려
+	// 작성리뷰 상세보기   
+	@RequestMapping(value="/writen_review_detail_form.do",method=RequestMethod.GET)
+	public String reviewDetailForm(ReviewVO rVO, HttpSession session, Model model) {
+		System.out.println("왔냐"+rVO.getReviewId());
 		
 		return "";
 	}

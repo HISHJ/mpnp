@@ -80,6 +80,37 @@
 
 <!--라이브 앱과 연동을위한 JS -->
 <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
+<script type="text/javascript">
+	//검색API 클릭 이벤트(사용자 액션 로그 수집)
+	function userActionLog(contId, action, url, targetUrl) {
+		var mbrNo = "0";
+		if (mbrNo != "0") {
+			$
+					.ajax({
+						type : 'POST',
+						url : "/common/sendSearchEngineEvent",
+						dataType : 'json',
+						data : {
+							"logGb" : "ACTION",
+							"mbr_no" : mbrNo,
+							"section" : "shop",
+							"content_id" : contId,
+							"action" : action,
+							"url" : (url != null && url) != '' ? url
+									: document.location.href,
+							"targetUrl" : (targetUrl != null && targetUrl != '') ? targetUrl
+									: document.location.href,
+							"litd" : "",
+							"lttd" : "",
+							"prclAddr" : "",
+							"roadAddr" : "",
+							"postNoNew" : "",
+							"timestamp" : ""
+						}
+					});
+		}
+	}
+</script>
 
 
 
@@ -89,6 +120,9 @@
 
 	<!-- 기본 컨텐츠 -->
 	<div class="wrap" id="wrap">
+		<input type="hidden" id="viewJsonData"
+			value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
+
 
 		<header class="header pc cu mode0" data-header="set0" id="header_pc">
 			<input type="password" style="display: none;" />
@@ -298,48 +332,6 @@
 		<!--❤️사이드바 끝-->
 		<!--❤️main-->
 		<!--❤️main-->
-		
-		<!-- 11.21 최정민테스트 -->
-		<script>
-		$(function(){
-			$("#writableBtn").click(function(){
-				alert("눌림");
-				$(".writableTab").show();
-				$(".writenTab").hide();
-			})
-			$("#writenBtn").click(function(){
-				alert("눌림");
-				$(".writenTab").show();
-				$(".writableTab").hide();
-			})
-		})
-		$(function(){
-			
-		})
-		function editBtn(reviewId){
-			alert(reviewId);
-			alert($("#selReviewId").val());
-			
-			$("#selReviewId").val(reviewId);
-			alert($("#selReviewId").val());
-			$("#frm").submit();
-		}
-		/* function editBtn(reviewId){
-			alert(reviewId);
-			$.ajax({
-				url:"",
-				date : reviewId,
-				dataType :"HTML",
-				error:function(xhr){
-					
-				},
-				success:function(data){
-					
-				}
-				
-			})
-		} */
-		</script>
 		<main class="container lnb page my" id="container"
 			style="margin-left: 100px;">
 			<div class="inr" style="min-height: 429px;">
@@ -353,24 +345,19 @@
 					<div class="petTabContent leftTab mode_fixed hmode_auto">
 						<!-- 2021.03.15 : mode_fixed, hmode_auto 클래스 추가 -->
 						<ul class="uiTab a line">
-							<li class="active">
-							<a class="bt" id="writableBtn" href="javascript:;">작성 가능한 후기</a>
-							</li>
-							<li class="">
-							<a class="bt" id="writenBtn" href="javascript:;">내가 작성한 후기</a>
-							</li>
+							<li class="active"><a class="bt" name="bfTab"
+								href="javascript:;"><span>작성 가능한 후기1</span></a></li>
+							<li class=""><a class="bt" name="aftTab" href="javascript:;"><span>내가
+										작성한 후기 0</span></a></li>
 						</ul>
 						<!--😎작성가능한 후기는 있는데 작성한 후기가 없는 경우-->
-						<div class="uiTab_content writableTab">
+						<div class="uiTab_content">
 							<ul style="left: -100%;">
 							
 							<c:choose>
 							<c:when  test="${ writableList.size() > 0 }">
 								<li class="active" style="min-height: 369px;">
 									<div class="review-area" name="bfList">
-									<form action="writen_review_detail_form.do" id="frm">
-									<input type="hidden" id="selReviewId" name="reviewId">
-									</form>
 								<c:forEach var="writableItem" items="${ writableList}">
 										<div class="item" name="orderGoods"
 											data-goods-id="GS251062051" data-ord-no="C202210301001496"
@@ -428,10 +415,8 @@
 						<!--😎 작성한 후기가 있는 경우
 					 -->
 						<!-- tab content -->
-						<div class="uiTab_content writenTab" style="display: none;">
+						<div class="uiTab_content" style="display: none;">
 							<ul style="left: -100%;">
-							<c:choose>
-							<c:when test="${writenList.size() == 0 }">
 								<li class="" style="min-height: 369px;">
 									<!-- 내역 없을 경우 style block-->
 									<div class="inr-box noneBoxPoint" name="bfNoComment"
@@ -443,9 +428,6 @@
 										</section>
 									</div>
 								</li>
-							</c:when>
-							<c:otherwise>
-							<c:forEach var="writenReview" items="${writenList }">
 								<li class="active" style="min-height: 369px;">
 									<div class="review-area t2" name="aftList"
 										style="padding-bottom: 20px;">
@@ -459,24 +441,24 @@
 														<img
 															src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg"
 															alt="상품" class="img">
-															<c:out value="${writenReview.thImg }"/>
 													</p>
 													<div class="txt">
-														<p class="t1"><c:out value="${writenReview.name }"/></p>
-														<p class="t2 k0423"><c:out value="${writenReview.contents }"/></p>
+														<p class="t1">[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)</p>
+														<p class="t2 k0423"></p>
 													</div>
 												</div>
 												<div class="bottom">
 													<p class="txt">
-														<strong>작성일</strong><c:out value="${writenReview.writeDate }"/>
+														<strong>주문일</strong>2022.10.30
 													</p>
 													<!-- 펫로그 후기는 작성 7일 이후에 수정 불가 CSR-2568 -->
 													<nav class="uidropmu dmenu">
-														<button type="button" class="bt st" style="font-size:15px; ">메뉴열기</button>
+														<button type="button" class="bt st">메뉴열기</button>
 														<div class="list">
 															<ul class="menu">
 																<li><button type="button" class="bt"
-																		onclick="editBtn('${writenReview.reviewId}')">수정</button></li>
+																		onclick="myComment.updateMyComment(this); return false;">수정</button></li>
+																<!-- 펫로그 후기는 삭제 불가  CSR-2568 -->
 																<li><button type="button" class="bt"
 																		onclick="myComment.deleteMyComment(this); return false;">삭제</button></li>
 															</ul>
@@ -487,7 +469,7 @@
 											<div class="review" name="myEstmResult">
 												<!-- 평점 -->
 												<div class="starpoint">
-													<span class="stars sm p_${writenReview.starScore }_0"></span>
+													<span class="stars sm p_5_0"></span>
 												</div>
 
 												<!-- // 평점 -->
@@ -507,9 +489,6 @@
 										</div>
 									</div>
 								</li>
-								</c:forEach>
-								</c:otherwise>
-							</c:choose>
 							</ul>
 						</div>
 						<!--😎 작성한 후기가 있는 경우 끝-->

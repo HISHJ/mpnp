@@ -31,7 +31,7 @@ public class ReviewDAO {
 		// 1. Mybatis Handler 받기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		System.out.println("CartDAO : ssesion - "+ss);
+		System.out.println("ReviewDAO : session - "+ss);
 		
 		// 2. 쿼리수행
 		list = ss.selectList("kr.co.mpnp.user.mapper.reviewMapper.writableReview",id);
@@ -43,9 +43,19 @@ public class ReviewDAO {
 	}
 	
 	// 작성후기 조회
-	public List<ReviewDomain> selectWritenReview(ReviewVO rVO){
+	public List<ReviewDomain> selectWritenReview(String id){
 		List<ReviewDomain> list = null;
 		
+		// 1. Mybatis Handler 받기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		System.out.println("ReviewDAO : session - "+ss);
+		
+		// 2. 쿼리수행
+		list = ss.selectList("kr.co.mpnp.user.mapper.reviewMapper.writenReview",id);
+		
+		// 3. 종료
+		mbh.closeHandler(ss);
 		
 		return list;
 	}

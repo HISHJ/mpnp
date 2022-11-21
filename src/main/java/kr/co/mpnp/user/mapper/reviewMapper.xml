@@ -9,6 +9,18 @@
 	from product p, order_detail od, orders o, member m
 	where (m.id = o.id and o.orderid = od.orderid and od.productid = p.productid) and
 	od.review_chk = 'N' and m.id= #{id}
-	
 </select>
+
+
+<select id="writenReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
+	select p.th_img thImg, p.name name, r.contents contents, r.star_score starScore, r.inputdate writeDate, r.reviewid reviewId
+	from product p, order_detail od, orders o, member m, review r
+	where m.id = o.id and o.orderid = od.orderid and od.productid = p.productid
+	and r.order_detailid = od.order_detailid and od.review_chk = 'Y' and o.id = #{id}
+</select>
+
+
+
+
+
 </mapper>

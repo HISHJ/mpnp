@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.user.domain.DestinationDomain;
 import kr.co.mpnp.user.service.DestinationService;
@@ -32,28 +33,51 @@ public class DestinationContoller {
 		model.addAttribute("desList",desList);
 		
 		
-		return "/user/mypage/delivery";
+		return "/user/mypage/delivery_test";
 	}
 	
 	// 배송지 추가
+	@ResponseBody
 	@RequestMapping(value="/des_add_process.do", method=RequestMethod.GET)
 	public String desAddProcess(HttpSession session, DestinationVO dtVO, Model model) {
 		
-		return "";
+		System.out.println(dtVO.toString());
+		//String id = "id005";
+		dtVO.setId("id005");
+		
+		
+		DestinationService desService = new DestinationService(); 
+		//desService.addDes(dtVO);
+		if("O".equals(dtVO.getDefaultFlag())) {
+			desService.editDefault(dtVO);
+		}
+		//return "des_list.do";
+		return desService.addDes(dtVO);
 	}
 	
 	// 배송지 정보변경
+	@ResponseBody
 	@RequestMapping(value="/des_modify_process.do", method=RequestMethod.GET)
 	public String desLModifyProcess(HttpSession session, DestinationVO dtVO, Model model) {
 		
-		return "";
+		System.out.println("배송지정보변경 dtVO : "+dtVO.toString());
+		dtVO.setId("id005");
+		
+		DestinationService desService = new DestinationService(); 
+		if("O".equals(dtVO.getDefaultFlag())) {
+			desService.editDefault(dtVO);
+		}
+		
+		return desService.modifyDes(dtVO);
 	}
 	
 	// 배송지 삭제
+	@ResponseBody
 	@RequestMapping(value="/des_remove_process.do", method=RequestMethod.GET)
 	public String desRemoveProcess(HttpSession session, String dtId, Model model) {
 		
-		return "";
+		DestinationService desService = new DestinationService(); 
+		return desService.removeDes(dtId);
 	}
 	
 }
