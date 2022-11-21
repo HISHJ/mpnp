@@ -17,14 +17,11 @@
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
-<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/login.css">
-<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/find_info.css">
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
 
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
 <script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
 <script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
 
@@ -35,6 +32,11 @@
 	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+	<style>
+
+ 
+
+	</style>
 	<script>
 		$(function(){
 		 $(".bt_dog").click(function(){
@@ -46,44 +48,22 @@
 		 });//click
 		
 		 $(".bt_cat").click(function(){
-			 $(".bt_dog").removeClass("active"); 
-			 $(this).addClass("active")
-			 $(".open_cat").css('display','block');
-			 $(".open_dog").css('display','none');
+		 $(".bt_dog").removeClass("active"); 
+		 $(this).addClass("active")
+		 $(".open_cat").css('display','block');
+		 $(".open_dog").css('display','none');
 		
 		 });//click
 		 
-		 $("#loginBtn").click(function(){
-			 //alert("로그인버튼"); 확인완료
-			 chkNull();
+		 $("#findPassBtn").click(function(){
+			 $("#findPassFrm").submit();
 		 });
 		
 		
-		});//ready function
-		
-		function chkNull() {
-			let id=$("#id").val();
-			if(id.trim() == ""){
-				alert("아이디를 입력해주세요.")
-				$("#id").val(""); 
-				$("#id").focus();
-				return;
-			}else{
-				$("#pass").focus(); 
-			}//endif
-			
-			let pass = $("#pass").val();
-			if(pass.trim() == ""){
-				alert("비밀번호를 입력해주세요.");
-				$("#pass").val("");	
-				return; 
-			}//endif
-			
-			$("#loginFrm").submit();
-			
-		}//chkNull
+		});
 		
 		</script>
+
 
 
 
@@ -151,7 +131,7 @@
 			<div class="cdt" >
 						<div class="schs">
 								<div class="form ">
-									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요."></div>
+									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
 									<button type="button" class="btnSch" data-content="" data-url="/commonSearch">검색</button>
 									
 									<!-- 자동완성 드롭박스 -->
@@ -197,102 +177,79 @@
 			</article>
 			<!-- //등급안내 팝업 추가 2021.05.13 -->
 		</div>
+		<style>
+			.result{
+				margin-bottom:30px !important;
+			}
+
+			button.bg-black{
+      margin:30px 0;
+
+			}
+		</style>
 <!--// header pc--><!-- e : header 영역 -->
+					<!-- s : gnb 영역 -->
+					<main class="container page login srch" id="container" style="margin-left:-100px;margin-top:250px !important;">
+						<div class="inr" style="min-height:629px;">
+							<div class="contents" id="contents">
 
-<!--❤️사이드바-->
-
-
-<div class="layers tv seriesHome" id="gnbSrisListPopup"></div>
-<!-- e : gnb 영역 -->			
-
-<!--❤️right main page-->
-<!-- 로그인 영역끝 -->
-<main class="container page login srch" id="container" style="margin-bottom:-70px !important;" >
-			
-  <div class="inr" style="min-height: 429px;margin-top:250px;">
-    <!-- 본문 -->
-    <div class="contents" id="contents">
-      <!-- PC 타이틀 모바일에서 제거  -->
-      <div class="pc-tit">
-        <h2>로그인</h2>
-      </div>
-      <!-- // PC 타이틀 모바일에서 제거  -->
-      <div class="fake-pop">
-        <form id="loginFrm" action="login_process.do">
-          <div class="pct">
-            <div class="poptents">
-              
-              <!-- 회원 정보 입력 -->
-              <input type="hidden" name="mbrNo" id="mbrNo">
-              <input type="hidden" name="mbrStatCd" id="mbrStatCd">
-              <input type="hidden" name="authJson" id="authJson">
-              <input type="hidden" name="deviceToken" id="appPushToken">
-              <input type="hidden" id="deviceTpCd" name="deviceTpCd" value="DEVICE_TYPE">
-              
-              <input type="hidden" id="RSAModulus" value="9ddb7a61c6cd3c3c2e7413e4a5aeebf210af0d21352da6f4e8bd58a6021f580cf0b394f57608dd8f88a0f38393f266d0cd8caa7dfcb7675ed76ddd583396b36dc8f7605fd6f3d1291807e5b2128818d64139bc47da05190da72a3474695c44ccfe078935065aa81c2dd5a44e2318d604bdce4ad0471a3f90f0e8921840141293">
-              <input type="hidden" id="RSAExponent" value="10001">
-              
-              <div class="member-input">
-                <ul class="list">
-                  <li>
-                    <div class="input">
-                      <input type="text" class="ipt" name="id" id="id" placeholder="아이디" autocomplete="new-password" maxlength="40" autofocus>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="input">
-                      <input type="password" class="ipt" name="pass" id="pass" placeholder="비밀번호" autocomplete="new-password" maxlength="15">
-                    </div>
-                    <p class="validation-check" id="newErrMsg" style="display: none;">아이디 또는 비밀번호를 다시 확인해주세요</p>
-                  </li>
-                </ul>
-              </div>
-              <!-- // 회원 정보 입력 -->
-            </div>
-          </div>
-          <div class="check-wrap">
-              <label class="checkbox">
-                <input type="checkbox" name="keepYn" id="keepYn" value="Y" checked="checked"><span class="txt">아이디 저장</span>
-              </label>
-            </div>
-          </form>
-        <div class="pbt pull">
-          <div class="btnSet" id="inactiveBtn">
-            <a href="javascript:;" class="btn lg gray" id="loginBtn">로그인</a>
-          </div>
-          <div class="btnSet" id="activeBtn" style="display:none;">
-            <a href="javascript:amplitudeLoginBtn('로그인');login();" class="btn lg a" data-content="" data-url="">로그인</a>
-          </div>
-        
-        </div>
-        
-        <div class="lnk-set">
-         <!--  <a href="javascript:amplitudeLoginBtn('아이디 찾기','/login/indexFindId');" data-content="" data-url="/login/indexFindId">아이디 찾기</a> -->
-          <a href="m_findid_form.do" data-content="">아이디 찾기</a>
-<!--           <a href="javascript:amplitudeLoginBtn('비밀번호 찾기','/login/indexFindPswd');" data-content="" data-url="/login/indexFindId">비밀번호 찾기</a> -->
-          <a href="m_findpass_form.do" data-content="">비밀번호 찾기</a>
-          <a href="join_terms.do" data-content="">회원가입</a>
-          </div>
-        
-          <!-- 애플 심사전 -->
-        
-   
-        <!-- 애플 심사후 -->
-          </div>
-    </div>
-  
-  </div>
-</main>
+						<div class="group">
+							<h3 class="tit-st4">비밀번호 찾기</h3>
+							<div class="result">
+								<span class="blue">비밀번호</span>가 생각나지 않으세요?
+								<h4 class="t"></h4>
+								<label for="find1_1" style="font-weight:lighter !important; font-size:14rem">회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 비밀번호를 찾을 수 있습니다.</label></span>
+							
+							</div>
+							
+								<div id="ck_cont">
+									<div class="form_w form1">
+										<form id="findPassFrm" action="m_findpass_process.do">
+										<ul class="form">
+											<li>
+												<label for="name" class="tt">아이디</label>
+												<div class="cont">
+													<input type="text" name="id" id="id"  autofocus="autofocus"/>
+												</div>
+												</li>
+											<li>
+												<label for="name" class="tt">이름</label>
+												<div class="cont">
+													<input type="text" name="name" id="name" />
+												</div>
+											</li>
+											<li>
+												<span class="tt">휴대전화</span>
+												<div class="cont">
+													<div class="tel_w">
+													<ul class="clearfix tel">
+														<li>
+															<input type="text" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" class="small numberOnly">
+														</li>
+													</ul>
+												</div>
+												<!-- <div class="tel_confirm">
+													<label for="smsAuthNumber" class="hide">인증번호 입력</label>
+													<input type="text" name="smsAuthNumber" id="smsAuthNumber" placeholder="인증번호 6자리 숫자 입력" maxlength="6"/>
+													<button type="button" class="bg-black" onclick="javascript:idSearchAuthProc('sms');return false;">인증번호 <span class="block-t">확인</span></button>
+												</div> -->
+<!-- 												<button type="button" class="bg-black" onclick="javascript:idSearchAuth();return false;">비밀번호 <span class="block-t">찾기</span></button> -->
+												<button type="button" class="bg-black" id="findPassBtn" name="findPassBtn">비밀번호 <span class="block-t">찾기</span></button>
+											</div>
+											</li>
+										</ul>
+										</form>
+									</div>
+									
+								</div>
+							</div>
+						</div><!-- .group -->
+						</div>
+					</div>
 
 
+					</main>	
 
-    <!--❤️main-->
-				<!-- s : 검색 영역 -->
-<!-- e : 검색 영역 -->
-<!--❤️사이드바 끝-->
-<!--❤️main-->
- 
-	
 
 <!-- footer -->	
 <footer class="footer" id="footer" style="width: 100%;">

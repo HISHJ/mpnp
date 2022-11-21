@@ -16,13 +16,13 @@ public class JoinController {
 	@RequestMapping(value = "/join_terms.do", method=GET )
 	public String joinTerms() {
 		
-		return "";
+		return "user/join/terms";
 	}//adminLoginForm
 	
 	@RequestMapping(value = "/join_form.do", method=GET )
 	public String joinForm() {
 		
-		return "";
+		return "user/join/signUp";
 	}//joinForm
 	
 	@RequestMapping(value = "/join_idchk_process.do", method=GET )

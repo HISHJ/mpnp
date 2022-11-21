@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
-<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/login.css">
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/mypage.css">
 <script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
@@ -35,6 +36,11 @@
 	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+	<style>
+
+ 
+
+	</style>
 	<script>
 		$(function(){
 		 $(".bt_dog").click(function(){
@@ -43,47 +49,21 @@
 		 $(".open_dog").css('display','block');
 		 $(".open_cat").css('display','none');
 		
-		 });//click
+		 })//click
 		
 		 $(".bt_cat").click(function(){
-			 $(".bt_dog").removeClass("active"); 
-			 $(this).addClass("active")
-			 $(".open_cat").css('display','block');
-			 $(".open_dog").css('display','none');
+		 $(".bt_dog").removeClass("active"); 
+		 $(this).addClass("active")
+		 $(".open_cat").css('display','block');
+		 $(".open_dog").css('display','none');
 		
-		 });//click
-		 
-		 $("#loginBtn").click(function(){
-			 //alert("로그인버튼"); 확인완료
-			 chkNull();
-		 });
+		 })//click
 		
 		
-		});//ready function
-		
-		function chkNull() {
-			let id=$("#id").val();
-			if(id.trim() == ""){
-				alert("아이디를 입력해주세요.")
-				$("#id").val(""); 
-				$("#id").focus();
-				return;
-			}else{
-				$("#pass").focus(); 
-			}//endif
-			
-			let pass = $("#pass").val();
-			if(pass.trim() == ""){
-				alert("비밀번호를 입력해주세요.");
-				$("#pass").val("");	
-				return; 
-			}//endif
-			
-			$("#loginFrm").submit();
-			
-		}//chkNull
+		})
 		
 		</script>
+
 
 
 
@@ -95,7 +75,63 @@
 	<div class="wrap" id="wrap">
 		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
 		
+	<script>
+	
+	function clickLogin(){
+		location.href = "/indexLogin?returnUrl="+location.pathname+location.search;
+	}
+	
+	//장바구니 수 set, 캐시 이슈로 ajax 호출
+	function setCartCnt(){
+		$.ajax({
+			url : "/order/getCartCnt"
+			, dataType : "json"
+			, type : "POST"
+			, success : function(data){
+				var $cartCntObj = $('.header .menu .cart').find('em');
+				var $shopMainCartCntObj = $('#btnCart').find('em');
+				if($cartCntObj.length == 0){
+					if(data.cartCnt != 0){
+						var html = '<em class="n">'+data.cartCnt+'</em>';
+						$('.header .menu .cart').html(html);
+					}
+				}else{
+					if(data.cartCnt == 0){
+						$cartCntObj.remove();
+					}else{
+						$cartCntObj.text(data.cartCnt);
+					}
+				}
+				
+		
+			}
+		});
+	}
 
+  	//등급 레이어팝업 스크립트 추가 2021.05.13
+	var rankBox = function(){
+		ui.popLayer.open('popLank',{
+			ocb:function(){
+				// console.log("popLank 열림");
+			},
+			ccb:function(){
+				// console.log("popLank 닫힘");
+			}
+		});
+
+		if("PC" == "PC") {
+			$(".rank_pc").addClass("on");
+		}else {										
+			$(".rank_mo").addClass("on");
+		}
+	}
+  	
+	function closeTopbanner() {
+		$('#topBanner').addClass('hide');
+		var cookieName	= getTopbannerCookieName();
+		setCookieTopBanner(cookieName, "done", 1);
+	}
+</script><!-- header pc-->
 <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -151,7 +187,7 @@
 			<div class="cdt" >
 						<div class="schs">
 								<div class="form ">
-									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요."></div>
+									<div class="input del kwd"><input id="srchWord" name="srchWord"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
 									<button type="button" class="btnSch" data-content="" data-url="/commonSearch">검색</button>
 									
 									<!-- 자동완성 드롭박스 -->
@@ -198,100 +234,190 @@
 			<!-- //등급안내 팝업 추가 2021.05.13 -->
 		</div>
 <!--// header pc--><!-- e : header 영역 -->
+					<!-- s : gnb 영역 -->
 
 <!--❤️사이드바-->
 
 
 <div class="layers tv seriesHome" id="gnbSrisListPopup"></div>
 <!-- e : gnb 영역 -->			
+					<!-- s : LNB 영역 -->
 
-<!--❤️right main page-->
-<!-- 로그인 영역끝 -->
-<main class="container page login srch" id="container" style="margin-bottom:-70px !important;" >
+<nav class="lnb shop" id="lnb">
+	<div class="inr" style="width:220px;">
+		<nav class="menushop"style="margin-right:20px;margin-top:-30px;">
+			<h2 class="bt bt_my">MY</h2>
+		
+
+			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
+				<ul class="sm">
+					<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
+					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
+					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
+					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
+				</ul>
+			</div>
+
 			
-  <div class="inr" style="min-height: 429px;margin-top:250px;">
-    <!-- 본문 -->
-    <div class="contents" id="contents">
-      <!-- PC 타이틀 모바일에서 제거  -->
-      <div class="pc-tit">
-        <h2>로그인</h2>
-      </div>
-      <!-- // PC 타이틀 모바일에서 제거  -->
-      <div class="fake-pop">
-        <form id="loginFrm" action="login_process.do">
-          <div class="pct">
-            <div class="poptents">
-              
-              <!-- 회원 정보 입력 -->
-              <input type="hidden" name="mbrNo" id="mbrNo">
-              <input type="hidden" name="mbrStatCd" id="mbrStatCd">
-              <input type="hidden" name="authJson" id="authJson">
-              <input type="hidden" name="deviceToken" id="appPushToken">
-              <input type="hidden" id="deviceTpCd" name="deviceTpCd" value="DEVICE_TYPE">
-              
-              <input type="hidden" id="RSAModulus" value="9ddb7a61c6cd3c3c2e7413e4a5aeebf210af0d21352da6f4e8bd58a6021f580cf0b394f57608dd8f88a0f38393f266d0cd8caa7dfcb7675ed76ddd583396b36dc8f7605fd6f3d1291807e5b2128818d64139bc47da05190da72a3474695c44ccfe078935065aa81c2dd5a44e2318d604bdce4ad0471a3f90f0e8921840141293">
-              <input type="hidden" id="RSAExponent" value="10001">
-              
-              <div class="member-input">
-                <ul class="list">
-                  <li>
-                    <div class="input">
-                      <input type="text" class="ipt" name="id" id="id" placeholder="아이디" autocomplete="new-password" maxlength="40" autofocus>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="input">
-                      <input type="password" class="ipt" name="pass" id="pass" placeholder="비밀번호" autocomplete="new-password" maxlength="15">
-                    </div>
-                    <p class="validation-check" id="newErrMsg" style="display: none;">아이디 또는 비밀번호를 다시 확인해주세요</p>
-                  </li>
-                </ul>
-              </div>
-              <!-- // 회원 정보 입력 -->
-            </div>
-          </div>
-          <div class="check-wrap">
-              <label class="checkbox">
-                <input type="checkbox" name="keepYn" id="keepYn" value="Y" checked="checked"><span class="txt">아이디 저장</span>
-              </label>
-            </div>
-          </form>
-        <div class="pbt pull">
-          <div class="btnSet" id="inactiveBtn">
-            <a href="javascript:;" class="btn lg gray" id="loginBtn">로그인</a>
-          </div>
-          <div class="btnSet" id="activeBtn" style="display:none;">
-            <a href="javascript:amplitudeLoginBtn('로그인');login();" class="btn lg a" data-content="" data-url="">로그인</a>
-          </div>
-        
-        </div>
-        
-        <div class="lnk-set">
-         <!--  <a href="javascript:amplitudeLoginBtn('아이디 찾기','/login/indexFindId');" data-content="" data-url="/login/indexFindId">아이디 찾기</a> -->
-          <a href="m_findid_form.do" data-content="">아이디 찾기</a>
-<!--           <a href="javascript:amplitudeLoginBtn('비밀번호 찾기','/login/indexFindPswd');" data-content="" data-url="/login/indexFindId">비밀번호 찾기</a> -->
-          <a href="m_findpass_form.do" data-content="">비밀번호 찾기</a>
-          <a href="join_terms.do" data-content="">회원가입</a>
-          </div>
-        
-          <!-- 애플 심사전 -->
-        
-   
-        <!-- 애플 심사후 -->
-          </div>
-    </div>
-  
-  </div>
-</main>
+	</nav>
 
+		<nav class="menushop">
+			<h2 class="bt bt_store">스토어</h2>
+			<div class="button_wrap">
+			<button type="button" class="bt st bt_dog active">강아지</button>
+			<button type="button" class="bt st  bt_cat">고양이</button>
+		</div>
 
+				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
+								<ul class="sm">
+									<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">강쥐사료</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+								</ul>
+								<ul class="sm_2">
+									<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+								 </ul> 
+				</li>
 
-    <!--❤️main-->
+				<li class="open open_cat" id="tab_category_12565" style="width:200px;display:none;">
+					<ul class="sm">
+						<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">냥이사료</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+					</ul>
+					<ul class="sm_2">
+						<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+					 </ul> 
+	</li>
+		</nav>
+	
+		</div>
+	
+</nav><!-- e : LNB 영역 -->
 				<!-- s : 검색 영역 -->
 <!-- e : 검색 영역 -->
 <!--❤️사이드바 끝-->
 <!--❤️main-->
- 
+  <!--❤️main-->
+	<input type="hidden" id="decodeNickNm" value="jsh1706"/>
+		
+	<style>
+		.expire{
+			font-size: 13rem;
+			color: #ff7777;
+			margin-top: 7px;
+			padding: 0 5px 0;
+			position:absolute;
+			left:53%;
+			top:20%;
+		}
+	</style>
+	<form id="signUpFrm" name="signUpFrm">
+		<div id="hiiden-field">
+			<input type="hidden" id="adapter" onchange="fnSnsStatSave();"/>
+			<input type="hidden" name="prflNm" value="" />
+			<input type="hidden" name="prflImg" value="" />
+			<input type="hidden" name="orgPrflImg" value="" />
+			<input type="hidden" name="mobile" value="01076511775" />
+			<input type="hidden" name="orgMobile" value="01076511775" />
+			<input type="hidden" name="mobileCd" value="01" />
+			<input type="hidden" name="ciCtfVal" value="lUijZT2Z0IRzMw8XpyV8D8pvEo0bk862JarAxqpFpzrpvZJWI3BIKay9mgqMKa/3Dc2WvvlBYSkrYv0WMqEgsw==" />
+			<input type="hidden" name="diCtfVal" value="MC0GCCqGSIb3DQIJAyEAQBL4osxW3EX7WS3cxkwIkVl5IHo3u8flIJmWzAXteH0=" />
+			<input type="hidden" name="rcomUrl" value=""/>
+			<input type="hidden" name="rcomCd" value="2F5E09F6"/>
+			<input type="hidden" name="ntnGbCd" value="10" />
+		</div>
+		<main class="container page login srch" id="container" style="margin-top:100px;margin-left:100px;">
+
+
+			<div class="inr">
+				<!-- 본문 -->
+				<div class="contents" id="contents">
+					<div class="pc-tit">
+						<h2>회원가입</h2>
+					</div>
+					<div class="fake-pop">
+						<div class="pct">
+							<div class="poptents">
+								<!-- 프로필 사진 -->
+								<div class="my-picture">
+									<p class="picture">
+										<img id="prflImg" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
+									</p>
+									<button type="button" class="btn edit" id="prflImgBtn" onclick="img.upload();" data-content=""></button>
+								</div>
+								<!-- // 프로필 사진 -->
+								<!-- 회원 정보 입력 -->
+								<div class="member-input">
+									<ul class="list">
+										<li>
+											<strong class="tit requied">아이디</strong>
+											<p class="info">필수입력정보</p>
+											<div class="input">
+												<input type="text" id="id" class="required_join_input cleanValMsg" name="Id" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
+											</div>
+
+										</li>
+										<li>
+											<strong class="tit requied">비밀번호</strong>
+											<div class="input del">
+												<input type="password" name="pass" id="pass" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="15" autocomplete="new-password">
+											</div>
+											<p class="validation-check" id="join_pswd_error"></p>
+										</li>
+										<li>
+											<strong class="tit requied">비밀번호 확인</strong>
+											<div class="input del">
+												<input type="password" id="repass" name="repass" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" autocomplete="new-password">
+											</div>
+											<p class="validation-check" id="join_pswd_check_error"></p>
+										</li>
+										<li>
+											<strong class="tit requied">이름</strong>
+											<div class="input">
+											<input type="text" name="mbrNm"  id="mbrNm" placeholder="이름을 입력해주세요" >
+												</div>
+										</li>
+										<li id="mobile-li-default">
+											<strong class="tit requied">휴대폰 번호</strong>
+											<div class="input">
+												<input type="text" id="phone" namae="phone"  placeholder="휴대폰번호를 입력해주세요">
+												</div>
+										</li>
+										 <!-- 본인인증 안내 -->
+										<li id="mobile-li-cert">
+										</li>
+										<li>
+											<strong class="tit requied">닉네임</strong>
+											<div class="input del">
+												<input type="text" id="join_nickname" name="nickNm" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
+											</div>
+											<p id="join_nickNm_error" class="validation-check"></p>
+										</li>
+								
+									</ul>
+								</div>
+								<!-- // 회원 정보 입력 -->
+							</div>
+						</div>
+						<div class="pbt pull mt54">
+							<div class="bts">
+								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">다음</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</main>
+	</form>
+	<!-- e -->
+
+					</main>
+			</div>
+	</div>
+</article><!-- 플로팅 영역 --><!-- location 영역 포함  -->			
+<!--❤️main끝-->			
 	
 
 <!-- footer -->	
