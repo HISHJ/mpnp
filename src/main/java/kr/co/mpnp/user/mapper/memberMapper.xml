@@ -50,8 +50,9 @@ where id=#{id}
 	 11.15: 상태, 가입일, 회원등급 추가
 	 sysdate만 써도되지만 코드 딱 떨어지게 하기위해 ..  -->
 <insert id="insertMember" parameterType="memberVO">
-insert into member (id,pfimg,nick,name,pass,phone,status,gradeId,inputdate)
-values(#{id},#{pfimg},#{nick},#{name},#{pass},#{phone},'정상','G1',to_char(sysdate,'yyyy-MM-dd'))
+insert into member (id,pfimg,nick,name,pass,phone,status,gradeid,inputdate)
+values(#{id},#{pfimg},#{nick},#{name},#{pass},#{phone},
+#{status},#{gradeid},to_char(sysdate,'yyyy-MM-dd'))
 </insert>
 
 

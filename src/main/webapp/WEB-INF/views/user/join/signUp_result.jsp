@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" info="scriptlet의 사용" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -275,7 +278,7 @@ function goPageWithClosingGnb(url) {
 						<!-- // PC 타이틀 모바일에서 제거  -->
 						<div class="fake-pop">
 							<div class="result">
-								<span class="blue">${param.nick}</span>님 명품냥품에 가입하신 것을 환영합니다!</div>
+								<span class="blue">${param.nick}</span>님<br> 명품냥품에 가입하신 것을 환영합니다!</div>
 							<div class="end-box mt30">
 									<dl>
 										<dt>아이디</dt>
@@ -288,7 +291,8 @@ function goPageWithClosingGnb(url) {
 								</div>
 							<div class="pbt mt30">
 								<div class="btnSet">
-									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a>
+<!-- 									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a> -->
+									<a href="login_form.do" class="btn lg a" >로그인하기</a>
 								</div>
 							</div>
 							<!-- <a class="lnk-pw center" href="/login/indexFindPswd" data-content="" data-url="/login/indexFindPswd" >비밀번호가 생각나지 않으세요?</a> -->

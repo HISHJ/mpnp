@@ -102,8 +102,6 @@
 						$cartCntObj.text(data.cartCnt);
 					}
 				}
-				
-		
 			}
 		});
 	}
@@ -131,7 +129,99 @@
 		var cookieName	= getTopbannerCookieName();
 		setCookieTopBanner(cookieName, "done", 1);
 	}
+		
+	/* 전화번호 하이픈추가  */
+	function PhoneNumber(obj) {
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+	    
+		if(number.substr(0,2)==02){
+		    if(number.length < 3) {
+		        return number;
+		    } else if(number.length < 6) {
+		        phone += number.substr(0, 2);
+		        phone += "-";
+		        phone += number.substr(2);
+		        
+		    } else if(number.length < 10) {
+		        phone += number.substr(0, 2);
+		        phone += "-";
+		        phone += number.substr(2, 3);
+		        phone += "-";
+		        phone += number.substr(5);
+		    } else {
+		        phone += number.substr(0, 2);
+		        phone += "-";
+		        phone += number.substr(2, 4);
+		        phone += "-";
+		        phone += number.substr(6,4);
+		    }
+		}else{
+			if(number.length < 4) {
+	        return number;
+	   		} else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    	} else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	}
+	    obj.value = phone;
+		return false;
+}//PhoneNumber
+
+$(function() {
+	$("#saveBtn").click(function() {
+		var pfimg=$("#pfimg").val();
+		
+		var blockExt="jpg,jpeg,png,PNG".split(",");
+		var flag=false;
+		var pfimgExt=pfimg.substring(pfimg.lastIndexOf(".")+1);
+		
+		for(var i=0; i<blockExt.length; i++){
+			if(blockExt[i]==pfimgExt){
+				flag=true;
+			}
+		}
+		if(!flag){
+			alert("이미지파일만 넣으라구");
+			return flag;
+		}
+		
+		$("#signUpFrm").submit();
+	});
+	
+	
+	
+});//ready
+
+//썸네일이미지 미리보기
+	function thImgSet(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('pfThumb').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('pfThumb').src = "";
+	  }
+}
 </script><!-- header pc-->
+
+
+
 <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -312,8 +402,8 @@
 			top:20%;
 		}
 	</style>
-	<form id="signUpFrm" name="signUpFrm">
-		<div id="hiiden-field">
+<!-- 	<form id="signUpFrm" name="signUpFrm">
+ -->		<div id="hiiden-field">
 			<input type="hidden" id="adapter" onchange="fnSnsStatSave();"/>
 			<input type="hidden" name="prflNm" value="" />
 			<input type="hidden" name="prflImg" value="" />
@@ -338,23 +428,29 @@
 					</div>
 					<div class="fake-pop">
 						<div class="pct">
+						<form id="signUpFrm" action="join_add_process.do">
 							<div class="poptents">
 								<!-- 프로필 사진 -->
 								<div class="my-picture">
 									<p class="picture">
-										<img id="prflImg" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
+										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
 									</p>
-									<button type="button" class="btn edit" id="prflImgBtn" onclick="img.upload();" data-content=""></button>
+ 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
+									<input type="file" id="pfimg" name="pfimg" style="display: none" onchange="thImgSet(this)">
 								</div>
 								<!-- // 프로필 사진 -->
 								<!-- 회원 정보 입력 -->
 								<div class="member-input">
 									<ul class="list">
 										<li>
-											<strong class="tit requied">아이디</strong>
+											<strong class="tit requied" style="visibility: hidden;" >아이디</strong>
 											<p class="info">필수입력정보</p>
+										</li>
+										<li>
+											<strong class="tit requied" >아이디</strong>
+											<p class="info">아이디 중복 검사 click 　</p><p class="info"></p>
 											<div class="input">
-												<input type="text" id="id" class="required_join_input cleanValMsg" name="Id" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
+												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
 											</div>
 
 										</li>
@@ -375,13 +471,13 @@
 										<li>
 											<strong class="tit requied">이름</strong>
 											<div class="input">
-											<input type="text" name="mbrNm"  id="mbrNm" placeholder="이름을 입력해주세요" >
+											<input type="text" name="name"  id="name" placeholder="이름을 입력해주세요" >
 												</div>
 										</li>
 										<li id="mobile-li-default">
 											<strong class="tit requied">휴대폰 번호</strong>
 											<div class="input">
-												<input type="text" id="phone" namae="phone"  placeholder="휴대폰번호를 입력해주세요">
+												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13" placeholder="휴대폰번호를 입력해주세요">
 												</div>
 										</li>
 										 <!-- 본인인증 안내 -->
@@ -390,8 +486,12 @@
 										<li>
 											<strong class="tit requied">닉네임</strong>
 											<div class="input del">
-												<input type="text" id="join_nickname" name="nickNm" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
+												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
+<!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
 											</div>
+											<!-- 회원등급 hidden으로 -->
+												<input type="hidden" id="gradeid" name="gradeid" value="NEW">
+												<input type="hidden" id="status" name="status" value="정상">
 											<p id="join_nickNm_error" class="validation-check"></p>
 										</li>
 								
@@ -402,7 +502,8 @@
 						</div>
 						<div class="pbt pull mt54">
 							<div class="bts">
-								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">다음</a>
+<!-- 								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">다음</a> -->
+								<a class="btn xl a" id="saveBtn">다음</a>
 							</div>
 						</div>
 						

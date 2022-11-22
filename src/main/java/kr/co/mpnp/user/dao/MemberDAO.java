@@ -117,11 +117,11 @@ public class MemberDAO {
 			//1.MyBatis Handler얻기
 			MyBatisHandler mbh=MyBatisHandler.getInstance();
 			SqlSession ss=mbh.getHandler();
+			System.out.println("DAO 아이디"+mVO.getId()); //잘들어옴
 			
 			//2.쿼리문실행
-			int cnt=ss.insert("",mVO);
+			int cnt=ss.insert("kr.co.mpnp.user.mapper.memberMapper.insertMember",mVO);
 			if(cnt!=0) {
-				System.out.println("");
 				ss.commit();//와 이거 잊지말자 .... 
 			}else {
 				System.out.println("실패하였습니다");

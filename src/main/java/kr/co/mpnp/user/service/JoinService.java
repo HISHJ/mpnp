@@ -1,5 +1,6 @@
 package kr.co.mpnp.user.service;
 
+import kr.co.mpnp.user.dao.MemberDAO;
 import kr.co.mpnp.user.vo.MemberVO;
 
 
@@ -14,14 +15,14 @@ public class  JoinService {
 	
 	
 	//2.사용자-회원가입
-	public void insertMember(MemberVO mVO) {
+	public int addMember(MemberVO mVO) {
+		int cnt=0;
+		
+		MemberDAO mDAO=MemberDAO.getInstance();
+		cnt=mDAO.insertMember(mVO);
+		
+		return cnt;
 	}
 	
 	
-	
-
-	public static void main(String[] args) {
-
-	}
-
 }
