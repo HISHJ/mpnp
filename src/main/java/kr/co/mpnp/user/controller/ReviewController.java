@@ -33,8 +33,8 @@ public class ReviewController {
 		model.addAttribute("writableList",writableList);
 		////////////////////////////////////////////////////////////////////////
 		
-		List<ReviewDomain> writenList = reviewService.searchWritenReview("id001");
-		model.addAttribute("writenList",writenList);
+		//List<ReviewDomain> writenList = reviewService.searchWritenReview("id001");
+		//model.addAttribute("writenList",writenList);
 		
 		
 		/////////////////////////////////////////////////////////////////////////
@@ -43,10 +43,15 @@ public class ReviewController {
 	
 	// 府轰累己 汽
 	@RequestMapping(value="/add_review_form.do",method=RequestMethod.GET)
-	public String addReviewForm(HttpSession session, String orderDetailId, Model model) {
+	public String addReviewForm(HttpSession session, String orderDetailId,String name, String thImg, Model model) {
 		
+		System.out.println(orderDetailId+" / "+name+" / "+thImg);
 		
-		return "";
+		model.addAttribute("odId",orderDetailId);
+		model.addAttribute("prdName",name);
+		model.addAttribute("prdImg",thImg);
+		
+		return "/user/review/write_review";
 	}
 	
 	// 府轰累己
@@ -70,11 +75,11 @@ public class ReviewController {
 		
 		List<ReviewDomain> writenList = reviewService.searchWritenReview("id001");
 		for(ReviewDomain rd : writenList) {
-			System.out.println("ReviewController :  - "+rd.getWriteDate());
+			System.out.println("ReviewController : 累己茄府轰 - "+rd.getWriteDate());
 		}
-		model.addAttribute("writableList",writenList);
+		model.addAttribute("writenList",writenList);
 		
-		return "";
+		return "/user/review/writen_review";
 	}
 	
 	// 累己府轰 惑技焊扁   

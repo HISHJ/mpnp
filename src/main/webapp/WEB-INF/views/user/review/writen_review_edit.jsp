@@ -345,7 +345,158 @@
 <!--❤️사이드바 끝-->
 <!--❤️main-->
   <!--❤️main-->
+	<script>
+		$(document).ready(function(){
+			//다 입력된 경우 변경 버튼 활성화
+			$(".inputPswd").on('keyup', function(e) {
+				if($("#newPswd_error").html() != "" ||  $("#newPswdCheck_error").html() != ""){
+					$("#newPswd_error").html("")
+					$("#newPswdCheck_error").html("");
+				}
+				
+				if($("#newPswd").val() != "" && $("#newPswdCheck").val()  != ""){
+					//버튼 활성화
+					$("#updateBtn").attr("disabled",false);
+					$("#updateBtn").attr("class","btn lg a");
+					
+				}else{
+					//버튼 비활성화
+					$("#updateBtn").attr("disabled",true);
+					$("#updateBtn").attr("class","btn lg a gray");
+				}
+			});
 	
+			$(document).on("blur", "#newPswd", function(){
+				fncPswdCheck();
+			});
+			
+			$(document).on("blur", "#newPswdCheck", function(){
+				if($("#newPswdCheck").val() != $("#newPswd").val()){
+					$("#newPswdCheck_error").html("동일한 비밀번호를 입력해주세요.");
+					//$("#newPswdCheck").focus();
+				}else{
+					$("#newPswdCheck_error").html("");
+				}
+			});
+		});
+		
+		// 알럿창 띄우기
+		var popAlert = function(msg, callback){
+			ui.toast('<p>'+msg+'</p>',{
+				ccb:function(){
+					if(callback.length > 0){
+						var returnUrl = "";
+						if(returnUrl.indexOf("indexManageDetail") > -1){
+							jQuery("<form action=\"/mypage/info/indexManageDetail\" method=\"post\"><input type=\"hidden\" name=\"checkCode\" value=\"f844fd4a067f5a543f9bb3adf7236d94\" /><input type=\"hidden\" name=\"type\" value=\"MNG\" /></form>").appendTo('body').submit();
+							return;
+						}
+						
+						if("PC"!= 'PC' ){
+							//location.href="/indexMyInfo?returnUrl=/mypage/indexMyPage";
+							location.href="/indexMyInfo";
+							return;
+						}
+						
+						location.href="/mypage/indexMyPage/";
+					}
+				},
+				ybt:'확인'	
+			});
+		}
+		
+		//비밀번호 변경
+		function fncUpdatePswd(){
+			if(fncPswdCheck()){
+				var newPswd = $("#newPswd").val();
+				var rsa = new RSAKey();
+				rsa.setPublic($("#RSAModulus").val(), $("#RSAExponent").val());
+				var newPswd_enc = rsa.encrypt(newPswd);
+				$("#newPswd").val(newPswd_enc);
+				
+				var options = {
+					url: "/mypage/info/updateMemberPassword",
+					data : $("#pswdForm").serialize(),
+					done : function(data){
+						if(data.resultCode == 'F'){
+							popAlert('오류가 발생되었습니다. 관리자에게 문의하십시요.');
+							return;
+						}
+						else if(data.resultCode == 'duplicated'){
+							ui.toast('이전에 사용된 비밀번호는 사용하실 수 없어요.'); // 체크하는게 맞는지 노확실
+						}else{
+							popAlert('비밀번호가 변경되었어요.', 'callback');
+						}
+					}
+				}
+				ajax.call(options);
+				
+				$("#newPswd").val(newPswd);
+			}else{
+				if($("#newPswd_error").html() != ''){
+					$("#newPswd").focus();
+				}else{
+					$("#newPswdCheck").focus();
+				}
+			}
+		}
+		
+		//유효성 체크
+		function fncPswdCheck(){
+			$("#newPswd_error").html("");
+			$("#newPswdCheck_error").html("");
+			
+			if($("#newPswd").val() == ""){
+				$("#newPswd_error").html("비밀번호를 입력해주세요.");
+				//$("#newPswd").focus();
+				return false;
+			}
+			 
+			if($("#newPswd").val().search(/\s/) !== -1 || $("#newPswd").val().search(/[|]/gi) !== -1){
+				$("#newPswd_error").html("공백이나 제한된 특수문자는 사용하실 수 없어요");
+				//$("#newPswd").focus();
+				return false;
+			}
+			
+			var pswdCheck = pswdValid.checkPswd($("#newPswd").val());
+			if(pswdCheck == "falseLength"){
+				$("#newPswd_error").html("8~15자 이내로 입력해주세요.");
+				//$("#newPswd").focus();
+				return false;
+			}
+			
+			if(pswdCheck == "falseCheck"){
+				$("#newPswd_error").html("영문, 숫자, 특수문자를 각각 1자리 이상 포함해주세요");
+				//$("#newPswd").focus();
+				return false;
+			}
+			
+			if(!pswdValid.checkPswdMatch($("#newPswd").val())){
+				$("#newPswd_error").html("3자리 연속 반복된 문자나 숫자는 입력할 수 없어요");
+				//$("#newPswd").focus();
+				return false;
+			}
+			
+			if(!pswdValid.checkIncludeIdValue($("#newPswd").val(),"jsh4135@naver.com") ) {
+				$("#newPswd_error").html("아이디와 4자 이상 동일할 수 없어요.");
+				//$("#newPswd").focus();
+				return false;
+			}
+	
+			/* if(!pswdValid.checkIncludeIdValue($("#newPswd").val(), "")){
+				$("#newPswd_error").html("생년월일과 4자 이상 동일할 수 없습니다.");
+				//$("#newPswd").focus();
+				return false;
+			} */
+	
+			if($("#newPswdCheck").val() != $("#newPswd").val()){
+				$("#newPswdCheck_error").html("동일한 비밀번호를 입력해주세요.");
+				//$("#newPswdCheck").focus();
+				return false;
+			}
+			
+			return true;
+		}
+	</script>
 	
 	
 	
@@ -362,52 +513,38 @@
 			
 		 
 				<!--❤️nav-->
-	<script>
-	$(function(){
-		$("[name=starRating]").click(function(){
-			//alert(this.value);
-			document.getElementById("starScore").value = this.value;
-		})
-	})
 	
-	function writeAdd(){
-		var contents = document.getElementById("reviewContents").value;
-		//alert(document.getElementById("starScore").value);
-		var starScore = document.getElementById("starScore").value;
-		alert(contents);
-		alert(starScore);
-	}
-	</script>
 	
 	
 			<!--❤️main-->
 			<!-- 바디 - 여기위로 템플릿 -->
 			<main class="container lnb page my" id="container" style="width:80%;margin-top:100px !important;margin-left:230px !important;">
-				<!-- <input type="hidden" id="returnUrl" value="https://aboutpet.co.kr/mypage/order/indexPurchaseCompletion"> -->
+				<input type="hidden" id="returnUrl" value="https://aboutpet.co.kr/mypage/order/indexPurchaseCompletion">
 				<div class="inr" style="min-height: 429px;">
 					<!-- 본문 -->
 					<div class="contents" id="contents" style="min-height: 550.8px;">
 						<div class="pc-tit">
 							<h2 id="asd"> 후기 작성</h2>
 						</div>
+						<!-- 리워드 있는 경우-->
+							<!-- 일반후기, 펫 미등록 사용자 -->
 										
-							<form id="reviewContentsForm" ><!-- method="post" action="add_review_process.do" -->
-							<!-- 내용길수도있으니까 post인데 이거 되나? 어차피 사진때문에 VO로 못받잖아 -->
-							<!-- 어쨋든 등록버튼누르면 그냥 AJAX처리하고 해당페이지로 보내주면 될거같은데? -->
+										<form id="commentForm" data-goods-estm-tp="NOR" data-goods-estm-no="">
 							<div class="uirevset-my">
 								<div class="set gods line-n">
 									<div class="cdt">
 										<div class="tops">
-											<div class="pic">
-											사진 : <c:out value="${prdImg }"/></div>
+											<div class="pic"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg" alt="상품" class="img"></div>
 											<div class="name">
-												<div class="tit k0423"><c:out value="${prdName }"/></div>
+												<div class="tit k0423">[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)</div>
 												<div class="stt k0423"></div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="flex-box">
+									<!-- 리워드 있는 경우-->
+										<!-- 일반후기, 펫 미등록 사용자 -->
 													
 														
 													<div class="set star">
@@ -418,17 +555,16 @@
 	
 											<div class="uiStar">
 												<div class="inner-content">
-												<input type="hidden" name="starScore" id="starScore"/>
-													<input type="radio" name="starRating" value="5" id="star5">
-													<label for="star5"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="4"  id="star4">
-													<label for="star4"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="3" id="star3">
-													<label for="star3"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="2" id="star2">
-													<label for="star2"><i class="fa fa-star"></i></label>
 													<input type="radio" name="starRating" value="1" id="star1">
 													<label for="star1"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="2" id="star2">
+													<label for="star2"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="3" id="star3">
+													<label for="star3"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="4"  id="star4">
+													<label for="star4"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="5" id="star5">
+													<label for="star5"><i class="fa fa-star"></i></label>
 												</div>
 											</div>
 											<div class="msg">별을 선택하여 만족도를 알려주세요.</div>
@@ -443,20 +579,14 @@
 											<span class="tit">후기 내용 입력</span>
 										</div>
 										<div class="textarea">
-											<textarea name="reviewContents" id="reviewContents" placeholder="다른 고객님들에게 도움이 되는 후기를 입력해주세요. 후기 내용은 최소 10자 이상 입력해주세요."></textarea>
+											<textarea name="commentContArea" placeholder="다른 고객님들에게 도움이 되는 후기를 입력해주세요. 후기 내용은 최소 10자 이상 입력해주세요."></textarea>
 										</div>
 									</div>
 									<div class="set file">
 										<div class="flex-box">
 											<div class="btnSet">
-												<input type="file" id="real-input" class="image_inputType_file" accept="img/*" multiple>
-											</div>
-										</div>
-										<!--<div class="flex-box">
-											<div class="btnSet">
-												<button type="button" class="btn lg btnAddPic" id="imgAddBtn-comment" onclick="document.all.file.click()">사진 첨부하기</button>
-												<button type="button" class="btn lg btnAddPic" id="imgAddBtn" onclick="onclick=document.all.imgAdd.click()">사진 첨부하기</button>
-												<input type="file" id="imgAdd" style="display: none;">
+												<button type="button" class="btn lg btnAddPic" id="imgAddBtn-comment" onclick="$('#imgAdd-comment').trigger('click')">사진 첨부하기</button>
+												<input type="file" id="imgAdd-comment" onclick="writeFnc.imageUpload(); return false;" style="display: none;" accept="image/*">
 											</div>
 											<div class="addfile">
 												<ul class="photo" id="commentImgArea">
@@ -464,25 +594,25 @@
 														cancel
 														</span></button></span></li></ul>
 											</div>
-										</div> -->
+										</div>
 										<!--APDO-174 모바일에서는 후기는 모바일앱에서 작성할 수 있습니다.를 제외하고 mweb / pc와 동일하게 맞춤   -->
 										<div class="gmsgListWrap">
 											<p class="gmsg info-t1" id="gsmgInfoRemoveInApp">로그 후기는 모바일앱에서 작성할 수 있습니다. </p> <!-- APET-1250 210728 kjh02  -->
 											<p class="gmsg info-t1">20MB 미만의 JPG, PNG 파일만 등록 가능합니다.</p>
 										</div>
 									</div>
-								<!-- <div class="set btts">
+								<div class="set btts">
 									<div class="btnSet">
 										<button type="button" class="btn lg d" name="writeCancel">취소</button>
 										<button type="button" class="btn lg a disabled" name="okbtn" onclick="writeFnc.writeComment(); return false;" style="pointer-events:all;">등록</button>
 											</div>
-								</div> -->
+								</div>
 								
 								
 			
 								<div class="btnSet pc pc-bottom-s1 mo-margin-s1">
 									<a href="javascript:;" class="btn lg d onWeb_if" name="writeCancel">취소</a>
-									<a href="javascript:;" class="btn lg a disabled" name="okbtn" onclick="writeAdd()" style="pointer-events:all;">등록</a>
+									<a href="javascript:;" class="btn lg a disabled" name="okbtn" onclick="writeFnc.writeComment(); return false;" style="pointer-events:all;">등록</a>
 										</div>
 						
 							</div>

@@ -303,27 +303,29 @@
 		<script>
 		$(function(){
 			$("#writableBtn").click(function(){
-				alert("눌림");
-				$(".writableTab").show();
-				$(".writenTab").hide();
+				location.href="writable_review_list.do";
+				//alert("눌림");
+				//$(".writableTab").show();
+				//$(".writenTab").hide();
 			})
 			$("#writenBtn").click(function(){
-				alert("눌림");
-				$(".writenTab").show();
-				$(".writableTab").hide();
+				location.href="writen_review_list.do";
+				//alert("눌림");
+				//$(".writenTab").show();
+				//$(".writableTab").hide();
 			})
 		})
 		$(function(){
 			
 		})
-		function editBtn(reviewId){
+		/* function editBtn(reviewId){
 			alert(reviewId);
 			alert($("#selReviewId").val());
 			
 			$("#selReviewId").val(reviewId);
 			alert($("#selReviewId").val());
 			$("#frm").submit();
-		}
+		} */
 		/* function editBtn(reviewId){
 			alert(reviewId);
 			$.ajax({
@@ -339,6 +341,15 @@
 				
 			})
 		} */
+		function writePage(odId, name, thImg){
+			$("#odId").val(odId);
+			$("#odPrdName").val(name);
+			$("#odPrdThImg").val(thImg);
+			
+			$("#addFrm").submit();
+			//alert(odId);
+			
+		}
 		</script>
 		<main class="container lnb page my" id="container"
 			style="margin-left: 100px;">
@@ -366,16 +377,15 @@
 							
 							<c:choose>
 							<c:when  test="${ writableList.size() > 0 }">
-								<li class="active" style="min-height: 369px;">
+								<!-- <li class="active" style="min-height: 369px;"> -->
 									<div class="review-area" name="bfList">
-									<form action="writen_review_detail_form.do" id="frm">
-									<input type="hidden" id="selReviewId" name="reviewId">
+									<form action="add_review_form.do" id="addFrm">
+									<input type="hidden" id="odId" name="orderDetailId">
+									<input type="hidden" id="odPrdName" name="name">
+									<input type="hidden" id="odPrdThImg" name="thImg">
 									</form>
 								<c:forEach var="writableItem" items="${ writableList}">
-										<div class="item" name="orderGoods"
-											data-goods-id="GS251062051" data-ord-no="C202210301001496"
-											data-ord-dtl-seq="1" data-pak-goods-id=""
-											data-goods-estm-no="" style="">
+										<div class="item" name="orderGoods">
 											<div class="inr">
 												<div class="top">
 													<p class="pic">
@@ -393,20 +403,13 @@
 														<strong>구매확정</strong> 2022.10.31
 													</p>
 													<button type="button" href="javascript:;" class="btn"
-														onclick="myComment.writePop(this)">후기 작성</button>
+														onclick="writePage('${writableItem.orderDetailId}','${writableItem.name}','${writableItem.thImg}')">후기 작성</button>
 												</div>
 											</div>
 										</div>
 								</c:forEach>
-										
-										<div class="uimoreload" id="bfMore" style="display: none;">
-											<button type="button" class="bt more"
-												onclick="myComment.getMyCommentList('bf');">
-												<span>더보기</span>
-											</button>
-										</div>
 									</div>
-								</li>
+								<!-- </li> -->
 							</c:when>
 							<c:otherwise>
 								<li class="" style="min-height: 369px;">
