@@ -1,9 +1,14 @@
 package kr.co.mpnp.user.controller;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,17 +17,7 @@ import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.domain.ProductReviewDomain;
 import kr.co.mpnp.user.service.ProductReviewService;
 import kr.co.mpnp.user.service.ProductService;
-import kr.co.mpnp.user.vo.MemberVO;
 import kr.co.mpnp.user.vo.ProductCartVO;
-import kr.co.mpnp.user.vo.ProductVO;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.security.ProtectionDomain;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class ProductController {
@@ -99,14 +94,10 @@ public String addWish(ProductCartVO cVO,HttpSession session) throws Exception {
 	//로그인 확인 : 나중에 session받아오기..!
 	int result=0;
 	if(session.getAttribute("id")!=null) {
-		
 		result=ps.addWish(cVO);
 	} else {//세션에 아이디 없을때
 		result=-1;
 	}
-	
-	
-	
 	return result+" ";
 	
 	

@@ -1,7 +1,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="showDetail.jsp"%>
- 
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -139,6 +140,7 @@
                                     <div class="card-body">
                                        
                                     <form id="updateFrm" action="show_update.jsp">
+                                    	
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                              <div class="col-4"><img id="thImgPreview" class="img-thumbnail" alt="썸네일이미지" src="img/no_img.jpg"></div> 
@@ -146,12 +148,12 @@
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>상품코드</b></div> 
-                                            <div class="col-6"><input id="" name="" type="text" class="dataTable-input" value="" placeholder="" readonly="readonly"></div>
+                                            <div class="col-6"><input id="" name="" type="text" class="dataTable-input" value="${data.productid }" placeholder="" readonly="readonly"></div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>상품명</b></div> 
-                                            <div class="col-6"><input id="name" name="name" type="text" class="dataTable-input" value="제발돼라" placeholder="공연명을 입력해주세요"></div>
+                                            <div class="col-6"><input id="name" name="name" type="text" class="dataTable-input" value="${data.productname }" placeholder="공연명을 입력해주세요"></div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -174,7 +176,7 @@
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>가격</b></div>
-                                            <div class="col-4"><input type="text" name="price" id="price" class="dataTable-input" placeholder="숫자만 입력해주세요"></div>
+                                            <div class="col-4"><input type="text" name="price" id="price" value="${data.price }" class="dataTable-input" placeholder="숫자만 입력해주세요"></div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -212,8 +214,9 @@
                                         <div class="dataTable-top"></div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                        	<div class="col-2"><b>상품추가일</b></div> <div class="col-6"></div>
+                                        	<div class="col-2"><b>상품추가일</b>: ${data.inputdate }</div> <div class="col-6"></div>
                                         </div>
+                                     
                                    	</form>  
                                    	
                                         

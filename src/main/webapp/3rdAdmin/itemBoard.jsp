@@ -2,7 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- <%
  //로그인되어있지 않은 경우 로그인페이지로 이동
@@ -84,19 +85,26 @@ if( session.getAttribute("adminId") == null){
                              </form>
                               
                         	<form name="" id="">
-                           	 <div class="dataTable-top"></div>
+                           	 <div class="dataTable-top">  </div>
                                <div>
-                                <label>분류1　　</label>
+                                <label>분류1</label>
                                 <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+                       			<c:forEach var="m" items="${main}">
+                                	<option value="${m.mainid}">${m.mainname}</option>
+	                         	  </c:forEach>
 								</select>
 								<input type="button" id="genreSearchBtn" name="genreSearchBtn" value="검색">
                                </div>
+                             
                               </form>
                            
                         	 <form name="" id="">
                                 <div class="dataTable-top"></div>
-                                <label>분류2　　</label>
+                                <label>분류2　</label>
                                   <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+                                 <c:forEach var="s" items="${main}">
+                                	<option value="${s.subid}">${s.mainname}</option>
+	                         	  </c:forEach>
 								  </select>
                                   <input type="button" id="statusSearchBtn" name="statusSearchBtn" value="검색">
                            		</form>
@@ -129,19 +137,19 @@ if( session.getAttribute("adminId") == null){
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    
+                                    <c:forEach items="${product}" var="product">
                                    		<tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>                                          
+                                            <td>${product.productid }</td>
+                                            <td>${product.mainname }</td>
+                                            <td>${product.subname }</td>
+                                            <td>${product.productname }</td>
+                                            <td><fmt:formatNumber value="${product.price}" pattern="#,###"/>원</td>                                          
                                             <td><input type="button" value="상세보기" onClick="getHiddenVal('','','')"></td> 
                                         </tr>
-                                        
+                                       </c:forEach> 
                                     </tbody>
                                 </table>
-                            <div><a href="http://localhost/group2_prj/admin/showAdd.jsp"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
+                            <div><a href="admin_prddetail.do"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
                          </div>
                     </div>
              

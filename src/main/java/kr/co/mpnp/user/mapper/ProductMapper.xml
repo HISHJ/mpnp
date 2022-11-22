@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.mpnp.use.mapper.ProductMapper">
+<mapper namespace="kr.co.mpnp.user.mapper.ProductMapper">
 <!-- resultType : 조회 결과 값을 저장하기 위한 데이터타입(데이터 하나에 대한 타입 지정)
        parameterType:전달받은 파라메터 데이터 타입 지정(선택적) select( 여기 들어가는거)
        domain과 setter명이 같아야함!!  
@@ -84,8 +84,14 @@ values(concat('ca_',lpad(seq_cart.nextval,7,0)),#{id},#{productid},#{cartcnt},sy
 </insert> 
 
 
-<!-- 찜 추가되어있으면 버튼 업데이트 -->
+<!-- 찜삭제 -->
+<delete id="deleteWish" parameterType="WishLishVO">
+delete from wish where id=#{id} and productid=#{productid}
 
+
+</delete>
+
+<!-- 찜 버튼 업데이트 -->
 
 
 </mapper>

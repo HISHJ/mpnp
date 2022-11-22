@@ -2,7 +2,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- <%
  //로그인되어있지 않은 경우 로그인페이지로 이동
@@ -20,7 +21,7 @@ if( session.getAttribute("adminId") == null){
         <meta name="author" content="" />
         <title>상품관리-메인</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
         
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!--제이쿼리-->
@@ -58,7 +59,7 @@ if( session.getAttribute("adminId") == null){
     </head>
     <body class="sb-nav-fixed">
   <!-- 여기서부터 <nav>-->
-<jsp:include page="admin_common_header.jsp"/>     
+<jsp:include page="admin_common_header.jsp"/>      
 <!-- -여기까지 <div id="layoutSidenav_content"> 전  -->
             <div id="layoutSidenav_content">
                     <div class="container-fluid px-4">
@@ -84,19 +85,27 @@ if( session.getAttribute("adminId") == null){
                              </form>
                               
                         	<form name="" id="">
-                           	 <div class="dataTable-top"></div>
+                           	 <div class="dataTable-top">  </div>
                                <div>
-                                <label>분류1　　</label>
-                                <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+                                <label>분류1</label>
+                                <select id="main" name="genreId" class="dataTable-selector" aria-label="Default select example">
+                       		
+                                	<option value="m0001">강아지</option>
+                                	<option value="m0002">고양이</option>
+	                         	 
 								</select>
 								<input type="button" id="genreSearchBtn" name="genreSearchBtn" value="검색">
                                </div>
+                             
                               </form>
                            
                         	 <form name="" id="">
                                 <div class="dataTable-top"></div>
-                                <label>분류2　　</label>
-                                  <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+                                <label>분류2　</label>
+                                  <select name="genreId" id="sub" class="dataTable-selector" aria-label="Default select example">
+                                 <c:forEach var="s" items="${main}">
+                                	<option value="${s.subid}">${s.subname}</option>
+	                         	  </c:forEach>
 								  </select>
                                   <input type="button" id="statusSearchBtn" name="statusSearchBtn" value="검색">
                            		</form>
@@ -129,19 +138,19 @@ if( session.getAttribute("adminId") == null){
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    
+                                    <c:forEach items="${product}" var="product">
                                    		<tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>                                          
-                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('','','')"></td> 
+                                            <td>${product.productid }</td>
+                                            <td>${product.mainname }</td>
+                                            <td>${product.subname }</td>
+                                            <td>${product.productname }</td>
+                                            <td><fmt:formatNumber value="${product.price}" pattern="#,###"/>원</td>                                          
+                                            <td><a href="admin_prddetail.do?productid=${product.productid }"><input type="button" value="상세보기" ></a></td> 
                                         </tr>
-                                        
+                                       </c:forEach> 
                                     </tbody>
                                 </table>
-                            <div><a href="http://localhost/group2_prj/admin/showAdd.jsp"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
+                            <div><a href="admin_prddetail.do"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
                          </div>
                     </div>
              
@@ -156,10 +165,10 @@ if( session.getAttribute("adminId") == null){
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="http://localhost/mpnp/3rdAdmin/js/scripts.js"></script>
+        <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="http://localhost/mpnp/3rdAdmin/js/datatables-simple-demo.js"></script>
+        <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
  

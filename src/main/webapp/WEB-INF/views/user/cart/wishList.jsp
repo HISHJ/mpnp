@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -717,18 +718,20 @@ function goPageWithClosingGnb(url) {
 				<div class="uiTab_content">
 					<ul data-cont-tag="shop">
 						<li class="active" id="tab_shop">
-							<div class="noneBoxPoint" id="noneBoxShopPoint" style="display:none">
+						<c:if test="${empty wish }">
+							<div class="noneBoxPoint" id="noneBoxShopPoint">
 								<section class="no_data i7" style="height:calc(100vh - 110px);">
 									<div class="inr">
 										<div class="msg">
 											찜리스트에 추가한 상품이 없습니다.<br>
 											반려동물을 위한 상품을  구경해보세요.</div>
 										<div class="uimoreview">
-											<a href="/shop/home" class="bt more" data-url="/shop/home">스토어 바로가기</a> <!-- APET-1250 210728 kjh02  -->
+											<a href="index.do" class="bt more" >스토어 바로가기</a> <!-- APET-1250 210728 kjh02  -->
 										</div>
 									</div>
 								</section>
 							</div>
+							</c:if>
 							
 							<div class="mybrand-list t4" id="brandPage" data-page="1" style="display:none;">
 								<div class="brand">
@@ -737,60 +740,34 @@ function goPageWithClosingGnb(url) {
 								</div>
 							
 							<div class="thumbnail-list" id="boxShopPoint" data-page="1" >
+							
 								<ul>
+									<c:if test="${not empty id }">
+									<input type="hidden" id="id" value="${id}"/>
+									</c:if>
+									<c:forEach var="list" items="${wish }">
 									<li>
 										<div class="gdset packg">
 											<div class="thum">
-												<a href="/goods/indexGoodsDetail?goodsId=GI251062497" data-content='GI251062497' data-url="/goods/indexGoodsDetail?goodsId=GI251062497" class="pic">
-													<img class="img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251062497/be95ce69-4e81-45f1-9bda-d938a410ac29.jpg?type=f&w=356&h=356&quality=100&align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt="이미지">
+												<a href="prddetail.do?productid=${list.productid}" class="pic">
+												
+												
+													<img class="img" src="http://localhost/mpnp/images/${list.thimg}.jpg?type=f&w=356&h=356&quality=100&align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt="${list.name }">
 													</a>
-												<span class="bt zzim on" 
-													data-yn="N"
-													data-goods-id="GI251062497"
-													data-content='GI251062497'
-													data-delyn='Y'
-													data-url="/goods/insertWish?goodsId=GI251062497"
-													onclick="myInsertWish('GI251062497');">즐겨찾기</span>
+												<span class="bt zzim on" id="zzim" onclick="deleteZZim('${list.productid}')">즐겨찾기</span>
 											</div>
 											<div class="boxs">
 												<div class="tit">
-													<a href="/goods/indexGoodsDetail?goodsId=GI251062497" data-content='GI251062497' data-url="/goods/indexGoodsDetail?goodsId=GI251062497" class="lk">[어펫단독] 사니캣 옥수수 모래 6L</a>
+													<a href="prddetail.do?productid=${list.productid}" class="lk">${list.name }</a>
 												</div>
-												<a href="/goods/indexGoodsDetail?goodsId=GI251062497" data-content='GI251062497' data-url="/goods/indexGoodsDetail?goodsId=GI251062497" class="inf">
-													<span class="prc"><em class="p">14,900</em><i class="w">원</i></span>
+												<a href="prddetail.do?productid=${list.productid}" class="inf">
+													<span class="prc"><em class="p"><fmt:formatNumber value="${list.price }" pattern="#,###"/></em><i class="w">원</i></span>
 												</a>
 												</div>
 										</div>
 										</li>
-										<li>
-										<div class="gdset packg">
-											<div class="thum">
-												<a href="/goods/indexGoodsDetail?goodsId=GP251060222" data-content='GP251060222' data-url="/goods/indexGoodsDetail?goodsId=GP251060222" class="pic">
-													<img class="img" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GP251060222/7b76ffcb-0a3b-4c1a-acc0-413635e97f85.jpg?type=f&w=356&h=356&quality=100&align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt="이미지">
-													</a>
-												<span class="bt zzim on" 
-													data-yn="N"
-													data-goods-id="GP251060222"
-													data-content='GP251060222'
-													data-delyn='Y'
-													data-url="/goods/insertWish?goodsId=GP251060222"
-													onclick="myInsertWish('GP251060222');">즐겨찾기</span>
-											</div>
-											<div class="boxs">
-												<div class="tit">
-													<a href="/goods/indexGoodsDetail?goodsId=GP251060222" data-content='GP251060222' data-url="/goods/indexGoodsDetail?goodsId=GP251060222" class="lk">냥심멍심 강아지간식 리얼져키 6종 모음</a>
-												</div>
-												<a href="/goods/indexGoodsDetail?goodsId=GP251060222" data-content='GP251060222' data-url="/goods/indexGoodsDetail?goodsId=GP251060222" class="inf">
-													<span class="prc"><em class="p">5,900</em><i class="w">원</i></span>
-												</a>
-												</div>
-										</div>
-
-
-
-
-
-</li>
+										</c:forEach>
+										
 </ul>
 								</div>
 						</li>
@@ -798,6 +775,45 @@ function goPageWithClosingGnb(url) {
 				</div>
 			</section>
 			<!-- // tab -->
+			
+			<script>
+			/* 찜 삭제 */
+	function deleteZZim(productid){
+				
+				
+				var data={
+						id : "${id}",
+						productid : productid
+				};
+				
+				console.log(data);
+			
+				 $.ajax({
+					  url :"remove_wish.do",
+					  type:"post",
+					  data : data,
+					  success : function(result){
+						if(result){
+							alert("삭제되었습니다");
+							location.reload();
+						} else{
+							alert("잠시후 다시 시도해주세요")
+						} 
+						console.log(result);
+					  },
+					
+					  error : function(){
+						  alert("잠시 후 다시시도해주세요.");
+						  
+					  }
+				
+				 }); 
+				
+			};//delete
+			
+			
+			
+			</script>
 		</div>
 	</div>
 </main>

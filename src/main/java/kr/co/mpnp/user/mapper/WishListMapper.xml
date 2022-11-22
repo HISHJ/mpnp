@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.mpnp.user.mapper.WishListMapper">
+<resultMap type="wishDomain"  id="wishResult">
+	<result column="id"  property="id"/>
+	<result column="productid" property="productid"/>	
+	<result column="name" property="name"/>	
+	<result column="price" property="price"/>	
+	<result column="th_img" property="thimg"/>	
+	<result column="inputdate" property="inputdate"/>	
+
+
+</resultMap>
+
+
+<select id="selectWish" parameterType="String" resultMap="wishResult">
+select w.id,w.inputdate,p.productid,p.th_img,p.price,p.name
+from wish w, product p
+where w.productid=p.productid and id=#{id}
+</select>
+
+<delete id="deleteWish" parameterType="WishLishVO">
+delete from wish where id=#{id} and productid=#{productid}
+
+
+</delete>
+
+
+</mapper>

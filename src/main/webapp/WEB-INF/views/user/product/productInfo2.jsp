@@ -720,8 +720,31 @@
     <div class="inr" id="artUiPdOrdPan">
   
       <div class="cdtwrap" style="max-height: 548.8px;">
+<script>
+//상품수량변경
+function count(type)  {
 
+  // 현재 화면에 표시된 값
+ var number=$("#buyQty").val();
+ alert(number)
+  // 더하기/빼기
+  if(type === 'plus') {
+    number=number+1;
+    alert(number)
+  }else if(type === 'minus' )  {
+    number = number - 1;
+    alert(number)
+  }
+  var sum =${data.price}*number
+  sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+  // 결과 출력
+ 	$("#TotalCnt").html(number);
+  	$("#TotalPrice").html(sum);
+  	$("#emPriceTotalAmt").html(sum);
+}
+
+</script>
 
  
   
@@ -739,13 +762,13 @@
               </a>
               <div class="cots">
                 <div class="uispiner">
-              <input type="text" value="1" class="amt" id="buyQty412810" name="buyQty" >
+               <input type="text" value="1" class="amt" id="buyQty" name="buyQty" > 
             <!--  onblur="fnChangebuyQty(this, 'GI251050011')" onkeyup="this.value=this.value.replace(/[^0-9]/g, '');" data-item-no="412810" data-min-ord-qty="1" data-max-ord-qty="100" data-ordmki-yn="N" data-stk="2500" -->
-              <button type="button" class="bt minus">-</button>
-                  <button type="button" class="bt plus">+</button>
+              <button type="button" class="bt minus" onclick='count("minus")'>-</button>
+                  <button type="button" class="bt plus" onclick='count("plus")'>+</button>
                 </div>
                 <div class="price">
-                  <em class="p" id="emPriceTotalAmtItem"><fmt:formatNumber value="${data.price }" pattern="#,###"/></em><i class="w">원</i>
+                  <em class="p" id="TotalPrice"> <fmt:formatNumber value="${data.price}" pattern="#,###"/></em><i class="w">원</i>
                 </div>
               </div>
               </div>
@@ -766,8 +789,8 @@
         <div class="inr">
           <div class="amts">
             <i class="t">총 수량</i>
-            <em class="amt">
-              <i class="i" id="emPriceTotalCnt"></i>
+            <em class="amt" >
+              <i class="i" id="TotalCnt" >1</i>
                 <i class="s">개</i>
             </em>
           </div>
@@ -782,7 +805,7 @@
     <input type="hidden" value="" id="cartQtyInput">
   </div>
   </article>
-      <input type="hidden" name="dispTpcd" value="00">
+      <input type="hidden" name="" value="00">
       <input type="hidden" name="fstPurchBeneTgYn" value="N">
       <input type="hidden" name="userAuthenticationYn" value="Y">
       <input type="hidden" id="dlvyAreaLoadYn" value="Y">
@@ -806,7 +829,7 @@
       <div class="btns">
         <!-- 스탬프 상품은 찜하기 불가 -->
         <div class="zims">
-            <button type="button" class="bt btZZim " id="goodsWish" ><span class="t"><span class="material-symbols-outlined">
+            <button type="button" class="bt btZZim" id="goodsWish" ><span class="t"><span class="material-symbols-outlined">
               bookmark
               </span></span></button><!-- .on class명 있으면 찜한 상태임 -->
           </div>
@@ -825,6 +848,11 @@
   
   <script>
   
+  
+  //상품 수량
+  
+  
+  
   //장바구니 추가-> 1번클릭했을때는 창을 띄우고 2번째 클릭했을때 장바구니 추가 되어야함(수정)
   
   
@@ -841,16 +869,15 @@
   console.log(data);
    
 	  $.ajax({
-		 
 		  url :"cart_insert.do",
 		  type:"post",
 		  data : data,
 		  success : function(result){
-			  if(result.equals("0")){
+			  if(result==0){
 					 alert("result 0 : 잠시후에 다시 시도해주세요") ;
-				  }else if(result.eqauls("1")){
+				  }else if(result==1){
 					  alert("장바구니에 추가되었습니다.");
-				  }else if(result.equals("2")){
+				  }else if(result==2){
 					  alert("장바구니에 이미 추가되었습니다.");
 				  }else{
 					  alert("로그인 후에 시도해주세요.")
@@ -888,12 +915,15 @@
   			type:"post",
   			data : data,
   			success : function(result){
-  				 if(result.equals("1")){
+  				 if(result==1){
+  					 
 	  					alert("찜리스트에 추가되었습니다.");
-				  }else if(result.equals("-1")){
+	  					$(".btZZim").addClass("on");
+	  					
+				  }else if(result==-1){
 					  alert("로그인 후에 사용해주세요.");
-				  }else if(result.equals("2")){
-					  alert("이미 추가되었습니다.!") ;
+				  }else if(result==2){
+					  alert("이미 추가되었습니다") ;
 				  }
 				  
   				 console.log(result);
@@ -910,8 +940,7 @@
 	});//add
 	  
   
-  
-  
+    
   
 
 	 

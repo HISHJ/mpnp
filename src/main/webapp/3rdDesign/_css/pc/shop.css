@@ -956,7 +956,7 @@ nav.location .loc>li .menu>li .bt .t{}
 .cartNavs .btns .zims{}
 .cartNavs .btns .bt{height:56px;display:block;font-size: 16rem;font-weight: 400;width:100%;}
 .cartNavs .btns .zims .btZZim{width: 57px;border-right:1px solid #ecedef;background: url(../../_images/shop/icon_bar_save_off@2x.png) no-repeat center;background-size: 20px auto;font-size:0;}
-.cartNavs .btns .zims .btZZim.on{background-image: url(../../_images/shop/icon_bar_save_on@2x.png);}
+.cartNavs .btns .zims .btZZim.on{background-image: url(http://localhost/mpnp/3rdDesign/images/icon_bar_save_on@2x.png);}
 .cartNavs .btns .obts{display:flex;width: 100%;}
 .cartNavs .btns .obts .btCart{ font-weight: 700; }
 .cartNavs .btns .obts .btOrde{color: #ffffff; background:#669aff;}

@@ -5,9 +5,15 @@ import java.sql.Date;
 public class WishDomain {
 
 	
-	private String productid,name,thimg;
+	private String id,productid,name,thimg;
 	private int price;
 	private Date inputdate;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getProductid() {
 		return productid;
 	}
@@ -40,8 +46,9 @@ public class WishDomain {
 	}
 	@Override
 	public String toString() {
-		return "WishDomain [productid=" + productid + ", name=" + name + ", thimg=" + thimg + ", price=" + price
-				+ ", inputdate=" + inputdate + "]";
+		return "WishDomain [id=" + id + ", productid=" + productid + ", name=" + name + ", thimg=" + thimg + ", price="
+				+ price + ", inputdate=" + inputdate + "]";
 	}
+
 
 }

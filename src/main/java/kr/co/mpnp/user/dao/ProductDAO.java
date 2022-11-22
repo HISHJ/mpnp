@@ -10,6 +10,7 @@ import kr.co.mpnp.user.domain.CartDomain;
 import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.vo.CartVO;
 import kr.co.mpnp.user.vo.ProductCartVO;
+import kr.co.mpnp.user.vo.WishListVO;
 
 
 public class ProductDAO {
@@ -36,7 +37,7 @@ private static ProductDAO pDAO;
 				SqlSession ss= mbh.getHandler();
 				try {
 				//2.Äõ¸®¹® ½ÇÇà
-				pd=ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectPrddetail", productid);
+				pd=ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectPrddetail", productid);
 				
 				}catch(PersistenceException pe) {
 					pe.printStackTrace();
@@ -57,7 +58,7 @@ private static ProductDAO pDAO;
 		SqlSession ss= mbh.getHandler();
 		try {
 		//2.Äõ¸®¹® ½ÇÇà
-		list=ss.selectList("kr.co.mpnp.use.mapper.ProductMapper.selectprdList", subid);
+		list=ss.selectList("kr.co.mpnp.user.mapper.ProductMapper.selectprdList", subid);
 		
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
@@ -77,7 +78,7 @@ private static ProductDAO pDAO;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		//2.Äõ¸®¹® ½ÇÇà
-		cnt=ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectprdCnt",subid);
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectprdCnt",subid);
 		//3.¿¬°á²÷±â
 		mbh.closeHandler(ss);
 		
@@ -94,7 +95,7 @@ private static ProductDAO pDAO;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		try {
-			cnt=ss.insert("kr.co.mpnp.use.mapper.ProductMapper.insertCart",cVO);
+			cnt=ss.insert("kr.co.mpnp.user.mapper.ProductMapper.insertCart",cVO);
 			ss.commit();
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
@@ -114,7 +115,7 @@ private static ProductDAO pDAO;
 		SqlSession ss= mbh.getHandler();
 		int check=0;
 		try {
-		check=	ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectConfirmCart",cVO);
+		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmCart",cVO);
 		
 			ss.commit();
 		}catch(PersistenceException pe) {
@@ -135,7 +136,7 @@ private static ProductDAO pDAO;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		try {
-			cnt=ss.insert("kr.co.mpnp.use.mapper.ProductMapper.insertWishList",cVO);
+			cnt=ss.insert("kr.co.mpnp.user.mapper.ProductMapper.insertWishList",cVO);
 			ss.commit();
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
@@ -155,7 +156,7 @@ private static ProductDAO pDAO;
 		SqlSession ss= mbh.getHandler();
 		int check=0;
 		try {
-		check=	ss.selectOne("kr.co.mpnp.use.mapper.ProductMapper.selectConfirmWish",cVO);
+		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",cVO);
 		
 			ss.commit();
 		}catch(PersistenceException pe) {
@@ -169,18 +170,38 @@ private static ProductDAO pDAO;
 		
 	}
 	
+	public int deleteWishList(WishListVO wVO) {
+		int cnt=0;
+		
+		//1.MyBatisHandler¾ò±â
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		//2.Äõ¸®¹® ½ÇÇà
+		cnt=ss.delete("kr.co.mpnp.user.mapper.ProductMapper.deleteWish",wVO);
+		ss.commit();
+		//3.¿¬°á²÷±â
+		mbh.closeHandler(ss);
+		
+		
+		return cnt;
+		
+		
+		
+	}
+	
 	
 	
 	public static void main(String[] args) {
 		
 		ProductDAO pDAO= new ProductDAO();
 		ProductCartVO cVO = new ProductCartVO();
-		cVO.setId("id002");
-		cVO.setProductid("p0001");
+		WishListVO wVO =new WishListVO();
+		wVO.setId("id002");
+		wVO.setProductid("p0001");
 	
 		//System.out.println(pDAO.checkCart(cVO));
 		//System.out.println(pDAO.insertWishList(cVO));
-		
+		System.out.println(pDAO.deleteWishList(wVO));
 		 
 	
 		// System.out.println(mDAO.selectPrdList("m0001")); 

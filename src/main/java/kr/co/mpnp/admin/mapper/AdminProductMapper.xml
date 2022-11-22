@@ -9,16 +9,29 @@
 
 
 
-<!-- <select id="selectCategory"  resultType="AdminCategoryDomain" >
-select s.sub_id subid,s.sub_name subname ,m.main_id mainid,m.main_name mainname
+<select id="selectCategory"  resultType="AdminCategoryDomain" parameterType="String" >
+select s.sub_id subid,s.sub_name subname ,m.main_id mainid, m.main_name mainname
 from sub_category s,main_category m
-where s.sub_id=m.sub_id
+where s.main_id=m.main_id and s.main_id=#{s.main_id}
 
-</select> -->
+</select>
 
-<select id="selectPrd" resultType="kr.co.mpnp.admin.domain.AdminProductDomain">
-select name,price,subname,status
-from product
+
+<select id="selectPrd" resultType="AdminProductDomain" parameterType="AdminProductVO">
+select p.productid productid,p.name productname,p.price price ,s.sub_name subname,m.main_name mainname
+from product p,sub_category s, main_category m
+where p.sub_id=s.sub_id and s.main_id = m.main_id
+
+
+</select>
+
+
+<select id ="selectPrdDetail" resultType="AdminProductDomain" parameterType="String">
+
+select p.productid productid,p.name productname ,p.price price ,p.status status,p.th_img thimg,p.info_img infoimg,p.inputdate inputdate
+,s.sub_name subname,m.main_name mainname,i.product_img prdImg
+from product p,sub_category s,main_category m,product_img i
+where p.productid=i.productid(+) and p.sub_id = s.sub_id(+) and s.main_id=m.main_id(+) and p.productid =#{p.productid}
 
 </select>
 

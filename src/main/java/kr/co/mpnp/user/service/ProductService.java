@@ -58,7 +58,9 @@ public class ProductService {
 		
 		//찜 데이터 체크
 		int check=pDAO.checkWish(cVO);
-		if(check!=0){	//장바구니에 이미 들어있는경우 2로반환
+		//찜 삭제
+	
+		if(check!=0){	//찜에 이미 들어있는경우 2로반환
 			return 2;
 		}
 		//장바구니 등록&에러시 0반환
@@ -70,6 +72,8 @@ public class ProductService {
 		
 		
 	}//addCart
+	
+
 	
 	public static void main(String[] args) {
 	ProductService ps=new ProductService();	
