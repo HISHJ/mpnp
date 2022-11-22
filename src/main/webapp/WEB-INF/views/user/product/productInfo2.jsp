@@ -193,7 +193,7 @@
                   <div class="swiper-container swiper-container-initialized swiper-container-vertical">
                     <ul class="swiper-wrapper slide" style="transform: translate3d(0px, 0px, 0px);">
                       <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
-                        <a href="javascript:" class="box"><span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg}.jpg?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                        <a href="javascript:" class="box"><span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
                       </li>
                       </ul>
                   <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -209,7 +209,7 @@
                       <li class="swiper-slide swiper-slide-active" style="width: 500px;">
                         <a href="javascript:" class="box">
                           <span class="pic">
-                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mpnp/images/${data.thimg}.jpg?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
+                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
                           </span>
                         </a>
                       </li>
@@ -367,7 +367,7 @@
     
   
     <div class="html_editor pc template_area" id="contentPc">
-      <p><img src="http://localhost/mpnp/images/${data.infoimg}.jpg" alt="img" class="full_img_area">
+      <p><img src="http://localhost/mpnp/images/${data.infoimg}" alt="img" class="full_img_area">
       &nbsp;</p>
     <!--   <script type="text/javascript">
     /* console.log("성분 정보 변동 여부 : " + goods.igdtInfoLnkYn); */
@@ -726,13 +726,13 @@ function count(type)  {
 
   // 현재 화면에 표시된 값
  var number=$("#buyQty").val();
- alert(number)
+
   // 더하기/빼기
   if(type === 'plus') {
-    number=number+1;
+    	++number
     alert(number)
   }else if(type === 'minus' )  {
-    number = number - 1;
+     --number
     alert(number)
   }
   var sum =${data.price}*number
@@ -816,7 +816,7 @@ function count(type)  {
       <div class="pdinfo">
         <div class="box">
   <!-- 				직사각형을 정사각형으로 변경함. frontConstants.IMG_OPT_QRY_210 >>>> frontConstants.IMG_OPT_QRY_756 -->
-          <span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg }.jpg?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt=""></span>
+          <span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg }?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt=""></span>
           <div class="disc">
             <div class="names">${data.productname }</div>
             <div class="price">
