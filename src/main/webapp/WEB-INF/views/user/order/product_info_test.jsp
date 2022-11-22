@@ -308,7 +308,7 @@
 	 </label>
 	<input type="hidden" class="indi_prdId"  value="pr_0000017"/>
 	<input type="hidden" class="indi_prdCnt"  value="5"/>
-	<input type="hidden" class="indi_cartId"  value="ca_0000027"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000037"/>
 
 	
 	<div class="cart_info">
@@ -318,7 +318,7 @@
 	 
 	<input type="hidden" class="indi_prdId"  value="p0012"/>
 	<input type="hidden" class="indi_prdCnt"  value="1"/>
-	<input type="hidden" class="indi_cartId"  value="ca_0000022"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000042"/>
 	
 	</div>
 		<script>

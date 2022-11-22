@@ -41,10 +41,10 @@
 </resultMap>
 <!-- 검증완료 -->
 <!-- //기본배송지 설정유무 -->
-<select id="selectOrderChk" parameterType="OrderVO" resultType="String">
+<select id="selectOrderChk" parameterType="String" resultType="String">
 SELECT d.DEFAULT_FLAG
 FROM  DESTINATION d, MEMBER m
-WHERE (d.id = m.id) and m.id= #{id} and d.DEFAULT_FLAG=#{defaultFlag}
+WHERE (d.id = m.id) and m.id= #{id} and d.DEFAULT_FLAG='O'
 </select>
 
 <!-- 기본배송지가 있는 경우, 해당 아이디의 배송지별칭 조회 -->
@@ -96,7 +96,7 @@ select concat('or_',lpad(seq_orders.nextval,7,0)) from dual
 <!-- 주문정보 추가 -->
 <insert id="insertOrderInfo" parameterType="OrderVO">
 insert into ORDERS(ORDERID, ID, SHIPREQ, INPUTDATE, ACTUAL_PRICE,  STATUS)
-values(concat('or_',lpad(seq_orders.nextval,7,0)),#{id},#{shipReq},to_char(sysdate,'yyyy-mm-dd'),#{actualPrice}, '주문완료')
+values(#{orderId},#{id},#{shipReq},to_char(sysdate,'yyyy-mm-dd'),#{actualPrice}, '주문완료')
 </insert>
 
 
@@ -118,13 +118,28 @@ insert into DESTINATION(DESID, ID,  RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL,
  values(concat('des_',lpad(seq_destination.nextval,6,0)) ,#{id},#{receiver},#{receiver_phone},#{zipcode},#{addr},#{addrDetail},#{defaultFlag, jdbcType=VARCHAR},#{ship_name})
 </insert>
 
+<!-- 주문완료 내역 조회 -->
 <!-- 주문완료내역 조회(여러 상품 중 하나만 나와야하니까 상품코드도 받아야 해 -->
-<select id="selectOrderComplete" parameterType="OrderVO" resultMap="myOrderDom">
-SELECT o.ORDERID,p.NAME,od.TOTALCNT, m.NAME, d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.RECEIVER, d.PHONE, o.SHIPREQ, o.ACTUAL_PRICE
-FROM ORDERS o, ORDER_DETAIL od, PRODUCT p, DESTINATION d, MEMBER m
-WHERE (od.ORDERID = o.ORDERID and od.PRODUCTID = p.PRODUCTID
-and o.ID = m.ID and d.ID = m.ID) and o.ORDERID= #{orderId} and p.productId = #{productId}
+<select id="selectOrderCompleteM" parameterType="String" resultType="MyOrderDomain">
+select m.NAME membername, ORDERID orderId,ACTUAL_PRICE actualPrice, SHIPREQ shipReq
+from ORDERS o,MEMBER m
+where (o.ID = m.ID)  and ORDERID=#{orderId}
 </select>
+<select id="selectOrderCompleteP" parameterType="String" resultType="MyOrderDomain">
+<![CDATA[
+SELECT p.NAME prdName, o.TOTALCNT totalCnt, p.PRICE prdPrice, o.TOTALCNT * p.PRICE 
+FROM ORDER_DETAIL o, PRODUCT p
+WHERE (o.PRODUCTID = p.PRODUCTID) and o.ORDERID=#{orderId} and ROWNUM <= 1
+]]>
+</select>
+<select id="selectOrderCompleteD" parameterType="String" resultType="MyOrderDomain">
+SELECT d.RECEIVER receiver, d.ZIPCODE zipcode, d.ADDR_DETAIL addrDetail, d.ADDR addr, d.PHONE phone
+FROM  DESTINATION d, MEMBER m, ORDERS o
+WHERE (d.ID = m.ID and o.ID= m.ID) and o.ORDERID=#{orderId}
+</select>
+
+
+
 
 <!-- 주문 후 장바구니에서 해당 상품 삭제 -->
 

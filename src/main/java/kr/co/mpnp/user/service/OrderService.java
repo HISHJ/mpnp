@@ -9,7 +9,6 @@ import kr.co.mpnp.user.dao.OrderDAO;
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.domain.OrderDomain;
 import kr.co.mpnp.user.domain.OrderShipDomain;
-import kr.co.mpnp.user.vo.MyOrderVO;
 import kr.co.mpnp.user.vo.OrderPrdVO;
 import kr.co.mpnp.user.vo.OrderVO;
 import kr.co.mpnp.user.vo.OrdersInfoVO;
@@ -20,10 +19,10 @@ public class OrderService {
 	OrderDAO oDAO = OrderDAO.getInstance();
 
 	// 배송지설정유무(아이디)
-	public String searchOrderChk(OrderVO oVO) {
+	public String searchOrderChk(String id) {
 		String flag = "";
 
-		flag = oDAO.selectOrderChk(oVO);
+		flag = oDAO.selectOrderChk(id);
 
 		return flag;
 	}// selectOrderChk
@@ -112,38 +111,19 @@ public class OrderService {
 		return cnt;
 	}// insertOrderInfo
 
-	//트랜잭션 처리
-	public void searchOrerDetailId(OrderVO oVO) {
+	//주문 & 주문상세 트랜잭션 처리
+	public void searchOrer( OrderVO oVO ) {
 		String orId = "";
 
 		orId = oDAO.selectOrderId();// 주문코드 조회
 		oVO.setOrderId(orId);  //vo에 코드 저장
 		if(oVO.getOrderId() != null) {
-			oDAO.insertOrderInfo(oVO); //주문테이블 추가
-			for(OrderPrdVO opVO :oVO.getOrders()) {
-				oVO.setTotalPrdCnt(opVO.getPrdCnt());
-				oVO.setPrdId(opVO.getPrdId());
-				oVO.setOrderId(orId);
-				
-			oDAO.insertOrderDetail(oVO); //주문 상세테이블 추가
-			}//end for
-			oDAO.deleteCartItem(); //주문한 해당 아이템 장바구니에서 삭제
-			oDAO.insertShipAddr(oVO); // 배송지 추가
-		}//end if
-		
+			oDAO.insertOrderInfo(oVO); //주문테이블 추가& 주문상세테이블 추가
+		}
+
 	}// searchOrerDetailId
-
-	// 주문상세추가-- mypageOrderVO사용예정
-	public int addOrderDetail(OrderVO oVO) {
-		int cnt = 0;
-
-		cnt = oDAO.insertOrderDetail(oVO);
-
-		return cnt;
-	} // insertOrderDetail
-
-
-
+	
+	
 	// 배송지추가-destinatioVO사용예정
 	public int addShipAddr(OrderVO dVO) {
 		int cnt = 0;
@@ -152,15 +132,38 @@ public class OrderService {
 
 		return cnt;
 	}// insertShipAddr
+	
+	//////////////////////////////////////////////////////////////////////////////////
 
 	// 주문완료내역조회
-	public MyOrderDomain searchOrderComplete(OrderVO orVO) {
+	public MyOrderDomain searchOrderCompleteM(String orderID) {
 		MyOrderDomain orDom = null;
 
-		orDom = oDAO.selectOrderComplete(orVO);
+		orDom = oDAO.selectOrderCompleteM(orderID);
 
 		return orDom;
 	}// selectOrderComplete
+	
+	// 주문완료내역조회(상품)
+	public MyOrderDomain searchOrderCompleteP(String orderID) {
+		MyOrderDomain orDom = null;
+
+		orDom = oDAO.selectOrderCompleteP(orderID);
+
+		return orDom;
+	}// selectOrderComplete
+	
+	
+	// 주문완료내역조회(배송)
+	public MyOrderDomain searchOrderCompleteD(String orderID) {
+		MyOrderDomain orDom = null;
+
+		orDom = oDAO.selectOrderCompleteD(orderID);
+
+		return orDom;
+	}// selectOrderComplete
+	
+	////////////////////////////////////////////////////////////////////////////////
 
 	// 주문후 장바구니에서 해당상품삭제 - 상품코드- cartVO, cartDomiain써야 함
 

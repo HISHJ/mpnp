@@ -7,6 +7,7 @@ import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.vo.MyOrderVO;
 //설빈
 public class MyOrderService {
+	MyOrderDAO oDAO = MyOrderDAO.getInstance();
 	public MyOrderService() {
 
 	}//
@@ -22,11 +23,35 @@ public class MyOrderService {
 	}// searchOrderList
 
 	// 주문내역 상세조회
-	public MyOrderDomain searchOrderDetail(String id, String orID) {
+	public MyOrderDomain searchOrderDetail(String orID) {
 		MyOrderDomain moDom = null;
+		
+		moDom = oDAO.selectOrderDetail(orID);
+		
 
 		return moDom;
 	}// searchOrderDetail
+	
+	//주문상품 상세
+	public List<MyOrderDomain> searchOrderPrdDetail(String orID){
+		List<MyOrderDomain> list = null;
+		
+		list = oDAO.selectOrderPrdDetail(orID);
+		
+		return list;
+	}
+	
+	//주문배송지 상세
+	public MyOrderDomain searchOrderShip(String orID) {
+		MyOrderDomain moDom = null;
+		
+		moDom = oDAO.selectOrderShip(orID);
+		
+		return moDom;
+	}// searchOrderDetail
+	
+	
+	
 
 	// 주문상태조회
 	public int[] searchOrderStatusCnt(String id) {

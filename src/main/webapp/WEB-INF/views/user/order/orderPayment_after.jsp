@@ -51,7 +51,7 @@ li.open, div.ctset {
 	<script type="text/javascript">
 		$(function(){
 			$(".btnBill").click(function(){
-				//alert("야 안돼?")
+				
 				check();
 			})//end click
 		})//end ready
@@ -397,7 +397,6 @@ li.open, div.ctset {
  											 $(function(){
  												 $("#shipName").change(function(){
  													 if($("#shipName").val() != "none"){
- 														// alert("야!")
  													setChangeAddr();
  												 }//end if
  												 });//change
@@ -414,6 +413,7 @@ li.open, div.ctset {
 														 console.log("에러코드" + xhr.status + "뭐지" + xhr.state() + "흐음" + xhr.statusText);
 													 },
 													 success:function(jsonObj){
+														 
 														 if(jsonObj.resultFlag){
 															  alert("배송지가 변경되었습니다.");
 															  var addrName = document.getElementById("dlvraGbNmEm");
@@ -421,7 +421,6 @@ li.open, div.ctset {
 															  
 															  addrName.innerHTML = jsonObj.name;
 															  addr.innerHTML = "[ "+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail;
-															//  $("#changeAddr").html( jsonObj.zipcode+ jsonObj.name+" " +jsonObj.addr);
 															 }
 														 }//end if
 												 })
@@ -443,7 +442,7 @@ li.open, div.ctset {
 											</div>
 										</form>
 										</div>
-											<div class="adrreq" style="display:none">
+											<div class="adrreq">
 									<div class="tit">배송 요청사항</div>
 									<div class="pwf" id="existDemand" style="display: none">
 										<em class="t" id="demandGoodsRcvPstCd"></em>
@@ -452,9 +451,8 @@ li.open, div.ctset {
 										<div class="btt"><a href="javascript:;" class="btn sm btMod" onclick="orderDlvra.changeDlvrDemandPop();">변경</a></div>
 									</div>
 									<div class="pss" id="noExistDemand">
-										<textarea name="delivery_request" id="" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
+										<textarea name="shipReq" id="shipReq" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
 
-										<!-- <a href="javascript:;" class="btn btPdPl" onclick="orderDlvra.changeDlvrDemandPop();">상품 수령 장소를 선택해주세요.</a> -->
 									</div>
 								</div>
 									</div>
@@ -471,10 +469,12 @@ li.open, div.ctset {
 					<ul class="lst"> 
 					
 							<c:forEach  items="${opvo}" var="op">
-								<li>
-											<div class="tt">${op.prdName}</div>
-											<div class="ts">${op.prdCnt}개 / 
-												${op.prdPrice}원
+								<li style="margin:10px 0px;">
+											<div class="tt" style="font-weight:bold">👀 ${op.prdName} </div>
+											<div class="ts totalPrice_info" style="margin-left:25px;">
+												[${op.prdCnt}개 * ${op.prdPrice}원 = 총 ${op.totalPrice}원]
+												<input type="hidden" id="totalP" name="totalP" value="${op.totalPrice}"/>
+												
 													</div>
 										</li>
 						</c:forEach>
@@ -497,6 +497,7 @@ li.open, div.ctset {
 								<input type="hidden" id="local_cp_dc_tot_amt" name="local_cp_dc_tot_amt" value="0">
 								<em class="prc"><b class="p" id="tot_goodsdlvr_cp_dc_amt_view">${orDom.discountRate }</b><i class="w">%</i></em>
 								<span class="txt">할인적용</span>
+								<input type="hidden" id="discount_rate"" value="${orDom.discountRate}"/>
 							</div>
 						</div>
 						
@@ -540,7 +541,7 @@ li.open, div.ctset {
 					</div>
 					</section>
 
-					<section class="sect bprc">
+						<section class="sect bprc">
 						<input type="hidden" id="order_payment_total_pay_amt_ex_gs_point" value="94000">
 						<input type="hidden" id="order_payment_total_pay_amt_ex_svmn_point" value="94000">
 						<div class="hdts"><span class="tit">결제 금액</span></div>
@@ -549,25 +550,19 @@ li.open, div.ctset {
 								<li>
 									<div class="dt">총 상품금액</div>
 									<div class="dd">
-										<span class="prc"><em class="p"></em><i class="w">원</i></span>
-										<input type="hidden" id="order_payment_total_goods_amt" value="99000">
-										<input type="hidden" id="order_payment_total_local_goods_amt" value="">
-										<input type="hidden" id="fstPurchGoodsIncYn" value="N">
+										<span class="prc"><em class="p totalProductPrice">99,000</em><i class="w">원</i></span>
+										<input type="hidden" id="totalPrice"  name="totalPrice"value="">
+										
 									</div>
 								</li>
 								<li id="couponDcLi">
 									<div class="dt">등급할인</div>
 									<div class="dd">
 										<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-5,000</em><i class="w">원</i></span>
-										<input type="hidden" id="order_payment_total_dc_amt" value="5000">
+										<input type="hidden" id="discountPrice" name="discountPrice" value="">
 									</div>
 								</li>
-								<li id="svmnDcLi" style="display:none;">
-									<div class="dt">적립금 사용</div>
-									<div class="dd">
-										<span class="prc dis"><em class="p" id="order_payment_svmn_amt_view">0</em><i class="w">점</i></span>
-									</div>
-								</li>
+								
 						
 								<li>
 									<div class="dt">배송비</div>
@@ -583,12 +578,10 @@ li.open, div.ctset {
 								<div class="dt">총 결제금액</div>
 								<div class="dd">
 									<span class="prc"><em class="p" id="order_payment_total_pay_amt_view">94,000</em><i class="w">원</i></span>
-									<input type="hidden" id="order_payment_total_pay_amt" value="94000">
+									<input type="hidden" id="actualPrice" name="actualPrice" value="">
 								</div>
 							</div>
-							<!-- 01 주문서-리테일멤버십 가입 안한 경우 -->
-						
-							<!-- 02 주문서-리테일멤버십 등록 한 경우 -->
+							
 					
 						</div>
 					</section>
@@ -630,7 +623,7 @@ li.open, div.ctset {
 						<ul class="agreeset">
 							<li class="all">
 								<span class="checkbox">
-									<input type="checkbox" id="chkAllTerms" name="chkAllTerms" onclick="selectAll(this)">
+									<input type="checkbox" id="chkAllTerms" name="chkAllTerms">
 									<span class="txt"><em class="tt st">주문상품 및 결제대행 이용약관에 모두 동의합니다.</em></span>
 								</span>
 							</li>
@@ -650,13 +643,7 @@ li.open, div.ctset {
 										<a href="javascript:;" name="contentPopBtn" title="내용보기" data-content="" data-url="" data-index="6"></a>
 									</li>
 								<!-- 나이스페이먼츠 -->
-							<li class="nicePaymentTerms" style="display: block;">
-										<span class="checkbox">
-											<input type="checkbox" class="chkNiceTerms" name="ordTerms" id="terms_47" data-idx="1" data-terms-no="47" onclick="checkSelectAll()">
-											<span class="txt"><a href="javascript:;" name="termPopBtn" data-index="1" class="tt lk">NICE페이먼츠 전자금융거래 이용약관</a></span>
-										</span>
-										<a href="javascript:;" name="contentPopBtn" title="내용보기" data-content="" data-url="" data-index="1"></a>
-									</li>
+						
 								<li class="nicePaymentTerms" style="display: block;">
 										<span class="checkbox">
 											<input type="checkbox" class="chkNiceTerms" name="ordTerms" id="terms_72" data-idx="4" data-terms-no="72" onclick="checkSelectAll()">
@@ -673,7 +660,7 @@ li.open, div.ctset {
 									</li>
 								</ul>
 						<div class="bts">
-							<a href="javascript:;" name="contentPopBtn" class="btn a lg btnBill" onclick="validNonMember();">
+							<a href="javascript:;" name="contentPopBtn"  class="btn a lg btnBill" >
 								<span class="prc"><em class="p" id="order_payment_end_pay_amt_view">51,800</em><i class="w">원</i></span> <span class="txt">결제하기</span>
 							</a>
 						</div>

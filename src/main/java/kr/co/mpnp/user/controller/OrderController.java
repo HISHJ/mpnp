@@ -5,6 +5,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.domain.OrderDomain;
 import kr.co.mpnp.user.domain.OrderShipDomain;
 import kr.co.mpnp.user.service.OrderService;
@@ -47,16 +49,14 @@ public class OrderController {
 	     System.out.println("db@@@@@@"+opvo ); //성공 ㅠㅠ
 	     model.addAttribute("opvo", opvo);
 		/////////////////////////////////////////////////////////
-		oVO.setId("id005");
+		oVO.setId("id001");
 		oVO.setDefaultFlag("O");
-		 String flag = ordSer.searchOrderChk(oVO);
+		 String flag = ordSer.searchOrderChk("id001");
 		 String id= oVO.getId();
 		//내역조회
 		 OrderDomain orDom = null;
 		orDom = ordSer.searchOrderInfo(id);
 		model.addAttribute("orDom", orDom); 
-
-		
 		 if(flag == null || "".equals(flag)) { // 기본배송지설정이 안된 회원일 경우
 			 url ="/user/order/orderPayment";
 		 }else { // 기본배송지 설정이 된 회원인 경우
@@ -90,33 +90,47 @@ public class OrderController {
 	// 결제완료버튼
 	@RequestMapping(value = "/orderPayment_process.do", method = GET)
 	public String orderCompleteProcess(HttpSession session, OrderVO oVO,Model model) {
-		System.out.println("오더" +oVO); //ok
+		session.setAttribute("discountPrice", oVO.getDiscountPrice());
+		session.setAttribute("totalPrice", oVO.getTotalPrice());
 		oVO.setId("id001");
-		//트랜잭션 처리(서비스에서 처리하려면 beans에서 트랜잭션 처리를 해줘ㅑ 함 
-		//ordSer.searchOrerDetailId(oVO);
-		String orId = "";
-		orId = ordSer.searchOrderId();
-		oVO.setOrderId(orId);
-		if(oVO.getOrderId() != null) {
-			ordSer.addOrderInfo(oVO);// //주문테이블 추가
-			for(OrderPrdVO opVO :oVO.getOrders()) {
-				oVO.setTotalPrdCnt(opVO.getPrdCnt());
-				oVO.setPrdId(opVO.getPrdId());
-				//oVO.setOrderId(orId);
-			ordSer.addOrderDetail(oVO);////주문 상세테이블 추가	
-			}//end for
-			ordSer.removeCartItem(oVO);// //주문한 해당 아이템 장바구니에서 삭제
-			ordSer.addShipAddr(oVO);// // 배송지 추가
-		}//end if
-		
-		
+		 String flag = ordSer.searchOrderChk("id001");
+		 System.out.println(flag);
+		 System.out.println("오더-1111---" +oVO.getOrderId()); //ok 
+		 
+		 ordSer.searchOrer(oVO); //트랜잭션
+		 System.out.println("오더-22222---" +oVO.getOrderId()); // 트랜잭션 처리 후 주문코드가 들어옴
+		if(flag == null || "".equals(flag)) { // 기본배송지설정이 안된 회원일 경우
+			ordSer.addShipAddr(oVO);//배송지추가
+		 }
+		session.setAttribute("orderId", oVO.getOrderId()); //트랜잭션 처리 후 주문코드값 들어옴
 		return "/user/order/orderPayment_process";
 	}// end orderComplete
 
 	// 결제완료페이지(주문코드)
 	@RequestMapping(value = "/orderPayment_complete.do", method = GET)
-	public String orderCompletePage(String orderId, OrderVO oVO, Model model) {
-
+	public String orderCompletePage(HttpSession session, Model model) {
+		int discountPrice = (Integer) session.getAttribute("discountPrice");
+		int totalPrice = (Integer) session.getAttribute("totalPrice");
+		String orderId = (String) session.getAttribute("orderId");
+		System.out.println("@@@@@@@@세션 테스트" +discountPrice +totalPrice );
+		System.out.println("@@@@@@@@인서트" +orderId );
+		MyOrderDomain mod = new MyOrderDomain();
+		mod = ordSer.searchOrderCompleteM(orderId);
+		MyOrderDomain mod2 = new MyOrderDomain();
+		mod2 = ordSer.searchOrderCompleteP(orderId);
+		MyOrderDomain mod3 = new MyOrderDomain();
+		mod3 = ordSer.searchOrderCompleteD(orderId);
+		
+		model.addAttribute("mod1", mod);
+		model.addAttribute("mod2", mod2);
+		model.addAttribute("mod3", mod3);
+		
+		System.out.println("@@@@@회원결과 " + mod);
+		System.out.println("@@@@@상품결과 " + mod2);
+		System.out.println("@@@@@배송결과 " + mod3);
+		
+		
+		
 		return "/user/order/orderComplete";
 	}// orderCompletePage
 

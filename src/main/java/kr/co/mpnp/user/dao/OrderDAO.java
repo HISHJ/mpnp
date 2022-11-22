@@ -33,7 +33,7 @@ public class OrderDAO {
 
 	// 검증완료
  //기본배송지 설정 조회 (없으면 조회 안함
-	public String selectOrderChk(OrderVO oVO) {
+	public String selectOrderChk(String id) {
 		String flag = "";
 
 		// 핸들러 얻기
@@ -44,8 +44,8 @@ public class OrderDAO {
 
 		try {
 			// 쿼리 실행
-			flag = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderChk", oVO);
-			System.out.println(flag + "/n");
+			flag = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderChk",  id);
+			System.out.println(flag);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
 		}
@@ -207,8 +207,32 @@ public class OrderDAO {
 			// 쿼리 실행
 			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderInfo", orVO);
 			if (cnt == 1) {
-				ss.commit();
-				System.out.println(cnt + "건 추가(주문)");
+				int detailCnt = 0;
+				int deletCnt =0;
+				int shipCnt=0;
+				for(OrderPrdVO opVO :orVO.getOrders()) {
+					orVO.setTotalPrdCnt(opVO.getPrdCnt());
+					orVO.setPrdId(opVO.getPrdId());
+					
+					if(opVO.getPrdId() != null) {
+					orVO.setCartId(opVO.getCartId());
+					}//end if
+				
+					detailCnt += ss.insert("kr.co.mpnp.orderMapper.insertOrderDetail", orVO);
+				    if(orVO.getCartId() != null) {
+				    	 deletCnt  = ss.delete("kr.co.mpnp.orderMapper.deleteCartItem");
+				    }//end if
+				    
+				}//end for
+
+//				}
+				if(detailCnt == orVO.getOrders().size()) {
+					ss.commit();
+					System.out.println(cnt + "건 추가(주문)");
+				}else {
+					ss.rollback();
+					System.out.println("트랜잭션 실패");
+				}
 			}
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -266,7 +290,7 @@ public class OrderDAO {
 		try {
 			// 쿼리 실행
 			cnt = ss.insert("kr.co.mpnp.orderMapper.insertShipAddr", dVO);
-			cnt++;
+		
 			if (cnt == 1) {
 				System.out.println(cnt + "건 추가(배송지)");
 				ss.commit();
@@ -280,10 +304,12 @@ public class OrderDAO {
 		return cnt;
 
 	}// insertShipAddr
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 검증완료
 	// 주문완료내역조회
-	public MyOrderDomain selectOrderComplete(OrderVO orVO) {
+	public MyOrderDomain selectOrderCompleteM(String orderId) {
 		MyOrderDomain orDom = null;
 
 		// 핸들러 얻기
@@ -292,7 +318,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderComplete", orVO);
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderCompleteM", orderId);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -302,6 +328,52 @@ public class OrderDAO {
 
 		return orDom;
 	}// selectOrderComplete
+	
+	// 검증완료
+	// 주문완료내역조회(상품
+	public MyOrderDomain selectOrderCompleteP(String orderId) {
+		MyOrderDomain orDom = null;
+
+		// 핸들러 얻기
+		// MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		try {
+			// 쿼리 실행
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderCompleteP", orderId);
+			System.out.println(orDom);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		// 연결끊기
+		mbh.closeHandler(ss);
+
+		return orDom;
+	}// selectOrderComplete
+	
+	// 검증완료
+	// 주문완료내역조회(상품
+	public MyOrderDomain selectOrderCompleteD(String orderId) {
+		MyOrderDomain orDom = null;
+
+		// 핸들러 얻기
+		// MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		try {
+			// 쿼리 실행
+			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderCompleteD", orderId);
+			System.out.println(orDom);
+		} catch (PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		// 연결끊기
+		mbh.closeHandler(ss);
+
+		return orDom;
+	}// selectOrderComplete
+	
+	/////////////////////////////////////////////////////////////////////////////////
 	
 	
 
@@ -333,12 +405,13 @@ public class OrderDAO {
 	}// deleteCartItem
 
 	public static void main(String[] args) {
-	//	OrderDAO oD = OrdSerDAO.getInstance();
-		//OrderVO ov = new OrderVO();
-		//oD.selectShipName("id002");
-		//ov.setId("id002");
-		//ov.setDefaultFlag("O");
-		//oD.selectOrderChk(ov);
+OrderDAO oD = new OrderDAO();
+//		OrderVO ov = new OrderVO();
+//		//oD.selectShipName("id002");
+//		ov.setId("id002");
+//		//String id= ov.getId();
+//		//ov.setDefaultFlag("O");
+		//oD.selectOrderChk("id002");
 	//	oD.selectOrderChk("id010");
 //		 DestinationVO d = new DestinationVO();
 //		 d.setId("id008");

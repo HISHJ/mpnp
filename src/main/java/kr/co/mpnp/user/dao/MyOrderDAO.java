@@ -27,6 +27,7 @@ public class MyOrderDAO {
 
 	//검증
 	// 기간별 주문내역조회
+	//골든에서는 값이 다 들어오는데 왜 여기는 부분적으로 들어오는지 모르겠다
 	public List<MyOrderDomain> selectOrderAList(String orID) {
 		List<MyOrderDomain> list = null;
 		
@@ -37,7 +38,7 @@ public class MyOrderDAO {
 
 		try {
 			// 쿼리 실행
-			list = ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderAList", orID);
+			list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderAllList", orID);
 			System.out.println(list);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();
@@ -51,7 +52,7 @@ public class MyOrderDAO {
 	}// selectOrderList
 
 	//검증완료
-	// 주무누내역 상세조회(아이디, 주문코드)
+	// 주무누내역 상세조회(주문코드)
 	public MyOrderDomain selectOrderDetail(String ordId) {
 		MyOrderDomain moDom = null;
 		
@@ -61,7 +62,7 @@ public class MyOrderDAO {
 		SqlSession ss = mbh.getHandler();
 		
 		//쿼리 실행
-		moDom = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectOrderDetail", ordId);
+		moDom = ss.selectOne("kr.co.mpnp.myOrderMapper.selectOrderDetail", ordId);
 		System.out.println(moDom);
 		// 연결끊기
 		mbh.closeHandler(ss);
@@ -69,7 +70,46 @@ public class MyOrderDAO {
 
 		return moDom;
 	}// selectOrderDetail
+	
+	//상세 상품편
+	public  List<MyOrderDomain> selectOrderPrdDetail(String orId) {
+		List<MyOrderDomain> list = null;
+		
+		// 핸들러 얻기
+		// MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		
+		//쿼리 실행
+		list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderPrdDetail", orId);
+		System.out.println(list);
+		// 연결끊기
+		mbh.closeHandler(ss);
+		
 
+		return list;
+	}// selectOrderDetail
+	
+	//주문상세배송지
+	public  MyOrderDomain selectOrderShip(String orId) {
+		MyOrderDomain orDom = null;
+		
+		// 핸들러 얻기
+		// MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		
+		//쿼리 실행
+		orDom = ss.selectOne("kr.co.mpnp.myOrderMapper.selectOrderShip", orId);
+		System.out.println(orDom);
+		// 연결끊기
+		mbh.closeHandler(ss);
+		
+
+		return orDom;
+	}// selectOrderDetail
+	
+	
 	///검증완료
 	// 기간 내 주문상태 조회 - count(날짜, 주문상태)
 	//--해당 주문코드의 총 주문상태... (모르겠다..)
@@ -85,7 +125,7 @@ public class MyOrderDAO {
 
 	 		try {
 	 			// 쿼리 실행
-	 			orderStatus= ss.selectList("kr.co.nyangpoom.myOrderMapper.selectOrderStatusCnt", id);
+	 			orderStatus= ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderStatusCnt", id);
 	 			System.out.println(orderStatus);
 	 		} catch (PersistenceException pe) {
 	 			pe.printStackTrace();
@@ -112,7 +152,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			price= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceIndivisual", ordId);
+ 			price= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceIndivisual", ordId);
  			System.out.println(price);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -135,7 +175,7 @@ public class MyOrderDAO {
 
 		 		try {
 		 			// 쿼리 실행
-		 			totalPrice= ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectPriceTotal", orID);
+		 			totalPrice= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceTotal", orID);
 		 			System.out.println(totalPrice);
 		 		} catch (PersistenceException pe) {
 		 			pe.printStackTrace();
@@ -149,8 +189,8 @@ public class MyOrderDAO {
 	
 	////////////주문취소 쿼리들
 	//검증완료
-	//1) 주문 개별 취소 (cascade적용한 상태- 주문상세 ~리뷰까지 (주문상세코드)
-	public int deleteCancelIndivisual(String ordId) {
+	//1) 주문 개별 취소-주문코드 (cascade적용한 상태- 주문상세 ~리뷰까지 (주문상세코드)
+	public int deleteCancelIndivisual(String orId) {
 		int cnt = 0;
 		
 		// MyBatisHandler얻기
@@ -159,7 +199,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelIndivisual", ordId);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelIndivisual", orId);
  			if(cnt==1) {
  			 System.out.println(cnt + "건 삭제");
  			ss.commit();
@@ -177,8 +217,8 @@ public class MyOrderDAO {
 	}
 	
 	//검증완료
-	//2) 주문전체취소 (주문코드) -  ((cascade적용한 상태- 주문테이블 ~ 리뷰까지 삭제됨) -->
-	public int deleteCancelTotal(String orID) {
+	//2) 주문전체취소 아이디) -  ((cascade적용한 상태- 주문테이블 ~ 리뷰까지 삭제됨) -->
+	public int deleteCancelTotal(String id) {
 		int cnt = 0;;
 		
 		// MyBatisHandler얻기
@@ -187,7 +227,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.nyangpoom.myOrderMapper.deleteCancelTotal", orID);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelTotal", id);
  			if(cnt==1) {
  			 System.out.println(cnt + "건 삭제");
  			 ss.commit();
@@ -218,7 +258,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			totalCnt = ss.selectOne("kr.co.nyangpoom.myOrderMapper.selectTotalPageCount");
+ 			totalCnt = ss.selectOne("kr.co.mpnp.myOrderMapper.selectTotalPageCount");
  			System.out.println(totalCnt);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -231,7 +271,10 @@ public class MyOrderDAO {
 	}// selectTotalCount
 	
 //	 public static void main(String[] args) {
-//	  MyOrderDAO moDAO = MyOrderDAO.getInstance();
+//  MyOrderDAO od = MyOrderDAO.getInstance();
+//  od.selectOrderAList("id010");
+//  od.selectOrderDetail("or_0000045");
+  
 //	//moDAO.deleteCancelIndivisual("od_0000005");
 //	 // moDAO.deleteCancelTotal("or_0000039");
 ////	  MyOrderVO m = new MyOrderVO();

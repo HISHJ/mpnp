@@ -160,33 +160,6 @@
 	</div>
 </header>
 
-		
-		<div class="layers">
-			<!-- 레이어팝업 넣을 자리 -->
-			<!-- 등급안내 팝업 추가 2021.05.13 -->
-			<article class="popLayer a popLank " id="popLank">
-				<div class="pbd">
-					<div class="phd">
-						<div class="in">
-							<h1 class="tit"></h1>
-							<button type="button" class="btnPopClose">닫기</button>
-						</div>
-					</div>
-					<div class="pct">
-						<main class="poptents">
-							<div class="rankCont">
-								<div class="rank_imgBox rank_pc">
-											<img src="/_images/common/img-level-pc.png" alt="어바웃펫 패미리 등급별 혜택 이미지">
-										</div>
-									</div>
-						</main>
-					</div>
-				</div>
-			</article>
-			<!-- //등급안내 팝업 추가 2021.05.13 -->
-		</div>
-
-
 
 <!--❤️main-->
 <main class="container lnb page my" id="container" style="margin-top:100px;">
@@ -203,14 +176,6 @@
 				<div class="inr-box piner">
 					<div class="pc-re-po01">
 						<div class="oder-step ptb_memOrderbox">
-							<!-- 펫츠비 주문/배송으로 이동버튼 2021.06.21 추가함 -->
-							<!-- CSR-3397 펫츠비 주문/배송 내역 보기 미노출 처리 -->
-							<!-- <div class="ptb_orderList">
-								<p onclick="fnGoPetsbeOrderList();">
-									<a href="#" class="detail-btn" onclick="fnGoPetsbeOrderList();">펫츠비 주문/배송 내역보기</a>
-								</p>
-							</div> -->
-							<!-- //펫츠비 주문/배송으로 이동버튼 2021.06.21 추가함 -->
 
 							<nav class="menushop re-po01">
 								<button type="button" class="bt st">최근 3개월</button>
@@ -241,13 +206,7 @@
 				</div>
 				
 				<form id="delivery_list_form">
-<input type="hidden" id="delivery_list_page" name="page" value="1">
-<input type="hidden" id="delivery_list_rows" name="rows" value="20">
-<input type="hidden" id="delivery_list_totalPage" value="1">
-<input type="hidden" name="period" value="3">
-<input type="hidden" name="ordAcptDtmStart" value="2022-07-31">
-<input type="hidden" name="ordAcptDtmEnd" value="2022-10-30">
-<input type="hidden" id="callAjaxdeliveryHtml" name="callAjaxdeliveryHtml" value="N">
+
 </form>
 <div class="inr-box piner">
 <div class="oder-step">
@@ -255,42 +214,83 @@
 	<ul>
 
 		<li id="stepTwo">
-			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=120" onclick="orderDeliveryList.searchStauts('1230','stepTwo');return false;"><p class="num">1</p></a>
+			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=120" onclick="orderDeliveryList.searchStauts('1230','stepTwo');return false;"><p class="num num1">1</p></a>
 			<p class="txt">주문완료</p>
 		</li>
 	
 		<li id="stepFive">
-			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=160" onclick="orderDeliveryList.searchStauts('160','stepFive');return false;"><p class="num">0</p></a>
+			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=160" onclick="orderDeliveryList.searchStauts('160','stepFive');return false;"><p class="num num2">0</p></a>
 			<p class="txt">배송완료</p>
 		</li>
 		<li id="stepSix">
-			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=170" onclick="orderDeliveryList.searchStauts('170','stepSix');return false;"><p class="num">0</p></a>
+			<a href="javascript:void(0);" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=170" onclick="orderDeliveryList.searchStauts('170','stepSix');return false;"><p class="num num3">0</p></a>
 			<p class="txt">구매확정</p>
 		</li>
 	</ul>
 </div>
 </div>
 </div>
-<!-- APET-1537: FE 배송준비중 상태 조기 변경으로 인한 고객 자체취소 불가 개선 -->
-					<!-- APET-1523 자사 전체 취소 가능 여부 - 자사 배송준비중까지 상태 아닌경우-->
-					<!-- APET-1523 자사 전체 배송완료 체크-->
+<script type="text/javascript">
+$(function(){
+	//주문상태 카운트
+	var staArr = ['주문완료','배송완료','구매확정'];
+	var dbStaArr = new Array();
+	$(".hidden_div").each(function(i,element){
+		var status = $(element).find("#status").val(); //상태 
+		dbStaArr.push(status);
+	});
+		//alert(dbStaArr);
+		var cnt1 = 0;
+		var cnt2 = 0;
+		var cnt3 = 0;
+		for(var i=0;i<dbStaArr.length;i++){
+			if(dbStaArr[i] ==staArr[0]){
+				cnt1 ++;
+			}else if(dbStaArr[i] ==staArr[1]){
+				cnt2 ++;
+			}else{
+				cnt3++;
+			}//end if
+		}//end for
+		//alert(cnt3);
+		
+		$(".num1").html(cnt1);
+		$(".num2").html(cnt2);
+		$(".num3").html(cnt3);
+		
+		
+})//ready
+</script>
+<script type="text/javascript">
+function goOrderDetail(orID){
+	$("#orderId").val(orID);
+	var o = $("#orderId").val();
+	alert(o);
+	$("#hidFrm").submit();
+	
+}
+</script>
+  <form id="hidFrm" name="hidFrm" action="order_detail_form.do">
+  	<input type="hidden" id="orderId" name="orderId" >
+	 </form>	
+  <c:forEach  items="${list}" var="list">
+  <div class="hidden_div">
+  <input type="hidden" id="status" name="status" value="${list.status}" /> 
+  </div>
+  </c:forEach>				
+				
 					<c:forEach  items="${list}" var="list">
 					<div class="inr-box statusDeliveryList">
 		<div class="item-list">
 			<div class="top">
 				<div class="tit">
 					<p class="data">${list.inputDateS }</p>
-					<a href="javascript:void(0);" class="detail-btn" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="orderDeliveryListBtn.goOrderDetail('C202210301001496');return false;">주문상세 </a>
+					<a href="javascript:void(0);" class="detail-btn" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="goOrderDetail('${list.orderId}')">주문상세 </a>
 				</div>
 				<!-- 주문 취소 가능 여부 eq Y -->
 					<a href="javascript:void(0);" class="btn sm" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="orderDeliveryListBtn.goCancelRequest('C202210301001496', '');return false;">전체주문취소</a>
 						</div>
 		</div>
-		<!-- 파랑 t3   결제완료 배송중 배송준비중   -->
-					<!-- 빨강 t4  입금대기 반품신청  반품진행중  교환신청 교환진행중 -->
-					<!-- 검정   구매확정 배송완료 반품완료 CLM_DTL_STAT 260 반품거부 250 교환완료 450 교환거부 350  -->
-					<!-- 회색 t2 주문취소 110 120 -->
-					<!-- dvlrClass (배송 아이콘  :: 배송 처리 유형 코드 eq 택배배송 ? 'icon-t t2' : ((배송 처리 유형 코드 eq  당일배송)? 'icon-t' : ((배송 처리 유형 코드 eq  새벽배송)? 'icon-t t3' : ''))-->
 					<div class="item-list">
 							<div class="bottom">
 								<div class="t-box">
@@ -298,6 +298,7 @@
 													${list.status}</p>
 										
 								</div>
+							
 			
 						
 								
@@ -336,19 +337,11 @@
 					
 					</div>
 					</c:forEach>
+						 
 <div class="btn_fixed_wrap t2" style="display: none;">
 	<button class="btn_round" onclick="searchAllOrder();" style="display:none;">전체주문보기</button><!-- 하단 gnb 있을 시 t2추가 -->
 </div>
-<script>
-function insertCart(goodsId, itemNo, pakGoodsId, mkiGoodsYn, mkiGoodsOptContent, reloadYn, buyQtyStr, rsvGoodsYn ) {
-if(rsvGoodsYn == 'Y') {
-	ui.toast('<div class="link"><p class="tt">사전예약 상품은 장바구니에 담을 수 없어요</p></div>');
-} else {
-	cartGoods.insertCart(goodsId, itemNo, pakGoodsId, mkiGoodsYn, mkiGoodsOptContent, reloadYn, buyQtyStr);
-}
-}
 </script><!-- 주문/배송 목록 include -->
-<!-- 주문/배송 form,목록 include -->
 			</div>				
 			
 			

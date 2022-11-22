@@ -5,8 +5,8 @@ import java.util.Date;
 public class MyOrderDomain {
 	private String memberId, membername,orderId, deliveryId, deliveryName,
 	zipcode, addr, addrDetail, phone, receiver, shipReq, status, prdId,
-	prdName, thImg,inputDateS,prdImg;
-	private int actualPrice, totalCnt, prdPrice, cntPrice;
+	prdName, thImg,inputDateS,prdImg,orDetailId;
+	private int actualPrice, totalCnt, prdPrice, cntPrice, totalPrdPrice;
 	private Date inputDate, completionDate;
 	
 	public MyOrderDomain() {
@@ -15,7 +15,8 @@ public class MyOrderDomain {
 	public MyOrderDomain(String memberId, String membername, String orderId, String deliveryId, String deliveryName,
 			String zipcode, String addr, String addrDetail, String phone, String receiver, String shipReq,
 			String status, String prdId, String prdName, String thImg, String inputDateS, String prdImg,
-			int actualPrice, int totalCnt, int prdPrice, int cntPrice, Date inputDate, Date completionDate) {
+			String orDetailId, int actualPrice, int totalCnt, int prdPrice, int cntPrice, int totalPrdPrice,
+			Date inputDate, Date completionDate) {
 		super();
 		this.memberId = memberId;
 		this.membername = membername;
@@ -34,10 +35,12 @@ public class MyOrderDomain {
 		this.thImg = thImg;
 		this.inputDateS = inputDateS;
 		this.prdImg = prdImg;
+		this.orDetailId = orDetailId;
 		this.actualPrice = actualPrice;
 		this.totalCnt = totalCnt;
 		this.prdPrice = prdPrice;
 		this.cntPrice = cntPrice;
+		this.totalPrdPrice = totalPrdPrice;
 		this.inputDate = inputDate;
 		this.completionDate = completionDate;
 	}
@@ -178,6 +181,14 @@ public class MyOrderDomain {
 		this.prdImg = prdImg;
 	}
 
+	public String getOrDetailId() {
+		return orDetailId;
+	}
+
+	public void setOrDetailId(String orDetailId) {
+		this.orDetailId = orDetailId;
+	}
+
 	public int getActualPrice() {
 		return actualPrice;
 	}
@@ -210,6 +221,14 @@ public class MyOrderDomain {
 		this.cntPrice = cntPrice;
 	}
 
+	public int getTotalPrdPrice() {
+		return totalPrdPrice;
+	}
+
+	public void setTotalPrdPrice(int totalPrdPrice) {
+		this.totalPrdPrice = totalPrdPrice;
+	}
+
 	public Date getInputDate() {
 		return inputDate;
 	}
@@ -232,11 +251,14 @@ public class MyOrderDomain {
 				+ ", deliveryId=" + deliveryId + ", deliveryName=" + deliveryName + ", zipcode=" + zipcode + ", addr="
 				+ addr + ", addrDetail=" + addrDetail + ", phone=" + phone + ", receiver=" + receiver + ", shipReq="
 				+ shipReq + ", status=" + status + ", prdId=" + prdId + ", prdName=" + prdName + ", thImg=" + thImg
-				+ ", inputDateS=" + inputDateS + ", prdImg=" + prdImg + ", actualPrice=" + actualPrice + ", totalCnt="
-				+ totalCnt + ", prdPrice=" + prdPrice + ", cntPrice=" + cntPrice + ", inputDate=" + inputDate
-				+ ", completionDate=" + completionDate + "]";
+				+ ", inputDateS=" + inputDateS + ", prdImg=" + prdImg + ", orDetailId=" + orDetailId + ", actualPrice="
+				+ actualPrice + ", totalCnt=" + totalCnt + ", prdPrice=" + prdPrice + ", cntPrice=" + cntPrice
+				+ ", totalPrdPrice=" + totalPrdPrice + ", inputDate=" + inputDate + ", completionDate=" + completionDate
+				+ "]";
 	}
-
+	
+	
+	
 	
 	
 }//class 

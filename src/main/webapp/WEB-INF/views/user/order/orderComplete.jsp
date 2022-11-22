@@ -170,7 +170,7 @@
 				<section class="topbox">
 					<div class="hdd">
 						<div class="hd">
-							<em class="nm">유설빈</em>님 <br>주문이 완료되었습니다.
+							<em class="nm">${mod1.membername}</em>님 <br>주문이 완료되었습니다.
 						</div>
 						<div class="dd">주문하신 내역은 ‘주문내역’ 에서 확인하실 수 있습니다.</div>
 					</div>
@@ -180,7 +180,7 @@
 					<div class="hdts"><span class="tit">주문 번호</span></div>
 					<div class="cdts">
 						<div class="box">
-							<i class="nums">C202210301001496</i>
+							<i class="nums">${mod1.orderId}</i>
 						</div>
 					</div>
 				</section>
@@ -189,8 +189,8 @@
 					<div class="hdts"><span class="tit">상품 정보</span></div>
 					<div class="cdts">
 						<div class="box">
-							<i class="nums">닭다리 장난감</i>
-							<i class="nums">&nbsp;[수량: 1개]</i>
+							<i class="nums">${mod2.prdName }</i>
+							<i class="nums">&nbsp;[수량: ${mod2.totalCnt}개]</i>
 						</div>
 					</div>
 				</section>
@@ -203,18 +203,13 @@
 								<em class="t">집</em>
 							</div>
 							<div class="adrs">
-								[06257] 서울특별시 강남구 논현로63길 7(역삼동)</div>
-							<div class="tels">유설빈 | 010-1111-1274</div>
+								[${mod3.zipcode}] ${mod3.addr}( ${mod3.addrDetail})</div>
+							<div class="tels">${mod3.receiver} | ${mod3.phone } </div>
 						</div>
 						<div class="adrreq">
 							<div class="pwf">
-								<em class="t">
-									택배함</em> 
-								<em class="p">필요없음&nbsp; 
-									<if test="false">
-										</if>
-								</em>
-								<div class="txt custom_ellipsis_dlvr">택배보관함에 두시면 돼요 감사합니다</div>
+								
+								<div class="txt custom_ellipsis_dlvr">${mod1.shipReq }</div>
 							</div>
 						</div>
 					</div>
@@ -227,7 +222,7 @@
 							<li>
 								<div class="dt">총 상품금액</div>
 								<div class="dd">
-									<span class="prc"><em class="p">99,000</em><i class="w">원</i></span>
+									<span class="prc"><em class="p">${totalPrice}</em><i class="w">원</i></span>
 									<input type="hidden" id="order_payment_total_goods_amt" value="99000">
 									<input type="hidden" id="order_payment_total_local_goods_amt" value="">
 									<input type="hidden" id="fstPurchGoodsIncYn" value="N">
@@ -236,16 +231,11 @@
 							<li id="couponDcLi">
 								<div class="dt">등급할인</div>
 								<div class="dd">
-									<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-5,000</em><i class="w">원</i></span>
+									<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-${discountPrice}</em><i class="w">원</i></span>
 									<input type="hidden" id="order_payment_total_dc_amt" value="5000">
 								</div>
 							</li>
-							<li id="svmnDcLi" style="display:none;">
-								<div class="dt">적립금 사용</div>
-								<div class="dd">
-									<span class="prc dis"><em class="p" id="order_payment_svmn_amt_view">0</em><i class="w">점</i></span>
-								</div>
-							</li>
+					
 					
 							<li>
 								<div class="dt">배송비</div>
@@ -260,7 +250,7 @@
 						<div class="tot">
 							<div class="dt">총 결제금액</div>
 							<div class="dd">
-								<span class="prc"><em class="p" id="order_payment_total_pay_amt_view">94,000</em><i class="w">원</i></span>
+								<span class="prc"><em class="p" id="order_payment_total_pay_amt_view">${mod1.actualPrice }</em><i class="w">원</i></span>
 								<input type="hidden" id="order_payment_total_pay_amt" value="94000">
 							</div>
 						</div>
