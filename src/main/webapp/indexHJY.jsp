@@ -30,6 +30,9 @@ ${member.id}흥 되나보자 - 안나오네<br>
 <a href="admin_m_list.do">관리자 회원관리메인</a><br>
 <a href="login_form.do">사용자 로그인</a><br>
 <a href="logout_process.do">사용자 로그아웃</a><br>
+<br>
+<a href="mypage_form.do">사용자 마이페이지 메인</a><br>
+<a href="mypage_pass_confirm.do">사용자 마이페이지 비번확인</a><br>
 
 
 

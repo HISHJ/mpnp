@@ -1,19 +1,19 @@
 package kr.co.mpnp.user.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartRequest;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.mpnp.user.service.JoinService;
 import kr.co.mpnp.user.vo.MemberVO;
@@ -40,22 +40,45 @@ public class JoinController {
 		return "";
 	}//joinDupChk
 	
-	@RequestMapping(value = "/join_add_process.do", method=GET )
+	@RequestMapping(value = "/join_add_process.do", method=POST )
 	public String joinAddProcess(HttpServletRequest request, Model model) {
 		
 		MemberVO mVO=new MemberVO();
-		mVO.setPfimg(request.getParameter("pfimg"));
-		mVO.setId(request.getParameter("id"));
-		mVO.setPass(request.getParameter("pass"));
-		mVO.setName(request.getParameter("name"));
-		mVO.setPhone(request.getParameter("phone"));
-		mVO.setNick(request.getParameter("nick"));
-		mVO.setStatus(request.getParameter("status"));//vo랑 짝 맞는지 확인하슈
-		mVO.setGradeid(request.getParameter("gradeid"));
+		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload_pf");
+		int maxSize=1024*1024*20;
 		
-		System.out.println("컨트롤러 아이디 "+request.getParameter("id"));//잘 들어옴
+		System.out.println("try 위");
 		
-		//값 받아서 어떻게해야하지 db로 가야하는데
+		//DB에 데이터는 들어가는데 ...디렉토리에는 사진이 안들어가지 해결완료 jsp form 태그를 조심ㅎㅐ.. Post방식으로 받아야하는것도
+		try {
+			System.out.println("try 바로아래"); 
+			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),
+					maxSize,"UTF-8", new DefaultFileRenamePolicy());
+			mVO.setPfimg(mr.getFilesystemName("pfimg"));
+			
+			mVO.setId(mr.getParameter("id"));
+			mVO.setPass(mr.getParameter("pass"));
+			mVO.setName(mr.getParameter("name"));
+			mVO.setPhone(mr.getParameter("phone"));
+			mVO.setNick(mr.getParameter("nick"));
+			mVO.setStatus(mr.getParameter("status"));
+			mVO.setGradeid(mr.getParameter("gradeid"));
+			
+			model.addAttribute("join",mVO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+//		mVO.setId(request.getParameter("id"));
+//		mVO.setPass(request.getParameter("pass"));
+//		mVO.setName(request.getParameter("name"));
+//		mVO.setPhone(request.getParameter("phone"));
+//		mVO.setNick(request.getParameter("nick"));
+//		mVO.setStatus(request.getParameter("status"));
+//		mVO.setGradeid(request.getParameter("gradeid"));
+		
+		
 		JoinService js= new JoinService();
 		js.addMember(mVO);
 		

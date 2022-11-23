@@ -19,12 +19,11 @@
 <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/mypage.css">
-<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bPopup/0.11.0/jquery.bpopup.js"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
 
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
 <script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
 <script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
 <script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
@@ -36,11 +35,6 @@
 	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-	<style>
-
- 
-
-	</style>
 	<script>
 		$(function(){
 		 $(".bt_dog").click(function(){
@@ -63,9 +57,124 @@
 		})
 		
 		</script>
+<style>
+	/*팝업창*/
+	.btn {
+  cursor: pointer;
+  /* border:1px solid var(--colors-main03); */
+  display: inline-block;
+  padding:5px 10px;
+	border: none;
+  color:  #000;
+  border-radius: 3px;
+	margin-left:-10px;
+	padding-right: 5px;
+    color: #666;
+    font-size: 13px;
+    line-height: normal;
+
+}
+
+ 
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+  background: rgba(0,0,0, .9);
+  transition: opacity .25s ease;
+  z-index:99999999999999999999999999999999999999999999999999999999999999999999999999999;
+}
+
+.modal__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.modal-state {
+  display: none;
+}
+
+.modal-state:checked + .modal {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-state:checked + .modal .modal__inner {
+  top: 0;
+}
+
+.modal__inner {
+  transition: top 1.25s ease;
+  position: absolute;
+  top: -20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  margin: auto;
+  overflow: auto; 
+   background: transparent !important; 
+  border-radius: 5px;
+  padding: 1em 2em;
+  height: 55%;
+}
+
+.modal__close {
+  position: absolute;
+  right: 50px;;
+  top: 30px;
+  width: 1.1em;
+  height: 1.1em;
+  cursor: pointer;
+}
+
+.modal__close:after,
+.modal__close:before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 1.5em;
+  background: #ccc;
+  display: block;
+  transform: rotate(45deg);
+  left: 50%;
+  margin: -3px 0 0 -1px;
+  top: 0;
+}
+
+.modal__close:hover:after,
+.modal__close:hover:before {
+  background: #aaa;
+}
+
+.modal__close:before {
+  transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+	
+  .modal__inner {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+  }
+}
+
+.hidden {
+    display: none;
+}
 
 
-
+</style>
 
 </head>
 
@@ -75,152 +184,6 @@
 	<div class="wrap" id="wrap">
 		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
 		
-	<script>
-	
-	function clickLogin(){
-		location.href = "/indexLogin?returnUrl="+location.pathname+location.search;
-	}
-	
-	//장바구니 수 set, 캐시 이슈로 ajax 호출
-	function setCartCnt(){
-		$.ajax({
-			url : "/order/getCartCnt"
-			, dataType : "json"
-			, type : "POST"
-			, success : function(data){
-				var $cartCntObj = $('.header .menu .cart').find('em');
-				var $shopMainCartCntObj = $('#btnCart').find('em');
-				if($cartCntObj.length == 0){
-					if(data.cartCnt != 0){
-						var html = '<em class="n">'+data.cartCnt+'</em>';
-						$('.header .menu .cart').html(html);
-					}
-				}else{
-					if(data.cartCnt == 0){
-						$cartCntObj.remove();
-					}else{
-						$cartCntObj.text(data.cartCnt);
-					}
-				}
-			}
-		});
-	}
-
-  	//등급 레이어팝업 스크립트 추가 2021.05.13
-	var rankBox = function(){
-		ui.popLayer.open('popLank',{
-			ocb:function(){
-				// console.log("popLank 열림");
-			},
-			ccb:function(){
-				// console.log("popLank 닫힘");
-			}
-		});
-
-		if("PC" == "PC") {
-			$(".rank_pc").addClass("on");
-		}else {										
-			$(".rank_mo").addClass("on");
-		}
-	}
-  	
-	function closeTopbanner() {
-		$('#topBanner').addClass('hide');
-		var cookieName	= getTopbannerCookieName();
-		setCookieTopBanner(cookieName, "done", 1);
-	}
-		
-	/* 전화번호 하이픈추가  */
-	function PhoneNumber(obj) {
-	    var number = obj.value.replace(/[^0-9]/g, "");
-	    var phone = "";
-	    
-		if(number.substr(0,2)==02){
-		    if(number.length < 3) {
-		        return number;
-		    } else if(number.length < 6) {
-		        phone += number.substr(0, 2);
-		        phone += "-";
-		        phone += number.substr(2);
-		        
-		    } else if(number.length < 10) {
-		        phone += number.substr(0, 2);
-		        phone += "-";
-		        phone += number.substr(2, 3);
-		        phone += "-";
-		        phone += number.substr(5);
-		    } else {
-		        phone += number.substr(0, 2);
-		        phone += "-";
-		        phone += number.substr(2, 4);
-		        phone += "-";
-		        phone += number.substr(6,4);
-		    }
-		}else{
-			if(number.length < 4) {
-	        return number;
-	   		} else if(number.length < 7) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3);
-	    	} else if(number.length < 11) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 3);
-	        phone += "-";
-	        phone += number.substr(6);
-	    } else {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 4);
-	        phone += "-";
-	        phone += number.substr(7);
-	    }
-	}
-	    obj.value = phone;
-		return false;
-}//PhoneNumber
-
-$(function() {
-	$("#saveBtn").click(function() {
-		var pfimg=$("#pfimg").val();
-		
-		var blockExt="jpg,jpeg,png,PNG".split(",");
-		var flag=false;
-		var pfimgExt=pfimg.substring(pfimg.lastIndexOf(".")+1);
-		
-		for(var i=0; i<blockExt.length; i++){
-			if(blockExt[i]==pfimgExt){
-				flag=true;
-			}
-		}
-		if(!flag){
-			alert("이미지파일만 넣으라구");
-			return flag;
-		}
-		
-		$("#signUpFrm").submit();
-	});
-	
-	
-	
-});//ready
-
-//썸네일이미지 미리보기
-	function thImgSet(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('pfThumb').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('pfThumb').src = "";
-	  }
-}
-</script><!-- header pc-->
-
-
 
 <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
@@ -298,33 +261,38 @@ $(function() {
 	</div>
 </header>
 
-		
+
+<!--❤️등급 팝업창-->	
+<script>
+	
+       $(".prooptions").click(loadDynamic);  
+  
+  function loadDynamic() {  
+      $("#dynamic")  
+      .load("https://dl.dropboxusercontent.com/s/6ro896byol223p0/ajax-data.txt?dl=1&token_hash=AAEhOzpJgzb71h8X_olqovBCKz0GF2BCXJogeZ0RIoWXoQ", // URL with only <div> content & dont load <head> or <html> or <body> etc...     
+              // Callback function on completion (optional)  
+              function (content) {  
+                  // make content visible with effect  
+                  $(this).hide().fadeIn("slow");  
+                  return false;  
+              });  
+  } 
+
+</script>	
+<input class="modal-state" id="modal-1" type="checkbox" />
+<div class="modal">
+  <label class="modal__bg" for="modal-1"></label>
+  <div class="modal__inner">
+    <label class="modal__close" for="modal-1"></label>
+    <img src="http://localhost/mpnp/3rdDesign/images/gradePopUp3.png" style="background-size:inherit" alt="어바웃펫 패미리 등급별 혜택 이미지"> 		
 		<div class="layers">
-			<!-- 레이어팝업 넣을 자리 -->
-			<!-- 등급안내 팝업 추가 2021.05.13 -->
-			<article class="popLayer a popLank " id="popLank">
-				<div class="pbd">
-					<div class="phd">
-						<div class="in">
-							<h1 class="tit"></h1>
-							<button type="button" class="btnPopClose">닫기</button>
-						</div>
-					</div>
-					<div class="pct">
-						<main class="poptents">
-							<div class="rankCont">
-								<div class="rank_imgBox rank_pc">
-											<img src="/_images/common/img-level-pc.png" alt="어바웃펫 패미리 등급별 혜택 이미지">
-										</div>
-									</div>
-						</main>
-					</div>
-				</div>
-			</article>
-			<!-- //등급안내 팝업 추가 2021.05.13 -->
+
 		</div>
-<!--// header pc--><!-- e : header 영역 -->
-					<!-- s : gnb 영역 -->
+	<div id="dynamic" class="hidden"></div>
+  </div>
+</div>
+<!--등급 팝업창-->	
+
 
 <!--❤️사이드바-->
 
@@ -345,6 +313,7 @@ $(function() {
 					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
 					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
 					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
+					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >배송지 관리</a></li>
 				</ul>
 			</div>
 
@@ -389,135 +358,110 @@ $(function() {
 <!--❤️사이드바 끝-->
 <!--❤️main-->
   <!--❤️main-->
-	<input type="hidden" id="decodeNickNm" value="jsh1706"/>
-		
-	<style>
-		.expire{
-			font-size: 13rem;
-			color: #ff7777;
-			margin-top: 7px;
-			padding: 0 5px 0;
-			position:absolute;
-			left:53%;
-			top:20%;
-		}
-	</style>
-<!-- 	<form id="signUpFrm" name="signUpFrm">
- -->		<div id="hiiden-field">
-			<input type="hidden" id="adapter" onchange="fnSnsStatSave();"/>
-			<input type="hidden" name="prflNm" value="" />
-			<input type="hidden" name="prflImg" value="" />
-			<input type="hidden" name="orgPrflImg" value="" />
-			<input type="hidden" name="mobile" value="01076511775" />
-			<input type="hidden" name="orgMobile" value="01076511775" />
-			<input type="hidden" name="mobileCd" value="01" />
-			<input type="hidden" name="ciCtfVal" value="lUijZT2Z0IRzMw8XpyV8D8pvEo0bk862JarAxqpFpzrpvZJWI3BIKay9mgqMKa/3Dc2WvvlBYSkrYv0WMqEgsw==" />
-			<input type="hidden" name="diCtfVal" value="MC0GCCqGSIb3DQIJAyEAQBL4osxW3EX7WS3cxkwIkVl5IHo3u8flIJmWzAXteH0=" />
-			<input type="hidden" name="rcomUrl" value=""/>
-			<input type="hidden" name="rcomCd" value="2F5E09F6"/>
-			<input type="hidden" name="ntnGbCd" value="10" />
+	<main class="container lnb page my home" id="container" style="margin-top:100px;margin-left: 100px;">
+			
+		<div class="inr" style="min-height: 429px;">			
+
+			<!-- 본문 -->
+			<div class="contents" id="contents" style="min-height: 550.8px;">
+
+				<!-- 회원정보  -->
+				<section class="sect top">
+<div class="my_user_info_wrap">
+	<div class="my_user_profile">
+		<div class="my_user_photo">
+			<a href="javascript:location.href='/mypage/info/indexManageCheck'" title="프로필수정하기">
+				<img src="common/images/img_default_profile.svg" class="img">
+				<button class="btn_profile_edit"><span class="hide_txt">수정</span></button>
+			</a>
 		</div>
-		<main class="container page login srch" id="container" style="margin-top:100px;margin-left:100px;">
-
-
-			<div class="inr">
-				<!-- 본문 -->
-				<div class="contents" id="contents">
-					<div class="pc-tit">
-						<h2>회원가입</h2>
-					</div>
-					<div class="fake-pop">
-						<div class="pct">
-						<form id="signUpFrm" action="join_add_process.do" method="post" enctype="multipart/form-data">
-							<div class="poptents">
-								<!-- 프로필 사진 -->
-								<div class="my-picture">
-									<p class="picture">
-										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
-									</p>
- 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
-									<input type="file" id="pfimg" name="pfimg" style="display: none" onchange="thImgSet(this)">
-								</div>
-								<!-- // 프로필 사진 -->
-								<!-- 회원 정보 입력 -->
-								<div class="member-input">
-									<ul class="list">
-										<li>
-											<strong class="tit requied" style="visibility: hidden;" >아이디</strong>
-											<p class="info">필수입력정보</p>
-										</li>
-										<li>
-											<strong class="tit requied" >아이디</strong>
-											<p class="info">아이디 중복 검사 click 　</p><p class="info"></p>
-											<div class="input">
-												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
-											</div>
-
-										</li>
-										<li>
-											<strong class="tit requied">비밀번호</strong>
-											<div class="input del">
-												<input type="password" name="pass" id="pass" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="15" autocomplete="new-password">
-											</div>
-											<p class="validation-check" id="join_pswd_error"></p>
-										</li>
-										<li>
-											<strong class="tit requied">비밀번호 확인</strong>
-											<div class="input del">
-												<input type="password" id="repass" name="repass" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" autocomplete="new-password">
-											</div>
-											<p class="validation-check" id="join_pswd_check_error"></p>
-										</li>
-										<li>
-											<strong class="tit requied">이름</strong>
-											<div class="input">
-											<input type="text" name="name"  id="name" placeholder="이름을 입력해주세요" >
-												</div>
-										</li>
-										<li id="mobile-li-default">
-											<strong class="tit requied">휴대폰 번호</strong>
-											<div class="input">
-												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13" placeholder="휴대폰번호를 입력해주세요">
-												</div>
-										</li>
-										 <!-- 본인인증 안내 -->
-										<li id="mobile-li-cert">
-										</li>
-										<li>
-											<strong class="tit requied">닉네임</strong>
-											<div class="input del">
-												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
-<!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
-											</div>
-											<!-- 회원등급 hidden으로 -->
-												<input type="hidden" id="gradeid" name="gradeid" value="G1">
-												<input type="hidden" id="status" name="status" value="정상">
-											<p id="join_nickNm_error" class="validation-check"></p>
-										</li>
-								
-									</ul>
-								</div>
-								<!-- // 회원 정보 입력 -->
-							</div>
-						</div>
-						<div class="pbt pull mt54">
-							<div class="bts">
-<!-- 								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">다음</a> -->
-								<a class="btn xl a" id="saveBtn">다음</a>
-							</div>
-						</div>
-						
-					</div>
+		<div class="my_user_info">
+			<div class="my_user_name">
+				<span class="nm" style="pointer:cursor" onclick="location.href='/mypage/info/indexManageCheck'">
+					유설빈</span>
+</div>
+			<div class="my_user_membership">
+				<span>
+					<a class="rank_icon" href="javascript:rankBox();"><i class="label welcome">웰컴</i></a>
+						등급 입니다</span>
+		
+				<div class="grade_click" style="display:flex;align-items:center;">
+				<label class="btn prooptions" for="modal-1" href="#" style="margin-top:10px;background-color: transparent !important;">
+					등급별 혜택보기
+				</label>
+				<span class="material-symbols-outlined" style="margin-top:13px;color:#ddd;">
+					chevron_right
+					</span>
 				</div>
 			</div>
-		</main>
-	</form>
-	<!-- e -->
-
-					</main>
-			</div>
+		</div>
 	</div>
-</article><!-- 플로팅 영역 --><!-- location 영역 포함  -->			
+	
+	<style>
+		/* APET-1628 스탬프 임시 미노출 처리 : 스탬프 반영전 임시 스타일, jsp에 직접 기술 - 스탬프 반영시엔 삭제요망.*/
+		.isMo .my_user_point li{width:calc(100% / 2) !important}
+		.isPc .my_user_point{justify-content: flex-end;}
+		.my_user_point li.my_accumulate{margin:unset;padding: 0 20px;border-top:none;}
+	</style>
+
+</div>
+</section><section class="myinfo">
+					<!-- 마이펫관리 -->
+					<div class="sect line">
+					</div>
+
+					<!-- 최근 본 영상  -->
+
+					<dl class="sect shop line">
+<dt>
+	<span>내 쇼핑정보</span>
+</dt>
+<dd>
+	<ul class="coupon">
+	
+		<li>
+			<a class="my3" href="/mypage/shop/myWishList" data-url="/mypage/shop/myWishList" data-content="1319879">
+			<span>찜한상품</span></a>
+		</li>
+		<li>
+			<a class="my4" href="/order/indexCartList/">
+			<em class="n">2</em>
+			<span>장바구니</span></a>
+		</li>
+	</ul>
+	<div class="barwrap">
+		<ul class="bar">
+			<li>
+				<a href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
+				<span class="tit">주문/배송</span>   
+				<span class="next"></span>
+				</a>
+			</li>
+			<li>
+				<a href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
+				<span class="tit">상품 후기</span>   
+				<span class="next"></span>
+				</a>
+			</li>
+			<li>
+				<!-- <span class="tit new">취소/반품/교환</span> -->
+				<a href="/mypage/order/indexClaimList" data-url="/mypage/order/indexClaimList" data-content="1319879">
+				<span class="tit">주문 취소</span>
+				<span class="next"></span>
+				</a>
+			</li>
+			
+		</ul>
+	
+	</div>
+
+</dd>
+</dl>
+</section>
+			</div>
+
+		</div>
+	</main>
 <!--❤️main끝-->			
 	
 

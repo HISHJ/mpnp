@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -11,6 +12,7 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#ffffff">
 
+
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
@@ -18,7 +20,8 @@
 <link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/find_info.css">
-<script type="text/javascript" src="http://localhost/mpnp/3rdDesign//_script/crypto.js"></script>
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/mypage.css">
+<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
@@ -34,8 +37,6 @@
 	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-
-
 	<script>
 		$(function(){
 		 $(".bt_dog").click(function(){
@@ -58,6 +59,8 @@
 		})
 		
 		</script>
+
+
 
 
 </head>
@@ -171,142 +174,81 @@
 			<!-- //등급안내 팝업 추가 2021.05.13 -->
 		</div>
 <!--// header pc--><!-- e : header 영역 -->
-					<!-- s : gnb 영역 -->
-					<script type="text/javascript">
-function setCateList(dispClsfNo, upDispClsfNo) {
-	var viewDispClsfNo = getDispClsfNoFromCateCdL(upDispClsfNo);
-	// 쿠키저장
-	fnDispClsfNoCookie('set', viewDispClsfNo);
-	location.href = "/shop/indexCategory?dispClsfNo="+dispClsfNo+"&cateCdL="+upDispClsfNo+"&cateCdM="+dispClsfNo;
-}
 
-function goIndexLoginSettings() {
-	location.href = "/indexLoginSettings?returnUrl=" + window.location.pathname;
-}
-
-//시리즈 팝업
-function seriesOpen(){
-	var options = {
-		url : "/tv/series/getSeriesList"
-		, type : "POST"
-		, dataType : "html"
-		, data : { }
-		, done : function(result){
-			$("#gnbSrisListPopup").empty();
-			$("#gnbSrisListPopup").html(result);
-			ui.gnb.using("close"); //시리즈 목록 레이어 팝업 실행시 gnb메뉴(전체메뉴) 닫기
-			ui.popLayer.open('popSeriesList');
-		}
-	};
-	ajax.call(options);
-}
-
-
-function goMyPetLogGnb(){
-	if( checkLoginGnb() && checkRegPetGnb() ){
-		location.href = "https://aboutpet.co.kr/log/indexMyPetLog/?mbrNo=0";
-	}
-}
-
-
-function checkLoginGnb(){
-	if( "false" != "true" ){
-		ui.confirm('로그인 후 서비스를 이용할 수 있어요.<br>로그인 할까요?',{ // 컨펌 창 옵션들
-			ycb:function(){
-				location.href = "https://aboutpet.co.kr/indexLogin";
-			},
-			ncb:function(){
-				return false;
-			},
-			ybt:"로그인", // 기본값 "확인"
-			nbt:"취소"  // 기본값 "취소"
-		});
-	}else{
-		return true;
-	}
-}
-
-
-function checkRegPetGnb(){	
-	if( "" == null || "" == ""){
-		ui.confirm('마이펫 등록 후 이용할 수 있어요<br/>펫정보를 등록할까요?',{ // 컨펌 창 옵션들
-			ycb:function(){
-				// 반려동물 등록 화면으로 이동.
-				location.href = "https://aboutpet.co.kr/my/pet/petInsertView";
-			},
-			ncb:function(){
-				//alert('취소');
-				return false;
-			},
-			ybt:"예", // 기본값 "확인"
-			nbt:"아니요"  // 기본값 "취소"
-		});
-	}else{
-		return true;
-	}
-}
-
-function goPageWithClosingGnb(url) { 
-	if(typeof url !== 'string') return;
-
-	ui.gnb.usingWithoutAnimation('close');
-
-	location.href = url;
-}
-
-</script>
 <!--❤️사이드바-->
 
 
 <!--❤️사이드바 끝-->
 <!--❤️main-->
- 	<!-- s : 본문영역 -->			
-	 <body class="body">
-		<div class="wrap" id="wrap">
-	
-	
-			<!-- 바디 - 여기위로 템플릿 -->
-			<main class="container page login srch" id="container" style="margin-top:250px !important;margin-bottom:-100px;">
-	
+ 			<!-- s : 본문영역 -->			
+		<form id="redirectForm" method="POST" action="/mypage/info/indexManageDetail" style="display:none;">
+			<input type="text" name="checkCode" value="3106febf2c516cf763328a43cfa76d13" />
+			<input type="text" name="type" value="MNG" />
+		</form>
+		<main class="container page sett" id="container" style="margin-top:200px;">
+			<div class="header pageHead heightNone">
 				<div class="inr">
-					<!-- 본문 -->
-					<div class="contents" id="contents">
-						<!-- PC 타이틀 모바일에서 제거  -->
-						<div class="pc-tit">
-							<h2>가입완료</h2>
+					<div class="hdt">
+						<button class="back" type="button" onclick="goBack();" data-content="" data-url="/mypage/indexMyPage">뒤로가기</button>
+					</div>
+					<div class="cent t2"><h2 class="subtit">회원 탈퇴</h2></div>
+				</div>
+			</div>
+
+			<div class="inr">
+				<!-- 본문 -->
+				<div class="contents" id="contents">
+
+					<!-- PC 타이틀 모바일에서 제거  -->
+					<div class="pc-tit">
+						<h2>회원탈퇴</h2>
+					</div>
+					<!-- // PC 타이틀 모바일에서 제거  -->
+
+					<div class="fake-pop">
+
+						<div class="member-input">
+							<ul class="list">
+								<li>
+									<strong class="tit">회원탈퇴 안내</strong>
+									<div class="dot-txt">
+									
+										<!-- APET-1628 스탬프 임시 미노출 처리 -->
+										<!-- <p>회원탈퇴시, 회원님께서 보유하신 비현금성 포인트와 적립금, 스탬프, 쿠폰 등은 모두 삭제됩니다.</p>
+										<p>탈퇴 후 삭제된 포인트, 적립금, 스탬프, 쿠폰 등은 복구가 불가합니다.</p> -->
+										<p>회원탈퇴시, 회원님께서 보유하신 비현금성 포인트와 적립금, 쿠폰 등은 모두 삭제됩니다.</p>
+										<p>탈퇴 후 삭제된 포인트, 적립금, 쿠폰 등은 복구가 불가합니다.</p>
+										
+										
+									</div>
+								</li>
+							</ul>
+							
 						</div>
-						<!-- // PC 타이틀 모바일에서 제거  -->
-						<div class="fake-pop">
-							<div class="result">
-								<span class="blue">${requestScope.join.nick}</span>님<br> 명품냥품에 가입하신 것을 환영합니다!</div>
-							<div class="end-box mt30">
-									<dl>
-										<dt>아이디</dt>
-										<dd>${requestScope.join.id}</dd>
-									</dl>
-									<dl>
-										<dt>회원등급</dt>
-										<dd>${requestScope.join.gradeid}</dd>
-									</dl>
-								</div>
-							<div class="pbt mt30">
-								<div class="btnSet">
-<!-- 									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a> -->
-									<a href="login_form.do" class="btn lg a" >로그인하기</a>
-								</div>
+						<div class="member-input">
+							<ul class="list">
+								<li>
+									<strong class="tit requied">비밀번호</strong>
+									<p class="info">필수 입력 정보</p>
+									<div class="input disabled">
+										<input type="password" class="ipt" name="pswd" id="password" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="12">
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="pbt mt20">
+							<strong class="tit">정말 회원탈퇴 하시겠습니까?</strong>
+							<div class="btnSet mt24">
+								<a href="javascript:fnCancel();" class="btn lg a base" id="leaveCancelBtn">취소</a>
+								<a href="javascript:fnLeaveMember();" class="btn lg a base" id="leaveMemberBtn">탈퇴하기</a>
 							</div>
-							<!-- <a class="lnk-pw center" href="/login/indexFindPswd" data-content="" data-url="/login/indexFindPswd" >비밀번호가 생각나지 않으세요?</a> -->
 						</div>
 					</div>
-	
 				</div>
-			</main>
-	
-			<div class="layers">
-				<!-- 레이어팝업 넣을 자리 -->
 			</div>
-		</div>
-	</body><!-- location 영역 포함  -->					
+		</main>
+
+	
 <!--❤️main끝-->			
 	
 

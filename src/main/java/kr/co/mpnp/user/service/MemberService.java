@@ -53,36 +53,5 @@ public class  MemberService {
 	}
 	
 	
-	//사용자-회원정보조회
-	public MemberDomain searchMemberInfo(MemberVO mVO) {
-		MemberDomain mD=null;
-		
-		return mD;
-	}
 	
-	
-	//사용자-회원정보수정
-	public int modifyMemberInfo(MemberVO mVO) {
-		int cnt=0;
-		return cnt;
-		
-	}
-	
-	
-	//사용자-회원탈퇴1
-	public boolean searchMember(MemberVO mVO) {
-		boolean flag=false;
-		
-		return flag;
-	}
-	
-	
-	//사용자-회원탈퇴2
-	public int modifyMemberStatus(MemberVO mVO) {
-		int cnt=0;
-		
-		return cnt;
-	}
-	
-
 }

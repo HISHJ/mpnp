@@ -2,14 +2,13 @@ package kr.co.mpnp.user.domain;
 
 public class MypageDomain {
 	
-	private String id,pass,pfimg,nick,name,gradeid,gradeName;
+	private String id,pass,pfimg,nick,name,gradeid,gradeName,phone;
 	
 	public MypageDomain( ) {
-		// TODO Auto-generated constructor stub
 	}
 
 	public MypageDomain(String id, String pass, String pfimg, String nick, String name, String gradeid,
-			String gradeName) {
+			String gradeName, String phone) {
 		super();
 		this.id = id;
 		this.pass = pass;
@@ -18,6 +17,7 @@ public class MypageDomain {
 		this.name = name;
 		this.gradeid = gradeid;
 		this.gradeName = gradeName;
+		this.phone = phone;
 	}
 
 	public String getId() {
@@ -76,14 +76,21 @@ public class MypageDomain {
 		this.gradeName = gradeName;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "MypageDomain [id=" + id + ", pass=" + pass + ", pfimg=" + pfimg + ", nick=" + nick + ", name=" + name
-				+ ", gradeid=" + gradeid + ", gradeName=" + gradeName + "]";
+				+ ", gradeid=" + gradeid + ", gradeName=" + gradeName + ", phone=" + phone + "]";
 	}
-	
-	
-	
-	
 
+	
+	
+	
 }

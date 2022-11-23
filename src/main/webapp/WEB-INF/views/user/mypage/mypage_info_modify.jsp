@@ -12,22 +12,23 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#ffffff">
 
+
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign//_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
 <link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/mypage.css">
-<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
+<script type="text/javascript" src="http://localhost/mpnp/3rdDesign//_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
 
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign//_script/common.js?modifiedDate=20221013" ></script>
 <script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
+<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
 
   <!--google icons-->
 	<link rel="stylesheet"
@@ -36,100 +37,38 @@
 	<link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
-	<style>
 
- 
-
-	</style>
-	<script>
-		$(function(){
-		 $(".bt_dog").click(function(){
-			$(".bt_cat").removeClass("active"); 
-		 $(this).addClass("active")
-		 $(".open_dog").css('display','block');
-		 $(".open_cat").css('display','none');
-		
-		 })//click
-		
-		 $(".bt_cat").click(function(){
-		 $(".bt_dog").removeClass("active"); 
-		 $(this).addClass("active")
-		 $(".open_cat").css('display','block');
-		 $(".open_dog").css('display','none');
-		
-		 })//click
-		
-		
-		})
-		
-		</script>
 
 
 
 
 </head>
-
-<body class="body">
-
-<!-- 기본 컨텐츠 -->
-	<div class="wrap" id="wrap">
-		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
+<script type="text/javascript">
+	$(function() {
 		
-	<script>
-	
-	function clickLogin(){
-		location.href = "/indexLogin?returnUrl="+location.pathname+location.search;
-	}
-	
-	//장바구니 수 set, 캐시 이슈로 ajax 호출
-	function setCartCnt(){
-		$.ajax({
-			url : "/order/getCartCnt"
-			, dataType : "json"
-			, type : "POST"
-			, success : function(data){
-				var $cartCntObj = $('.header .menu .cart').find('em');
-				var $shopMainCartCntObj = $('#btnCart').find('em');
-				if($cartCntObj.length == 0){
-					if(data.cartCnt != 0){
-						var html = '<em class="n">'+data.cartCnt+'</em>';
-						$('.header .menu .cart').html(html);
-					}
-				}else{
-					if(data.cartCnt == 0){
-						$cartCntObj.remove();
-					}else{
-						$cartCntObj.text(data.cartCnt);
-					}
-				}
-			}
+		$("#saveBtn").click(function() {
+			
+				
+			alert("눌렀다"); //여기까지 반응하는데 안넘어간다 ? 
+			$("#myModifyFrm").submit();
+			alert("두번째 알랏"); //반응함 ... 왜 submit이 안되는감
+			
 		});
-	}
-
-  	//등급 레이어팝업 스크립트 추가 2021.05.13
-	var rankBox = function(){
-		ui.popLayer.open('popLank',{
-			ocb:function(){
-				// console.log("popLank 열림");
-			},
-			ccb:function(){
-				// console.log("popLank 닫힘");
-			}
-		});
-
-		if("PC" == "PC") {
-			$(".rank_pc").addClass("on");
-		}else {										
-			$(".rank_mo").addClass("on");
-		}
-	}
-  	
-	function closeTopbanner() {
-		$('#topBanner').addClass('hide');
-		var cookieName	= getTopbannerCookieName();
-		setCookieTopBanner(cookieName, "done", 1);
-	}
-		
+	});
+	
+	//썸네일이미지 미리보기
+	function thImgSet(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('pfThumb').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('pfThumb').src = "";
+	  }
+	}//thImgSet
+	
 	/* 전화번호 하이픈추가  */
 	function PhoneNumber(obj) {
 	    var number = obj.value.replace(/[^0-9]/g, "");
@@ -179,49 +118,17 @@
 	}
 	    obj.value = phone;
 		return false;
-}//PhoneNumber
+	}//PhoneNumber
 
-$(function() {
-	$("#saveBtn").click(function() {
-		var pfimg=$("#pfimg").val();
+</script>
+
+<body class="body">
+
+<!-- 기본 컨텐츠 -->
+	<div class="wrap" id="wrap">
+		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
 		
-		var blockExt="jpg,jpeg,png,PNG".split(",");
-		var flag=false;
-		var pfimgExt=pfimg.substring(pfimg.lastIndexOf(".")+1);
-		
-		for(var i=0; i<blockExt.length; i++){
-			if(blockExt[i]==pfimgExt){
-				flag=true;
-			}
-		}
-		if(!flag){
-			alert("이미지파일만 넣으라구");
-			return flag;
-		}
-		
-		$("#signUpFrm").submit();
-	});
 	
-	
-	
-});//ready
-
-//썸네일이미지 미리보기
-	function thImgSet(input) {
-	  if (input.files && input.files[0]) {
-	    var reader = new FileReader();
-	    reader.onload = function(e) {
-	      document.getElementById('pfThumb').src = e.target.result;
-	    };
-	    reader.readAsDataURL(input.files[0]);
-	  } else {
-	    document.getElementById('pfThumb').src = "";
-	  }
-}
-</script><!-- header pc-->
-
-
-
 <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -326,12 +233,8 @@ $(function() {
 <!--// header pc--><!-- e : header 영역 -->
 					<!-- s : gnb 영역 -->
 
-<!--❤️사이드바-->
 
 
-<div class="layers tv seriesHome" id="gnbSrisListPopup"></div>
-<!-- e : gnb 영역 -->			
-					<!-- s : LNB 영역 -->
 
 <nav class="lnb shop" id="lnb">
 	<div class="inr" style="width:220px;">
@@ -402,8 +305,8 @@ $(function() {
 			top:20%;
 		}
 	</style>
-<!-- 	<form id="signUpFrm" name="signUpFrm">
- -->		<div id="hiiden-field">
+	<form id="memberForm">
+		<div id="hiiden-field">
 			<input type="hidden" id="adapter" onchange="fnSnsStatSave();"/>
 			<input type="hidden" name="prflNm" value="" />
 			<input type="hidden" name="prflImg" value="" />
@@ -417,25 +320,32 @@ $(function() {
 			<input type="hidden" name="rcomCd" value="2F5E09F6"/>
 			<input type="hidden" name="ntnGbCd" value="10" />
 		</div>
-		<main class="container page login srch" id="container" style="margin-top:100px;margin-left:100px;">
-
+		<main class="container page login srch" id="container" style="margin-left:150px;">
+<!-- 				<div class="header pageHead heightNone"> -->
+<!-- 					<div class="inr"> -->
+<!-- 						<div class="hdt"> -->
+<!-- 							<button class="back" type="button" onclick="goBack();" data-content="" data-url="/mypage/indexMyPage">뒤로가기</button> -->
+<!-- 						</div> -->
+<!-- 						<div class="cent"><h2 class="subtit">회원정보 수정</h2></div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 			<div class="inr">
 				<!-- 본문 -->
 				<div class="contents" id="contents">
 					<div class="pc-tit">
-						<h2>회원가입</h2>
+						<h2>회원정보 수정</h2>
 					</div>
 					<div class="fake-pop">
 						<div class="pct">
-						<form id="signUpFrm" action="join_add_process.do" method="post" enctype="multipart/form-data">
 							<div class="poptents">
 								<!-- 프로필 사진 -->
+							<form id="myModifyFrm" action="m_info_modify_process.do" enctype="multipart/form-data" method="post" >
 								<div class="my-picture">
 									<p class="picture">
-										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
+										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="http://localhost/mpnp/upload_pf/${requestScope.mypage.pfimg }" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
 									</p>
- 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
+									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
 									<input type="file" id="pfimg" name="pfimg" style="display: none" onchange="thImgSet(this)">
 								</div>
 								<!-- // 프로필 사진 -->
@@ -443,41 +353,22 @@ $(function() {
 								<div class="member-input">
 									<ul class="list">
 										<li>
-											<strong class="tit requied" style="visibility: hidden;" >아이디</strong>
-											<p class="info">필수입력정보</p>
-										</li>
-										<li>
-											<strong class="tit requied" >아이디</strong>
-											<p class="info">아이디 중복 검사 click 　</p><p class="info"></p>
-											<div class="input">
-												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
+											<strong class="tit requied">아이디</strong>
+											<p class="info">필수 입력 정보</p>
+											<div class="input disabled">
+												<input type="text" id="id" name="id" readonly  value="${requestScope.mypage.id }" style="-webkit-text-fill-color:black;">
 											</div>
-
-										</li>
-										<li>
-											<strong class="tit requied">비밀번호</strong>
-											<div class="input del">
-												<input type="password" name="pass" id="pass" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="15" autocomplete="new-password">
-											</div>
-											<p class="validation-check" id="join_pswd_error"></p>
-										</li>
-										<li>
-											<strong class="tit requied">비밀번호 확인</strong>
-											<div class="input del">
-												<input type="password" id="repass" name="repass" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" autocomplete="new-password">
-											</div>
-											<p class="validation-check" id="join_pswd_check_error"></p>
 										</li>
 										<li>
 											<strong class="tit requied">이름</strong>
 											<div class="input">
-											<input type="text" name="name"  id="name" placeholder="이름을 입력해주세요" >
+											<input type="text"  id="name" name="name" value="${requestScope.mypage.name }" readonly  style="-webkit-text-fill-color:black;">
 												</div>
 										</li>
 										<li id="mobile-li-default">
 											<strong class="tit requied">휴대폰 번호</strong>
 											<div class="input">
-												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13" placeholder="휴대폰번호를 입력해주세요">
+												<input type="text" id="phone" name="phone" value="${requestScope.mypage.phone }" onkeyup="PhoneNumber(this)"  maxlength="13"  style="-webkit-text-fill-color:black;">
 												</div>
 										</li>
 										 <!-- 본인인증 안내 -->
@@ -485,16 +376,10 @@ $(function() {
 										</li>
 										<li>
 											<strong class="tit requied">닉네임</strong>
-											<div class="input del">
-												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
-<!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
+											<div class="input del disabled">
+												<input type="text" id="nick" name="nick" class="valChkRequired" value="${requestScope.mypage.nick }"  maxlength ="22" placeholder="닉네임을 입력해주세요." style="-webkit-text-fill-color:black;" >
 											</div>
-											<!-- 회원등급 hidden으로 -->
-												<input type="hidden" id="gradeid" name="gradeid" value="G1">
-												<input type="hidden" id="status" name="status" value="정상">
-											<p id="join_nickNm_error" class="validation-check"></p>
 										</li>
-								
 									</ul>
 								</div>
 								<!-- // 회원 정보 입력 -->
@@ -502,11 +387,15 @@ $(function() {
 						</div>
 						<div class="pbt pull mt54">
 							<div class="bts">
-<!-- 								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">다음</a> -->
-								<a class="btn xl a" id="saveBtn">다음</a>
+								<a class="btn xl a" id="saveBtn">저장</a>
+<!-- 								<a href="javascript:;" class="btn xl a" id="saveBtn" onclick="updateMember();">저장</a> -->
 							</div>
 						</div>
-						
+						</form>
+						<div class="btn-area">
+							<a href="m_quit_form.do" class="text-btn" data-content="1319790" >회원탈퇴하기</a>
+<!-- 							<a href="javascript:fnLeaveMember();" class="text-btn" data-url="/mypage/info/indexLeaveGuide" data-content="1319790" >회원탈퇴하기</a> -->
+						</div>
 					</div>
 				</div>
 			</div>

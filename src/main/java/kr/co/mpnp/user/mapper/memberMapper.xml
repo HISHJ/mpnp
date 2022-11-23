@@ -56,43 +56,6 @@ values(#{id},#{pfimg},#{nick},#{name},#{pass},#{phone},
 </insert>
 
 
-<!-- 사용자-회원정보조회 -->
-<select id="selectMemberInfo" parameterType="memberVO" resultType="memberDomain">
-select pfimg,nick,id,name,pass
-from member 
-where id=#{id}
-</select>
-
-
-<!-- 사용자-회원정보수정 -->
-<update id="updateMemberInfo" parameterType="memberVO">
-update member
-set pfimg=#{pfimg},nick=#{nick},phone=#{phone}
-where id=#{id} and pass=#{pass}?
-</update>
-
-
-<!-- 사용자-회원탈퇴1 -->
-<select id="selectMember" parameterType="memberVO" resultType="memberDomain">
-select id,pfimg,nick,name,pass,phone
-from member 
-where pass=#{pass}
-</select>
-
-
-<!-- 사용자-회원탈퇴2 -->
-<update id="updateMemberStatus" parameterType="memberVO">
-update member 
-set    pfimg='',nick='',name='',phone='',status='탈퇴',gradeId='',inputdate=to_char(sysdate,'yyyy-MM-dd')
-where id=#{id} and  pass=#{pass}
-</update>
-
-
-<!-- 사용자-회원탈퇴 -->
-<insert id="insertQuitMember" parameterType="memberVO">
-insert into quitmember(id,inputdate) 
-values(#{id},to_char(sysdate,'yyyy-MM-dd')) <!-- inputdate으로만 받아도되나 -->
-</insert>
 
 
 </mapper>
