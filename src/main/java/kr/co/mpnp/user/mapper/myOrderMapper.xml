@@ -29,23 +29,31 @@
 
 
 <select id="selectOrderAllList" parameterType="String" resultType="MyOrderDomain">
-SELECT o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, o.ACTUAL_PRICE actualPrice, r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId 
+SELECT o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, (p.PRICE * r.TOTALCNT) totalPrdPrice,r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId
 FROM ORDERS o, PRODUCT p, ORDER_DETAIL r
 WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID ) and o.id=#{id}
-
-
+order by o.inputdate desc
 </select>
+
+<!-- 임시 할인율 조회 -->
+<select id="selectDiscountRate" parameterType="String" resultType="int" >
+SELECT DISCOUNT_RATE discountRate  , g.GRADEID gradeId
+FROM MEMBER m, GRADE g
+WHERE (m.GRADEID = g.GRADEID) and m.id =#{id}
+</select>
+
+
 
 <!-- 주문 상세내역 조회 -->
 <select id="selectOrderDetail" parameterType="String" resultType="MyOrderDomain">
-SELECT orderId ,status, to_char(INPUTDATE,'yyyy-mm-dd') inputDateS, shipReq, ACTUAL_PRICE actualPrice
+SELECT orderId ,id memberId,status, to_char(INPUTDATE,'yyyy-mm-dd') inputDateS, shipReq, ACTUAL_PRICE actualPrice
 FROM ORDERS 
 WHERE orderId=#{orderId}
 </select>
 
 <!-- 주문 상세 상품조회 -->
 <select id="selectOrderPrdDetail" parameterType="String" resultType="MyOrderDomain">
-SELECT p.NAME prdName, p.PRICE prdPrice, r.TOTALCNT totalCnt
+SELECT p.NAME prdName, p.PRICE prdPrice, r.TOTALCNT totalCnt, th_img prdImg
 FROM   ORDERS o, ORDER_DETAIL r, PRODUCT p
 WHERE  (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID )and o.orderId=#{orderId}
 </select>
@@ -72,14 +80,15 @@ WHERE (o.id = m.id ) and  m.id=#{id}
 <!-- 주문취소누르면 수행되는 쿼리들 -->
 <!-- 1. 가격 감산을 위한 쿼리 -->
 
-<!-- 1) 주문상세코드의 가격 조회: 파라미터로 받아서 필요없는데 일단 적어둔다 -->
+<!-- 1) 주문코드의 상품 합 가격 조회: 파라미터로 받아서 필요없는데 일단 적어둔다 -->
 <select id="selectPriceIndivisual" parameterType="String" resultType="int">
-select r.TOTALCNT * p.PRICE cntPrice
-from ORDER_DETAIL r, PRODUCT p
-where (r.PRODUCTID = p.PRODUCTID) and ORDER_DETAILID=#{orderDetailId}
+select sum(r.TOTALCNT * p.PRICE) cntPrice
+from ORDER_DETAIL r, PRODUCT p ,ORDERS o
+where (r.PRODUCTID = p.PRODUCTID and r.ORDERID = o.ORDERID) and o.ORDERID=#{orderId}
+
 </select>
 
-<!-- 2) 해당 주문코드의 주문전체 가격조회 : 이건 필요-->
+<!-- 2) 해당 주문코드의 주문전체 최종가격조회 : 이건 필요-->
 <select id="selectPriceTotal" parameterType="String" resultType="int">
 select sum(o.ACTUAL_PRICE) totalPrice
 from ORDERS o,ORDER_DETAIL r
@@ -89,11 +98,11 @@ where (r.ORDERID =o.ORDERID) and o.ORDERID=#{orderId}
 <!-- 주문취소 쿼리들 -->
 <!-- 1) 주문 개별 취소 (cascade적용한 상태- 주문상세 ~리뷰까지 삭제됨)-->
 <delete id="deleteCancelIndivisual" parameterType="String">
-delete from ORDERS where ORDERID=#{orderId}
+delete from ORDER_DETAIL where ORDER_DETAILID=#{orDetailId}
 </delete>
 <!-- 2)주문 전체 취소((cascade적용한 상태- 주문테이블 ~ 리뷰까지 삭제됨) -->
 <delete id="deleteCancelTotal" parameterType="String">
-delete from ORDERS where ID=#{Id}
+delete from ORDERS where ORDERID=#{orderId}
 </delete>
 
 <!-- 페이징 :전체 게시물 수 조회 -->

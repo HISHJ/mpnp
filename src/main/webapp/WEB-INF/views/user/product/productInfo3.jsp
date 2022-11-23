@@ -1336,7 +1336,8 @@
       }
   
     }
-    function funcFstPurchGoodsCart(fstPurchBeneTgYn, fstPurchRejoinYn){
+    //임시 주석처리 - 2022-11-23 유설빈(이 부분 필요없는 것 같아서 주석처리했는데 아니라면 제거해주세요..)
+/*     function funcFstPurchGoodsCart(fstPurchBeneTgYn, fstPurchRejoinYn){
       if(fstPurchBeneTgYn=="N"){
         // APET-1627 구매 이력이 있는 계정 탈퇴 후 재가입 고객 alert 분기
         if (fstPurchRejoinYn=="Y") {
@@ -1349,8 +1350,8 @@
         return true;
       }
   
-    }
-    function funcNowBuy(nowBuyYn,inputOrdmki,goodsId,itemNo,totalCnt){
+    }*/
+/*     funct ion funcNowBuy(nowBuyYn,inputOrdmki,goodsId,itemNo,totalCnt){
       if(nowBuyYn=="Y"){
         ui.confirm('첫구매딜 상품은 장바구니에 담은 후 구매할 수 있습니다.<br> 장바구니에 담을까요?', { // 컨펌 창 옵션들
           ycb: function () {
@@ -1371,7 +1372,7 @@
         return true;
       }
   
-    }
+    } */
   
     //App일때 영상상세에서 로그인 화면으로 화면 닫고 이동해야해서 추가된 함수
     function fncAppCloseMoveLogin(url){
@@ -2423,8 +2424,9 @@
   
   
   </script>
+
   
-  
+  <!-- 유설ㅣㅂㄴ -->
       <div class="tots">
         <div class="inr">
           <div class="amts">

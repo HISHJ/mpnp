@@ -37,19 +37,27 @@ public class OrderService {
 	}
 
 
-	//DB상품처리
+	//DB상품처리(장바구니에서는 OK,상품직접구매 X)
 	public List<OrderPrdVO>searchProduct(OrdersInfoVO orders){
 		List<OrderPrdVO> list = new ArrayList<OrderPrdVO>();
-		
-		
+		//System.out.println("서비스@@@@@:"+ orders.getOrders()); //값은 있어
+		OrderPrdVO opvo =null; // null이다..?
+		//System.out.println(opvo.toString());
 		for(OrderPrdVO oVO : orders.getOrders()) {
-		OrderPrdVO opvo =	oDAO.selectProduct(oVO.getPrdId());
+		//System.out.println("상품갯수 서비스:" +oVO.getPrdCnt());//웅 들어와
+		//System.out.println("상품코드 서비스:" +oVO.getPrdId());//웅 들어와
+		opvo =	oDAO.selectProduct(oVO.getPrdId());
 		opvo.setPrdCnt(oVO.getPrdCnt()); 
+		System.out.println("########3"+ opvo.toString());
+		//System.out.println("서비스@@@@"+ opvo.getPrdCnt());
+		if(oVO.getCartId() != null || "".equals(oVO.getCartId())) {
 		opvo.setCartId(oVO.getCartId()); 
+		}
 		opvo.initSaleTotal();
 		 
 		 list.add(opvo);
 		}
+		//System.out.println("서비스@@@@:" + opvo);
 		return list;
 	}
 
@@ -145,8 +153,8 @@ public class OrderService {
 	}// selectOrderComplete
 	
 	// 주문완료내역조회(상품)
-	public MyOrderDomain searchOrderCompleteP(String orderID) {
-		MyOrderDomain orDom = null;
+	public List<MyOrderDomain>  searchOrderCompleteP(String orderID) {
+		List<MyOrderDomain>  orDom = null;
 
 		orDom = oDAO.selectOrderCompleteP(orderID);
 

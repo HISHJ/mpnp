@@ -4,9 +4,9 @@ import java.util.Date;
 //¼³ºó
 public class MyOrderDomain {
 	private String memberId, membername,orderId, deliveryId, deliveryName,
-	zipcode, addr, addrDetail, phone, receiver, shipReq, status, prdId,
+	zipcode, addr, addrDetail, phone, receiver, shipReq, status, prdId,gradeId,
 	prdName, thImg,inputDateS,prdImg,orDetailId;
-	private int actualPrice, totalCnt, prdPrice, cntPrice, totalPrdPrice;
+	private int actualPrice, totalCnt, prdPrice, cntPrice, totalPrdPrice, discountRate;
 	private Date inputDate, completionDate;
 	
 	public MyOrderDomain() {
@@ -16,7 +16,7 @@ public class MyOrderDomain {
 			String zipcode, String addr, String addrDetail, String phone, String receiver, String shipReq,
 			String status, String prdId, String prdName, String thImg, String inputDateS, String prdImg,
 			String orDetailId, int actualPrice, int totalCnt, int prdPrice, int cntPrice, int totalPrdPrice,
-			Date inputDate, Date completionDate) {
+			int discountRate, Date inputDate, Date completionDate) {
 		super();
 		this.memberId = memberId;
 		this.membername = membername;
@@ -41,6 +41,7 @@ public class MyOrderDomain {
 		this.prdPrice = prdPrice;
 		this.cntPrice = cntPrice;
 		this.totalPrdPrice = totalPrdPrice;
+		this.discountRate = discountRate;
 		this.inputDate = inputDate;
 		this.completionDate = completionDate;
 	}
@@ -229,6 +230,14 @@ public class MyOrderDomain {
 		this.totalPrdPrice = totalPrdPrice;
 	}
 
+	public int getDiscountRate() {
+		return discountRate;
+	}
+
+	public void setDiscountRate(int discountRate) {
+		this.discountRate = discountRate;
+	}
+
 	public Date getInputDate() {
 		return inputDate;
 	}
@@ -253,9 +262,22 @@ public class MyOrderDomain {
 				+ shipReq + ", status=" + status + ", prdId=" + prdId + ", prdName=" + prdName + ", thImg=" + thImg
 				+ ", inputDateS=" + inputDateS + ", prdImg=" + prdImg + ", orDetailId=" + orDetailId + ", actualPrice="
 				+ actualPrice + ", totalCnt=" + totalCnt + ", prdPrice=" + prdPrice + ", cntPrice=" + cntPrice
-				+ ", totalPrdPrice=" + totalPrdPrice + ", inputDate=" + inputDate + ", completionDate=" + completionDate
-				+ "]";
+				+ ", totalPrdPrice=" + totalPrdPrice + ", discountRate=" + discountRate + ", inputDate=" + inputDate
+				+ ", completionDate=" + completionDate + ", getMemberId()=" + getMemberId() + ", getMembername()="
+				+ getMembername() + ", getOrderId()=" + getOrderId() + ", getDeliveryId()=" + getDeliveryId()
+				+ ", getDeliveryName()=" + getDeliveryName() + ", getZipcode()=" + getZipcode() + ", getAddr()="
+				+ getAddr() + ", getAddrDetail()=" + getAddrDetail() + ", getPhone()=" + getPhone() + ", getReceiver()="
+				+ getReceiver() + ", getShipReq()=" + getShipReq() + ", getStatus()=" + getStatus() + ", getPrdId()="
+				+ getPrdId() + ", getPrdName()=" + getPrdName() + ", getThImg()=" + getThImg() + ", getInputDateS()="
+				+ getInputDateS() + ", getPrdImg()=" + getPrdImg() + ", getOrDetailId()=" + getOrDetailId()
+				+ ", getActualPrice()=" + getActualPrice() + ", getTotalCnt()=" + getTotalCnt() + ", getPrdPrice()="
+				+ getPrdPrice() + ", getCntPrice()=" + getCntPrice() + ", getTotalPrdPrice()=" + getTotalPrdPrice()
+				+ ", getDiscountRate()=" + getDiscountRate() + ", getInputDate()=" + getInputDate()
+				+ ", getCompletionDate()=" + getCompletionDate() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 	

@@ -61,6 +61,55 @@
 		})
 		
 		</script>
+			<script type="text/javascript">
+					  $(function(){
+						  var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+						  var prdSum = $("#fstPurchGoodsIncYn").val();
+						  var discountRate = $("#order_payment_total_dc_amt").val();
+						  var actualPrice = $("#order_payment_total_pay_amt").val()*1;
+						  
+				
+					  var deli_fee = 2500;
+					 
+					  if(prdSum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
+						  deli_fee = 0;
+					  } //end if
+				
+					  //숫자에 단위 넣기
+					  const rate_ = discountRate
+                      .replace(expression, ","); //할인금액
+					  const total_pri = prdSum 
+                      .replace(expression, ","); //상품 총가격
+					  const cn1 = actualPrice.toString()
+                      .replace(expression, ","); // 총 결제금액
+					  const ship_fee = deli_fee.toString()
+                      .replace(expression, ","); // 배송비
+                     
+					  $(".total_pri").html(total_pri); //상품 총 금액
+					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
+					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
+					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
+					//  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+					 
+					 
+					  })//reay
+					</script>
+					<script>
+					//전화번호 하이픈
+					const autoHyphen2 = (target) => {
+						 target.value = target.value
+						   .replace(/[^0-9]/g, '')
+						  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+						}
+					
+					//기본배송지 값 설정(안됨..)
+				  $(function(){
+					  if(document.getElementById("defaultFlag").checked) {
+						    document.getElementById("input_check_hidden").disabled = true;
+						}
+					  
+				  })
+					</script>
 
 
 
@@ -188,10 +237,12 @@
 				<section class="sect proinfo">
 					<div class="hdts"><span class="tit">상품 정보</span></div>
 					<div class="cdts">
+					 <c:forEach  items="${mod2}" var="mod2">
 						<div class="box">
-							<i class="nums">${mod2.prdName }</i>
+							<i class="nums" style="font-weight:bold;">👀${mod2.prdName }</i>
 							<i class="nums">&nbsp;[수량: ${mod2.totalCnt}개]</i>
 						</div>
+					 </c:forEach>
 					</div>
 				</section>
 
@@ -222,17 +273,17 @@
 							<li>
 								<div class="dt">총 상품금액</div>
 								<div class="dd">
-									<span class="prc"><em class="p">${totalPrice}</em><i class="w">원</i></span>
+									<span class="prc"><em class="p total_pri">${totalPrice}</em><i class="w">원</i></span>
 									<input type="hidden" id="order_payment_total_goods_amt" value="99000">
 									<input type="hidden" id="order_payment_total_local_goods_amt" value="">
-									<input type="hidden" id="fstPurchGoodsIncYn" value="N">
+									<input type="hidden" id="fstPurchGoodsIncYn" value="${totalPrice}">
 								</div>
 							</li>
 							<li id="couponDcLi">
 								<div class="dt">등급할인</div>
 								<div class="dd">
 									<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-${discountPrice}</em><i class="w">원</i></span>
-									<input type="hidden" id="order_payment_total_dc_amt" value="5000">
+									<input type="hidden" id="order_payment_total_dc_amt" value="${discountPrice}">
 								</div>
 							</li>
 					
@@ -251,14 +302,14 @@
 							<div class="dt">총 결제금액</div>
 							<div class="dd">
 								<span class="prc"><em class="p" id="order_payment_total_pay_amt_view">${mod1.actualPrice }</em><i class="w">원</i></span>
-								<input type="hidden" id="order_payment_total_pay_amt" value="94000">
+								<input type="hidden" id="order_payment_total_pay_amt" value="${mod1.actualPrice }">
 							</div>
 						</div>
 						<!-- 01 주문서-리테일멤버십 가입 안한 경우 -->
 					
 						<!-- 02 주문서-리테일멤버십 등록 한 경우 -->
 				
-					</div>></section>
+					</div></section>
 				<section class="sect binf">
 						<div class="hdts"><span class="tit">결제수단 정보</span></div>
 						<div class="cdts">
@@ -272,7 +323,7 @@
 
 				<div class="my_btnWrap">
 					<div class="btnSet">
-						<a href="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496&amp;mngb=OC" class="btn lg d">상세 주문내역</a>
+						<a href="order_detail_form.do?orderId=${mod1.orderId}" class="btn lg d">상세 주문내역</a>
 						<a href="/shop/home/" class="btn lg a">계속 쇼핑하기</a>
 					</div>
 				</div>

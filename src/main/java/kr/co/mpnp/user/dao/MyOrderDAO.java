@@ -110,6 +110,26 @@ public class MyOrderDAO {
 	}// selectOrderDetail
 	
 	
+	//할인율 구학
+	public int selectDiscountRate(String id) {
+		int dRate =0;
+		
+		// 핸들러 얻기
+				// MyBatisHandler얻기
+				MyBatisHandler mbh = MyBatisHandler.getInstance();
+				SqlSession ss = mbh.getHandler();
+				
+				//쿼리 실행
+				dRate= ss.selectOne("kr.co.mpnp.myOrderMapper.selectDiscountRate", id);
+				System.out.println(dRate);
+				// 연결끊기
+				mbh.closeHandler(ss);
+				
+				return dRate;
+		
+	}
+	
+	
 	///검증완료
 	// 기간 내 주문상태 조회 - count(날짜, 주문상태)
 	//--해당 주문코드의 총 주문상태... (모르겠다..)
@@ -142,7 +162,7 @@ public class MyOrderDAO {
 	
 	//검증완료
 	//////////////////////////가격감산을 위한 쿼리
-	public int selectPriceIndivisual(String ordId) {
+	public int selectPriceIndivisual(String orId) {
 		int price = 0;
 		
 		// MyBatisHandler얻기
@@ -152,7 +172,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			price= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceIndivisual", ordId);
+ 			price= ss.selectOne("kr.co.mpnp.myOrderMapper.selectPriceIndivisual", orId);
  			System.out.println(price);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -189,8 +209,8 @@ public class MyOrderDAO {
 	
 	////////////주문취소 쿼리들
 	//검증완료
-	//1) 주문 개별 취소-주문코드 (cascade적용한 상태- 주문상세 ~리뷰까지 (주문상세코드)
-	public int deleteCancelIndivisual(String orId) {
+	//1) 주문 개별 취소-주문상세코드 (cascade적용한 상태- 주문상세 ~리뷰까지 (주문상세코드)
+	public int deleteCancelIndivisual(String orDId) {
 		int cnt = 0;
 		
 		// MyBatisHandler얻기
@@ -199,12 +219,12 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelIndivisual", orId);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelIndivisual", orDId);
  			if(cnt==1) {
- 			 System.out.println(cnt + "건 삭제");
+ 			 System.out.println(cnt + "건 삭제(선택)");
  			ss.commit();
  			}else {
- 				System.out.println("삭제 실패");
+ 				System.out.println("삭제 실패(선택)");
  			}
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -217,8 +237,8 @@ public class MyOrderDAO {
 	}
 	
 	//검증완료
-	//2) 주문전체취소 아이디) -  ((cascade적용한 상태- 주문테이블 ~ 리뷰까지 삭제됨) -->
-	public int deleteCancelTotal(String id) {
+	//2) 주문전체취소 주문코드) -  ((cascade적용한 상태- 주문테이블 ~ 리뷰까지 삭제됨) -->
+	public int deleteCancelTotal(String orId) {
 		int cnt = 0;;
 		
 		// MyBatisHandler얻기
@@ -227,12 +247,12 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelTotal", id);
+ 			 cnt= ss.delete("kr.co.mpnp.myOrderMapper.deleteCancelTotal", orId);
  			if(cnt==1) {
- 			 System.out.println(cnt + "건 삭제");
+ 			 System.out.println(cnt + "건 삭제(전체 주문)");
  			 ss.commit();
  			}else {
- 				System.out.println("삭제 실패");
+ 				System.out.println("삭제 실패(전체 주문)");
  			}
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -270,8 +290,8 @@ public class MyOrderDAO {
 		return totalCnt;
 	}// selectTotalCount
 	
-//	 public static void main(String[] args) {
-//  MyOrderDAO od = MyOrderDAO.getInstance();
+	 public static void main(String[] args) {
+ MyOrderDAO od = MyOrderDAO.getInstance();
 //  od.selectOrderAList("id010");
 //  od.selectOrderDetail("or_0000045");
   
@@ -284,7 +304,8 @@ public class MyOrderDAO {
 ////	  moDAO.selectOrderStatusCnt(m);
 // // moDAO.selectPriceIndivisual("od_0000005");
 ////	  moDAO.selectPriceTotal("or_0000004");
-
+	
+ od.selectDiscountRate("id001");
 	  
-	// }//main
+	 }//main
 }// class

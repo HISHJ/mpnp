@@ -306,9 +306,10 @@
       <label class="checkbox">
 	<input type="checkbox"  class="indi_checkbox" checked="checked">
 	 </label>
-	<input type="hidden" class="indi_prdId"  value="pr_0000017"/>
-	<input type="hidden" class="indi_prdCnt"  value="5"/>
-	<input type="hidden" class="indi_cartId"  value="ca_0000037"/>
+	<input type="hidden" class="indi_prdId"  value="p0005"/>
+	<input type="hidden" class="indi_prdCnt"  value="2"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000053"/>
+	</div>
 
 	
 	<div class="cart_info">
@@ -316,9 +317,20 @@
 	<input type="checkbox"  class="indi_checkbox" checked="checked">
 	 </label>
 	 
-	<input type="hidden" class="indi_prdId"  value="p0012"/>
-	<input type="hidden" class="indi_prdCnt"  value="1"/>
-	<input type="hidden" class="indi_cartId"  value="ca_0000042"/>
+	<input type="hidden" class="indi_prdId"  value="pr_0000012"/>
+	<input type="hidden" class="indi_prdCnt"  value="3"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000067"/>
+	
+	</div>
+	
+		<div class="cart_info">
+	  <label class="checkbox">
+	<input type="checkbox"  class="indi_checkbox" checked="checked">
+	 </label>
+	 
+	<input type="hidden" class="indi_prdId"  value="pr_0000017"/>
+	<input type="hidden" class="indi_prdCnt"  value="7"/>
+	<input type="hidden" class="indi_cartId"  value="ca_0000031"/>
 	
 	</div>
 		<script>
@@ -333,10 +345,8 @@
 							$(".cart_info").each(function(i, element){
 								if($(element).find(".indi_checkbox").is(":checked") === true){
 								var cartId = $(element).find(".indi_cartId").val(); //카트 아이디
-								var prdId= $(element).find(".indi_prdId").val()
+								var prdId= $(element).find(".indi_prdId").val() //상품코드
 								var prdCnt = $(element).find(".indi_prdCnt").val() ; //상품 수량
-								/* var prdPrice = $(element).find(".indi_prdPrice").val() ;  // 상품가격 */
-								//var prdName =$(element).find(".indi_prdName").val()  //상품명
 								
 								var cartId_Input  = "<input name='orders["+ orderNumber  +"].cartId' type='hidden' value='" + cartId+"'>"; 
 								form_contents += cartId_Input;
@@ -345,11 +355,6 @@
 								
 								var prdCnt_Input  = "<input name='orders["+ orderNumber  +"].prdCnt' type='hidden' value='" +prdCnt+"'>"; 
 								form_contents += prdCnt_Input;
-								/* var price_Input  = "<input name='orders["+ orderNumber  +"].prdPrice' type='hidden' value='" + prdPrice+"'>"; 
-								form_contents += price_Input;  
-								var name_Input  = "<input name='orders["+ orderNumber  +"].prdName' type='hidden' value='" + prdName+"'>"; 
-								form_contents += name_Input;  */
-								
 								orderNumber += 1;
 								}//end checked
 							});//end cart Info

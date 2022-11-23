@@ -29,6 +29,8 @@ public class OrderController {
      OrderService ordSer = new OrderService();
      List<String> list = null;
      
+     //
+     
      //임시- 페이지 이동,파라미터 값 넘겨받는 거 연습땜시
      //장바구니 페이지로 이동
      @RequestMapping(value="/test.do",method=GET)
@@ -45,9 +47,9 @@ public class OrderController {
 		String url="";
 		
 		List<OrderPrdVO> opvo = ordSer.searchProduct(oIfVO);
-	     System.out.println("p@@@@@@"+oIfVO); //파라메터
+	     System.out.println("p@@@@@@"+oIfVO); //파라메터 (ok)
 	     System.out.println("db@@@@@@"+opvo ); //성공 ㅠㅠ
-	     model.addAttribute("opvo", opvo);
+	    model.addAttribute("opvo", opvo);
 		/////////////////////////////////////////////////////////
 		oVO.setId("id001");
 		oVO.setDefaultFlag("O");
@@ -57,6 +59,7 @@ public class OrderController {
 		 OrderDomain orDom = null;
 		orDom = ordSer.searchOrderInfo(id);
 		model.addAttribute("orDom", orDom); 
+		
 		 if(flag == null || "".equals(flag)) { // 기본배송지설정이 안된 회원일 경우
 			 url ="/user/order/orderPayment";
 		 }else { // 기본배송지 설정이 된 회원인 경우
@@ -94,7 +97,6 @@ public class OrderController {
 		session.setAttribute("totalPrice", oVO.getTotalPrice());
 		oVO.setId("id001");
 		 String flag = ordSer.searchOrderChk("id001");
-		 System.out.println(flag);
 		 System.out.println("오더-1111---" +oVO.getOrderId()); //ok 
 		 
 		 ordSer.searchOrer(oVO); //트랜잭션
@@ -109,6 +111,7 @@ public class OrderController {
 	// 결제완료페이지(주문코드)
 	@RequestMapping(value = "/orderPayment_complete.do", method = GET)
 	public String orderCompletePage(HttpSession session, Model model) {
+	
 		int discountPrice = (Integer) session.getAttribute("discountPrice");
 		int totalPrice = (Integer) session.getAttribute("totalPrice");
 		String orderId = (String) session.getAttribute("orderId");
@@ -116,7 +119,7 @@ public class OrderController {
 		System.out.println("@@@@@@@@인서트" +orderId );
 		MyOrderDomain mod = new MyOrderDomain();
 		mod = ordSer.searchOrderCompleteM(orderId);
-		MyOrderDomain mod2 = new MyOrderDomain();
+		List<MyOrderDomain> mod2 =new ArrayList<MyOrderDomain>();
 		mod2 = ordSer.searchOrderCompleteP(orderId);
 		MyOrderDomain mod3 = new MyOrderDomain();
 		mod3 = ordSer.searchOrderCompleteD(orderId);
@@ -124,12 +127,6 @@ public class OrderController {
 		model.addAttribute("mod1", mod);
 		model.addAttribute("mod2", mod2);
 		model.addAttribute("mod3", mod3);
-		
-		System.out.println("@@@@@회원결과 " + mod);
-		System.out.println("@@@@@상품결과 " + mod2);
-		System.out.println("@@@@@배송결과 " + mod3);
-		
-		
 		
 		return "/user/order/orderComplete";
 	}// orderCompletePage

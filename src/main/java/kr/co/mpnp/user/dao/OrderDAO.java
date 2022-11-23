@@ -156,13 +156,14 @@ public class OrderDAO {
 	//해당 상품코드의 상품 조회
 	public OrderPrdVO selectProduct(String prdId){ 
 			OrderPrdVO opVO = null;
-	
+	System.out.println("다오다오"+prdId);
 	MyBatisHandler mbh = MyBatisHandler.getInstance();
 	SqlSession ss = mbh.getHandler();
 	try {
 		// 쿼리 실행
 		opVO = ss.selectOne("kr.co.mpnp.orderMapper.selectProduct", prdId);
 		//System.out.println(orDom);
+		
 	} catch (PersistenceException pe) {
 		pe.printStackTrace();
 	}
@@ -331,8 +332,8 @@ public class OrderDAO {
 	
 	// 검증완료
 	// 주문완료내역조회(상품
-	public MyOrderDomain selectOrderCompleteP(String orderId) {
-		MyOrderDomain orDom = null;
+	public List<MyOrderDomain> selectOrderCompleteP(String orderId) {
+		List<MyOrderDomain> orDom = null;
 
 		// 핸들러 얻기
 		// MyBatisHandler얻기
@@ -340,7 +341,7 @@ public class OrderDAO {
 		SqlSession ss = mbh.getHandler();
 		try {
 			// 쿼리 실행
-			orDom = ss.selectOne("kr.co.mpnp.orderMapper.selectOrderCompleteP", orderId);
+			orDom = ss.selectList("kr.co.mpnp.orderMapper.selectOrderCompleteP", orderId);
 			System.out.println(orDom);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();

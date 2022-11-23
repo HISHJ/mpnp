@@ -65,68 +65,63 @@
 		})
 		
 		</script>
+		<!-- 설빈 -->
 		<script type="text/javascript">
-					  $(function(){
-						var form_data = ""; //히든으로 넣을 공간
-						var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
-						var priceArr = new Array();
-						//상품의 개별 총 가격 배열에 넣기
-					  $(".totalPrice_info").each(function(i,element){
-						 var price = $(element).find("#totalP").val()*1;
-						 priceArr.push(price);
-					  })//en each
-					 
-					  //상품 총 합계 구하기
-					  var sum = 0;
-					  priceArr.forEach((item)=>{
-						  sum += item;
-					  });//end forEach
-					  
-					  
-					  //할인액 구하기
-					  //할인율 가져오기
-					  var rate = ($("#discount_rate").val()*1)/100;
-					  //해당 상품에 적용되는 할인 액
-					  var rate_price = sum * rate;
-					  
-					
-					  //총 결제금액 구하기
-					  var deli_fee = 2500;
-					  
-					   var actual_price;
-					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-						  deli_fee = 0;
-					  } //end if
-				
-					  actual_price = sum - rate_price -deli_fee ; 
-					 
-					  
-					  //숫자에 단위 넣기
-					  const rate_ = rate_price.toString()
-                      .replace(expression, ","); //할인금액
-					  const total_pri = actual_price.toString()
-                      .replace(expression, ","); //상품 총가격
-					  const cn1 = sum.toString()
-                      .replace(expression, ","); // 총 결제금액
-					  const ship_fee = deli_fee.toString()
-                      .replace(expression, ","); // 배송비
-                     
-					  $(".totalProductPrice").html(total_pri); //상품 총 금액
-					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
-					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
-					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
-					  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
-					  
-					 $('#actualPrice').attr("value",sum);
-					 $('#discountPrice').attr("value",rate_price);
-					 $('#totalPrice').attr("value",actual_price);
-					 
-					  })//reay
-					</script>
+		  $(function(){
+			var form_data = ""; //히든으로 넣을 공간
+			var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+			var priceArr = new Array();
+			//상품 총 합 가져오기
+			var prdPrice = $("#prdPri").val()*1;
+		 
+		  
+		  //할인액 구하기
+		  //할인율 가져오기
+		  var rate = ($("#discountRate").val()*1)/100;
+		  //해당 상품에 적용되는 할인 액
+		  var rate_price = prdPrice * rate;
+		  
+		
+		  //총 결제금액 구하기
+		  var deli_fee = 2500;
+		  
+		   var actual_price;
+		  if(prdPrice < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
+			  deli_fee = 0;
+		  } //end if
+	
+		  actual_price = prdPrice - rate_price -deli_fee ; 
+		 
+		  //상품개별비용
+		  
+		  //숫자에 단위 넣기
+		  const rate_ = rate_price.toString()
+        .replace(expression, ","); //할인금액
+		  const total_pri = prdPrice.toString()
+        .replace(expression, ","); //상품 총가격
+		  const cn1 = actual_price.toString()
+        .replace(expression, ","); // 총 결제금액
+		  const ship_fee = deli_fee.toString()
+        .replace(expression, ","); // 배송비
+       
+		  $(".total_pri").html(total_pri); //상품 총 금액
+		  $(".dc_price").html(rate_); //할인금액
+		  $(".deli_pri").html(ship_fee);//배송비
+		  $(".act_pri").html(cn1);//총 결제금액
+		  //$("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+		  
+	
+		 
+		  })//reay
+		</script>
+
 
 </head>
 
 <body class="body">
+<input type="hidden" id="fstPurchGoodsIncYn" value="${totalPrice}">
+<input type="hidden" id="order_payment_total_dc_amt" value="${discountPrice}">
+<input type="hidden" id="order_payment_total_pay_amt" value="${moDom.actualPrice}">
 
 <!-- 기본 컨텐츠 -->
 	<div class="wrap" id="wrap">
@@ -209,31 +204,11 @@
 	</div>
 </header>
 
-		
-		<div class="layers">
-			<!-- 레이어팝업 넣을 자리 -->
-			<!-- 등급안내 팝업 추가 2021.05.13 -->
-			<article class="popLayer a popLank " id="popLank">
-				<div class="pbd">
-					<div class="phd">
-						<div class="in">
-							<h1 class="tit"></h1>
-							<button type="button" class="btnPopClose">닫기</button>
-						</div>
-					</div>
-					<div class="pct">
-						<main class="poptents">
-							<div class="rankCont">
-								<div class="rank_imgBox rank_pc">
-											<img src="/_images/common/img-level-pc.png" alt="어바웃펫 패미리 등급별 혜택 이미지">
-										</div>
-									</div>
-						</main>
-					</div>
-				</div>
-			</article>
-			<!-- //등급안내 팝업 추가 2021.05.13 -->
-		</div>
+<script type="text/javascript">
+
+
+
+</script>
 
 
 
@@ -271,20 +246,9 @@
 					<div class="item-list">
 						<div class="top">
 							<div class="tit">
-								<p class="data">2022.10.30</p>
+								<p class="data">${moDom.inputDateS}</p>
 								<span class="icon-left-gap">주문번호 : ${moDom.orderId}</span>
 							</div>
-							<!-- 전체 구매확정 여부 -->
-							<!-- APET-1523 자사 전체 취소 가능 여부 - 자사인 경우 배송준비중까지 상태 아닌경우-->
-								<!-- APET-1523 자사 전체 배송완료 체크-->
-								<!-- 주문 취소 가능 여부 eq Y -->
-									</div>
-					<!-- </div> -->
-					<!-- 파랑 t3   결제완료 배송중 배송준비중   -->
-					<!-- 빨강 t4  입금대기 반품신청  반품진행중  교환신청 교환진행중 -->
-					<!-- 검정   구매확정 배송완료 반품완료 CLM_DTL_STAT 260 반품거부 250 교환완료 450 교환거부 350  -->
-					<!-- 회색 t2 주문취소 110 120 -->
-					<!-- <div class="item-list"> -->
 							<div class="bottom">
 								<div class="t-box">
 									<p class="tit t3">${moDom.status}</p>
@@ -296,12 +260,13 @@
 										<div class="untcart"><!-- .disabled -->
 											<div class="box">
 												<div class="tops">
+												<c:forEach items="${list}" var="list">
 													<div class="pic">
 														<a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
-														<img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg?type=f&amp;w=259&amp;h=259&amp;quality=90&amp;align=4" alt="[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+														<img src="http://localhost/mpnp/images/${list.prdImg}" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 														</a>
 													</div>
-													<c:forEach items="${list}" var="list">
+													
 													<div class="name">
 														<div class="tit k0421">
 															<a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
@@ -313,8 +278,9 @@
 															</div>
 														<div class="prcs">
 															<!-- APET-1523 스탬프 -->
-															<span class="prc"><em class="p">${list.prdPrice}</em><i class="w">원</i></span>
-																</div>
+															<span class="prc"><em class="p prd_">${list.prdPrice}</em><i class="w">원</i></span>
+															<input type="hidden" id="prdPrice" name="prdPrice" value="${list.prdPrice}">
+ 																</div>
 													</div>
 													</c:forEach>
 												</div>
@@ -347,11 +313,7 @@
 								<div class="adrreq">
 								<!-- 배송요청사항 노출을 위해 주석 -->
 								<div class="pwf">
-										<em class="t">
-											택배함</em>
-										<em class="p">
-											필요없음&nbsp; 
-											</em>
+										
 										<div class="txt custom_ellipsis_dlvr">${moDom.shipReq }</div>
 									</div>
 								</div>
@@ -363,15 +325,25 @@
 								<ul class="prcset">
 
 								<li>
+								<!-- 설빈 -->
 										<div class="dt">상품 금액</div>
 										<div class="dd">
-											<span class="prc"><em class="p">3,400</em><i class="w">원</i></span>
+											<span class="prc"><em class="p total_pri">${prdPrice}</em><i class="w">원</i></span>
+											<input type="hidden" id="prdPri" name="prdPri" value="${prdPrice}">
+											
+										</div>
+									</li>
+									<li>
+										<div class="dt">할인 금액</div>
+										<div class="dd">
+											<span class="prc"><em class="p dc_price">0</em><i class="w">원</i></span>
+											<input type="hidden" id="discountRate" name="discountRate" value="${discountRate}">
 										</div>
 									</li>
 									<li>
 										<div class="dt">배송비</div>
 										<div class="dd">
-											<span class="prc"><em class="p">2,500</em><i class="w">원</i></span>
+											<span class="prc"><em class="p deli_pri">2,500</em><i class="w">원</i></span>
 										</div>
 									</li>
 								
@@ -380,7 +352,7 @@
 							<div class="tot">
 									<div class="dt">최종 결제금액</div>
 									<div class="dd">
-										<span class="prc"><em class="p">5,900</em><i class="w">원</i></span>
+										<span class="prc"><em class="p act_pri">0</em><i class="w">원</i></span>
 									</div>
 								</div>
 							</div>
@@ -400,12 +372,21 @@
 								</div>
 							</div>
 						</section>
+						<script type="text/javascript">
+						function backOrderList(){
+							$("#id").val();
+							$("#idFrm").submit();
+						}
+						</script>
 				
 						<div class="my_btnWrap t2">
 							<div class="btnSet">
-								<a href="/mypage/order/indexDeliveryList" data-content="" data-url="/mypage/order/indexDeliveryList" class="btn lg d">주문 목록</a>
+								<a href="javascript:void();" onClick="backOrderList()" data-content="" data-url="/mypage/order/indexDeliveryList" class="btn lg d">주문 목록</a>
 								<a href="/shop/home/" class="btn lg b">계속 쇼핑하기</a>
 							</div>
+							<form action="order_information_form.do" id="idFrm" name="idFrm">
+							  <input type="hidden" id="id" name="id" value="${moDom.memberId}">
+							</form>
 						</div>
 					</div>
 				</div>

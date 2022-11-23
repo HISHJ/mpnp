@@ -168,11 +168,13 @@ li.open, div.ctset {
 				return ;
 			}//addr2
 			
-			if($("#shipReq").val().length < 10){
-				alert("요청사항은 최소 10자 이상 입력가능합니다");
+			if($("#shipReq").val().length < 5 && $("#shipReq").val().length > 50 ){
+				alert("요청사항은 최소 5자 이상 50자 이하 입력가능합니다");
 				$("#shipReq").focus();
 				return ;
 			}
+			
+
 			
 			var mailChk =$(':checkbox[id=chk1]:checked' );
 			if(mailChk.length<1){

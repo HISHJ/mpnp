@@ -129,7 +129,7 @@ where (o.ID = m.ID)  and ORDERID=#{orderId}
 <![CDATA[
 SELECT p.NAME prdName, o.TOTALCNT totalCnt, p.PRICE prdPrice, o.TOTALCNT * p.PRICE 
 FROM ORDER_DETAIL o, PRODUCT p
-WHERE (o.PRODUCTID = p.PRODUCTID) and o.ORDERID=#{orderId} and ROWNUM <= 1
+WHERE (o.PRODUCTID = p.PRODUCTID) and o.ORDERID=#{orderId} 
 ]]>
 </select>
 <select id="selectOrderCompleteD" parameterType="String" resultType="MyOrderDomain">

@@ -2,6 +2,8 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import kr.co.mpnp.user.dao.MyOrderDAO;
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.vo.MyOrderVO;
@@ -79,12 +81,70 @@ public class MyOrderService {
 		return cnt;
 	}// searchOrderStatusCnt
 
-	// 주문취소(아이디,주문코드)
-	public int modifyOrderProcess(String id, String orID) {
-		int cnt = 0;
-
-		return cnt;
-	}// modifyOrderProcess
+	//주문 개별취소
+	public String removeCancelIndivisual(String orDId) {
+	
+		MyOrderDAO moD = MyOrderDAO.getInstance();
+		
+		JSONObject jsonObject = new JSONObject();
+		boolean removeFlag =moD.deleteCancelIndivisual(orDId)==1?true:false;
+		jsonObject.put("removeFlag", removeFlag);
+		
+		return jsonObject.toString();
+	}//end 
+	
+	//주문 전체취소
+	public String removeCancelTotal(String orDId) {
+		
+		MyOrderDAO moD = MyOrderDAO.getInstance();
+		JSONObject jsonObject = new JSONObject();
+	    boolean removeFlag = moD.deleteCancelTotal(orDId)==1?true:false;
+	    jsonObject.put("removeFlag", removeFlag);
+	    System.out.println("마이오더서비스@@@@:" +removeFlag);
+		return jsonObject.toString();
+	}//end 
+	
+	//상품 총가격
+	
+	//상품 총가격
+	public int searchPriceIndivisual(String orId) {
+		int price =0;
+		
+		MyOrderDAO moD = MyOrderDAO.getInstance();
+		price= moD.selectPriceIndivisual(orId);
+		
+		return price; 
+		
+	}//
+	
+	//총 결제금액
+	public int selectPriceTotal(String orId) {
+		int price =0;
+		
+		MyOrderDAO moD = MyOrderDAO.getInstance();
+		int prdPrice = moD.selectPriceIndivisual(orId);
+		int actualprice= moD.selectPriceTotal(orId);
+		price =actualprice - prdPrice;
+		
+		return price; 
+		
+	}//
+	
+	//할인율 구하기
+	public int selectDiscountRate(String id) {
+		int discountRate =0;
+		
+		MyOrderDAO moD = MyOrderDAO.getInstance();
+		discountRate = moD.selectDiscountRate(id);
+		;
+		
+		
+		return discountRate;
+		
+	}
+	
+	
+	
 
 	//////////////////////////////////////////////// 페이징////////////////////////////
 	// 전체 게시물수(왜 adminProductVO?)

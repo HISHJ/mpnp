@@ -221,11 +221,30 @@
               <!-- 상품 이미지 영역 END -->
               <!-- sameDay Class  -->
               <section class="pdInfos p1 sameDay">
-  
-              
-  
-              
-                <!-- 상품명 -->
+
+							<!-- 유설빈영역  상품 값 넘기기 2022-11-23-->
+					<button id="tempBtn" class="tempBtn">임시버튼 구매하기</button>
+							<script type="text/javascript">
+							 $(function(){
+								 $("#tempBtn").click(function(){
+									 var number=$("#buyQty").val()*1;
+									//alert(typeof number);
+								   $("#orderFrm").find("input[name='orders[0].prdCnt']").val(number);
+								  //alert(number);
+								   $("#orderFrm").submit();
+								 })
+								
+							 })//end ready
+							</script>
+							
+							<form action="orderPayment_form.do" method="get" id="orderFrm" name="orderFrm">
+								<input type="hidden" name="orders[0].prdId" value=" ${data.productid}" />
+								<input type="hidden" name="orders[0].prdCnt" value=" ${data.productid}" />
+							</form>
+							<!-- 유설빈영역  상품 값 넘기기 2022-11-23끝-->
+
+
+							<!-- 상품명 -->
                 <div class="names">${data.productname }</div>
   				<input type="hidden" id="productid" value="${data.productid }"/>
   				<!--로그인 했을때 id  -->

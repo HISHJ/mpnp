@@ -56,18 +56,9 @@
 		 $(".open_dog").css('display','none');
 		
 		 })//click
-		
-		
-		
 		})
 		
 		</script>
-
-
-
-
-
-
 
 
 </head>
@@ -258,6 +249,17 @@ $(function(){
 		$(".num2").html(cnt2);
 		$(".num3").html(cnt3);
 		
+		var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+		
+		var prdPrice = $("#prdPrice").val();
+		//숫자에 단위 넣기
+		  const rate_ = prdPrice.toString()
+         .replace(expression, ","); //할인금액
+        //alert(rate_);
+         
+         $(".prdPri").html(rate_);
+         
+		
 		
 })//ready
 </script>
@@ -269,10 +271,104 @@ function goOrderDetail(orID){
 	$("#hidFrm").submit();
 	
 }
+
+
+
+function deleteDetail(ordId,status){
+	var data ={
+			orDetailId :ordId
+		
+	}
+	 console.log(data) 
+	
+ 	
+	if(confirm("주문취소 하시겠습니까?")){
+		 if(status == '구매확정'){
+			alert("구매확정 후에는 주문을 취소할 수 없습니다."); 
+		 }else{
+		
+			$.ajax({
+				url:"order_can_process.do",
+				data:"orDetailId=" +ordId,
+				type:"get",
+				dataType:"json",
+				error:function(xhr){
+					alert("a:"+ xhr.status + "b:"+ xhr.statusText + "c:" + xhr.state());
+					console.log(data)
+				},
+				success:function(jsonObj){
+					if(jsonObj.removeFlag){
+						alert("주문취소가 완료되었습니다");
+						location.href="order_information_form.do";
+					}//end if
+				}//end suc
+				
+			})//ajax
+		 }//end else
+		
+	}//if 
+
+
+}//function
+
+
+function canTotalOrder(orId, status){
+		var data ={
+				orderId :orId
+			
+		}
+		 console.log(data) 
+		
+	 	
+		if(confirm("해당 주문코드의 주문을 전부 취소하시겠습니까?")){
+			 if(status == '구매확정'){
+				alert("구매확정 후에는 주문을 취소할 수 없습니다."); 
+			
+			 }else{
+				$.ajax({
+					url:"order_totalCan_process.do",
+					data:"orderId=" +orId,
+					type:"get",
+					dataType:"json",
+					error:function(xhr){
+						alert("a:"+ xhr.status + "b:"+ xhr.statusText + "c:" + xhr.state());
+						console.log(data)
+					},
+					success:function(jsonObj){
+						if(jsonObj.removeFlag){
+							alert("주문취소가 완료되었습니다");
+							location.href="order_information_form.do";
+						}//end if
+					}//end suc
+					
+				})//ajax
+			 }//end else
+			
+		}//if 
+
+
+	}//function
+
+
+
+function deleteTotalOrder(orID){
+	$("#orderId").val(orID);
+	var o = $("#orderId").val();
+	alert(o);
+	$("#delAFrm").submit();
+}
+
+
 </script>
   <form id="hidFrm" name="hidFrm" action="order_detail_form.do">
   	<input type="hidden" id="orderId" name="orderId" >
 	 </form>	
+	  <form id="delAFrm" name="delAFrm" action="order_totalCan_process.do">
+	  <input type="hidden" id="orderId" name="orderId" >
+	  </form>
+	    <form id="delDFrm" name="delDFrm" action="order_can_process.do">
+	    <input type="hidden" id="orDetailId" name="orDetailId">
+	  </form>
   <c:forEach  items="${list}" var="list">
   <div class="hidden_div">
   <input type="hidden" id="status" name="status" value="${list.status}" /> 
@@ -288,7 +384,9 @@ function goOrderDetail(orID){
 					<a href="javascript:void(0);" class="detail-btn" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="goOrderDetail('${list.orderId}')">주문상세 </a>
 				</div>
 				<!-- 주문 취소 가능 여부 eq Y -->
-					<a href="javascript:void(0);" class="btn sm" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="orderDeliveryListBtn.goCancelRequest('C202210301001496', '');return false;">전체주문취소</a>
+					<%-- <a href="order_totalCan_process.do?orderId=${list.orderId}" class="btn sm" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="deleteTotalOrder('${list.orderId}')">전체주문취소</a> --%>
+					<a href="javascript:void(0);" class="btn sm" onClick="canTotalOrder('${list.orderId}','${list.status}')" >주문코드 ${list.orderId} 전체주문취소</a>
+
 						</div>
 		</div>
 					<div class="item-list">
@@ -308,7 +406,7 @@ function goOrderDetail(orID){
 												<div class="tops" style="margin-bottom:30px;">
 													<div class="pic">
 														<a href="javascript:void(0);" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="orderDeliveryListBtn.goOrderDetail('C202210301001496');return false;">
-														<img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg?type=f&amp;w=259&amp;h=259&amp;quality=90&amp;align=4" alt="[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+														<img src="http://localhost/mpnp/images/${list.thImg}" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 														</a>
 													</div>
 													<div class="name">
@@ -316,10 +414,11 @@ function goOrderDetail(orID){
 															<a href="javascript:void(0);" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="orderDeliveryListBtn.goOrderDetail('C202210301001496');return false;">${list.prdName }</a>
 														</div>
 														<div class="stt">
-															${list.totalCnt}
+															${list.totalCnt} 개
 															</div>
 														<div class="prcs">
-															<span class="prc"><em class="p">${list.actualPrice}</em><i class="w">원</i></span>
+															<span class="prc"><em class="p prdPri">${list.totalPrdPrice}</em><i class="w">원</i></span>
+															<input type="hidden" id="prdPrice" name="prdPrice" value="${list.totalPrdPrice}">
 																</div>
 													</div>
 												</div>
@@ -328,7 +427,7 @@ function goOrderDetail(orID){
 										 <div class="btn-bx 
 										">
 										<div class="btnSet">
-												<a href="javascript:void(0);" class="btn c" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="orderDeliveryListBtn.goCancelRequest('C202210301001496', '1');return false;">주문취소</a>
+																	<a href="javascript:void(0);" class="btn c" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="deleteDetail('${list.orDetailId}','${list.status}')">주문취소</a>
 											</div>
 											</div>
 										</div>
@@ -341,7 +440,7 @@ function goOrderDetail(orID){
 <div class="btn_fixed_wrap t2" style="display: none;">
 	<button class="btn_round" onclick="searchAllOrder();" style="display:none;">전체주문보기</button><!-- 하단 gnb 있을 시 t2추가 -->
 </div>
-</script><!-- 주문/배송 목록 include -->
+
 			</div>				
 			
 			
