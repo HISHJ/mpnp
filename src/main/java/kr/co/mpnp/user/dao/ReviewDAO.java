@@ -60,14 +60,39 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	
 	// 리뷰작성
-	public boolean insertReview(ReviewVO rVO){
+	public int insertReview(ReviewVO rVO){
 		
 		
 		int cnt = 0; // 쿼리문실행결과 담기 ?? 여기에하는게 맞던가
 		
-		return cnt!=0?true:false;
+		return cnt;
 	}
+	// 리뷰코드조회 select
+	public int selectReviewId(String odId) {
+		int cnt = 0;
+		
+		return cnt;
+	}
+	
+	// 리뷰이미지 추가
+	public int insertReviewImgs(ReviewVO rVO) {
+		int cnt = 0;
+		
+		return cnt;
+	}
+	
+	// 리뷰플래그 Y로 update
+	public int updateReviewChk(String odId) {
+		int cnt = 0;
+		
+		return cnt;
+	}
+	
+	
+	
+	
 	
 	// 리뷰수정
 	public boolean updateReview(ReviewVO rVO){
