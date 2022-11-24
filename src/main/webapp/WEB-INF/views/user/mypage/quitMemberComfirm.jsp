@@ -226,7 +226,7 @@
 				<div class="my_btnWrap">
 					<div class="btnSet">
 						
-						<a href="/shop/home/" class="btn lg a" style="width:300px;">확인</a>
+						<a href="logout_process.do" class="btn lg a" style="width:300px;">확인</a>
 					</div>
 				</div>
 			</div>

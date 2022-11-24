@@ -139,7 +139,28 @@ public class MypageDAO {
 	public boolean selectMember(MypageVO mVO) {
 		boolean flag=false;
 		
+		//1.MyBatis Handler얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		System.out.println("비번확인 id "+mVO.getId()); 
+		System.out.println("비번확인 pass "+mVO.getPass()); 
+				
+		//2.쿼리문실행
+		int cnt=ss.selectOne("kr.co.mpnp.user.mapper.mypageMapper.selectMember",mVO);
+		if(cnt!=0) {
+			flag=true;
+		}else {
+			System.out.println("실패하였습니다");
+		}
+		//cnt 테스트
+		System.out.println(cnt+"건");
+				
+		//3.MyBatis Handler 끊기
+		mbh.closeHandler(ss);
+		
 		return flag;
+		
 	}
 	
 	
@@ -150,9 +171,30 @@ public class MypageDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		//2.쿼리문실행
-		int cnt=ss.update("",mVO);
+		int cnt=ss.update("kr.co.mpnp.user.mapper.mypageMapper.updateMemberStatus",mVO);
 		if(cnt!=0) {
-			System.out.println("");
+			ss.commit();//와 이거 잊지말자 .... 
+		}else {
+			System.out.println("실패하였습니다");
+		}
+		//cnt 테스트
+		System.out.println(cnt+"건");
+		
+		//3.MyBatis Handler 끊기
+		mbh.closeHandler(ss);
+		
+		return cnt;
+	}
+	
+	//사용자-회원탈퇴3
+	public int insertQuitMember(MypageVO mVO) {
+		//1.MyBatis Handler얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		
+		//2.쿼리문실행
+		int cnt=ss.update("kr.co.mpnp.user.mapper.mypageMapper.insertQuitMember",mVO);
+		if(cnt!=0) {
 			ss.commit();//와 이거 잊지말자 .... 
 		}else {
 			System.out.println("실패하였습니다");

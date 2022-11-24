@@ -140,6 +140,24 @@ public class MemberDAO {
 		public boolean selectDupChk(String id) {
 			boolean flag=false;
 			
+			//1.MyBatis Handler얻기
+			MyBatisHandler mbh=MyBatisHandler.getInstance();
+			SqlSession ss=mbh.getHandler();
+			System.out.println("사용자 중복확인 들어온 "+id); //값 잘 받아짐
+					
+			//2.쿼리문실행
+			int cnt=ss.selectOne("kr.co.mpnp.user.mapper.memberMapper.selectDupChk",id);
+			if(cnt!=0) {
+				flag=true;
+			}else {
+				System.out.println("중복아이디가 없습니다");
+			}
+			//cnt 테스트
+			System.out.println(cnt+"건");
+					
+			//3.MyBatis Handler 끊기
+			mbh.closeHandler(ss);
+			
 			return flag;
 		}
 		

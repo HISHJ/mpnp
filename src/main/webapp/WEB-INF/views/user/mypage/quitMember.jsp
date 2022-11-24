@@ -53,10 +53,13 @@
 		 $(".open_cat").css('display','block');
 		 $(".open_dog").css('display','none');
 		
-		 })//click
+		 });//click
 		
+		 $("#quitMemberBtn").click(function() {
+			$("#quitMemberFrm").submit();
+		});
 		
-		})
+		});//ready
 		
 		</script>
 
@@ -225,22 +228,24 @@
 							</ul>
 							
 						</div>
+						<form id="quitMemberFrm" action="m_quit_process.do">
 						<div class="member-input">
 							<ul class="list">
 								<li>
 									<strong class="tit requied">비밀번호</strong>
 									<p class="info">필수 입력 정보</p>
 									<div class="input disabled">
-										<input type="password" class="ipt" name="pswd" id="password" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="12">
+										<input type="password" class="ipt" name="pass" id="pass" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="12">
 									</div>
 								</li>
 							</ul>
 						</div>
+						</form>
 						<div class="pbt mt20">
 							<strong class="tit">정말 회원탈퇴 하시겠습니까?</strong>
 							<div class="btnSet mt24">
-								<a href="javascript:fnCancel();" class="btn lg a base" id="leaveCancelBtn">취소</a>
-								<a href="javascript:fnLeaveMember();" class="btn lg a base" id="leaveMemberBtn">탈퇴하기</a>
+								<a href="javascript:history.back();" class="btn lg a base" id="leaveCancelBtn">취소</a>
+								<a class="btn lg a base" id="quitMemberBtn">탈퇴하기</a>
 							</div>
 						</div>
 					</div>

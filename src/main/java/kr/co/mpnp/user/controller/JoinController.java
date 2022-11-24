@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -34,10 +35,16 @@ public class JoinController {
 		return "user/join/signUp";
 	}//joinForm
 	
+	@ResponseBody
 	@RequestMapping(value = "/join_idchk_process.do", method=GET )
-	public String joinDupChk(String str, Model model) {
+	public String joinDupChk(String id, Model model) {
 		
-		return "";
+		//ajax 사용할건데 페이지 이동이 있으면 되나 ? 
+		
+		JoinService js=new JoinService();
+		System.out.println("중복환인 return 값 "+js.searchDupChk(id));
+		
+		return js.searchDupChk(id);
 	}//joinDupChk
 	
 	@RequestMapping(value = "/join_add_process.do", method=POST )
@@ -47,11 +54,9 @@ public class JoinController {
 		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload_pf");
 		int maxSize=1024*1024*20;
 		
-		System.out.println("try 위");
 		
 		//DB에 데이터는 들어가는데 ...디렉토리에는 사진이 안들어가지 해결완료 jsp form 태그를 조심ㅎㅐ.. Post방식으로 받아야하는것도
 		try {
-			System.out.println("try 바로아래"); 
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),
 					maxSize,"UTF-8", new DefaultFileRenamePolicy());
 			mVO.setPfimg(mr.getFilesystemName("pfimg"));

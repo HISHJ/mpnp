@@ -50,17 +50,17 @@ where id=#{id}
 
 
 <!-- 사용자-회원탈퇴1 -->
-<select id="selectMember" parameterType="mypageVO" resultType="mypageDomain">
-select id,pfimg,nick,name,pass,phone
+<select id="selectMember" parameterType="mypageVO" resultType="int">
+select count(*) cnt
 from member 
-where pass=#{pass}
+where id=#{id} and pass=#{pass}
 </select>
 
 
 <!-- 사용자-회원탈퇴2 -->
 <update id="updateMemberStatus" parameterType="mypageVO">
 update member 
-set    pfimg='',nick='',name='',phone='',status='탈퇴',gradeId='',inputdate=to_char(sysdate,'yyyy-MM-dd')
+set    pass='',pfimg='',nick='',name='',phone='',status='탈퇴',gradeId=''
 where id=#{id} and  pass=#{pass}
 </update>
 

@@ -130,6 +130,8 @@
 		setCookieTopBanner(cookieName, "done", 1);
 	}
 		
+	
+	// 순서 저 세상 .... 시간 되면 정리할 것
 	/* 전화번호 하이픈추가  */
 	function PhoneNumber(obj) {
 	    var number = obj.value.replace(/[^0-9]/g, "");
@@ -182,7 +184,73 @@
 }//PhoneNumber
 
 $(function() {
+    $("#id").change(function(){ 
+  	   $("#chkmemberIdYN").val("N");
+     });
+
+     $(".chkmemberId").click(function(){
+  	   var id = $("#id").val();
+  	   if(id == ''){
+  		  alert("아이디를 입력해주세요.");
+  		  $('#id').focus();
+  		  return false;
+  	   }
+
+  	  if(!id.match('^[a-zA-Z0-9]{4,20}$')) {
+  		  alert('아이디는 특수문자를 제외한 영문, 숫자 조합 6~15자로 사용 가능합니다.');
+  		 $('#id').focus();
+  		  return false;
+  	  }
+
+/*  	  $.post( //이거 뭔데 어떻게 쓰는거지
+ 		"/portal/member/user/checkDupId.json",
+ 		{id : id},
+ 		function(data){
+
+ 			if(data.idCnt > 0) {
+ 				alert("아이디가 중복됩니다.");
+ 				$("#chkmemberIdYN").val("N");
+ 				$('#id').focus();
+ 				return false;
+ 			}
+
+ 			alert("사용 가능한 아이디입니다.");
+ 			$("#chkmemberIdYN").val("Y");
+ 		}); //function */
+ 		
+		$.ajax({
+			url:"join_idchk_process.do",
+			data:"id="+$("#id").val(),
+			dataType:"json",
+			error:function(xhr){
+				console.log("ajax에 들어오는 아이디 "+id); //들어온다
+				console.log("에러 "+xhr.status+" / "+xhr.statusText);
+				alert(xhr.status); 
+				//500뜸 >> mapper에 resultType int 로 바꿔주고 404 
+				//>>controller위에 @ResponseBody 안줬음 ㅎ..
+			},
+			success:function(jsonObj){
+				//alert(jsonObj);
+				//alert(jsonObj.dupChkFlag); //dupChkFlag 값 잘 받아옴
+				if(jsonObj.dupChkFlag){ //select 돼서 true로 떨어지면 아이디가 있는것!
+					alert("이미 존재하는 아이디입니다");
+	 				$("#chkmemberIdYN").val("N");
+				}else{
+					alert("사용 가능한 아이디입니다");
+		 			$("#chkmemberIdYN").val("Y");
+					
+				}
+			}
+		})
+ 		
+ 		
+ 		
+     });//id를 입력해주세요 
+     
+     
 	$("#saveBtn").click(function() {
+		
+		//파일 등록
 		var pfimg=$("#pfimg").val();
 		
 		var blockExt="jpg,jpeg,png,PNG".split(",");
@@ -198,6 +266,51 @@ $(function() {
 			alert("이미지파일만 넣으라구");
 			return flag;
 		}
+		
+		//아이디 중복검사 안했을떄, 검사 하고 아이디 바꿨을 떄
+		if ($("#chkmemberIdYN").val()=="N") {
+			alert("아이디 중복 검사를 해주세요");
+			return;
+		}
+		
+		//아이디 제외 유효성 검증
+		var pass=$("#pass").val();
+		if(pass.trim()==""){
+			alert("비밀번호를 입력해주세요");
+			$("#pass").focus();	
+			return;
+		}
+		
+		var pass2=$("#pass2").val();
+		if(pass2.trim()==""){
+			alert("비밀번호 확인을 해주세요");
+			$("#pass2").focus();	
+			return;
+		}
+		
+		var name=$("#name").val();
+		if(name.trim()==""){
+			alert("이름을 입력해주세요");
+			$("#name").focus();	
+			return;
+		}
+		
+		var phone=$("#phone").val();
+		if(phone.trim()==""){ //이거 이상한데 >length
+			alert("전화번호를 입력해주세요");
+			alert(phone.length);
+			$("#phone").focus();	
+			return;
+		}
+		
+		var nick=$("#nick").val();
+		if(nick.trim()==""){
+			alert("닉네임을 입력해주세요");
+			$("#nick").focus();	
+			return;
+		}
+		
+		
 		
 		$("#signUpFrm").submit();
 	});
@@ -448,9 +561,10 @@ $(function() {
 										</li>
 										<li>
 											<strong class="tit requied" >아이디</strong>
-											<p class="info">아이디 중복 검사 click 　</p><p class="info"></p>
+											<p class="info"><button type="button" href="login_form.do" id="chkId" class="chkmemberId">아이디 중복 검사 click</button>　</p><p class="info"></p>
 											<div class="input">
-												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="6자 이상 입력해주세요." maxlength="40"  style="padding-right: 29px;">
+												<input type="hidden" name="chkmemberIdYN" id="chkmemberIdYN" value="N"/>
+												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="영문, 숫자 조합 6~15자" maxlength="15"  style="padding-right: 29px;">
 											</div>
 
 										</li>

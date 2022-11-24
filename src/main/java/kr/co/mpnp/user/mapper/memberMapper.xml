@@ -39,8 +39,8 @@ where id=#{id}
 
 
 <!-- 사용자-회원가입 아이디 중복확인-->
-<select id="selectDupChk" parameterType="memberVO" resultType="memberDomain">
-select id 
+<select id="selectDupChk" parameterType="memberVO" resultType="int">
+select count(*) cnt
 from member 
 where id=#{id}
 </select>

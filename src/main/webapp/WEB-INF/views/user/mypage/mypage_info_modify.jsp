@@ -47,12 +47,22 @@
 	$(function() {
 		
 		$("#saveBtn").click(function() {
+			var pfimg=$("#pfimg").val();
 			
-				
-			alert("눌렀다"); //여기까지 반응하는데 안넘어간다 ? 
+			var blockExt="jpg,jpeg,png,PNG".split(",");
+			var flag=false;
+			var pfimgExt=pfimg.substring(pfimg.lastIndexOf(".")+1);
+			
+			for(var i=0; i<blockExt.length; i++){
+				if(blockExt[i]==pfimgExt){
+					flag=true;
+				}
+			}
+			if(!flag){
+				alert("이미지파일만 넣으라구");
+				return flag;
+			}
 			$("#myModifyFrm").submit();
-			alert("두번째 알랏"); //반응함 ... 왜 submit이 안되는감
-			
 		});
 	});
 	
@@ -305,7 +315,6 @@
 			top:20%;
 		}
 	</style>
-	<form id="memberForm">
 		<div id="hiiden-field">
 			<input type="hidden" id="adapter" onchange="fnSnsStatSave();"/>
 			<input type="hidden" name="prflNm" value="" />
@@ -400,7 +409,6 @@
 				</div>
 			</div>
 		</main>
-	</form>
 	<!-- e -->
 
 					</main>

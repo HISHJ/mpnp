@@ -88,7 +88,6 @@ public class MypageController {
 	public String mypageModifyProcess(HttpServletRequest request, Model model) {
 		
 		MypageVO mVO=new MypageVO();
-		//request.getAttribute("id");
 		System.out.println("컨트롤러에있는 세션 아이디!!"+request.getAttribute("id"));//null
 
 		
@@ -97,7 +96,6 @@ public class MypageController {
 		
 		
 		try {
-			
 			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),
 					maxSize,"UTF-8", new DefaultFileRenamePolicy());
 			mVO.setPfimg(mr.getFilesystemName("pfimg"));
@@ -141,10 +139,25 @@ public class MypageController {
 	
 	//회원탈퇴
 	@RequestMapping(value = "/m_quit_process.do", method=GET )
-	public String memberQuitProcess(HttpSession session, String str, Model model) {
+	public String memberQuitProcess(HttpSession session, MypageVO mVO, Model model) {
+		
+		MypageService ms=new MypageService();
+		//아이디,비번이 맞는지 확인
+		String id=(String) session.getAttribute("id");
+		mVO.setId(id);
+		boolean passChk=ms.searchMember(mVO);
+		if(!passChk) {
+			//비번틀렸을때 처리 ...
+		}
+		
+		//탈퇴상태 update
+		ms.modifyMemberStatus(mVO);
+		
+		//탈퇴테이블에 insert
+		ms.addQuitMember(mVO);
 		
 		
-		return "user/mypage/quitMemberConfirm";
+		return "user/mypage/quitMemberComfirm";
 	}//memberQuitProcess
 	
 	

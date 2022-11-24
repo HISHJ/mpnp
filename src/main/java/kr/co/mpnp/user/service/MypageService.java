@@ -52,28 +52,43 @@ public class  MypageService {
 			int cnt=0;
 			
 			MypageDAO mDAO=MypageDAO.getInstance();
-			mDAO.updateMemberInfo(mVO);
+			cnt=mDAO.updateMemberInfo(mVO);
 			
 			return cnt;
 			
 		}
 		
 		
-		//사용자-회원탈퇴1
+		//사용자-회원탈퇴1 .. 이게 꼭 필요할까
 		public boolean searchMember(MypageVO mVO) {
 			boolean flag=false;
+			
+			MypageDAO mDAO=MypageDAO.getInstance();
+			flag=mDAO.selectMember(mVO);
 			
 			return flag;
 		}
 		
 		
 		//사용자-회원탈퇴2
-		public int modifyMemberStatus(MypageVO mVO) {
+		public int modifyMemberStatus(MypageVO mVO) { //탈퇴2,3은 id만 받아도되지않남
 			int cnt=0;
+			
+			MypageDAO mDAO=MypageDAO.getInstance();
+			cnt=mDAO.updateMemberStatus(mVO);
 			
 			return cnt;
 		}
 		
+		//사용자-회월탈퇴3
+		public int addQuitMember(MypageVO mVO) {//id만 받고, inputdate는 sysdate로 
+			int cnt=0;
+			
+			MypageDAO mDAO=MypageDAO.getInstance();
+			cnt=mDAO.insertQuitMember(mVO);
+			
+			return cnt;
+		}
 
 	
 
