@@ -80,7 +80,7 @@ WHERE (o.id = m.id ) and  m.id=#{id}
 <!-- 주문취소누르면 수행되는 쿼리들 -->
 <!-- 1. 가격 감산을 위한 쿼리 -->
 
-<!-- 1) 주문코드의 상품 합 가격 조회: 파라미터로 받아서 필요없는데 일단 적어둔다 -->
+<!-- 1) 주문코드의 상품 합 가격 조회:-->
 <select id="selectPriceIndivisual" parameterType="String" resultType="int">
 select sum(r.TOTALCNT * p.PRICE) cntPrice
 from ORDER_DETAIL r, PRODUCT p ,ORDERS o
@@ -88,7 +88,7 @@ where (r.PRODUCTID = p.PRODUCTID and r.ORDERID = o.ORDERID) and o.ORDERID=#{orde
 
 </select>
 
-<!-- 2) 해당 주문코드의 주문전체 최종가격조회 : 이건 필요-->
+<!-- 2) 해당 주문코드의 주문전체 최종가격조회 : -->
 <select id="selectPriceTotal" parameterType="String" resultType="int">
 select sum(o.ACTUAL_PRICE) totalPrice
 from ORDERS o,ORDER_DETAIL r

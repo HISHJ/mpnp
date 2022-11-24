@@ -336,14 +336,14 @@
 									<li>
 										<div class="dt">할인 금액</div>
 										<div class="dd">
-											<span class="prc"><em class="p dc_price">0</em><i class="w">원</i></span>
+											<span class="prc">-<em class="p dc_price">0</em><i class="w">원</i></span>
 											<input type="hidden" id="discountRate" name="discountRate" value="${discountRate}">
 										</div>
 									</li>
 									<li>
 										<div class="dt">배송비</div>
 										<div class="dd">
-											<span class="prc"><em class="p deli_pri">2,500</em><i class="w">원</i></span>
+											<span class="prc">-<em class="p deli_pri">2,500</em><i class="w">원</i></span>
 										</div>
 									</li>
 								

@@ -15,8 +15,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>주문관리-주문상세내역</title>
-        <link href="css/styles.css" rel="stylesheet" />
-        <style type="text/css">
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
+        <style type="http://localhost/mpnp/3rdAdmin/text/css">
         
         body{background-color : #fff;}
         
@@ -34,8 +34,60 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
+<script type="text/javascript">
+$(function(){
+	  var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+	  var prdSum = $("#totlaPrdPrice").val()*1;
+	  var price = $("#price").val()*1;
+
+	  
+	//할인액 구하기
+	  //할인율 가져오기
+	  var rate = ($("#discountRate").val()*1)/100;
+		
+	  //해당 상품에 적용되는 할인 액
+	  var rate_price = prdSum * rate;
+	
+	 
+var deli_fee = 2500;
+
+var actual_price;
+if(prdSum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
+	  deli_fee = 0;
+} //end if
+
+actual_price = prdSum - rate_price -deli_fee ; 
 
 
+//숫자에 단위 넣기
+const rate_ = rate_price.toString()
+.replace(expression, ","); //할인금액
+const total_pri = prdSum.toString() 
+.replace(expression, ","); //상품 총가격
+const cn1 = actual_price.toString()
+.replace(expression, ","); // 총 결제금액
+const ship_fee = deli_fee.toString()
+.replace(expression, ","); // 배송비
+const price_ = price.toString().replace(expression, ",");
+
+
+$(".prdPri").html(total_pri); //상품 총 금액
+$(".disPri").html("-" + rate_); //할인금액
+$(".deliFee").html("-" +ship_fee);//배송비
+$(".actualPri").html(cn1);//총 결제금액
+//$(".pri").html(price_);
+
+
+})//reay
+</script>
+</script>
+
+<div class="hidList">
+<input type="hidden" id="discountRate" name="discountRate" value="${discountRate}">
+<input type="hidden" id="totlaPrdPrice" name="totlaPrdPrice" value="${totlaPrdPrice}">
+<input type="hidden" id="status" name="status" value="${aoDom.status}">
+
+</div>
 	
 	
 	<div id="layoutAuthentication">
@@ -53,30 +105,30 @@
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>주문코드</b></div>
-                                             <div class="col-6"></div>
+                                             <div class="col-6">${aoDom.orderId}</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>주문고객</b></div> 
-                                            <div class="col-6">${memberName}(${phone})</div>
+                                            <div class="col-6">${aoDom.memberName}(${aoDom.phone})</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>배송지</b></div> 
-                                            <div class="col-9 navbar-dark "><b>집</b></div>
+                                            <div class="col-9 navbar-dark "><b>${aoDom2.shipName}</b></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-2"><b></b></div> 
-                                            <div class="col-9">[01234]서울시 어쩌구 저쩌동 320번지 2층</div>
+                                            <div class="col-9">[${aoDom2.zipcode}]${aoDom2.addr} ${aoDom2.addrDetail}</div>
                                         </div>
                                         <div class="row">
                                             <div class="col-2"><b></b></div> 
-                                            <div class="col-9 figure-caption ">짱구 | 010-2222-3333</div>
+                                            <div class="col-9 figure-caption ">${aoDom2.receiver} | ${aoDom2.phone}</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>요청사항</b></div> 
-                                            <div class="col-6">문 앞에 놔주세요</div>
+                                            <div class="col-6">${aoDom.shipReq}</div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -88,16 +140,14 @@
                                                 <td>가격</td>
                                                 <td>개수</td>
                                             </tr>
+                                            <c:forEach items="${list}" var="list">
                                             <tr>
-                                                <td>[2+1]펫모닝 바베큐(랜덤배송)</td>
-                                                <td>1,000원</td>
-                                                <td>1개</td>
+                                                <td>${list.productName}</td>
+                                                <td class="pri">${list.price}원</td>
+                                                <td>${list.totalCnt}개</td>
                                             </tr>
-                                            <tr>
-                                                <td>캣 홀리스틱 가든 스틱 샘플 500g</td>
-                                                <td>3,000원</td>
-                                                <td>2개</td>
-                                            </tr>
+                                                <input type="hidden" id="price" name="price" value="${list.price}">
+                                            </c:forEach>
                                             </table>
                                         </div>
                                    		</div>   
@@ -109,36 +159,47 @@
                                                 <tr > 
                                                     <td class="table-light"><b>총 상품금액</b></td>
                                                     
-                                                    <td class="text-end">1,900원</td>
+                                                    <td class="text-end prdPri">${totlaPrdPrice}원</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-light"><b>할인금액</b></td>
                                                     
-                                                    <td class="text-end">-100원</td>
+                                                    <td class="text-end disPri">-100원</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-light"><b>배송비</b></td>
                                                    
-                                                    <td class="text-end">2,500원</td>
+                                                    <td class="text-end deliFee">2,500원</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="table-light"><b>총 결제금액</b></td>
                                                     
-                                                    <td class="text-end"><b>4,300원</b></td>
+                                                    <td class="text-end actualPri"><b>4,300원</b></td>
                                                 </tr>
                                                 </table>
                                             </div>
                                         </div>
+                                        <script>
+                                        function addBtn(){
+                                        	$("#statusFrm").submit();
+                                        }
+                                        </script>
 										<div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>상태</b></div> 
                                             <div class="col-5">
-			                                <select name="" class="dataTable-selector" aria-label="Default select example">
-												<option>입금대기</option>
-												<option>결제완료</option>
-												<option>배송완료</option>
-												<option>구매확정</option>
+                          
+                                            <form action="orderModify_process.do" id="statusFrm" name="statusFrm">
+                                            <input type="hidden" id="orderId" name="orderId" value="${aoDom.orderId}"/>
+			                                <select name="status" class="dataTable-selector" aria-label="Default select example">
+												
+												<option ${aoDom.status eq '주문완료'?"selected='selected'":"" }>주문완료</option>
+												<option ${aoDom.status eq '배송완료'?"selected='selected'":"" }>배송완료</option>
+												<option ${aoDom.status eq '구매확정'?"selected='selected'":"" }>구매확정</option>
 											</select>
+											
+											    </form>
+											
                                             </div>
                                         </div>
                                                                      

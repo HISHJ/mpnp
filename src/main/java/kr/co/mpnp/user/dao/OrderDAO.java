@@ -155,14 +155,15 @@ public class OrderDAO {
 	
 	//해당 상품코드의 상품 조회
 	public OrderPrdVO selectProduct(String prdId){ 
-			OrderPrdVO opVO = null;
+	OrderPrdVO opVO = null;
 	System.out.println("다오다오"+prdId);
 	MyBatisHandler mbh = MyBatisHandler.getInstance();
 	SqlSession ss = mbh.getHandler();
 	try {
 		// 쿼리 실행
+		System.out.println("----------------------- "+prdId);
 		opVO = ss.selectOne("kr.co.mpnp.orderMapper.selectProduct", prdId);
-		//System.out.println(orDom);
+		System.out.println("          opVO:"+opVO);
 		
 	} catch (PersistenceException pe) {
 		pe.printStackTrace();
@@ -406,7 +407,9 @@ public class OrderDAO {
 	}// deleteCartItem
 
 	public static void main(String[] args) {
-OrderDAO oD = new OrderDAO();
+//OrderDAO oD = new OrderDAO();
+//System.out.println(oD.selectProduct("pr_0000017"));
+
 //		OrderVO ov = new OrderVO();
 //		//oD.selectShipName("id002");
 //		ov.setId("id002");

@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.mpnp.adminOrderMapper">
 <resultMap type="AOrderDomain" id="AOrderDom">
 <result column="ORDERID" property="orderId"/>
-<result column="NAME" property="memberName"/>
+<result column="memberName" property="memberName"/>
  <result column="ID" property="memberId"/>
  <result column="PHONE" property="phone"/>
  <result column="ZIPCODE" property="zipcode"/>
@@ -14,10 +14,10 @@
  <result column="RECEIVER" property="receiver"/>
  <result column="receiver_phone" property="receiverPhone"/>
  <result column="SHIPREQ" property="shipReq"/>
- <result column="ACTUAL_PRICE" property="actualPrice"/>
- <result column="STATUS" property="orderStatus"/>
+ <result column="actualPrice" property="actualPrice"/>
+ <result column="status" property="status"/>
  <result column="DISCOUNT_RATE" property="discountRate"/>
- <result column="prd_name" property="phone"/>
+ <result column="NAME" property="p_name"/>
  <result column="inputdate" property="inputdate"/>
 
 </resultMap>
@@ -30,55 +30,93 @@
 
 주문내역 첫조회(다이나믹 필요) -->
  <select id="selectOrderList"  parameterType="AOrderVO" resultMap="AOrderDom" >
-SELECT o.ORDERID, m.NAME memberName, p.NAME, o.ACTUAL_PRICE  actualPrice, o.STATUS orderStatus, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate
+SELECT o.ORDERID, m.NAME memberName,m.id id ,p.NAME, o.ACTUAL_PRICE  actualPrice, o.STATUS status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate
 FROM ORDERS o, ORDER_DETAIL d, PRODUCT p, MEMBER m
 WHERE (d.ORDERID=o.ORDERID and o.ID=m.ID and d.PRODUCTID=p.PRODUCTID)
-<if test="o.STATUS != null">
-and o.STATUS =#{orderStatus}
+<if test="status != null">
+and o.STATUS =#{status}
 </if>
-<if test="o.ORDERID != null">
-and o.ORDERID=#{orderID}
+<if test="memberName != null">
+and m.NAME like '%' ||   #{memberName}  || '%'
+
 </if>
-</select> 
+</select>
+ <!-- 임시 할인율 조회 -->
+<select id="selectDiscountRate" parameterType="String" resultType="int" >
+SELECT DISCOUNT_RATE discountRate
+FROM MEMBER m, GRADE g
+WHERE (m.GRADEID = g.GRADEID) and m.id =#{id}
+</select>
+ 
 
-<!-- 주문상세조회 -->
-<select id="selectOrderDetail" parameterType="String"  resultMap="AOrderDom">
+<!-- 주문 상세내역 조회 -->
+<select id="selectOrderDetail" parameterType="String" resultType="AOrderDomain">
+SELECT orderId ,m.id memberId,m.NAME memberName,m.PHONE PHONE,o.status status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate, o.shipReq, o.ACTUAL_PRICE actualPrice
+FROM ORDERS o,MEMBER m
+WHERE (o.id=m.id) and orderId=#{orderId}
 
-SELECT o.ORDERID,m.NAME, m.ID, m.PHONE,  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL, d.RECEIVER, d.PHONE receiver_phone, o.SHIPREQ,o.ACTUAL_PRICE,o.STATUS,g.DISCOUNT_RATE
-FROM  ORDERS o,MEMBER m,  DESTINATION d,GRADE g
-WHERE  (o.ID = m.ID and d.ID = m.ID and m.GRADEID = g.GRADEID) and o.ORDERID =#{orderId}
+
 </select>
 
-<!-- 해당 주문코드의 상품조회 -->
-<select id="selectOrderPrdDetail" parameterType="String"  resultMap="AOrderPrdDom">
+<!-- 주문 상세 상품조회 -->
+<select id="selectOrderPrdDetail" parameterType="String" resultType="AOrderPrdDomain">
+SELECT p.NAME productName, p.PRICE price, r.TOTALCNT totalCnt
+FROM   ORDERS o, ORDER_DETAIL r, PRODUCT p
+WHERE  (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID )and o.orderId=#{orderId}
+</select>
 
-SELECT p.NAME , p.PRICE , d.TOTALCNT 
-FROM ORDERS o, ORDER_DETAIL d, PRODUCT p
-WHERE (d.ORDERID = o.ORDERID and d.PRODUCTID=p.PRODUCTID) and o.ORDERID=#{orderId}
+<!-- 주문 상세 배송지 조회 -->
+<select id="selectOrderShip" parameterType="String" resultType="AOrderDomain">
+SELECT  d.NAME shipName, d.ZIPCODE zipcode, d.ADDR addr, d.ADDR_DETAIL addrDetail, d.RECEIVER receiver, d.PHONE receiverPhone
+FROM   ORDERS o,DESTINATION d,MEMBER m
+WHERE  (o.ID = m.ID and d.ID = m.ID) and o.orderId=#{orderId}
+</select>
+
+
+<!-- 주문취소누르면 수행되는 쿼리들 -->
+<!-- 1. 가격 감산을 위한 쿼리 -->
+
+<!-- 1) 주문코드의 상품 합 가격 조회:-->
+<select id="selectPriceIndivisual" parameterType="String" resultType="int">
+select sum(r.TOTALCNT * p.PRICE) cntPrice
+from ORDER_DETAIL r, PRODUCT p ,ORDERS o
+where (r.PRODUCTID = p.PRODUCTID and r.ORDERID = o.ORDERID) and o.ORDERID=#{orderId}
 
 </select>
+
+<!-- 2) 해당 주문코드의 주문전체 최종가격조회 : -->
+<select id="selectPriceTotal" parameterType="String" resultType="int">
+select sum(o.ACTUAL_PRICE) totalPrice
+from ORDERS o,ORDER_DETAIL r
+where (r.ORDERID =o.ORDERID) and o.ORDERID=#{orderId}
+</select>
+
+<!-- 주문취소 쿼리들 -->
+
+
+
 
 <!-- 주문상태 변경 -->
 <update id="updateOrderStatus" parameterType="AOrderVO" >
 
-update ORDERS set STATUS =#{orderStatus} where ORDERID=#{orderID}
+update ORDERS set STATUS =#{status} where ORDERID=#{orderId}
 
 </update>
 
 <!-- 주문상태가 구매확정인 경우 구매확정일 업데이트 -->
-<update id="updateCompletionDate" parameterType="String">
+<update id="updateCompletionDate" parameterType="AOrderVO">
 
-update ORDERS set COMPLETIONDATE=sysdate  where STATUS ='구매확정' and ORDERID=#{orderID}
+update ORDERS set COMPLETIONDATE=sysdate  where STATUS ='구매확정' and ORDERID=#{orderId}
 
 </update>
 
 <!-- 구매확정인 주문코드는 주문상세에서 주문후기를 'N''로 바꿔줘야 하겠지? 쿼리문 계~속 추가된다 -->
-<update id="updateReviewChk" >
+<update id="updateReviewChk" parameterType="String">
 update ORDER_DETAIL
-set REVIEW_CHK ='N'
+set REVIEW_CHK = 'N'
 where ORDERID in(select ORDERID
                  from ORDERS
-        where STATUS ='구매확정')
+                 where STATUS ='구매확정' and ORDERID=#{orderId})
 </update>        
 
 

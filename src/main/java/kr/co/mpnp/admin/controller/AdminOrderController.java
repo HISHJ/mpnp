@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.admin.domain.AdminOrderDomain;
+import kr.co.mpnp.admin.domain.AdminOrderPrdDomain;
 import kr.co.mpnp.admin.service.AdminOrderService;
 import kr.co.mpnp.admin.vo.AdminOrderVO;
 //설빈
@@ -22,29 +24,48 @@ public class AdminOrderController {
 	public String orderList(HttpSession session, AdminOrderVO adVO, Model model) {
 		List<AdminOrderDomain> list = null;
 
-	//	AdminOrderService aoService = new AdminOrderService();
-		//list = aoService.searchOrderList();
-		//model.addAttribute("orderList", list);
+	     AdminOrderService aoService = new AdminOrderService();
+		 list = aoService.searchOrderList(adVO);
+		 model.addAttribute("orderList", list);
+		 
 		return "/admin/order/orderBoard";
 
 	}// orderList
 
 	// 주문상세조회(주문코드)
 	@RequestMapping(value = "/orderDetail_form.do", method = GET)
-	public String orderListDetail(HttpSession session, String orderId, Model model) {
-		AdminOrderDomain aoDom = null;
-		
+	public String orderListDetail(HttpSession session, String memberId, String orderId, Model model) {
+
 		AdminOrderService aoService = new AdminOrderService();
-		 aoDom = aoService.searchOrderDetail("or_0000004");
-		model.addAttribute("orderDetail", aoDom);
+		
+		 AdminOrderDomain aoDom = aoService.searchOrderDetail(orderId); //주문상세
+		List<AdminOrderPrdDomain> list = aoService.searchOrderPrdDetail(orderId);//주문상품 상세
+		AdminOrderDomain aoDom2 = aoService.searchOrderShip(orderId); //주문상세 배송지
+		int discountRate = aoService.searchDiscountRate(memberId);//할인율
+		int totlaPrdPrice = aoService.searchPriceIndivisual(orderId);//주문상품 총 가격
+		System.out.println("@@@@@@22"+ discountRate);
+		model.addAttribute("aoDom", aoDom); //주문자상세
+		model.addAttribute("list", list); //상품상세
+		model.addAttribute("aoDom2",aoDom2); //배송지상세
+		model.addAttribute("discountRate",discountRate); //할인율
+		model.addAttribute("totlaPrdPrice",totlaPrdPrice); // 상품 총 가격
 		
 		return "/admin/order/orderDetail";
 	}// orderListDetail
 
 	// 주문상태변경
+
 	@RequestMapping(value = "/orderModify_process.do", method = GET)
 	public String modifyOrderStatus(AdminOrderVO adVO, Model model) {
-
+      
+		System.out.println("주문변경 @@@2" + adVO);
+		AdminOrderService aoService = new AdminOrderService(); 
+		int cnt = aoService.modifyOrderStatus(adVO);
+		//int cnt2 = aoService.modifyReviewChk(orderId);
+		if(cnt ==1) {
+		System.out.println("@@@@@@@cnt" + cnt + "건 변경됨");
+		};
+		
 		return "/admin/order/orderModify_process";
 	}// modifyOrderStatus
 

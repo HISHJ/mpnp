@@ -249,31 +249,34 @@ $(function(){
 		$(".num2").html(cnt2);
 		$(".num3").html(cnt3);
 		
-		var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
-		
-		var prdPrice = $("#prdPrice").val();
-		//숫자에 단위 넣기
-		  const rate_ = prdPrice.toString()
-         .replace(expression, ","); //할인금액
-        //alert(rate_);
-         
-         $(".prdPri").html(rate_);
+	
          
 		
 		
 })//ready
 </script>
+<script>
+$(function(){
+	var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+	
+	var prdPrice = $("#prd").val();
+	
+	$("#prdPrice").val(prdPrice);
+	var prdResult=$("#prdPrice").val();
+	//숫자에 단위 넣기
+	  const rate_ = prdPrice.toString()
+     .replace(expression, ","); //상품금액
+     //$(".prdPri").html(rate_);
+	
+})
+</script>
 <script type="text/javascript">
 function goOrderDetail(orID){
 	$("#orderId").val(orID);
 	var o = $("#orderId").val();
-	alert(o);
 	$("#hidFrm").submit();
 	
 }
-
-
-
 function deleteDetail(ordId,status){
 	var data ={
 			orDetailId :ordId
@@ -354,12 +357,15 @@ function canTotalOrder(orId, status){
 function deleteTotalOrder(orID){
 	$("#orderId").val(orID);
 	var o = $("#orderId").val();
-	alert(o);
+	
 	$("#delAFrm").submit();
 }
 
 
 </script>
+<div class=prdP">
+<input type="hidden" id="prdPrice" name="prdPrice" >
+</div>
   <form id="hidFrm" name="hidFrm" action="order_detail_form.do">
   	<input type="hidden" id="orderId" name="orderId" >
 	 </form>	
@@ -418,7 +424,7 @@ function deleteTotalOrder(orID){
 															</div>
 														<div class="prcs">
 															<span class="prc"><em class="p prdPri">${list.totalPrdPrice}</em><i class="w">원</i></span>
-															<input type="hidden" id="prdPrice" name="prdPrice" value="${list.totalPrdPrice}">
+															<input type="hidden" id="prd" name="prd" value="${list.totalPrdPrice}"/>
 																</div>
 													</div>
 												</div>

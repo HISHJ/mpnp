@@ -238,8 +238,8 @@
 							</script>
 							
 							<form action="orderPayment_form.do" method="get" id="orderFrm" name="orderFrm">
-								<input type="hidden" name="orders[0].prdId" value=" ${data.productid}" />
-								<input type="hidden" name="orders[0].prdCnt" value=" ${data.productid}" />
+								<input type="hidden" name="orders[0].prdId" value="${data.productid}" />
+								<input type="hidden" name="orders[0].prdCnt" />
 							</form>
 							<!-- 유설빈영역  상품 값 넘기기 2022-11-23끝-->
 

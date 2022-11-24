@@ -5,9 +5,38 @@ import java.util.Date;
 public class AdminOrderDomain {
 	//¼³ºó
 	private String orderId,memberId,memberName,phone,shipName,zipcode,addr,addrDetail,receiver,
-	receiverPhone, shipReq, orderStatus, inputdate,p_name,id;
+	receiverPhone, shipReq, status, inputdate,p_name,id;
 	private int price, totalcnt, actualPrice, discountRate;
-//	private Date inputdate;
+	
+	
+	
+	
+	public AdminOrderDomain() {
+	}
+	public AdminOrderDomain(String orderId, String memberId, String memberName, String phone, String shipName,
+			String zipcode, String addr, String addrDetail, String receiver, String receiverPhone, String shipReq,
+			String status, String inputdate, String p_name, String id, int price, int totalcnt, int actualPrice,
+			int discountRate) {
+		this.orderId = orderId;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.phone = phone;
+		this.shipName = shipName;
+		this.zipcode = zipcode;
+		this.addr = addr;
+		this.addrDetail = addrDetail;
+		this.receiver = receiver;
+		this.receiverPhone = receiverPhone;
+		this.shipReq = shipReq;
+		this.status = status;
+		this.inputdate = inputdate;
+		this.p_name = p_name;
+		this.id = id;
+		this.price = price;
+		this.totalcnt = totalcnt;
+		this.actualPrice = actualPrice;
+		this.discountRate = discountRate;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
@@ -74,11 +103,11 @@ public class AdminOrderDomain {
 	public void setShipReq(String shipReq) {
 		this.shipReq = shipReq;
 	}
-	public String getOrderStatus() {
-		return orderStatus;
+	public String getStatus() {
+		return status;
 	}
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public String getInputdate() {
 		return inputdate;
@@ -127,11 +156,13 @@ public class AdminOrderDomain {
 		return "AdminOrderDomain [orderId=" + orderId + ", memberId=" + memberId + ", memberName=" + memberName
 				+ ", phone=" + phone + ", shipName=" + shipName + ", zipcode=" + zipcode + ", addr=" + addr
 				+ ", addrDetail=" + addrDetail + ", receiver=" + receiver + ", receiverPhone=" + receiverPhone
-				+ ", shipReq=" + shipReq + ", orderStatus=" + orderStatus + ", inputdate=" + inputdate + ", p_name="
-				+ p_name + ", id=" + id + ", price=" + price + ", totalcnt=" + totalcnt + ", actualPrice=" + actualPrice
+				+ ", shipReq=" + shipReq + ", status=" + status + ", inputdate=" + inputdate + ", p_name=" + p_name
+				+ ", id=" + id + ", price=" + price + ", totalcnt=" + totalcnt + ", actualPrice=" + actualPrice
 				+ ", discountRate=" + discountRate + "]";
 	}
 
+	
+	
 
 	
 

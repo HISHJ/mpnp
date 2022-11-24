@@ -27,17 +27,34 @@
 <script type="text/javascript">
 $(function(){
 	$("#nameSearchBtn").click(function(){
-		$("#memberName").submit();
+	
+		$("#memberFrm").submit();
 	})
 	
 	
-	$("#nameSearchBtn").click(function(){
-		$("#orderStatus").submit();
+	$("#statusSearchBtn").click(function(){
+	
+		$("#orderFrm").submit();
 	})
+	
+	$("#reset").click(function(){
+		$("#resetFrm").submit();
+	})
+	
+	var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+	var price =$("#price").val();
+	//alert(price);
+	  const rate_ = price
+      .replace(expression, ",");
+	  
+	// $(".act_price").html(rate_);
+	  
+	
 })
 
-function getHiddenVal(orderId){
+function getHiddenVal(orderId,status){
 	 $("#orderId").val(orderId);
+	 $("#memberId").val(status)
 	 $("#resultFrm").submit();
 	
 }
@@ -68,24 +85,32 @@ function getHiddenVal(orderId){
                             <div class="card-body">
                                
                                <!-- 다 검색으로 조회가능 하지만 우선 만듬 -->
-                            <form name="memberName" id="memberName"" action="orderMain_process.do">
+                            <form name="memberFrm" id="memberFrm"" >
                            	 <div class="dataTable-top"></div>
                                 <label>회원명</label>
-                           	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
-                                <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
+                           	  	<input type="text"  name="memberName" class="dataTable-input" style="width: auto; display: inline-block;"> 
+                                <input type="button" id="nameSearchBtn" name="memberName" value="검색">
                              </form>
                              
-                            <form name="orderStatus" id="orderStatus"  action="orderMain_list.do">
+                            <form name="orderFrm" id="orderFrm" >
                            	 <div class="dataTable-top"></div>
-                                <label>상태　　</label>
-                                <select name="genreId" class="dataTable-selector" aria-label="Default select example">
+                                <label>상태</label>
+                                <select name="status" class="dataTable-selector" aria-label="Default select example" style="margin-left:18px;">
 								<option>주문취소</option>
 								<option>주문완료</option>
 								<option>배송완료</option>
 								<option>구매확정</option>
 								</select>
-                                <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
+                                <input type="button" id="statusSearchBtn" name="status" value="검색">
                              </form>
+                             
+                             <form name="resertFrm" id="resetFrm" >
+                           	 <div class="dataTable-top"></div>
+                                <label>전체보기</label>
+                                <input type="radio" id="reset" value="전체보기" >
+                             </form>
+                             
+                            
                                 
                                 </div>
                             </div>
@@ -94,6 +119,8 @@ function getHiddenVal(orderId){
                                
                            <form id="resultFrm" name="resultFrm" action="orderDetail_form.do" method="get"> 
                    		  <input type="hidden" name="orderId" id="orderId" >
+                   		  <input type="hidden" name="memberId" id="memberId" >
+                   		  
 		 				
                                 <table id="datatablesSimple">
                                
@@ -125,12 +152,13 @@ function getHiddenVal(orderId){
                               	 		<tr>
                                             <td>${order.orderId}</td>
                                             <td>${order.memberName}</td>
-                                            <td>${order.prdName}</td>
-                                            <td>${order.orderStatus}</td>
-                                            <td>${order.actualPrice}</td>
+                                            <td>${order.p_name} 외</td>
+                                            <td>${order.status}</td>
+                                            <td class="act_price">${order.actualPrice}</td>
                                             <td>${order.inputdate}</td>                                          
-                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('${order.orderId}')"></td> 
+                                            <td><input type="button" value="상세보기" onClick="getHiddenVal('${order.orderId}','${order.memberId}')"></td> 
                                         </tr>
+                                            <input type="hidden" id="price" name="price" value="${order.actualPrice}">
                                      </c:forEach>  
                                     </tbody>                                    
                                 </table>

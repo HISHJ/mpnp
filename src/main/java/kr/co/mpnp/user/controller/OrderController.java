@@ -29,7 +29,6 @@ public class OrderController {
      OrderService ordSer = new OrderService();
      List<String> list = null;
      
-     //
      
      //임시- 페이지 이동,파라미터 값 넘겨받는 거 연습땜시
      //장바구니 페이지로 이동
@@ -51,9 +50,9 @@ public class OrderController {
 	     System.out.println("db@@@@@@"+opvo ); //성공 ㅠㅠ
 	    model.addAttribute("opvo", opvo);
 		/////////////////////////////////////////////////////////
-		oVO.setId("id001");
+		oVO.setId("id006");
 		oVO.setDefaultFlag("O");
-		 String flag = ordSer.searchOrderChk("id001");
+		 String flag = ordSer.searchOrderChk("id006");
 		 String id= oVO.getId();
 		//내역조회
 		 OrderDomain orDom = null;
@@ -84,7 +83,7 @@ public class OrderController {
 	@RequestMapping(value = "/order_ship_addr.do", method = GET, produces = "application/json;charset=UTF-8")
 	public String changeShipAddr(HttpSession session, String shipName,Model model) {
 		ShipNameVO snVO = new ShipNameVO();
-		snVO.setId("id001");
+		snVO.setId("id006");
 		snVO.setName(shipName);
 		String jsonObj =ordSer.seachChangeDestination(snVO);
 		return jsonObj;
@@ -95,8 +94,8 @@ public class OrderController {
 	public String orderCompleteProcess(HttpSession session, OrderVO oVO,Model model) {
 		session.setAttribute("discountPrice", oVO.getDiscountPrice());
 		session.setAttribute("totalPrice", oVO.getTotalPrice());
-		oVO.setId("id001");
-		 String flag = ordSer.searchOrderChk("id001");
+		oVO.setId("id006");
+		 String flag = ordSer.searchOrderChk("id006");
 		 System.out.println("오더-1111---" +oVO.getOrderId()); //ok 
 		 
 		 ordSer.searchOrer(oVO); //트랜잭션

@@ -30,8 +30,6 @@ public class MyOrderController {
 		return "/user/mypage/order_information";
 	}// searchOrderList
 	
-	
-	/////////////////////////////////
 
 	// 선택주문취소(,주문상세코드)
 	@ResponseBody
@@ -40,7 +38,6 @@ public class MyOrderController {
 			
 		 MyOrderService moServ = new MyOrderService();
 		 
-		
 		return moServ.removeCancelIndivisual(orDetailId);
 	}// removeOrderProcess
 	

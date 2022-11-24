@@ -8,7 +8,7 @@ public class OrderPrdVO {
 	//장바구니에서 넘어올 값 (view로부터 전달받을 값)
  private String prdName, prdId, cartId;
  private int prdCnt, prdPrice;
-// private int prdCnt, prdPrice;
+
  //만들어낼 값
  private int totalPrice,totalProductPrice;
 
