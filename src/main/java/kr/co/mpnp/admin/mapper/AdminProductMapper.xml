@@ -8,7 +8,7 @@
 
 
 
-
+<!--중분류카테고리  -->
 <select id="selectCategory"  resultType="AdminCategoryDomain" parameterType="String" >
 select s.sub_id subid,s.sub_name subname ,m.main_id mainid, m.main_name mainname
 from sub_category s,main_category m
@@ -16,33 +16,57 @@ where s.main_id=m.main_id and s.main_id=#{s.main_id}
 
 </select>
 
-
-<select id="selectPrd" resultType="AdminProductDomain" parameterType="AdminProductVO">
-select p.productid productid,p.name productname,p.price price ,s.sub_name subname,m.main_name mainname
+<!-- 상품 검색(전체보기) -->   <!-- parameterType="AdminProductVO" -->
+<select id="selectPrd" resultType="AdminProductDomain" parameterType="AdminProductVO" >
+select p.productid productid,p.name productname,p.price price ,s.sub_name subname,m.main_name mainname,s.sub_id,s.main_id
 from product p,sub_category s, main_category m
 where p.sub_id=s.sub_id and s.main_id = m.main_id
+<!--  <choose>
+<when test ="name!=null and name!='' ">
+and replace(name,' ','') like '%'||#{name}||'%'
+</when>
+<when test="main_id!=null and main_id!= '' ">
+and s.main_id=#{main_id}
+</when>
+<when test="sub_id!=null and sub_id!= '' ">
+and s.sub_id=#{sub_id}
+</when>
+<otherwise>
+
+</otherwise>
+</choose>  -->
 
 
 </select>
 
-
+<!-- 상품상세보기 -->
 <select id ="selectPrdDetail" resultType="AdminProductDomain" parameterType="String">
 
-select p.productid productid,p.name productname ,p.price price ,p.status status,p.th_img thimg,p.info_img infoimg,p.inputdate inputdate
+select p.productid productid,p.name productname ,p.price price ,p.status status,p.th_img,p.info_img,p.inputdate inputdate
 ,s.sub_name subname,m.main_name mainname,i.product_img prdImg
 from product p,sub_category s,main_category m,product_img i
 where p.productid=i.productid(+) and p.sub_id = s.sub_id(+) and s.main_id=m.main_id(+) and p.productid =#{p.productid}
 
 </select>
 
-<insert id="insertPrd" parameterType="kr.co.mpnp.admin.vo.AdminProductVO2"  >
+<!--상품번호 조회 -->
+<select id="selectPrdId" resultType="String">
+select concat('pr_',lpad(seq_product.nextval,7,0)) from dual
+</select>
 
-insert into product(productid,name,price)
-values(#{productid},#{name},#{price})
+<!-- 상품추가  -->
+<insert id="insertPrd" parameterType="AdminProductVO">
 
-
+insert into product(productid,name,price,th_img,info_img,status,sub_id,inputdate)
+values(#{productid},#{name},#{price},#{th_img},#{info_img},#{status},#{sub_id},to_char(sysdate,'yyyy-MM-dd'))
 
 </insert>
 
+<!--상품이미지추가 -->
+<!--  <insert id="insertPrdImg" parameterType="AdminProductVO">
+insert into product(PRODUCT_IMGID,PRODUCTID,PRODUCT_IMG) 
+values(concat('prI_',lpad(seq_product.nextval,6,0)),#{productid},#{prdimg})
+</insert> 
+ -->
 
 </mapper>

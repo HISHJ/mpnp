@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info=""%>
+    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -52,7 +53,59 @@ if( session.getAttribute("adminId") == null){
 	    	
    		});//ready
 		   	
-
+	
+   		//카테고리
+   		$(function(){
+   			
+   			$("#main").change(function(){
+   				console.log( $("select[name=main]").val())
+   				if($("select[name=main]").val()!="none"){
+   					
+   					setSub();
+   				}//end if 
+   				
+   				
+   			});//change
+   			
+   			
+   			
+   	
+   		});//ready
+   		
+   		function setSub(){
+   			
+   			var data ={
+   				mainid : $("select[name=main]").val()
+   			}
+   			
+   			$.ajax({
+   				
+   				url: "admin_category.do",
+   				data : data,
+   				dataType: "json",
+   				type:"get",
+   				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+   				error : function(xhr){
+   					alert("잠시후 다시 시도해주세요")
+   					console.log("에러 : " + xhr.status);
+   		
+   				},
+   				success : function(jsonObj){
+   					if(jsonObj.resultFlag){
+   						var categorySel=document.subFrm.sub;
+   						
+   						categorySel.length=1;
+   						$.each(jsonObj.subData,function(i,json){
+   							categorySel.options[i+1]=new Option(json.subname,json.subid)
+   						});
+   					}
+   					
+   				}
+   				
+   				
+   			});//ajax 
+   			
+   		}//subid
         </script>
       
         
@@ -77,35 +130,34 @@ if( session.getAttribute("adminId") == null){
                                <!-- 뭐 추가하면 템플릿 양식을 깨트림;;; -->
                                <!-- 해결 </table> 바로 밑에 버튼 만들면 됨 -->
                            
-                        	<form name="nameFrm" id="nameFrm">
+                        	<form name="nameFrm" id="nameFrm" >
                            	 <div class="dataTable-top"></div>
                                 <label>상품명　</label>
                            	  	<input type="text"  name="name" class="dataTable-input" style="width: auto; display: inline-block;"> 
                                 <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
                              </form>
                               
-                        	<form name="" id="">
+                        	<form name="mainFrm" id="main" >
                            	 <div class="dataTable-top">  </div>
                                <div>
                                 <label>분류1</label>
-                                <select id="main" name="genreId" class="dataTable-selector" aria-label="Default select example">
-                       		
+                                <select id="main" name="main" class="dataTable-selector" aria-label="Default select example">
+                       			<option value="none">---분류1---<option>
                                 	<option value="m0001">강아지</option>
                                 	<option value="m0002">고양이</option>
-	                         	 
 								</select>
 								<input type="button" id="genreSearchBtn" name="genreSearchBtn" value="검색">
                                </div>
                              
                               </form>
                            
-                        	 <form name="" id="">
+                        	 <form name="subFrm" id="subFrm" >
                                 <div class="dataTable-top"></div>
                                 <label>분류2　</label>
-                                  <select name="genreId" id="sub" class="dataTable-selector" aria-label="Default select example">
-                                 <c:forEach var="s" items="${main}">
-                                	<option value="${s.subid}">${s.subname}</option>
-	                         	  </c:forEach>
+                                  <select name="sub" id="sub" class="dataTable-selector" aria-label="Default select example">
+            
+                                	<option value="none">---분류2---<option>
+	                         	 
 								  </select>
                                   <input type="button" id="statusSearchBtn" name="statusSearchBtn" value="검색">
                            		</form>
@@ -150,7 +202,7 @@ if( session.getAttribute("adminId") == null){
                                        </c:forEach> 
                                     </tbody>
                                 </table>
-                            <div><a href="admin_prddetail.do"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
+                            <div><a href="admin_prd_insert.do"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
                          </div>
                     </div>
              

@@ -1,6 +1,6 @@
 package kr.co.mpnp.admin.service;
 
-import java.sql.SQLClientInfoException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.json.simple.JSONObject;
 import kr.co.mpnp.admin.dao.AdminProductDAO;
 import kr.co.mpnp.admin.domain.AdminCategoryDomain;
 import kr.co.mpnp.admin.domain.AdminProductDomain;
+import kr.co.mpnp.admin.vo.AdminProductVO;
 
 public class AdminProductService {
 	
@@ -19,21 +20,39 @@ public class AdminProductService {
 	
 	
 	
-	//상품중분류
-	/*
-	 * public String SubCategory(String mainid){ JSONObject category = new
-	 * JSONObject(); boolean resultFlag=false;
-	 * 
-	 * try { List<AdminCategoryDomain> list= apDAO.selectCategory(mainid);
-	 * 
-	 * JSONObject jsonTemp=null; JSONArray jsonArr = new JSONArray();
-	 * }catch(SQLException e) { resultFlag=true; e.printStackTrace(); }//end Catch
-	 * 
-	 * 
-	 * return category.toJSONString(); }//SubCategory
-	 */	//상품목록
-	public List<AdminProductDomain> SearchPrdList(){
-		List<AdminProductDomain> list=apDAO.selectPrd();
+	//상품카테고리
+
+	 public String SubCategory(String mainid) throws SQLException{ 
+		 JSONObject jsonObj = new JSONObject(); 
+		 boolean resultFlag=false;
+	 
+	 List<AdminCategoryDomain> list= apDAO.selectCategory(mainid);
+	
+	 	JSONObject jsonTemp=null; 
+	 	JSONArray jsonArr = new JSONArray();
+	 //db조회결과를 JsonObject에 할당
+	 for(AdminCategoryDomain ad : list) {
+		
+		 jsonTemp = new JSONObject();
+		 //DB조회결과를 JSONObject에 할당
+		 jsonTemp.put("subname", ad.getSubname());
+		 jsonTemp.put("subid", ad.getSubid());
+		 //값을 가진 JSONObject을 JSONArray할당
+		 jsonArr.add(jsonTemp);
+	 }//end for 
+
+	 //모든조회결과를 가진 JSONArray를 JSONObject에 할당
+	 	jsonObj.put("subData", jsonArr);
+		 jsonObj.put("resultFlag", !resultFlag);
+		 jsonObj.put("main", mainid);
+	 
+	 
+	 return jsonObj.toJSONString(); 
+	 }//SubCategory
+	 //상품목록
+	public List<AdminProductDomain> SearchPrdList(AdminProductVO apVO){
+		List<AdminProductDomain> list=apDAO.selectPrd(apVO);
+		
 		
 		return list;
 	}
@@ -43,10 +62,30 @@ public class AdminProductService {
 		return ap;
 	}
 
+	//상품 추가
+	public void addProduct(AdminProductVO apVO) {
+		String prID="";
+		prID=apDAO.selectProductId();
+		apVO.setProductid(prID); //vo에 코드 저장
+		if(apVO.getProductid()!=null) {
+			apDAO.insertProduct(apVO);
+			
+		}
+		
+	
+	
+	}
+	
 	
 	public static void main(String[] args) {
-		
-
+		AdminProductService as=new AdminProductService();
+		try {
+			System.out.println(as.SubCategory("m0001"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 	
 	

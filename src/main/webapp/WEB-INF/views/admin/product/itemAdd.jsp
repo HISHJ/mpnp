@@ -26,6 +26,53 @@
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     	<script type="text/javascript">
     	
+ 		//카테고리
+   		$(function(){
+   			
+   			$("#main").change(function(){
+   				if($("select[name=main]").val()!="none"){
+   					setSub();
+   				}//end if
+   			});//change
+   		});//ready
+   		
+   		function setSub(){
+   			
+   			var data ={
+   				mainid : $("select[name=main]").val()
+   			}
+   			
+   			$.ajax({
+   				
+   				url: "admin_category.do",
+   				data : data,
+   				dataType: "json",
+   				type:"get",
+   				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+   				error : function(xhr){
+   					alert("잠시후 다시 시도해주세요")
+   					console.log("에러 : " + xhr.status);
+   				},
+   				success : function(jsonObj){
+   					if(jsonObj.resultFlag){
+   							var categorySel=document.frm.sub;
+   	   						categorySel.length=1;
+   						$.each(jsonObj.subData,function(i,json){
+   	   						
+   	   							categorySel.options[i+1]=new Option(json.subname,json.subid)
+   	   						
+   	   				
+   						});
+   					}//end if
+   					
+   				}//success
+   				
+   				
+   			});//ajax 
+   			
+   		}//subid
+    	
+    	
     	//썸네일이미지 미리보기
 		function thImgSet(input) {
 			  if (input.files && input.files[0]) {
@@ -40,12 +87,38 @@
 		}
     	
     	//추가하기버튼
-    	function addBtn() {
+
+    	
+     	function addBtn() {
+     	
+    var fileInput=document.getElementById("multiImg");
+            
+            var files=fileInput.files;
+            var file ;
+       
+            for (var i = 0; i < files.length; i++) {
+                file = files[i];
+              
+                console.log(file.name)
+     
+            
+            }
+            
+  var fileRespository =[];
+  $('input[type="file"]').on('change',function(){
+	 fileRespository.push(this.files[0]); 
+	 console.log( fileRespository )
+  });
+
+  var formData = new FormData();
+  formData.append('imgFile[]',fileRespository);
+  console.log()
     		
-    		//유효성 검증 
+    		
+     		//유효성 검증 
     		var name=$("#name").val();
 			if(name.trim()==""){ //null 아니라 ""로 처리
-				alert("공연명을 입력해주세요");
+				alert("상품명을 입력해주세요");
 				$("#name").focus();	
 				return;
 			}
@@ -67,7 +140,7 @@
 			
 			//파일은 focus 안돼서 뺌
 			var thImg=$("#thImg").val();
-			var mImg=$("#mImg").val();
+			var mImg=$("#multiImg").val();
 			var infoImg=$("#infoImg").val();
 			
 			if(thImg==""||infoImg==""){ //main이미지는 없는 것도 있으니까
@@ -75,7 +148,7 @@
 				return;
 			}
 			
-			
+		/* 	
 			//이미지 파일 확장자 제한
 			var blockExt="jpg,jpeg,png,do".split(",");
 			var flag=false;
@@ -98,17 +171,99 @@
 			if(!flag){
 				alert("※파일 형식을 다시 확인해주세요");
 				return flag;
-			}
+			} */
 			
-			
-			if(confirm("공연을 추가하시겠습니까?")){
+	
+		
+			if(confirm("상품을 추가하시겠습니까?")){
 				$("#frm").submit();
 			} 
-				
+		 
 			
-		}//addBtn
+		}//addBtn 
 		
-    	
+    
+		/*  상품이미지  */
+		//버튼 DIV 변수
+ 
+    //이미지 추가 버튼 클릭시
+    function addimg(){
+    	alert("ㅇㅇㅇ");
+    	 var addedFormDiv = document.getElementById("prdFrm");
+    var count = 0;
+    	 alert(count);
+ 	var fileTag = "<input type='file'  name='multiImg' id='multiImg'  value='파일선택'><button type='button'  onchange='addimg()''>추가</button><br/>"
+ 	if(count<3){
+    		count++
+    		alert(count);
+    		fileTag+="<input type='file'  name='multiImg' id='multiImg_'"+count+1+" value='파일선택'>"
+    		fileTag+="<button type='button'  onclick='addimg()''>추가</button>"
+    		
+ 	}else{
+ 		alert("상품이미지는 최대 3개까지 추가 가능합니다!")
+ 	}
+    		 addedFormDiv.innerHTML=fileTag;
+     
+    }
+    
+    
+    
+  /*   $(document).on("change", '#multiImg', function(event) {
+ 
+        var target = $(this)[0];
+        
+ 
+        if(target != null){
+            //------------------이미지 확장자 검사 시작--------------------------------//
+            var fileNM = $(this).val();
+ 
+            var ext = fileNM.slice(fileNM.lastIndexOf(".") + 1).toLowerCase();
+ 
+            if (!(ext == "gif" || ext == "jpg" || ext == "png")) {
+                alert("이미지파일 (.jpg, .png, .gif ) 만 업로드 가능합니다.");
+                return false;
+            }
+            //------------------이미지 확장자 검사 종료--------------------------------//
+            // 상위 요소
+            var img_div = $(this).parent();
+ 
+            var fileList = target.files ;
+        
+            // 파일리더기 생성
+            var reader = new FileReader();
+            
+            // 파일 위치 읽기
+            reader.readAsDataURL(fileList [0]);
+            
+       
+            // 이미지 파일 첨부 버튼 추가 하기
+            // 새로운 div 생성
+            var div = document.createElement('div');
+ 
+            index++;
+ 
+            // 새로운 div의 className 지정
+            div.className = 'image_div_'+index+'';
+ 
+            div.innerHTML = '<label for ="image_plus_'+index+'"></label>\<input type="file" id="multiImg_'+index+'">';
+            
+            // 추가
+            $('.image_swiper').append(div);
+ 
+            
+            // 테스트
+            //alert($(this).parent().attr('class'));
+            //alert(index);
+            //$(this).parent().attr('class')
+        }else{
+            alert("이미지 없음");
+        }
+    }); */
+
+		
+		
+		
+		
     	</script>
     
     </head>
@@ -125,7 +280,7 @@
                                     <div class="card-body">
                                        
                                        <!-- 추가안되면 close form위치 바꾸기  -->
-                                     <form id="frm" name="frm" action="show_insert.jsp">
+                                     <form id="frm" name="frm" action="admin_prdinsert_process.do" enctype="multipart/form-data">
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-4"><img id="thImgPreview" class="img-thumbnail" src="img/no_img.jpg" alt="썸네일이미지"></div>
@@ -139,18 +294,22 @@
                                         <div class="row">
                                             <div class="col-3"><b>분류1</b></div> 
                                             <div class="col-4">
-                                                <select name="genreId" class="dataTable-dropdown dataTable-selector">
-                                                <option></option>
-                                                </select>
+                                                	<select name="main" id="main" class="dataTable-dropdown dataTable-selector">
+			                                              <option value="none">---분류1---<option>
+			                                			 <option value="m0001">강아지</option>
+			                                	         <option value="m0002">고양이</option>
+												</select>
                                             </div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>분류2</b></div> 
                                             <div class="col-4">
-                                                <select name="genreId" class="dataTable-dropdown dataTable-selector">
-                                                <option></option>
-                                                </select>
+                                     
+                                                <select name="sub" id="sub" class="dataTable-dropdown dataTable-selector">
+                                                	<option value="none">---분류2---<option>
+												  </select>
+									
                                             </div>
                                         </div>
                                         <div class="dataTable-top"></div>
@@ -162,8 +321,8 @@
                                         <div class="row">
                                             <div class="col-3"><b>상품상태</b></div> 
                                             <div class="col-4">
-                                                <select name="" class="dataTable-dropdown dataTable-selector">
-                                                <option>판매중</option>
+                                                <select name="status" id="status" class="dataTable-dropdown dataTable-selector">
+                                                <option value="Y">판매중</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -174,8 +333,13 @@
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-3"><b>상품이미지</b></div> <div class="col-4">
-                                            	<input type="file"  name="multiImg" id="multiImg" multiple="multiple" value="파일선택"></div>
+                                            <div class="col-3"><b>상품이미지</b></div> 
+                                            <div class="col-4" id="prdFrm"> 
+                                       
+                                            	<input type="file"  name="multiImg" id="multiImg" value="파일선택" >
+                                            	<button type="button" value="추가"  onchange="addimg()">추가</button>
+                                            	</div>
+                                            	
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -193,10 +357,19 @@
                                         </div>
                                     </form>
                                     
+                                   	<form id="imgfrm" name="imgfrm" action="admin_prdinsert_process.do" >
+                                   		<input type="hidden" id="prdimg">
+                                   		
+                                   		
+                                   		
+             
+                                   	</form>
+                                       
+                                        
                                         
                                              <div class="mt-4 mb-0">
                                                  <div class="col text-center">
-                                                     <a class="btn btn-info btn-sm" onclick="addBtn()" >추가</a>
+                                                     <a class="btn btn-info btn-sm" onclick="addBtn()">추가</a>
                                                      <a class="btn btn-light btn-sm" onclick="history.back()">닫기</a>
                                                  </div>
                                              </div>

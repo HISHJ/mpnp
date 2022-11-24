@@ -45,59 +45,32 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
    rel="stylesheet">
    <!--버튼클릭시 카테고리 변경  -->
-		<script>
-		$(function(){
-		 $(".bt_dog").click(function(){
-			$(".bt_cat").removeClass("active"); 
-			$(".quickCat").removeClass("active")
-		 $(this).addClass("active")
-		 $(".open_dog").css('display','block');
-		 $(".open_cat").css('display','none');
-		 $(".quickDog").addClass("active");
+<!-- 		<script>
+	    $(function(){
+			 $(".bt_dog").click(function(){
+				$(".bt_cat").removeClass("active"); 
+				$(".quickCat").removeClass("active")
+			 $(this).addClass("active")
+			 $(".open_dog").css('display','block');
+			 $(".open_cat").css('display','none');
+			 $(".quickDog").addClass("active");
+			
+			 })//click
+			
+			 $(".bt_cat").click(function(){
+			 $(".bt_dog").removeClass("active"); 
+			 $(".quickDog").removeClass("active")
+			 $(this).addClass("active")
+			 $(".open_cat").css('display','block');
+			 $(".open_dog").css('display','none');
+			 $(".quickCat").addClass("active")
 		
-		 })//click
+			 })//click
+			
 		
-		 $(".bt_cat").click(function(){
-		 $(".bt_dog").removeClass("active"); 
-		 $(".quickDog").removeClass("active")
-		 $(this).addClass("active")
-		 $(".open_cat").css('display','block');
-		 $(".open_dog").css('display','none');
-		 $(".quickCat").addClass("active")
 	
-		 })//click
 		
-		
-		
-		})//
-		
-		
-		/* 카테고리 	버튼 클릭시 상품 변경 */
-		
-/* 	 $(function(){
-    	$("button").on('click',function(){
-    			var kind = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var kind로 가져와서	
-    			$.ajax({
-    				 url : './index.do', // 이 주소로 
-    	              type : "get", // 포스트 방식으로 보내는데
-    	              cache: false,
-    	              headers: {"cache-control":"no-cache", "pragma": "no-cache"},
-    	              data : {"kind" : kind}, // kind를 kind로 명명하여 보내겠다
-    	              success : function(data){ 
-    	                 console.log(data);
-    	                
-    	                 $('body').html(data); //성공할시에 body부분에 data라는 html문장들을 다 적용시키겠다
-    	              },
-    	              error : function(data){
-    	            	 alert('error');
-    	               
-    	              }//error
-    			})//ajax
-    		});//click
-    });//ready */
-		
-		
-		</script>
+		</script> -->
 
 
 
@@ -130,11 +103,7 @@
 	      prevEl: ".swiPopCont .swiper-button-prev",
 	    },
 	});
-	
-	function search(){
 
-		location.href="search_prd_list.do"
-	}
 </script>
 <style>
 	/* .has_top_banner nav.lnb>.inr{top:182px} */
@@ -228,11 +197,64 @@
 		
 		
 		<script >
+		
+		
+		
+		//중분류 이동
 			function setCateList(subid){
-				
 				location.href="prdList.do?subid="+subid
-				
 			}
+		
+		//검색
+			
+	function search(){
+		location.href="search_prd_list.do"
+	}
+		
+			/* 카테고리 	버튼 클릭시 상품 변경 */
+			
+		 	 	 $(function(){
+			    	$("button").on('click',function(){
+			    			var mainid = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var kind로 가져와서	
+			    			
+			    			console.log(mainid)
+			    			$.ajax({
+			    				 url : 'index.do', // 이 주소로 
+			    	              type : "get",
+			    	              data : {"mainid" : mainid}, 
+			    	              success : function(data){ 
+			    	                 
+			    	                 $('body').html(data); 
+			    	             	if(mainid=="m0002"){
+			    	            		
+			    	           		 $(".bt_dog").removeClass("active"); 
+			    	           		 $(".quickDog").removeClass("active")
+			    	           		 $(".bt_cat").addClass("active")
+			    	           		 $(".open_cat").css('display','block');
+			    	           		 $(".open_dog").css('display','none');
+			    	           		 $(".quickCat").addClass("active")
+			    	         
+			    	           	}else if(mainid=="m0001"){
+			    	           		$(".bt_cat").removeClass("active"); 
+			    	           		$(".quickCat").removeClass("active")
+			    	           	 $(".bt_dog").addClass("active")
+			    	           	 $(".open_dog").css('display','block');
+			    	           	 $(".open_cat").css('display','none');
+			    	           	 $(".quickDog").addClass("active");
+			    	
+			    	           	}//end if
+			    	              },
+			    	              error : function(data){
+			    	            	 alert('error');
+			    	               
+			    	              }//error
+			    			})//ajax 
+			    		});//click
+			    });//ready 
+			
+					
+					 
+				
 		
 		
 		</script>
@@ -247,9 +269,17 @@
 		<nav class="menushop">
 			<h2 class="bt bt_store">스토어</h2>
 			<div class="button_wrap">
+			
 			<button type="button" class="bt st bt_dog active" value="m0001">강아지</button>
+		
+	
 			<button type="button" class="bt st  bt_cat" value="m0002">고양이</button>
+	
 		</div>
+		<!-- 대분류 히든값  -->
+		<input type="hidden" value="m0001"/>
+		<input type="hidden" value="m0002"/>
+		
 
 				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
 								<ul class="sm">
@@ -640,21 +670,24 @@ var gogoSwiper = (function() {
 <input type="hidden" id="dispCornNo_onlyApet" value="1257">
 <input type="hidden" id="dispCornNm_onlyApet" value="오직 어펫에서만!">
 <input type="hidden" id="dispClsfCornNo_onlyApet" value="1342">
+
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
-			<button class="btn-more" ><a href="mainList.do">전체보기</a></button>
+			<button class="btn-more" ><a href="mainList.do?mainid=">전체보기</a></button>
 		</h3>
 			<div id="corner1257" class="wrap-gd-unit gd-sd gd-col-4 is-cart">
 			<div class="gd-unit swiper swiper-container-initialized swiper-container-horizontal swiper-container-multirow">
 <div class="inner swiper-wrapper" style="width: 5200px; transform: translate3d(0px, 0px, 0px);">
 
 <c:forEach var="data" items="${prdList }">
+
 	<div class="gd-item amplitudeMainData swiper-slide active" data-idx="0" data-goodsid="GI251053225" data-displayid="1257" data-displayname="오직 어펫에서만!" data-productid="GI251053225" data-productname="그르르 캣크다스 참치맛 200g" data-brandid="58" data-brandname="그르르" data-categorypath="고양이 > 간식 > 간식파우치" data-price="9000" data-discountprice="4000" data-swiper-column="0" data-swiper-row="0" style="order: 0; margin-right: 30px;">
 		<!-- NOTE: 랭킹 상품 그룹인 경우 'rank-label' 로 순위 표기 -->
+		
 				<a class="gd-link" href="prddetail.do?productid=${data.productid}">
 						<div class="gd-thumb">
-			<img class="thumb-img" src="http://localhost/mpnp/images/${data.thimg }.jpg?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+			<img class="thumb-img" src="http://localhost/mpnp/images/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 								<div class="gd-flag">
 									</div>
 								<button class="btn-favorite " data-content="GI251053225" data-url="/goods/insertWish?goodsId=GI251053225" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251053225" data-target="goods">찜하기</button>
@@ -684,7 +717,7 @@ var gogoSwiper = (function() {
 						</div>
 				</a>
 		</div>
-		</c:forEach>
+</c:forEach>	
 	
 		<div class="gd-item swiper-slide" data-swiper-column="19" data-swiper-row="1" style="-webkit-box-ordinal-group: 39; order: 39; margin-top: 30px; margin-right: 30px;">
 		</div>
@@ -760,6 +793,7 @@ if (petShopMainResult.focus.indexOf('OnlyApet') > -1) {
 });
 </script></div>
 	</section>
+		
 </div>
 			<div id="538" name="dispCorn_div" data-index="4"><!-- 배너 -->
 <section class="sect mn bannr" id="corner538">

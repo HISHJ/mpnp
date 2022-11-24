@@ -198,10 +198,12 @@ private static ProductDAO pDAO;
 		WishListVO wVO =new WishListVO();
 		wVO.setId("id002");
 		wVO.setProductid("p0001");
+		cVO.setId("id005");
+		cVO.setProductid("pr_0000017");
 	
 		//System.out.println(pDAO.checkCart(cVO));
-		//System.out.println(pDAO.insertWishList(cVO));
-		System.out.println(pDAO.deleteWishList(wVO));
+		System.out.println(pDAO.insertWishList(cVO));
+		//System.out.println(pDAO.deleteWishList(wVO));
 		 
 	
 		// System.out.println(mDAO.selectPrdList("m0001")); 

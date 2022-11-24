@@ -5,25 +5,25 @@ import java.util.List;
 
 public class AdminProductVO {
 
-	private String productid,subid,mainid,subname,mainname,name,thimg,infoimg,status;
+	private String productid,sub_id,main_id,subname,mainname,name,th_img,info_img,status;
 	private int price;
 	private List<String> prdimg;
 	private Date inputdate;
 	public AdminProductVO() {
 	
 	}
-	public AdminProductVO(String productid, String subid, String mainid, String subname, String mainname,
-			String name, String thimg, String infoimg, String status, int price, List<String> prdimg,
+	public AdminProductVO(String productid, String sub_id, String main_id, String subname, String mainname,
+			String name, String th_img, String info_img, String status, int price, List<String> prdimg,
 			Date inputdate) {
 
 		this.productid = productid;
-		this.subid = subid;
-		this.mainid = mainid;
+		this.sub_id = sub_id;
+		this.main_id = main_id;
 		this.subname = subname;
 		this.mainname = mainname;
 		this.name = name;
-		this.thimg = thimg;
-		this.infoimg = infoimg;
+		this.th_img = th_img;
+		this.info_img = info_img;
 		this.status = status;
 		this.price = price;
 		this.prdimg = prdimg;
@@ -35,17 +35,17 @@ public class AdminProductVO {
 	public void setProductid(String productid) {
 		this.productid = productid;
 	}
-	public String getSubid() {
-		return subid;
+	public String getsub_id() {
+		return sub_id;
 	}
-	public void setSubid(String subid) {
-		this.subid = subid;
+	public void setsub_id(String sub_id) {
+		this.sub_id = sub_id;
 	}
-	public String getMainid() {
-		return mainid;
+	public String getmain_id() {
+		return main_id;
 	}
-	public void setMainid(String mainid) {
-		this.mainid = mainid;
+	public void setmain_id(String main_id) {
+		this.main_id = main_id;
 	}
 	public String getSubname() {
 		return subname;
@@ -65,17 +65,17 @@ public class AdminProductVO {
 	public void setname(String name) {
 		this.name = name;
 	}
-	public String getThimg() {
-		return thimg;
+	public String getth_img() {
+		return th_img;
 	}
-	public void setThimg(String thimg) {
-		this.thimg = thimg;
+	public void setth_img(String th_img) {
+		this.th_img = th_img;
 	}
-	public String getInfoimg() {
-		return infoimg;
+	public String getinfo_img() {
+		return info_img;
 	}
-	public void setInfoimg(String infoimg) {
-		this.infoimg = infoimg;
+	public void setinfo_img(String info_img) {
+		this.info_img = info_img;
 	}
 	public String getStatus() {
 		return status;
@@ -103,9 +103,9 @@ public class AdminProductVO {
 	}
 	@Override
 	public String toString() {
-		return "AdminProductVO [productid=" + productid + ", subid=" + subid + ", mainid=" + mainid + ", subname="
-				+ subname + ", mainname=" + mainname + ", name=" + name + ", thimg=" + thimg
-				+ ", infoimg=" + infoimg + ", status=" + status + ", price=" + price + ", prdimg=" + prdimg
+		return "AdminProductVO [productid=" + productid + ", sub_id=" + sub_id + ", main_id=" + main_id + ", subname="
+				+ subname + ", mainname=" + mainname + ", name=" + name + ", th_img=" + th_img
+				+ ", info_img=" + info_img + ", status=" + status + ", price=" + price + ", prdimg=" + prdimg
 				+ ", inputdate=" + inputdate + "]";
 	}
 	
