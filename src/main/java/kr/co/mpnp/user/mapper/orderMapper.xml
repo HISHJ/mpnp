@@ -4,12 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mpnp.orderMapper">
 <!-- ProductDomain mapping -->
-<resultMap type="ProductYSBDomain" id="prdYDom">
-<result column="PRODUCTID" property="prdId"/>
-<result column="NAME" property="prdName"/>
-<result column="PRICE" property="price"/>
 
-</resultMap>
 
 <!--  Orderdomain mapping처리 -->
 <resultMap type="OrderDomain" id="orderDom">
@@ -23,6 +18,7 @@
 	<result column="discount_rate" property="discountRate"/>
 	<result column="default_flag" property="default_flag"/>
 	<result column="ship_name" property="shipName"/>
+	<result column="DESID" property="desid"/>
 	
 </resultMap>
 
@@ -48,19 +44,19 @@ WHERE (d.id = m.id) and m.id= #{id} and d.DEFAULT_FLAG='O'
 </select>
 
 <!-- 기본배송지가 있는 경우, 해당 아이디의 배송지별칭 조회 -->
-<select id="selectShipName" parameterType="String" resultType="String">
-select NAME
+<select id="selectShipName" parameterType="String" resultType="OrderShipDomain">
+select NAME shipName ,DESID
 from DESTINATION
 where id=#{id}
-
 </select>
 
 <!-- //배송지 변경 버튼 -->
 <select id="selectChangeDestination" parameterType="ShipNameVO" resultMap="orderDom">
-SELECT ZIPCODE, ADDR,ADDR_DETAIL
+SELECT ZIPCODE, ADDR,ADDR_DETAIL,DESID,name ship_name 
 FROM  DESTINATION 
-WHERE  id=#{id} and name=#{name}
+WHERE  id=#{id} and desid=#{desId} 
 </select>
+
 <!--	// 주문기본내역조회  -->
 <select id="selectOrderInfo" parameterType="String" resultMap="orderDom">
 
@@ -72,7 +68,7 @@ WHERE (  m.GRADEID = g.GRADEID) and m.ID =#{id}
 
 <!--기본배송지 조회 -->
 <select id="selectDestination" parameterType="OrderVO" resultType="OrderShipDomain">
-SELECT  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL addrDetail, d.DEFAULT_FLAG,d.NAME shipName
+SELECT  d.ZIPCODE, d.ADDR, d.ADDR_DETAIL addrDetail, d.DEFAULT_FLAG,d.NAME shipName, d.desID desid 
 FROM MEMBER m, DESTINATION d
 WHERE (d.ID = m.ID ) and m.ID =#{id} and d.DEFAULT_FLAG=#{defaultFlag}
 
@@ -87,6 +83,28 @@ WHERE PRODUCTID = #{prdId}
 
 </select>  
 
+<!--결제하기 프로세스 -->
+
+<!-- 배송지 추가 -->
+<insert id="insertShipAddr" parameterType="OrderVO">
+insert into DESTINATION(DESID, ID,  RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, DEFAULT_FLAG,NAME)
+ values(concat('des_',lpad(seq_destination.nextval,6,0)) ,#{id},#{receiver},#{receiver_phone},#{zipcode},#{addr},#{addrDetail},#{defaultFlag, jdbcType=VARCHAR},#{ship_name})
+</insert>
+
+<!-- 배송지코드 조회 -->
+<select id="searchDesId" parameterType="String" resultType="String">
+select desid
+from
+(
+   select desid, name
+   from destination
+   where id =#{id}
+   order by desid desc
+)
+where rownum=1
+</select>
+
+
 
 <!-- 주문코드 조회 -->
 <select id="selectOrderId" resultType="String" >
@@ -95,8 +113,8 @@ select concat('or_',lpad(seq_orders.nextval,7,0)) from dual
 
 <!-- 주문정보 추가 -->
 <insert id="insertOrderInfo" parameterType="OrderVO">
-insert into ORDERS(ORDERID, ID, SHIPREQ, INPUTDATE, ACTUAL_PRICE,  STATUS)
-values(#{orderId},#{id},#{shipReq},to_char(sysdate,'yyyy-mm-dd'),#{actualPrice}, '주문완료')
+insert into ORDERS(ORDERID, ID, SHIPREQ, INPUTDATE, ACTUAL_PRICE,  STATUS,DES_ID)
+values(#{orderId},#{id},#{shipReq},to_char(sysdate,'yyyy-mm-dd'),#{actualPrice}, '주문완료',#{desId})
 </insert>
 
 
@@ -110,13 +128,8 @@ insert into ORDER_DETAIL(ORDER_DETAILID, TOTALCNT, ORDERID, PRODUCTID,CARTID)
  values(concat('od_',lpad(seq_order_detail.nextval,7,0)),#{totalPrdCnt},#{orderId},#{prdId},#{cartId, jdbcType=VARCHAR})
 </insert>
 
+<!--결제하기 프로세스 -->
 
-
-<!-- 배송지 추가 -->
-<insert id="insertShipAddr" parameterType="OrderVO">
-insert into DESTINATION(DESID, ID,  RECEIVER, PHONE, ZIPCODE, ADDR, ADDR_DETAIL, DEFAULT_FLAG,NAME)
- values(concat('des_',lpad(seq_destination.nextval,6,0)) ,#{id},#{receiver},#{receiver_phone},#{zipcode},#{addr},#{addrDetail},#{defaultFlag, jdbcType=VARCHAR},#{ship_name})
-</insert>
 
 <!-- 주문완료 내역 조회 -->
 <!-- 주문완료내역 조회(여러 상품 중 하나만 나와야하니까 상품코드도 받아야 해 -->
@@ -134,12 +147,9 @@ WHERE (o.PRODUCTID = p.PRODUCTID) and o.ORDERID=#{orderId}
 </select>
 <select id="selectOrderCompleteD" parameterType="String" resultType="MyOrderDomain">
 SELECT d.RECEIVER receiver, d.ZIPCODE zipcode, d.ADDR_DETAIL addrDetail, d.ADDR addr, d.PHONE phone
-FROM  DESTINATION d, MEMBER m, ORDERS o
-WHERE (d.ID = m.ID and o.ID= m.ID) and o.ORDERID=#{orderId}
+FROM  DESTINATION d,  ORDERS o
+WHERE (o.DES_ID = d.DESID) and o.ORDERID=#{orderId}
 </select>
-
-
-
 
 <!-- 주문 후 장바구니에서 해당 상품 삭제 -->
 

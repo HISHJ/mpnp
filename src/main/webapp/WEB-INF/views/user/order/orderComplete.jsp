@@ -69,10 +69,10 @@
 						  var actualPrice = $("#order_payment_total_pay_amt").val()*1;
 						  
 				
-					  var deli_fee = 2500;
+					  var deli_fee =0;
 					 
 					  if(prdSum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-						  deli_fee = 0;
+						  deli_fee =2500;;
 					  } //end if
 				
 					  //숫자에 단위 넣기
@@ -89,7 +89,6 @@
 					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
 					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
 					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
-					//  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
 					 
 					 
 					  })//reay

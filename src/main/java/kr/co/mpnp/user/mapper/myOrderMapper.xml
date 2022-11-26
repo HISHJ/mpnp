@@ -28,11 +28,16 @@
  and #{findStartDate}< to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') < #{findEndDate} -->
 
 
-<select id="selectOrderAllList" parameterType="String" resultType="MyOrderDomain">
-SELECT o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, (p.PRICE * r.TOTALCNT) totalPrdPrice,r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId
+<select id="selectOrderAllList" parameterType="MyOrderVO" resultType="MyOrderDomain">
+
+SELECT o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, p.PRICE prdPrice,r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId
 FROM ORDERS o, PRODUCT p, ORDER_DETAIL r
 WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID ) and o.id=#{id}
-order by o.inputdate desc
+<if test="findStartDate != null and findEndDate != null">
+and #{findStartDate}  <![CDATA[< ]]> to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') <![CDATA[ < ]]>#{findEndDate}
+</if>
+
+
 </select>
 
 <!-- 임시 할인율 조회 -->
@@ -61,8 +66,8 @@ WHERE  (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID )and o.orderId=#{ord
 <!-- 주문 상세 배송지 조회 -->
 <select id="selectOrderShip" parameterType="String" resultType="MyOrderDomain">
 SELECT  d.NAME deliveryName, d.ZIPCODE zipcode, d.ADDR addr, d.ADDR_DETAIL addrDetail, d.RECEIVER receiver, d.PHONE phone
-FROM   ORDERS o,DESTINATION d,MEMBER m
-WHERE  (o.ID = m.ID and d.ID = m.ID) and o.orderId=#{orderId}
+FROM   ORDERS o,DESTINATION d
+WHERE  (o.DES_ID = d.DESID)  and o.orderId=#{orderId}
 </select>
 
 <!-- 기간 내 주문상태 조회(아이디,시작,끝)

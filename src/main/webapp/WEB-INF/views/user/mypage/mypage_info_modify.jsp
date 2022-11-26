@@ -58,11 +58,6 @@
 					flag=true;
 				}
 			}
-			
-			if(pfimg==null||pfimg==""){
-					flag=true;
-			}
-			
 			if(!flag){
 				alert("이미지파일만 넣으라구");
 				return flag;
@@ -357,8 +352,6 @@
 							<form id="myModifyFrm" action="m_info_modify_process.do" enctype="multipart/form-data" method="post" >
 								<div class="my-picture">
 									<p class="picture">
-									<%--이거쓰면 안되는듯... <input type="hidden" name="pfimg" value="${requestScope.mypage.pfimg }"> --%>
-									<input type="hidden" name="gradeid" value="${requestScope.mypage.gradeid }">
 										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="http://localhost/mpnp/upload_pf/${requestScope.mypage.pfimg }" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
 									</p>
 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
@@ -381,6 +374,12 @@
 											<input type="text"  id="name" name="name" value="${requestScope.mypage.name }" readonly  style="-webkit-text-fill-color:black;">
 												</div>
 										</li>
+										<li id="mobile-li-default">
+											<strong class="tit requied">휴대폰 번호</strong>
+											<div class="input">
+												<input type="text" id="phone" name="phone" value="${requestScope.mypage.phone }" onkeyup="PhoneNumber(this)"  maxlength="13"  style="-webkit-text-fill-color:black;">
+												</div>
+										</li>
 										 <!-- 본인인증 안내 -->
 										<li id="mobile-li-cert">
 										</li>
@@ -389,12 +388,6 @@
 											<div class="input del disabled">
 												<input type="text" id="nick" name="nick" class="valChkRequired" value="${requestScope.mypage.nick }"  maxlength ="22" placeholder="닉네임을 입력해주세요." style="-webkit-text-fill-color:black;" >
 											</div>
-										</li>
-										<li id="mobile-li-default">
-											<strong class="tit requied">휴대폰 번호</strong>
-											<div class="input">
-												<input type="text" id="phone" name="phone" value="${requestScope.mypage.phone }" onkeyup="PhoneNumber(this)"  maxlength="13"  style="-webkit-text-fill-color:black;">
-												</div>
 										</li>
 									</ul>
 								</div>

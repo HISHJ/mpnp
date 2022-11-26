@@ -105,10 +105,26 @@
         .replace(expression, ","); // 배송비
        
 		  $(".total_pri").html(total_pri); //상품 총 금액
-		  $(".dc_price").html(rate_); //할인금액
-		  $(".deli_pri").html(ship_fee);//배송비
+		  if(rate_price <0 && deli_fee <0 ){
+		  $(".dc_price").html("-" +rate_); //할인금액
+		  $(".deli_pri").html("-" +ship_fee);//배송비
+		  }else{
+			  $(".dc_price").html(rate_ ); //할인금액
+			  $(".deli_pri").html(ship_fee);//배송비
+		  }
 		  $(".act_pri").html(cn1);//총 결제금액
 		  //$("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+		  
+		 
+	
+	var price;
+	var rate;
+	var act_price
+	$(".prcs").each(function(i,element){
+	 	price = $(element).find("#prdPrice").val()*1;
+	 	rate = price.toString().replace(expression,",");
+	 	$(this).html(rate + "원");
+	})
 		  
 	
 		 

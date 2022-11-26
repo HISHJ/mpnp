@@ -234,11 +234,11 @@ li.open, div.ctset {
 					  
 					
 					  //총 결제금액 구하기
-					  var deli_fee = 2500;
+					  var deli_fee = 0;
 					  
 					   var actual_price;
 					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-						  deli_fee = 0;
+						  deli_fee = 2500;
 					  } //end if
 				
 					  actual_price = sum - rate_price -deli_fee ; 
@@ -257,8 +257,8 @@ li.open, div.ctset {
 					  $(".totalProductPrice").html(total_pri); //상품 총 금액
 					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
 					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
-					  $("#order_payment_total_pay_amt_view").html(cn1);//총 결제금액
-					  $("#order_payment_end_pay_amt_view").html(cn1);//총 결제금액
+					  $("#order_payment_total_pay_amt_view").html(total_pri);//총 결제금액
+					  $("#order_payment_end_pay_amt_view").html(total_pri);//총 결제금액
 					  
 					 $('#actualPrice').attr("value",sum);
 					 $('#discountPrice').attr("value",rate_price);
@@ -281,6 +281,12 @@ li.open, div.ctset {
 						}
 					  
 				  })
+					</script>
+					<script>
+					$(function(){
+						 
+						  var defaultFlag = $("#defaultFlag").is(":checked")?'O':'X;'
+					})
 					</script>
 
 </head>
@@ -554,7 +560,7 @@ li.open, div.ctset {
 							
 								<div class="saves">
 									<div class="pp"><label class="checkbox"><input type="checkbox" id="defaultFlag" name="defaultFlag" checked value="O">
-															<input type="hidden" name="defaultFlag" value='X'  id="input_check_hidden"/>
+														<!-- 	<input type="hidden" name="defaultFlag" value='X'  id="input_check_hidden"/> -->
 									<span class="txt"><em class="tt">기본 배송지로 설정</em></span>
 															
 									</label></div>

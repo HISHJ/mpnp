@@ -154,6 +154,9 @@
 
 <!--❤️main-->
 <main class="container lnb page my" id="container" style="margin-top:100px;">
+<input type="hidden" id="" name="">
+<input type="hidden" id="" name="">
+ 
 	<div class="inr" style="min-height: 429px;">
 		<!-- 본문 -->
 		<div class="contents" id="contents" style="min-height: 550.8px;">
@@ -168,9 +171,14 @@
 					<div class="pc-re-po01">
 						<div class="oder-step ptb_memOrderbox">
 
-							<nav class="menushop re-po01">
-								<button type="button" class="bt st">최근 3개월</button>
-								<div class="list">
+							<nav class="menushop re-po01 date_hidden" style="display:flex;">
+								<button type="button" name="schRange" class="bt st" onclick=" setThreeMonth()">최근 3개월</button>
+								<input type="hidden" name="schRange_" id="schRange_" value="1"/>
+								<button type="button" name="schRange" class="bt st" onclick="clickDate(6)">최근 6개월</button>
+								<input type="hidden" name="schRange_" id="schRange_" value="3"/>
+								<button type="button"  name="schRange" class="bt st" onclick="clickDate(0)">전체보기</button>
+								<input type="hidden" name="schRange_" id="schRange_" value="6"/>
+								<!-- <div class="list">
 									<ul class="menu">
 										<li class="active"><a href="javascript:void(0);" id="period_type_3" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(3);return false;">최근 3개월</a></li>
 										<li><a href="javascript:void(0);" id="period_type_6" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=6&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(6);return false;">최근 6개월</a></li>
@@ -178,7 +186,7 @@
 										<li><a href="javascript:void(0);" id="period_type_12" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=12&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(12);return false;">최근 12개월</a></li>
 										<li><a href="javascript:void(0);" id="period_type_0" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=0&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(0);return false;">직접 입력</a></li>
 									</ul>
-								</div>
+								</div> -->
 							</nav>
 
 							<!-- open 클래스 추가 시 open -->
@@ -360,10 +368,92 @@ function deleteTotalOrder(orID){
 	
 	$("#delAFrm").submit();
 }
+	
+
+$(function(){
+	var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+	var price;
+	var rate;
+	var act_price
+	$(".prcs").each(function(i,element){
+	 	price = $(element).find("#prd").val()*1;
+	 	rate = price.toString().replace(expression,",");
+	 	$(this).html(rate);
+	})
+})//ready
+
+</script>
+<script type="text/javascript">
+//버튼을 클릭했을 때 처음날짜 다음날짜가 js에서 가공된 후
+//히든에 넣어서 전달해야 해
+//일단 여기서는 값을 전달하지 말고 ajax로 값을 전달해야 함
+$(function(){
+	var today = new Date(); 
+
+	var year = today.getFullYear();
+	var month= ("0" + (1+today.getMonth())).slice(-2)
+	var date =("0" + today.getDate()).slice(-2);
+	var sdate = year + "-" + month + "-" + date;
+	//alert(sdate); //마지막날짜
+	
+	var lastmonth =("0" + (1+today.getMonth()-3)).slice(-2)
+	var fdate = year + "-" + lastmonth + "-" + date;
+	alert("마지막날짜"+sdate + "첫ㅉ날짜" + fdate ); //3개월 조회
+	
+	
+    $("#findStartDate").val(fdate);//값 집어넣기
+    var o = $("#findStartDate").val();
+	$("#findEndDate").val(sdate);// 값 집어넣기
+	
+
+})//end ready
+</script>
+
+<script type="text/javascript">
+function setThreeMonth(){
+	/* var data ={
+			findStartDate:$("#findEndDate").val()
+		
+	} */
+	 
+	   $.ajax({
+		  url:"order_date_process.do",
+		  data: "findStartDate=" + $("#findStartDate").val()"&findEndDate=" + $("#findEndDate").val(),
+		  dataType:"json",
+		  error:function(xhr){
+			  alert("날짜 조회 중 문제 발생");
+			  console.log("에러코드" + xhr.status + "뭐지" + xhr.state() + "흐음" + xhr.statusText);
+		  },
+		  success:function(jsonObj){
+			  if(jsonObj.resultFalg){
+				  alert("최근 3개월 조회");
+				 
+			
+				  
+			  }//if
+  
+		  }//suss
+	
+	  })//aajx 
+	  
+}
+</script>
+
+	
+
+
 
 
 </script>
-<div class=prdP">
+<!-- 날짜 전달 -->
+<form id="dateFrm" name="dateFrm" >
+<input type="hidden" name="findStartDate" id="findStartDate"/>
+<input type="hidden" name="findEndDate" id="findEndDate"/>
+</form>
+<!-- 날짜 전달 -->
+
+
+<div class=prdP>
 <input type="hidden" id="prdPrice" name="prdPrice" >
 </div>
   <form id="hidFrm" name="hidFrm" action="order_detail_form.do">
@@ -375,6 +465,7 @@ function deleteTotalOrder(orID){
 	    <form id="delDFrm" name="delDFrm" action="order_can_process.do">
 	    <input type="hidden" id="orDetailId" name="orDetailId">
 	  </form>
+	  
   <c:forEach  items="${list}" var="list">
   <div class="hidden_div">
   <input type="hidden" id="status" name="status" value="${list.status}" /> 
@@ -387,18 +478,18 @@ function deleteTotalOrder(orID){
 			<div class="top">
 				<div class="tit">
 					<p class="data">${list.inputDateS }</p>
-					<a href="javascript:void(0);" class="detail-btn" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="goOrderDetail('${list.orderId}')">주문상세 </a>
+					<a href="javascript:void(0);" class="detail-btn" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="goOrderDetail('${list.orderId}')">주문상세 &gt; </a>
 				</div>
 				<!-- 주문 취소 가능 여부 eq Y -->
 					<%-- <a href="order_totalCan_process.do?orderId=${list.orderId}" class="btn sm" data-content="C202210301001496" data-url="/mypage/order/indexCancelRequest" onclick="deleteTotalOrder('${list.orderId}')">전체주문취소</a> --%>
-					<a href="javascript:void(0);" class="btn sm" onClick="canTotalOrder('${list.orderId}','${list.status}')" >주문코드 ${list.orderId} 전체주문취소</a>
+					<a href="javascript:void(0);" class="btn sm orderCode" onClick="canTotalOrder('${list.orderId}','${list.status}')" >주문코드 ${list.orderId} 전체주문취소</a>
 
 						</div>
 		</div>
 					<div class="item-list">
 							<div class="bottom">
 								<div class="t-box">
-										<p class="tit t3" data-target="">
+										<p class="tit t3 orderstatus" data-target="">
 													${list.status}</p>
 										
 								</div>
@@ -423,8 +514,8 @@ function deleteTotalOrder(orID){
 															${list.totalCnt} 개
 															</div>
 														<div class="prcs">
-															<span class="prc"><em class="p prdPri">${list.totalPrdPrice}</em><i class="w">원</i></span>
-															<input type="hidden" id="prd" name="prd" value="${list.totalPrdPrice}"/>
+															<span class="prc"><em class="p prdPri">${list.prdPrice}</em><i class="w">원</i></span>
+															<input type="hidden" id="prd" name="prd" value="${list.prdPrice}"/>
 																</div>
 													</div>
 												</div>

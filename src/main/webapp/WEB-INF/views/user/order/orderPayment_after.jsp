@@ -397,8 +397,8 @@ li.open, div.ctset {
 											</div>
  											<script type="text/javascript">
  											 $(function(){
- 												 $("#shipName").change(function(){
- 													 if($("#shipName").val() != "none"){
+ 												 $("#desid").change(function(){
+ 													 if($("#desid").val() != "none"){
  													setChangeAddr();
  												 }//end if
  												 });//change
@@ -406,11 +406,16 @@ li.open, div.ctset {
  											 })//ready
  											
 											  function setChangeAddr(){
+ 												var data ={
+ 														desid :$("#desid").val()
+ 													
+ 												}
+ 												 console.log(data) 
  												 
  												 
 												 $.ajax({
 													 url:"order_ship_addr.do",
-													 data: "shipName="+$("#shipName").val(),
+													 data: "desid="+$("#desid").val(),
 													 dataType:"json",
 													 error:function(xhr){
 														 alert("배송지 조회 중 문제가 발생하였습니다");
@@ -423,28 +428,30 @@ li.open, div.ctset {
 															  var addrName = document.getElementById("dlvraGbNmEm");
 															  var addr = document.getElementById("changeAddr");
 															  
-															  addrName.innerHTML = jsonObj.name;
-															  addr.innerHTML = "[ "+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail;
-															 }
+															  $(".dftDelivery").html("배송지");
+															  addrName.innerHTML = jsonObj.shipname;
+															  addr.innerHTML = "["+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail +  jsonObj.desID ;
+															 $("#desId").val( jsonObj.desID);
+														 }
 														 }//end if
 												 })
 											 }
 											</script>  
-									
-											<form id="shipFrm" name="shipFrm" >
+											<input type="hidden" id="desId" name="desId" value="${osDom.desid}"/>
 											<div class="adrs" id="changeAddr" name="changeAddr">
-												[${osDom.zipcode}] ${osDom.addr}, ${osDom.addrDetail}</div>
+												[${osDom.zipcode}] ${osDom.addr}, ${osDom.addrDetail},
+												</div>
 											
 											<!-- <div class="bts"><a href="javascript:;" onclick="orderDlvra.addressListPop();" data-content="layerAlert" data-url="/order/popupAddressList" class="btn c sm btnDeMod">배송지 변경</a></div> -->
 											<div class="bts">
-												<select style="padding:10px;color: #666666;border:1px soid #666;border-radius:3px;" name="shipName" id="shipName">
+												<select style="padding:10px;color: #666666;border:1px soid #666;border-radius:3px;" name="desid" id="desid">
 												<option value="none">배송지변경</option>
 												<c:forEach items='${list}' var="dname" >
-												 <option>${dname}</option>
+												 <option value="${dname.desid}">${dname.shipName}
+												 </option>
 												 </c:forEach>
 												</select>
 											</div>
-										</form>
 										</div>
 											<div class="adrreq">
 									<div class="tit">배송 요청사항</div>
