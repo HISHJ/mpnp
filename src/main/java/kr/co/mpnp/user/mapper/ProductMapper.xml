@@ -26,12 +26,15 @@
 
 <!-- 상품 중분류 리스트 코드 -->
 <select id="selectprdList" resultMap="prdResult" 
-parameterType="String">
+parameterType="productVO">
 
-select p.name,p.price,p.th_img,p.productid,round(nvl(avg(r.star_score),0),1) staravg , nvl(count(r.reviewid),0) reviewcnt
+select p.sub_id, p.name,p.price,p.th_img,p.productid,round(nvl(avg(r.star_score),0),1) staravg , nvl(count(r.reviewid),0) reviewcnt
 from product p,order_detail o,review r
-where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.sub_id=#{p.sub_id}
-group by p.name,p.price,p.th_img,p.productid
+where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.sub_id=#{sub_id}
+group by p.sub_id, p.name,p.price,p.th_img,p.productid
+offset (#{pageFlag}-1) *8 rows
+fetch next 8 rows only
+
 
 </select>
 
@@ -42,14 +45,21 @@ group by p.name,p.price,p.th_img,p.productid
 
 select p.name,p.price,p.th_img,p.info_img,p.status,p.productid,round(nvl(avg(r.star_score),0),1) staravg , nvl(count(r.reviewid),0) reviewcnt
 from product p,order_detail o,review r
-where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.productid=#{p.productid}
+where p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and p.productid=#{productid}
 group by p.name,p.price,p.th_img,p.productid,p.info_img,p.status
 	
 </select>
 
 
+<!--상품이미지 조회 -->
+<select id="selectImg"  resultType="ProductDomain" parameterType="String">
+select product_imgid,productid,product_img prdimg
+from product_img
+where productid=#{productid}
+</select>
+
 <!-- 상품 총 갯수  -->
-<select id="selectprdCnt" resultType="int" parameterType="String">
+<select id="selectprdCnt" resultType="int" parameterType="productVO">
 select count(*) from product where sub_id=#{sub_id}
 
 </select>

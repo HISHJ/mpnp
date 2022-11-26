@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.SearchDomain;
+import kr.co.mpnp.user.vo.SearchVO;
 
 public class SearchDAO {
 	
@@ -25,7 +26,7 @@ private static SearchDAO searchDAO;
 	
 	
 	//검색결과
-	public List<SearchDomain> selectProduct(String productname){
+	public List<SearchDomain> selectProduct(SearchVO sVO){
 		List<SearchDomain> list=null;
 		MyBatisHandler mbh= MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
@@ -33,7 +34,7 @@ private static SearchDAO searchDAO;
 		
 		try {
 			
-			list=ss.selectList("kr.co.mpnp.user.mapper.SearchMapper.searchPrd",productname);
+			list=ss.selectList("kr.co.mpnp.user.mapper.SearchMapper.searchPrd",sVO);
 			ss.commit();
 			
 		}catch(PersistenceException pe) {
@@ -48,7 +49,7 @@ private static SearchDAO searchDAO;
 	}
 	
 	//검색결과 총 개수
-	public int selectTotalCnt(String productname) {
+	public int selectTotalCnt(SearchVO sVO) {
 		int cnt=0;
 		
 		//1.MyBatisHandler얻기
@@ -57,7 +58,7 @@ private static SearchDAO searchDAO;
 
 		try {
 		//2.쿼리문 실행
-		cnt=ss.selectOne("kr.co.mpnp.user.mapper.SearchMapper.selectTotalCnt", productname);
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.SearchMapper.selectTotalCnt", sVO);
 		
 		}catch(PersistenceException pe) {
 		pe.printStackTrace();
@@ -101,10 +102,11 @@ private static SearchDAO searchDAO;
 	public static void main(String[] args) {
 		
 		SearchDAO shDAO= new SearchDAO();
-		
-		 System.out.println(shDAO.selectBestFive());
-		 System.out.println(shDAO.selectProduct("도"));
-		 System.out.println(shDAO.selectTotalCnt("도"));
+		SearchVO sVO =new SearchVO();
+		sVO.setName("g");
+		System.out.println(shDAO.selectTotalCnt(sVO));
+		 System.out.println(shDAO.selectProduct(sVO));
+		 
 		 
 		
 		

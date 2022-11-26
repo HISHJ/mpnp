@@ -193,8 +193,18 @@
                   <div class="swiper-container swiper-container-initialized swiper-container-vertical">
                     <ul class="swiper-wrapper slide" style="transform: translate3d(0px, 0px, 0px);">
                       <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
-                        <a href="javascript:" class="box"><span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                        <a href="javascript:" class="box"><span class="pic">
+                        <img class="img" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
                       </li>
+                      <c:if test="${not empty prdImg }">
+                     
+                      <c:forEach var="Img" items="${prdImg }">
+                      <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
+                        <a href="javascript:" class="box"><span class="pic">
+                        <img class="img" src="http://localhost/mpnp/images/${Img.prdimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                      </li>
+                     </c:forEach>
+                    </c:if> 
                       </ul>
                   <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                 </div>
@@ -594,7 +604,7 @@
               <!-- 수정/삭제 메뉴 -->
               <!-- 로그 후기 -->
               
-                  <nav class="uidropmu dmenu">
+                <!--   <nav class="uidropmu dmenu">
                     <button type="button" class="bt st gb" name="menuBtn">	<span class="material-symbols-outlined">
 									expand_more
 									</span></button>
@@ -603,14 +613,16 @@
                         <li><button type="button" class="bt bt_warn" >신고</button></li>	
                         </ul>
                     </div>
-                  </nav>
+                  </nav> -->
                   <!-- // 로그 후기 -->
                 <!-- // 수정/삭제 메뉴 -->
             </div>
             
             	<!-- 사용자 아이디 -->
 				<div class="spec">
+				<!-- 아이디 fn:replace substring로 생략하기 -->
 					<em class="b">${rev.id }</em>
+               
 					
 					</div>
             </div>
@@ -631,12 +643,15 @@
               <!-- 로그후기 일 경우 -->
                 <ul class="swiper-wrapper pics" style="transform: translate3d(0px, 0px, 0px);">
                   <!-- 이미지가 여러개일 경우 -->
+                 <c:if test="${not empty rev.review_img }"> 
+              <c:forTokens items="${rev.review_img }" delims = "," var="Img">
+       
                       <li class="swiper-slide swiper-slide-active" style="margin-right: 8px;">
-                          <a href="javascript:;" class="pic"><img class="img" name="plgImgList" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/log/956687/0becb354-3bc8-4c11-a548-95c2830eea6b.jpg?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4" alt="첨부이미지" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'"></a>
+                          <a href="javascript:;" class="pic">
+                          <img class="img" name="plgImgList" src="http://localhost/mpnp/upload/product/${Img}?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4" alt="첨부이미지" onerror=" http://localhost/mpnp/images/${img.review_img }?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4"></a>
                         </li>
-                      <li class="swiper-slide swiper-slide-next" style="margin-right: 8px;">
-                          <a href="javascript:;" class="pic"><img class="img" name="plgImgList" src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/log/956687/9666f3fd-3f6f-48d6-b061-6e1b237a4e60.jpg?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4" alt="첨부이미지" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'"></a>
-                        </li>
+                           </c:forTokens>
+                      </c:if>
                       </ul>
               <!-- // 로그후기 일 경우 -->
               <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
@@ -690,7 +705,7 @@
   </script>
   </ul>
  </c:forEach>   
- <c:if test="${empty result }">
+ <c:if test="${empty review }">
            <!-- 😎등록된 후기가 없는 경우 -->
           <div class="nodata" id="commentNodata" >등록된 후기가 없습니다.</div>
       </c:if>  
@@ -835,7 +850,7 @@ function count(type)  {
       <div class="pdinfo">
         <div class="box">
   <!-- 				직사각형을 정사각형으로 변경함. frontConstants.IMG_OPT_QRY_210 >>>> frontConstants.IMG_OPT_QRY_756 -->
-          <span class="pic"><img class="img" src="http://localhost/mpnp/images/${data.thimg }?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt=""></span>
+          <span class="pic"><img class="img" src="http://localhost/mpnp/upload/product/${data.thimg }?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt=""></span>
           <div class="disc">
             <div class="names">${data.productname }</div>
             <div class="price">
@@ -859,7 +874,7 @@ function count(type)  {
                 <button type="button" class="bt btCart" id="addCart_btn"><span class="t">장바구니</span></button>
               <!-- 판매가능 -->
                 <!-- 판매가능 -->
-                    <button type="button" class="bt btOrde" id="addBuy_btn"><span class="t">구매하기</span></button>
+                    <button type="button" class="bt btOrde" id="tempBtn"><span class="t">구매하기</span></button>
                     </div>
       </div>
     </div>
@@ -914,8 +929,12 @@ function count(type)  {
 	  
 	  
   });//addCart
-</script>
-<script>
+	
+  
+  
+  
+  
+  
   
 	$("#goodsWish").click(function(){
 	
@@ -935,14 +954,13 @@ function count(type)  {
   			data : data,
   			success : function(result){
   				 if(result==1){
-  					 
 	  					alert("찜리스트에 추가되었습니다.");
 	  					$(".btZZim").addClass("on");
-	  					
 				  }else if(result==-1){
 					  alert("로그인 후에 사용해주세요.");
-				  }else if(result==2){
-					  alert("이미 추가되었습니다") ;
+				  }else if(result==0){
+					  alert("찜에서 삭제되었습니다.") ;
+					  $(".btZZim").removeClass("on");
 				  }
 				  
   				 console.log(result);
@@ -959,10 +977,7 @@ function count(type)  {
 	});//add
 	  
   
-    
-  
 
-	 
   </script>
   <script type="text/template" id="relatedGoodsDetailWrap">
     <div class="commentBoxAp type01 handHead popconTingBox pop-relation-box uiPdOrdPan ton tabMode bodylock" style="bottom:-100%;" data-priceh="60%" id="goodsRelatedBottomSheet">

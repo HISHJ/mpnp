@@ -20,7 +20,7 @@ public class AdminProductService {
 	
 	
 	
-	//상품카테고리
+	//상품카테고리 : json
 
 	 public String SubCategory(String mainid) throws SQLException{ 
 		 JSONObject jsonObj = new JSONObject(); 
@@ -49,11 +49,20 @@ public class AdminProductService {
 	 
 	 return jsonObj.toJSONString(); 
 	 }//SubCategory
+	 
+	 //상품카테고리 : 
+	 public List<AdminCategoryDomain> searchCategory2(String mainid){
+		 
+		 List<AdminCategoryDomain> list= apDAO.selectCategory(mainid);
+		 
+		 return list;
+	 }
+	 
 	 //상품목록
 	public List<AdminProductDomain> SearchPrdList(AdminProductVO apVO){
 		List<AdminProductDomain> list=apDAO.selectPrd(apVO);
 		
-		
+		System.out.println(list);
 		return list;
 	}
 	//상품상세보기
@@ -61,11 +70,23 @@ public class AdminProductService {
 		AdminProductDomain ap =apDAO.selectPrdDetail(productid);
 		return ap;
 	}
+	
+	//상품이미지
+	public List<AdminProductDomain> searchPrdImg(String productid){
+		
+		List<AdminProductDomain> list= apDAO.selectPrdImg(productid);
+	
+		
+		return list;
+		
+	}
 
 	//상품 추가
 	public void addProduct(AdminProductVO apVO) {
 		String prID="";
+	
 		prID=apDAO.selectProductId();
+		
 		apVO.setProductid(prID); //vo에 코드 저장
 		if(apVO.getProductid()!=null) {
 			apDAO.insertProduct(apVO);
@@ -74,9 +95,15 @@ public class AdminProductService {
 		
 	
 	
+	}//addProduct
+	
+	public void modifyProduct(AdminProductVO apVO) {
+		apDAO.updateProduct(apVO);
+		
 	}
 	
-	
+	//상품이미지
+
 	public static void main(String[] args) {
 		AdminProductService as=new AdminProductService();
 		try {

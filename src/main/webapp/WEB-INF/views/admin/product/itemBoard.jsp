@@ -22,7 +22,7 @@ if( session.getAttribute("adminId") == null){
         <meta name="author" content="" />
         <title>상품관리-메인</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <!--제이쿼리-->
@@ -33,7 +33,7 @@ if( session.getAttribute("adminId") == null){
     		
 			//추가버튼 클릭
 	    	$("#addBtn").click(function(){
-				location.href = "showAdd.jsp"; //안가는데 ? 제이쿼리 js 안받아서 그랬던것
+				location.href = "admin_prdList.do"; //안가는데 ? 제이쿼리 js 안받아서 그랬던것
 			});
     	
 			//공연명 검색
@@ -43,12 +43,13 @@ if( session.getAttribute("adminId") == null){
 			
 	    	//장르 검색
 	    	$("#genreSearchBtn").click(function() {
-	    		$("#genreFrm").submit();
+	    	
+	    		$("#mainFrm").submit();
 			});
 			
 	    	//상태 검색
 	    	$("#statusSearchBtn").click(function() {
-	    		$("#statusFrm").submit();
+	    		$("#subFrm").submit();
 	    	});
 	    	
    		});//ready
@@ -75,7 +76,7 @@ if( session.getAttribute("adminId") == null){
    		function setSub(){
    			
    			var data ={
-   				mainid : $("select[name=main]").val()
+   				mainid : $("select[name=main_id]").val()
    			}
    			
    			$.ajax({
@@ -92,12 +93,15 @@ if( session.getAttribute("adminId") == null){
    				},
    				success : function(jsonObj){
    					if(jsonObj.resultFlag){
-   						var categorySel=document.subFrm.sub;
+   						var categorySel=document.subFrm.sub_id;
    						
    						categorySel.length=1;
    						$.each(jsonObj.subData,function(i,json){
    							categorySel.options[i+1]=new Option(json.subname,json.subid)
+   							
    						});
+   						
+   						console.log(Option)
    					}
    					
    				}
@@ -137,11 +141,11 @@ if( session.getAttribute("adminId") == null){
                                 <input type="button" id="nameSearchBtn" name="nameSearchBtn" value="검색">
                              </form>
                               
-                        	<form name="mainFrm" id="main" >
+                        	<form name="mainFrm" id="mainFrm" >
                            	 <div class="dataTable-top">  </div>
                                <div>
                                 <label>분류1</label>
-                                <select id="main" name="main" class="dataTable-selector" aria-label="Default select example">
+                                <select id="main" name="main_id" class="dataTable-selector" aria-label="Default select example">
                        			<option value="none">---분류1---<option>
                                 	<option value="m0001">강아지</option>
                                 	<option value="m0002">고양이</option>
@@ -154,14 +158,15 @@ if( session.getAttribute("adminId") == null){
                         	 <form name="subFrm" id="subFrm" >
                                 <div class="dataTable-top"></div>
                                 <label>분류2　</label>
-                                  <select name="sub" id="sub" class="dataTable-selector" aria-label="Default select example">
+                                  <select name="sub_id" id="sub" class="dataTable-selector" aria-label="Default select example">
             
                                 	<option value="none">---분류2---<option>
 	                         	 
 								  </select>
                                   <input type="button" id="statusSearchBtn" name="statusSearchBtn" value="검색">
                            		</form>
-                              <a href="http://localhost/group2_prj/admin/showBoard.jsp"><button id="addBtn" type="button" class="btn btn-outline-info float-end mx-md-4" >전체보기</button></a>
+                              <a href="admin_prdList.do">
+                              <button id="addBtn" type="button" class="btn btn-outline-info float-end mx-md-4" >전체보기</button></a>
                            	 </div>
                            </div>
                             
@@ -193,19 +198,23 @@ if( session.getAttribute("adminId") == null){
                                     <c:forEach items="${product}" var="product">
                                    		<tr>
                                             <td>${product.productid }</td>
-                                            <td>${product.mainname }</td>
-                                            <td>${product.subname }</td>
+                                            <td>${product.mainname }
+                                             	<input type="hidden" value="${product.mainid }"/></td>
+                                          
+                                            <td>${product.subname }
+                                              <input type="hidden" value="${product.subid }"/></td>
+                                          
                                             <td>${product.productname }</td>
                                             <td><fmt:formatNumber value="${product.price}" pattern="#,###"/>원</td>                                          
                                             <td><a href="admin_prddetail.do?productid=${product.productid }"><input type="button" value="상세보기" ></a></td> 
                                         </tr>
+				        
                                        </c:forEach> 
                                     </tbody>
                                 </table>
                             <div><a href="admin_prd_insert.do"><button type="button" id="addBtn" class="btn btn-info">상품추가</button></a></div>
                          </div>
                     </div>
-             
                 <!--  -->
                 
            <footer class="py-4 bg-light mt-auto">
@@ -217,10 +226,10 @@ if( session.getAttribute("adminId") == null){
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="http://localhost/mpnp/3rdAdmin/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
+        <script src="http://localhost/mpnp/3rdAdmin/js/datatables-simple-demo.js"></script>
     </body>
 </html>
  

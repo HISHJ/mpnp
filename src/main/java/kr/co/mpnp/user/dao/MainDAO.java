@@ -50,6 +50,7 @@ public class MainDAO {
 		return list;
 	}
 	
+	//»óÇ° ÃÑ °¹¼ö
 	public int selectprdCnt(String mainid) {
 		int cnt=0;
 		
@@ -75,7 +76,7 @@ public class MainDAO {
 		// mDAO.selectProductList("m0001"); 
 		 
 	
-		//System.out.println(mDAO.selectPrdList("m0001")); 
+		System.out.println(mDAO.selectPrdList("m0001")); 
 		System.out.println(mDAO.selectprdCnt("m0001")); 
 		/*
 		 * System.out.println(mDAO.selectStar("pr_0000017"));

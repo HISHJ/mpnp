@@ -7,32 +7,28 @@ public class ProductVO {
 
 
 
-private String id,productid,productname,thimg,status,subid,subname,mainid,mainname;
-private int price,totalcount,totalpage,currentpage,startnum,endnum,pagescale;
+private String id,productid,productname,thimg,status,sub_id,subname,mainid,mainname;
+private int price,totalcount,pageFlag=1;
 private Date cartdate, wishdate;
 public ProductVO() {
 	
 }
-public ProductVO(String id, String productid, String productname, String thimg, String status, String subid,
-		String subname, String mainid, String mainname, int price, int totalcount, int totalpage, int currentpage,
-		int startnum, int endnum, int pagescale, Date cartdate, Date wishdate) {
-	
+public ProductVO(String id, String productid, String productname, String thimg, String status, String sub_id,
+		String subname, String mainid, String mainname, int price, int totalcount, int pageFlag, Date cartdate,
+		Date wishdate) {
+
 	this.id = id;
 	this.productid = productid;
 	this.productname = productname;
 	this.thimg = thimg;
 	this.status = status;
-	this.subid = subid;
+	this.sub_id = sub_id;
 	this.subname = subname;
 	this.mainid = mainid;
 	this.mainname = mainname;
 	this.price = price;
 	this.totalcount = totalcount;
-	this.totalpage = totalpage;
-	this.currentpage = currentpage;
-	this.startnum = startnum;
-	this.endnum = endnum;
-	this.pagescale = pagescale;
+	this.pageFlag = pageFlag;
 	this.cartdate = cartdate;
 	this.wishdate = wishdate;
 }
@@ -66,11 +62,11 @@ public String getStatus() {
 public void setStatus(String status) {
 	this.status = status;
 }
-public String getSubid() {
-	return subid;
+public String getsub_id() {
+	return sub_id;
 }
-public void setSubid(String subid) {
-	this.subid = subid;
+public void setsub_id(String sub_id) {
+	this.sub_id = sub_id;
 }
 public String getSubname() {
 	return subname;
@@ -102,35 +98,11 @@ public int getTotalcount() {
 public void setTotalcount(int totalcount) {
 	this.totalcount = totalcount;
 }
-public int getTotalpage() {
-	return totalpage;
+public int getPageFlag() {
+	return pageFlag;
 }
-public void setTotalpage(int totalpage) {
-	this.totalpage = totalpage;
-}
-public int getCurrentpage() {
-	return currentpage;
-}
-public void setCurrentpage(int currentpage) {
-	this.currentpage = currentpage;
-}
-public int getStartnum() {
-	return startnum;
-}
-public void setStartnum(int startnum) {
-	this.startnum = startnum;
-}
-public int getEndnum() {
-	return endnum;
-}
-public void setEndnum(int endnum) {
-	this.endnum = endnum;
-}
-public int getPagescale() {
-	return pagescale;
-}
-public void setPagescale(int pagescale) {
-	this.pagescale = pagescale;
+public void setPageFlag(int pageFlag) {
+	this.pageFlag = pageFlag;
 }
 public Date getCartdate() {
 	return cartdate;
@@ -147,11 +119,11 @@ public void setWishdate(Date wishdate) {
 @Override
 public String toString() {
 	return "ProductVO [id=" + id + ", productid=" + productid + ", productname=" + productname + ", thimg=" + thimg
-			+ ", status=" + status + ", subid=" + subid + ", subname=" + subname + ", mainid=" + mainid + ", mainname="
-			+ mainname + ", price=" + price + ", totalcount=" + totalcount + ", totalpage=" + totalpage
-			+ ", currentpage=" + currentpage + ", startnum=" + startnum + ", endnum=" + endnum + ", pagescale="
-			+ pagescale + ", cartdate=" + cartdate + ", wishdate=" + wishdate + "]";
+			+ ", status=" + status + ", sub_id=" + sub_id + ", subname=" + subname + ", mainid=" + mainid + ", mainname="
+			+ mainname + ", price=" + price + ", totalcount=" + totalcount + ", pageFlag=" + pageFlag + ", cartdate="
+			+ cartdate + ", wishdate=" + wishdate + "]";
 }
+
 
 
 

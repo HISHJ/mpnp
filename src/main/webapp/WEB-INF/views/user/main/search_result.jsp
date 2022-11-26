@@ -104,7 +104,7 @@
 								<form action="search_prd_list.do" method="get">
 								<div class="form " style="margin-right:70px !important;width:900px !important; ">
 									<div class="input del kwd">
-									<input id="srchWord" name="productname"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
+									<input id="srchWord" name="name"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
 									<button type="submit" class="btnSch">검색</button>
 								</div>
 									</form>
@@ -144,6 +144,15 @@ var check = ($('link[href *= "style.mo.css"]').length) ? true : false;
 var searchLastView;
 var hitKeyword;
 var swiper3;
+
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#hidFrm").submit();
+}
+
+
+
 </script>
 <!-- 검색 페이지 -->
 <div class="contents" id="contents">
@@ -161,7 +170,7 @@ var swiper3;
 		 <section class="search_last_view" id="rcntSearchArea" style="margin-top:-5px" >	<!-- one_line 은 각 구좌별 고유 class명이 들어갑니다 -->
 				<div class="hdts">
 					<a class="hdt" href="/mypage/indexRecentViews">
-						<span class="tit"> 검색결과 (${cnt }건)</span>
+						<span class="tit"> 검색결과 (${totalData }건)</span>
 					</a>
 				</div>
 				<div id="tmpPrd01" class="wrap-gd-unit gd-sd gd-col-2">
@@ -175,7 +184,7 @@ var swiper3;
 							<div class="gd-item amplitudeMainData airbridge swiper-slide active" data-idx="0" data-index="1" data-goodsid="GS251062051" data-displayid="" data-displayname="" data-productid="GS251062051" data-productname="[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)" data-brandid="" data-brandname="" data-categorypath="" data-price="9000" data-discountprice="3400" data-petgbcd="" style="margin-right: 10px;">
 		<a class="gd-link" href="prddetail.do?productid=${result.productid}" data-dispcornno="" data-disptype="commonSearchHist" data-idx="0" data-content="GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
 			 <div class="gd-thumb">
-				<img class="thumb-img" src="http://localhost/mpnp/images/${result.thimg}.jpg?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+				<img class="thumb-img" src="http://localhost/mpnp/images/${result.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 				<div class="gd-flag">
 					</div>
 				<!-- <button class="btn-favorite " data-content="GS251062051" data-url="/goods/insertWish?goodsId=GS251062051" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GS251062051" data-target="goods">찜하기</button>
@@ -196,8 +205,30 @@ var swiper3;
 				</div>
 		</a>
 	</div>
-	
-</c:forEach>  
+		</c:forEach> 
+ 
+	<div class="page">
+		<c:if test="${ not empty result  }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+
+ 	<form name="hidFrm" id="hidFrm" action="search_prd_list.do">
+	<input type="hidden" id="name" name="name" value="${param.name}">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
+	</form> 
+
+
 <div class="gd-item swiper-slide" style="margin-right: 10px;">
 			</div>
 		</div> 

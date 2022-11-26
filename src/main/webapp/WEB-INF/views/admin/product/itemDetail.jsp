@@ -13,7 +13,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>상품관리-상품상세내역</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         <style type="text/css">
         
         body{background-color : #fff;}
@@ -23,6 +23,70 @@
         <!--제이쿼리-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript">
+      //카테고리
+      	 firstScreen=true;
+   		$(function(){
+   			
+   			
+   	
+   			
+   			$("#main").change(function(){
+   				if($("select[name=main_id]").val()!="none"){
+   					setSub();
+   				}//end if
+   			});//change
+   		});//ready
+   		
+   		function setSub(){
+   			
+   			var data ={
+   				mainid : $("select[name=main_id]").val()
+   			}
+   			console.log(data)
+   			
+   			$.ajax({
+   				
+   				url: "admin_category.do",
+   				data : data,
+   				dataType: "json",
+   				type:"get",
+   				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+   				error : function(xhr){
+   					alert("잠시후 다시 시도해주세요")
+   					console.log("에러 : " + xhr.status);
+   				},
+   				success : function(jsonObj){
+   					if(jsonObj.resultFlag){
+   			
+   						
+   						var categorySel=document.frm.sub_id;
+   	   					categorySel.length=1;
+   						$.each(jsonObj.subData,function(i,json){
+   								
+   	   					categorySel.options[i+1]=new Option(json.subname,json.subid)
+   						}); 		
+   	   				
+   						if(firstScreen){
+   						$("#sub").val("${data.subid}").prop("selected",true);
+   							 firstScreen=false;
+   						}		
+   					
+   								
+   					}//end if
+   					
+   	   						
+   				}//success
+   				
+   				
+   			});//ajax 
+   			
+   		}//subid
+    	
+   
+    
+
+        
+        
        
         //썸네일이미지 미리보기 
 		function thImgSet(input) {
@@ -37,6 +101,8 @@
 			  }
 		}
 		
+
+   		
 		
         /* add page랑 유효성검증 완전 같지 않음. 추후 수정할 때 주의 */
         $(function() {
@@ -55,11 +121,15 @@
 			});
 			
 			
-        	$("#modifyBtn").click(function() {
+        	$("#modifyBtn").click(function(){
+        		
+       		var productid=$("#productid").val();
+        		
+        		
         		//유효성 검증 
         		var name=$("#name").val();
     			if(name.trim()==""){ //null 아니라 ""로 처리
-    				alert("공연명을 입력해주세요");
+    				alert("상품명을 입력해주세요");
     				$("#name").focus();	
     				return;
     			}
@@ -80,15 +150,22 @@
     			
             	//파일은 focus 안돼서 뺌
     			var thImg=$("#thImg").val();
-    			var mImg=$("#mImg").val();
+    		
     			var infoImg=$("#infoImg").val();
     			
     			if(thImg==""||infoImg==""){ //main이미지는 없는 것도 있으니까
     				alert("업로드할 파일을 선택해주세요");
     				return;
     			}
+    			
+    			var status=$("#status").val();
+    			if(status.trim()==""){ //null 아니라 ""로 처리
+    				alert("상태를 입력해주세요");
+    			
+    				return;
+    			}
             	
-    			//이미지 파일 확장자 제한
+    	/* 		//이미지 파일 확장자 제한
     			var blockExt="jpg,jpeg,png,do".split(",");
     			var flag=false;
     			
@@ -110,13 +187,35 @@
     			if(!flag){
     				alert("※파일 형식을 다시 확인해주세요");
     				return flag;
-    			}
+    			} */
     			
-        		if(confirm("공연을 수정하시겠습니까?")){
-        			$("#updateFrm").submit();
+        		if(confirm("상품을 수정하시겠습니까?")){
+        		
+        			
+        			var form=document.getElementById('frm')
+        			var formData = new FormData(form);
+        	
+        		$.ajax({
+        			url:"admin_prd_modify.do",
+        			type : "POST",
+        			data : formData,
+        			enctype:'multipart/form-data',
+        			processData: false,
+  	               contentType: false,
+        			
+        		
+        			 success: function (result) {
+        		    		alert("상품이 변경되었습니다.")
+        		    		
+        		            },error : function(xhr){
+        		            	alert(xhr.status+"에러")
+        		            }//error
+        			
+        			
+        		});//ajax  
         		}
 			});//변경
-			
+			 
 			
 		});//ready
 		
@@ -139,16 +238,17 @@
                                     <div class="card-header navyv bg-dark"><h3 class="text-start text-white font-weight-light my-4 " style="font-weight: bold;">상품 상세정보</h3></div>
                                     <div class="card-body">
                                        
-                                    <form id="updateFrm" action="show_update.jsp">
+                                    <form id="frm" name="frm" enctype="multipart/form-data" method="POST" action="admin_prd_modify.do">
+                                    
                                     	
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                             <div class="col-4"><img id="thImgPreview" class="img-thumbnail" alt="썸네일이미지" src="img/no_img.jpg"></div> 
+                                             <div class="col-4"><img id="thImgPreview" class="img-thumbnail" alt="썸네일이미지" src="http://localhost/mpnp/images/${data.thimg }"></div> 
                                         </div> 
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>상품코드</b></div> 
-                                            <div class="col-6"><input id="" name="" type="text" class="dataTable-input" value="${data.productid }" placeholder="" readonly="readonly"></div>
+                                            <div class="col-6"><input id="productid" name="productid" type="text" class="dataTable-input" value="${data.productid }" placeholder="" readonly="readonly"></div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
@@ -159,18 +259,27 @@
                                         <div class="row">
                                             <div class="col-3"><b>분류1</b></div> 
                                             <div class="col-4">
-                                                <select name="" class="dataTable-dropdown dataTable-selector">
-                                                <option></option>
-                                                </select>
-                                            </div>
+                                             	<select name="main_id" id="main" class="dataTable-dropdown dataTable-selector">
+			                                              <option value="none">---분류1---<option>
+			                                             
+			                                			 <option value="m0001" <c:if test="${data.mainid eq 'm0001' }">selected</c:if>>강아지</option>
+			                                	         <option value="m0002" <c:if test="${data.mainid eq 'm0002' }">selected</c:if>>고양이</option>
+												</select>
+                                                
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>분류2</b></div> 
                                             <div class="col-4">
-                                                <select name="" class="dataTable-dropdown dataTable-selector">
-                                                <option></option>
-                                                </select>
+                                               <select name="sub_id" id="sub" class="dataTable-dropdown dataTable-selector">
+                                                	<option value="none">---분류2---<option>
+                                                
+                                            	   <c:if test="${not empty data.subid }">
+                                                	<option value="${data.subid }" selected>${data.subname }</option>
+                                                	<option value="${list.subid }"> ${list.subname }</option>
+                                                	
+                                                	</c:if>
+												  </select>  
                                             </div>
                                         </div>
                                         <div class="dataTable-top"></div>
@@ -182,28 +291,51 @@
                                         <div class="row">
                                             <div class="col-3"><b>상태</b></div> 
                                             <div class="col-4">
-                                                <select name="" class="dataTable-dropdown dataTable-selector">
-                                                <option>판매중</option>
-                                                <option>판매중지</option>
+                                                <select name="status" id="status" class="dataTable-dropdown dataTable-selector">
+                                                <option value="Y">판매중</option>
+                                                <option value="N">판매중지</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>썸네일이미지</b></div> <div class="col-4"><input type="file" name="thImg" id="thImg" onchange="thImgSet(this);" value="파일선택" ></div>
-                                            <div class="col-2 my-1"><b>원본파일</b></div><div class="col-4 my-1"></div>
+                                            <div class="col-2 my-1"><b>원본파일</b></div><div class="col-3 my-1">${data.thimg }</div>
                                         </div>
+                                     
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                            <div class="col-3"><b>상품이미지</b></div> <div class="col-4">
-                                            	<input type="file"  name="multiImg" id="multiImg" multiple="multiple" value="파일선택"></div>
-                                        </div>
+                                            <div class="col-3"><b>상품이미지</b></div> 
+                                            <div class="col-4">
+                                        		<input type="file"  name="multiImg0" id="multiImg0" value="파일선택" ></div>
+                                        
+                                   
+                                       </div>
+                                        <div class="dataTable-top"></div>
+                                        <div class="row">
+                                            <div class="col-3"><b>     </b></div> 
+                                            <div class="col-4">
+                                        		<input type="file"  name="multiImg1" id="multiImg1" value="파일선택"></div>
+                                       </div>
+                                        <div class="dataTable-top"></div>
+                                        <div class="row">
+                                            <div class="col-3"><b>     </b></div> 
+                                            <div class="col-4">
+                                        		<input type="file"  name="multiImg2" id="multiImg2" value="파일선택"></div>
+                                   
+                                       </div>
+                                  
+                                         
+                              
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>소개이미지</b></div><div class="col-4"><input type="file" name="infoImg" id="infoImg" value="파일선택"></div>
-                                            <div class="col-2 my-1"><b>원본파일</b></div><div class="col-4 my-1"></div>
+                                            <div class="col-2 my-1"><b>원본파일</b></div><div class="col-3 my-1">${data.infoimg }</div>
                                         </div>
                                         <div class="dataTable-top"></div>
+                                        <div class="row">
+                                        	<div class="col-2"><b>상품추가일</b>:</div> <div class="col-6"> ${data.inputdate }</div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-3"></div><div class="col-8 text-secondary">※jpg,jpeg,png,bmp,do 파일만 등록할 수 있습니다</div>
                                         </div>
@@ -213,9 +345,6 @@
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="dataTable-top"></div>
-                                        <div class="row">
-                                        	<div class="col-2"><b>상품추가일</b>: ${data.inputdate }</div> <div class="col-6"></div>
-                                        </div>
                                      
                                    	</form>  
                                    	
@@ -249,6 +378,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="http://localhost/mpnp/3rdAdmin/js/scripts.js"></script>
     </body>
 </html>

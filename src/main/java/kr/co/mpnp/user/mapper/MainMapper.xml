@@ -34,6 +34,8 @@ from  product p ,order_detail o, review r ,sub_category s
 where  p.productid=o.productid(+) and o.order_detailid=r.order_detailid(+) and  p.sub_id = s.sub_id(+) and s.main_id=#{s.main_id}
 group by p.name,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id,p.inputdate
 order by p.inputdate desc
+offset #{pageFlag} rows
+fetch next 8 rows only
 
  </select> 
 <!-- 대분류 상품 총 갯수  -->

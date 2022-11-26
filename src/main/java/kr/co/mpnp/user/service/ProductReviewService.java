@@ -22,5 +22,14 @@ public class ProductReviewService {
 		return slist;
 	}
 	
+	//상품이미지
+	public List<ProductReviewDomain> searchImg(String productid){
+		List<ProductReviewDomain> list= prDAO.selectImg(productid);
+		
+		
+		return list;
+		
+	}
+	
 	
 }

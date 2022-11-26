@@ -5,11 +5,13 @@ import java.util.List;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
+import kr.co.mpnp.admin.domain.AdminProductDomain;
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.CartDomain;
 import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.vo.CartVO;
 import kr.co.mpnp.user.vo.ProductCartVO;
+import kr.co.mpnp.user.vo.ProductVO;
 import kr.co.mpnp.user.vo.WishListVO;
 
 
@@ -49,7 +51,7 @@ private static ProductDAO pDAO;
 	}
 	
 	//상품중분류리스트
-	public List<ProductDomain> selectprdList(String subid) {
+	public List<ProductDomain> selectprdList(ProductVO pVO) {
 		
 		List<ProductDomain> list= null;
 		
@@ -58,7 +60,7 @@ private static ProductDAO pDAO;
 		SqlSession ss= mbh.getHandler();
 		try {
 		//2.쿼리문 실행
-		list=ss.selectList("kr.co.mpnp.user.mapper.ProductMapper.selectprdList", subid);
+		list=ss.selectList("kr.co.mpnp.user.mapper.ProductMapper.selectprdList", pVO);
 		
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
@@ -71,19 +73,43 @@ private static ProductDAO pDAO;
 	
 	
 	//상품 총 갯수
-	public int selectprdCnt(String subid) {
+	public int selectprdCnt(ProductVO pVO) {
 		int cnt=0;
 		
 		//1.MyBatisHandler얻기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		//2.쿼리문 실행
-		cnt=ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectprdCnt",subid);
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectprdCnt",pVO);
 		//3.연결끊기
 		mbh.closeHandler(ss);
 		
 		
 		return cnt;
+	}
+	
+	
+	//상품이미지 
+	public List<ProductDomain> selectPrdImg(String productid){
+		
+		List<ProductDomain> list= null;
+		
+		//1.MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		try {
+		//2.쿼리문 실행
+		list=ss.selectList("kr.co.mpnp.user.mapper.ProductMapper.selectImg", productid);
+		
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		//3.연결끊기
+		mbh.closeHandler(ss);
+		
+		return list;
+		
+		
 	}
 	
 	
@@ -113,11 +139,14 @@ private static ProductDAO pDAO;
 		//1.MyBatisHandler얻기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
+	
 		int check=0;
 		try {
 		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmCart",cVO);
+		if(check!=0) {
 		
 			ss.commit();
+		}
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}
@@ -131,13 +160,38 @@ private static ProductDAO pDAO;
 	
 	//찜추가
 	public int insertWishList(ProductCartVO cVO) {
+		int check=0;
 		int cnt=0;
+		int delete=0;
+		boolean Flag=false;
 		//1.MyBatisHandler얻기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		try {
+			check=ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",cVO);
+			System.out.println("확인"+check);
+			if(check==0) {
 			cnt=ss.insert("kr.co.mpnp.user.mapper.ProductMapper.insertWishList",cVO);
-			ss.commit();
+			System.out.println("----찜추가"+cnt);
+			Flag=true;	
+			}else if(check>=1) {
+				WishListVO wVO =new WishListVO();
+				wVO.setId(cVO.getId());
+				wVO.setProductid(cVO.getProductid());
+				System.out.println(wVO);
+			delete=ss.delete("kr.co.mpnp.user.mapper.ProductMapper.deleteWish",wVO);
+			if(delete!=0) {
+			System.out.println("삭제성공"+delete);
+			Flag=true;	
+			}else {
+			System.out.println("삭제실패+"+delete);
+			}
+		
+			}
+			if(Flag=true) {
+				
+				ss.commit();
+			}
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}
@@ -149,71 +203,38 @@ private static ProductDAO pDAO;
 	}
 	
 	//찜 여부
-	public int  checkWish(ProductCartVO cVO) {
-		
-		//1.MyBatisHandler얻기
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss= mbh.getHandler();
+	public boolean  checkWish(ProductCartVO cVO) {
 		int check=0;
-		try {
-		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",cVO);
-		
-			ss.commit();
-		}catch(PersistenceException pe) {
-			pe.printStackTrace();
-		}
-		//3.연결끊기
-		mbh.closeHandler(ss);
-		
-		return check;
-	
-		
-	}
-	
-	public int deleteWishList(WishListVO wVO) {
-		int cnt=0;
-		
+		boolean wishChk=false;
 		//1.MyBatisHandler얻기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
-		//2.쿼리문 실행
-		cnt=ss.delete("kr.co.mpnp.user.mapper.ProductMapper.deleteWish",wVO);
-		ss.commit();
+		
+
+		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",cVO);
+		if(check==0) {
+			wishChk=true;
+		}
+		
+	
 		//3.연결끊기
 		mbh.closeHandler(ss);
 		
-		
-		return cnt;
-		
-		
+		return wishChk;
+	
 		
 	}
+
 	
 	
 	
 	public static void main(String[] args) {
 		
 		ProductDAO pDAO= new ProductDAO();
-		ProductCartVO cVO = new ProductCartVO();
-		WishListVO wVO =new WishListVO();
-		wVO.setId("id002");
-		wVO.setProductid("p0001");
-		cVO.setId("id005");
-		cVO.setProductid("pr_0000017");
-	
-		//System.out.println(pDAO.checkCart(cVO));
-		System.out.println(pDAO.insertWishList(cVO));
-		//System.out.println(pDAO.deleteWishList(wVO));
-		 
-	
-		// System.out.println(mDAO.selectPrdList("m0001")); 
-//System.out.println(pDAO.selectPrdDetail("p0001"));
-//System.out.println(pDAO.selectprdList("s0001"));
-//System.out.println(pDAO.selectprdCnt("s0001"));
-
-
-
-
+		ProductVO pVO= new ProductVO();
+		pVO.setsub_id("s0001");
+System.out.println(pDAO.selectprdList(pVO));
+System.out.println(pDAO.selectprdCnt(pVO));
 		
 		
 	}

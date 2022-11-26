@@ -4,21 +4,25 @@ import java.sql.Date;
 
 public class ProductDomain {
 
-	private String productid,productname,thimg,infoimg,status;
+	private String productid,productname,thimg,infoimg,sub_id,status,product_imgid,prdimg;
 	private int price,reviewcnt;
 	private double staravg;
 	private Date inputdate;
 	public ProductDomain() {
 	
 	}
-	public ProductDomain(String productid, String productname, String thimg, String infoimg, String status, int price,
-			int reviewcnt, double staravg, Date inputdate) {
-		
+	public ProductDomain(String productid, String productname, String thimg, String infoimg, String sub_id,
+			String status, String product_imgid, String prdimg, int price, int reviewcnt, double staravg,
+			Date inputdate) {
+
 		this.productid = productid;
 		this.productname = productname;
 		this.thimg = thimg;
 		this.infoimg = infoimg;
+		this.sub_id = sub_id;
 		this.status = status;
+		this.product_imgid = product_imgid;
+		this.prdimg = prdimg;
 		this.price = price;
 		this.reviewcnt = reviewcnt;
 		this.staravg = staravg;
@@ -48,11 +52,29 @@ public class ProductDomain {
 	public void setInfoimg(String infoimg) {
 		this.infoimg = infoimg;
 	}
+	public String getSub_id() {
+		return sub_id;
+	}
+	public void setSub_id(String sub_id) {
+		this.sub_id = sub_id;
+	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getProduct_imgid() {
+		return product_imgid;
+	}
+	public void setProduct_imgid(String product_imgid) {
+		this.product_imgid = product_imgid;
+	}
+	public String getPrdimg() {
+		return prdimg;
+	}
+	public void setPrdimg(String prdimg) {
+		this.prdimg = prdimg;
 	}
 	public int getPrice() {
 		return price;
@@ -80,10 +102,18 @@ public class ProductDomain {
 	}
 	@Override
 	public String toString() {
-		return "productdomain [productid=" + productid + ", productname=" + productname + ", thimg=" + thimg
-				+ ", infoimg=" + infoimg + ", status=" + status + ", price=" + price + ", reviewcnt=" + reviewcnt
-				+ ", staravg=" + staravg + ", inputdate=" + inputdate + "]";
+		return "ProductDomain [productid=" + productid + ", productname=" + productname + ", thimg=" + thimg
+				+ ", infoimg=" + infoimg + ", sub_id=" + sub_id + ", status=" + status + ", product_imgid="
+				+ product_imgid + ", prdimg=" + prdimg + ", price=" + price + ", reviewcnt=" + reviewcnt + ", staravg="
+				+ staravg + ", inputdate=" + inputdate + ", getProductid()=" + getProductid() + ", getProductname()="
+				+ getProductname() + ", getThimg()=" + getThimg() + ", getInfoimg()=" + getInfoimg() + ", getSub_id()="
+				+ getSub_id() + ", getStatus()=" + getStatus() + ", getProduct_imgid()=" + getProduct_imgid()
+				+ ", getPrdimg()=" + getPrdimg() + ", getPrice()=" + getPrice() + ", getReviewcnt()=" + getReviewcnt()
+				+ ", getStaravg()=" + getStaravg() + ", getInputdate()=" + getInputdate() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
+
+	
 
 
 	

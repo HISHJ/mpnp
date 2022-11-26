@@ -1,5 +1,7 @@
 package kr.co.mpnp.admin.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.exceptions.PersistenceException;
@@ -7,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.admin.domain.AdminCategoryDomain;
 import kr.co.mpnp.admin.domain.AdminProductDomain;
+import kr.co.mpnp.admin.vo.AdminPrdImgVO;
 import kr.co.mpnp.admin.vo.AdminProductVO;
 import kr.co.mpnp.handler.MyBatisHandler;
 
@@ -88,6 +91,27 @@ public AdminProductDomain selectPrdDetail(String productid) {
 	
 	
 }
+//상품 이미지
+public List<AdminProductDomain> selectPrdImg(String productid) {
+	List<AdminProductDomain> list =null;
+	//1.MyBatis Handler얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss= mbh.getHandler();
+	//2.쿼리문수행
+	try {
+		list=ss.selectList("kr.co.mpnp.admin.mapper.AdminProductMapper.selectPrdImg",productid);
+	}catch(PersistenceException pe) {
+		pe.printStackTrace();
+	}
+	//3.MyBatis Handler닫기
+	mbh.closeHandler(ss);
+	
+	
+	return list;
+	
+	
+}
+
 //상품코드 조회
 public String selectProductId() {
 String prID="";
@@ -114,25 +138,97 @@ return prID;
 //상품추가
 public int insertProduct(AdminProductVO apVO) {
 	int cnt=0;
-	int img=0;
+
 	//1.MyBatis Handler얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		//2.쿼리문수행
 		try {
 			cnt=ss.insert("kr.co.mpnp.admin.mapper.AdminProductMapper.insertPrd",apVO);
-	if(cnt==1) {		
+			if(cnt!=0) {		
+					System.out.println("성공 : "+cnt);
+			}else {
+				System.out.println("상품테이블 추가 실패 ");
+			}//end else
 			
-			img+=ss.insert("kr.co.mpnp.admin.mapper.AdminProductMapper.insertPrdImg", apVO);
-		ss.commit();
-		
-	}
-	}catch(PersistenceException pe) {
-			pe.printStackTrace();
-		
-		}
+			System.out.println("----------insertProduct----------"+ apVO);
+			
+			if(!apVO.getPrdimg().isEmpty()) {
+			int img=0;
+			AdminPrdImgVO apiVO=null;
+			for(int i=0 ; i  < apVO.getPrdimg().size() ;i++) {
+				apiVO=new AdminPrdImgVO( apVO.getProductid() , apVO.getPrdimg().get(i));
+				
+			img+=ss.insert("kr.co.mpnp.admin.mapper.AdminProductMapper.insertPrdImg",apiVO);
+			}
+			  if(img!=0) {
+			 System.out.println("최종성공 :"+img);
+	
+			  }else {
+				  System.out.println("이미지 넣기 실패"+img);
+			  }
+			}//end if
+			
+			  ss.commit();
+			}catch(PersistenceException pe) {
+					pe.printStackTrace();
+				
+				}
 		//3.MyBatis Handler닫기
 		mbh.closeHandler(ss);
+	
+	
+	return cnt;
+}
+//상품수정
+public int updateProduct(AdminProductVO apVO) {
+	int cnt=0;
+	
+	//1.MyBatis Handler얻기
+	MyBatisHandler mbh=MyBatisHandler.getInstance();
+	SqlSession ss= mbh.getHandler();
+	//2.쿼리문수행
+	try {
+		cnt=ss.update("kr.co.mpnp.admin.mapper.AdminProductMapper.updatePrd",apVO);
+		if(cnt!=0) {		
+			System.out.println("성공 : "+cnt);
+		}else {
+			System.out.println("상품테이블 추가 실패 ");
+		}//end else
+		
+		System.out.println("----------updateProduct----------"+ apVO);
+		
+		if(!apVO.getPrdimg().isEmpty()) {
+			int delete=0;
+			int img=0;
+			delete=ss.delete("kr.co.mpnp.admin.mapper.AdminProductMapper.deletePrd",apVO);
+			if(delete!=0) {
+				System.out.println("데이터 삭제성공 " +delete);
+			}else {
+				System.out.println("데이터 삭제 실패 : "+delete);
+			}
+			AdminPrdImgVO apiVO=null;
+			for(int i=0 ; i  < apVO.getPrdimg().size() ;i++) {
+				apiVO=new AdminPrdImgVO( apVO.getProductid() , apVO.getPrdimg().get(i));
+				img+=ss.insert("kr.co.mpnp.admin.mapper.AdminProductMapper.insertPrdImg",apiVO);
+				
+			}
+			if(img!=0) {
+				System.out.println("최종성공 :"+img);
+				ss.commit();
+				
+			}else {
+				System.out.println("이미지 넣기 실패"+img);
+			}
+		}//end if
+		
+	
+	}catch(PersistenceException pe) {
+		pe.printStackTrace();
+		
+	}
+	//3.MyBatis Handler닫기
+	mbh.closeHandler(ss);
 	
 	
 	return cnt;
@@ -145,17 +241,19 @@ public int insertProduct(AdminProductVO apVO) {
 		//apVO.setname("도");
 		apVO.setmain_id("m0001");
 		//apVO.setsub_id("s000");
-	System.out.println(apDAO.selectPrd(apVO));
-//System.out.println(apDAO.selectPrdDetail("p0001"));
-//	apVO.setname("테스트");
-//	apVO.setPrice(123);
-//	apVO.setth_img("TEST1");
-//	apVO.setinfo_img("TESTB1");
-//	apVO.setStatus("Y");
-//	apVO.setsub_id("s0005");
-//	apVO.setProductid("p12345678");
+	//System.out.println(apDAO.selectPrd(apVO));
+//System.out.println(apDAO.selectPrdDetail("pr_0000073"));
+		List<String> list = new ArrayList<String>(Arrays.asList("A"));
+//	System.out.println(apDAO.selectPrdImg("pr_0000073"));
+
+		//System.out.println(apDAO.selectCategory("m0001"));
+	//System.out.println(apVO);
 //	System.out.println(apDAO.insertProduct(apVO));
 //System.out.println(apDAO.selectProductId());
+	
+	apVO.setProductid("pr_0000073");
+	System.out.println(apDAO.updateProduct(apVO));
+	
 	}
 
 }

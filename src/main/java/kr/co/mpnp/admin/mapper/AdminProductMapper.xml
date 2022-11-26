@@ -12,16 +12,16 @@
 <select id="selectCategory"  resultType="AdminCategoryDomain" parameterType="String" >
 select s.sub_id subid,s.sub_name subname ,m.main_id mainid, m.main_name mainname
 from sub_category s,main_category m
-where s.main_id=m.main_id and s.main_id=#{s.main_id}
+where s.main_id=m.main_id and s.main_id=#{main_id}
 
 </select>
 
 <!-- 상품 검색(전체보기) -->   <!-- parameterType="AdminProductVO" -->
 <select id="selectPrd" resultType="AdminProductDomain" parameterType="AdminProductVO" >
-select p.productid productid,p.name productname,p.price price ,s.sub_name subname,m.main_name mainname,s.sub_id,s.main_id
+select p.productid productid,p.name productname,p.price price ,s.sub_name subname,m.main_name mainname,s.sub_id subid,s.main_id mainid
 from product p,sub_category s, main_category m
-where p.sub_id=s.sub_id and s.main_id = m.main_id
-<!--  <choose>
+where (p.sub_id=s.sub_id and s.main_id = m.main_id)
+  <choose>
 <when test ="name!=null and name!='' ">
 and replace(name,' ','') like '%'||#{name}||'%'
 </when>
@@ -31,10 +31,8 @@ and s.main_id=#{main_id}
 <when test="sub_id!=null and sub_id!= '' ">
 and s.sub_id=#{sub_id}
 </when>
-<otherwise>
 
-</otherwise>
-</choose>  -->
+</choose>  
 
 
 </select>
@@ -42,10 +40,18 @@ and s.sub_id=#{sub_id}
 <!-- 상품상세보기 -->
 <select id ="selectPrdDetail" resultType="AdminProductDomain" parameterType="String">
 
-select p.productid productid,p.name productname ,p.price price ,p.status status,p.th_img,p.info_img,p.inputdate inputdate
-,s.sub_name subname,m.main_name mainname,i.product_img prdImg
-from product p,sub_category s,main_category m,product_img i
-where p.productid=i.productid(+) and p.sub_id = s.sub_id(+) and s.main_id=m.main_id(+) and p.productid =#{p.productid}
+select p.productid productid,p.name productname ,p.price price ,p.status status,p.th_img thimg,p.info_img infoimg,p.inputdate inputdate
+,s.sub_name subname,s.sub_id subid,m.main_id mainid,m.main_name mainname
+from product p,sub_category s,main_category m
+where  p.sub_id = s.sub_id(+) and s.main_id=m.main_id(+) and p.productid =#{p.productid}
+
+</select>
+
+<!-- 상품이미지 조회 -->
+<select id="selectPrdImg"  resultType="AdminProductDomain"  parameterType="String">
+select productid,product_imgid,product_img PrdImg1
+from product_img
+where productid=#{productid}
 
 </select>
 
@@ -62,11 +68,37 @@ values(#{productid},#{name},#{price},#{th_img},#{info_img},#{status},#{sub_id},t
 
 </insert>
 
-<!--상품이미지추가 -->
-<!--  <insert id="insertPrdImg" parameterType="AdminProductVO">
-insert into product(PRODUCT_IMGID,PRODUCTID,PRODUCT_IMG) 
-values(concat('prI_',lpad(seq_product.nextval,6,0)),#{productid},#{prdimg})
+ <!--상품이미지추가 -->
+
+<insert id="insertPrdImg" parameterType="AdminPrdImgVO">
+insert into product_img(PRODUCT_IMGID,PRODUCTID,PRODUCT_IMG) values
+(concat('prI_',lpad(seq_product.nextval,6,0)),#{productid},#{img})
+
 </insert> 
- -->
+
+<!--상품 변경 -->
+<update id="updatePrd" parameterType="AdminProductVO">
+update product set 
+name=#{name},
+price=#{price},
+th_img=#{th_img},
+info_img=#{info_img},
+status=#{status},
+sub_id=#{sub_id}
+where
+productid=#{productid}
+
+</update>
+
+<!--상품이미지 삭제 -->
+<delete id="deletePrd" parameterType="String">
+delete
+from product_img
+where productid=#{productid}
+
+
+</delete>
+
+
 
 </mapper>

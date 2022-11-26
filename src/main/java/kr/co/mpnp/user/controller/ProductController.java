@@ -18,19 +18,34 @@ import kr.co.mpnp.user.domain.ProductReviewDomain;
 import kr.co.mpnp.user.service.ProductReviewService;
 import kr.co.mpnp.user.service.ProductService;
 import kr.co.mpnp.user.vo.ProductCartVO;
+import kr.co.mpnp.user.vo.ProductVO;
 
 @Controller
 public class ProductController {
 //상품중분류
 @RequestMapping(value="/prdList.do", method=GET)
-public String searchPrdList(String subid,Model model) {
+public String searchPrdList(ProductVO pVO,Model model) {
 	
 	ProductService ps=new ProductService();
-	List<ProductDomain> list=ps.searchPrdList(subid);
-	int cnt =ps.searchPrdCnt(subid);
+	List<ProductDomain> list=ps.searchPrdList(pVO);
+
 	model.addAttribute("sub", list);
-	model.addAttribute("prdcnt", cnt);
-	System.out.println(subid);
+
+	
+	
+	//페이징변수
+	int totalData =ps.searchPrdCnt(pVO);
+	int lastPage = ps.lastPage(totalData);
+	int curPage = pVO.getPageFlag();
+	int startNum = ps.startNum(curPage);
+	int isLast = ps.isLast(lastPage, startNum);
+			
+	//view로 전송
+	model.addAttribute("totalData", totalData);
+	model.addAttribute("lastPage", lastPage);
+	model.addAttribute("startNum", startNum);
+	model.addAttribute("isLast", isLast);
+	model.addAttribute("curPage", curPage);
 	
 	
 	return "user/product/prdList";
@@ -38,7 +53,8 @@ public String searchPrdList(String subid,Model model) {
 
 //상품상세보기
 @RequestMapping(value="/prddetail.do", method=GET)
-public String searchPrdDetail(@RequestParam(value="productid")  String productid,HttpSession session,Model model) {
+public String searchPrdDetail( String reviewid,@RequestParam(value="productid") String productid,
+		HttpSession session,Model model) {
 	//세션 값 확인
 	if(session.getAttribute("id")!=null) {
 		String id =(String)session.getAttribute("id");
@@ -47,11 +63,14 @@ public String searchPrdDetail(@RequestParam(value="productid")  String productid
 	
 	ProductService ps= new ProductService();
 	ProductReviewService pr = new ProductReviewService();
-	
+	ProductCartVO cVO= new ProductCartVO();
 	ProductDomain pd=ps.searchPrdDetail(productid);
 	List<ProductReviewDomain> list = pr.searchProductReview(productid);
-	List<ProductReviewDomain > slist=pr.searchStarCnt(productid);
-	
+	List<ProductReviewDomain > slist=pr.searchStarCnt(productid);	
+
+	//model.addAttribute("wishFlag",ps.CheckWish(cVO));
+	model.addAttribute("prdImg", ps.searchPrdImg(productid));
+
 	model.addAttribute("data", pd);
 	model.addAttribute("review", list);
 	model.addAttribute("star",slist);
@@ -88,15 +107,16 @@ public String addCart(ProductCartVO cVO,HttpSession session) throws Exception {
 //찜담기 : ajax에서 parameter를 받아올때 @ResponseBody를 사용하면 된다!
 @ResponseBody
 @RequestMapping(value="addWish.do",method=POST)
-public String addWish(ProductCartVO cVO,HttpSession session) throws Exception {
+public String addWish(ProductCartVO cVO,HttpSession session,Model model) throws Exception {
 	
 	ProductService ps=new ProductService();
+	String id=(String)session.getAttribute("id");
 	//로그인 확인 : 나중에 session받아오기..!
 	int result=0;
-	if(session.getAttribute("id")!=null) {
-		result=ps.addWish(cVO);
+	if(id!=null) {
+		result= ps.addWish(cVO);
 	} else {//세션에 아이디 없을때
-		result=-1;
+		model.addAttribute("msg", "로그인 후에 시도해주세요.");
 	}
 	return result+" ";
 	

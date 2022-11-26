@@ -6,7 +6,7 @@
 <!-- resultType : 조회 결과 값을 저장하기 위한 데이터타입(데이터 하나에 대한 타입 지정)
        parameterType:전달받은 파라메터 데이터 타입 지정(선택적)
  -->
-<resultMap type="pr" id="productReview">
+<resultMap type="ProductReviewDomain" id="productReview">
 	<result column="id" property="id"/>
 	<result column="productid" property="productid"/>
 	<result column="name" property="productname"/>
@@ -39,9 +39,12 @@ where p.productid=o.productid(+) and o.order_detailid=r.order_detaili(+)d and p.
  
  <!-- 상품후기리스트 -->
  <select id="selectProductReview" resultMap="productReview" parameterType="String">
-select m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate
-from member m, orders o, order_detail od ,review r
-where m.id=o.id(+) and o.orderid=od.orderid(+) and od.order_detailid =  r.order_detailid(+) and od.productid=#{od.productid}
+select m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate ,
+LISTAGG(ri.review_img, ',') WITHIN GROUP(order by ri.reviewid) AS review_img
+from member m, orders o, order_detail od ,review r ,review_img ri
+where m.id=o.id(+) and o.orderid=od.orderid(+) and od.order_detailid =  r.order_detailid(+) and r.reviewid=ri.reviewid(+) and od.productid=#{productid}
+group by  m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate 
+
 
  
  
@@ -56,7 +59,24 @@ group by star_score
  
  
  </select>
+ <!--상품후기이미지  -->
+   <select id="selectReviewImg" resultType="ProductReviewDomain" parameterType="String">
+  select reviewid,review_img
+  from review_img
+  where reviewid = #{reviewid}
   
-
+  
+  
+  </select>
+ <!--상품후기이미지  -->
+<!--   <select id="selectReviewImg" resultType="ProductReviewDomain" parameterType="String">
+select r.reviewid,ri.review_img,od.productid
+from review_img ri,review r, order_detail od
+where r.reviewid=ri.reviewid(+) and  r.order_detailid=od.order_detailid(+) and od.productid=#{productid}
+  
+  
+  
+  </select>
+ -->
  
  </mapper>

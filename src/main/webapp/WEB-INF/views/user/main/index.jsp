@@ -45,7 +45,12 @@
    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
    rel="stylesheet">
    <!--버튼클릭시 카테고리 변경  -->
-<!-- 		<script>
+	<script>
+	function main(mainid){
+		location.href="index.do?mainid="+mainid;
+	}
+		
+	/* 
 	    $(function(){
 			 $(".bt_dog").click(function(){
 				$(".bt_cat").removeClass("active"); 
@@ -67,10 +72,10 @@
 		
 			 })//click
 			
+	    });
+	 */
 		
-	
-		
-		</script> -->
+		</script>
 
 
 
@@ -175,9 +180,9 @@
 						<form action="search_prd_list.do" method="get">
 								<div class="form ">
 									<div class="input del kwd">
-									<input id="srchWord" name="productname"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." >
+									<input id="srchWord" name="name"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." >
 									</div>
-									<button type="submit" class="btnSch" >검색</button>
+									<button type="button" class="btnSch" onclick="search()">검색</button>
 								</div>
 									</form>
 							</div>
@@ -197,23 +202,33 @@
 		
 		
 		<script >
-		
+		/*설빈*/
 		
 		
 		//중분류 이동
 			function setCateList(subid){
-				location.href="prdList.do?subid="+subid
+				location.href="prdList.do?sub_id="+subid
 			}
 		
 		//검색
+		
+		
 			
 	function search(){
-		location.href="search_prd_list.do"
-	}
+		var keyword=$("#srchWord").val();
+		if(keyword.trim()==""){
+			alert("검색어를 입력해주세요.");
+			return;
+		}
 		
+		location.href="search_prd_list.do?name="+keyword
+	}
+	
+
+
 			/* 카테고리 	버튼 클릭시 상품 변경 */
-			
-		 	 	 $(function(){
+		
+	 	 $(function(){
 			    	$("button").on('click',function(){
 			    			var mainid = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var kind로 가져와서	
 			    			
@@ -223,26 +238,26 @@
 			    	              type : "get",
 			    	              data : {"mainid" : mainid}, 
 			    	              success : function(data){ 
-			    	                 
-			    	                 $('body').html(data); 
-			    	             	if(mainid=="m0002"){
+			    	             
+			    	                 $('body').html(data)
+			    	         	 	if(mainid=="m0002"){
 			    	            		
-			    	           		 $(".bt_dog").removeClass("active"); 
-			    	           		 $(".quickDog").removeClass("active")
-			    	           		 $(".bt_cat").addClass("active")
-			    	           		 $(".open_cat").css('display','block');
-			    	           		 $(".open_dog").css('display','none');
-			    	           		 $(".quickCat").addClass("active")
-			    	         
-			    	           	}else if(mainid=="m0001"){
-			    	           		$(".bt_cat").removeClass("active"); 
-			    	           		$(".quickCat").removeClass("active")
-			    	           	 $(".bt_dog").addClass("active")
-			    	           	 $(".open_dog").css('display','block');
-			    	           	 $(".open_cat").css('display','none');
-			    	           	 $(".quickDog").addClass("active");
-			    	
-			    	           	}//end if
+			    	             		 $(".bt_dog").removeClass("active"); 
+			    	             		 $(".quickDog").removeClass("active")
+			    	             		 $(".bt_cat").addClass("active")
+			    	             		 $(".open_cat").css('display','block');
+			    	             		 $(".open_dog").css('display','none');
+			    	             		 $(".quickCat").addClass("active")
+			    	    
+			    	             	}else if(mainid=="m0001"){
+			    	             		$(".bt_cat").removeClass("active"); 
+			    	             		$(".quickCat").removeClass("active")
+			    	             	 $(".bt_dog").addClass("active")
+			    	             	 $(".open_dog").css('display','block');
+			    	             	 $(".open_cat").css('display','none');
+			    	             	 $(".quickDog").addClass("active");
+			    	            
+			    	              }
 			    	              },
 			    	              error : function(data){
 			    	            	 alert('error');
@@ -251,9 +266,9 @@
 			    			})//ajax 
 			    		});//click
 			    });//ready 
-			
-					
+			    
 					 
+					  
 				
 		
 		
@@ -269,6 +284,7 @@
 		<nav class="menushop">
 			<h2 class="bt bt_store">스토어</h2>
 			<div class="button_wrap">
+			
 			
 			<button type="button" class="bt st bt_dog active" value="m0001">강아지</button>
 		
@@ -344,9 +360,9 @@
 			<input type="hidden" id="dispClsfNo_" value="300000174">
 			<div id="519" name="dispCorn_div" data-index="0"><section class="sect mn visul">
 	<div class="mn_visul_sld" id="corner519">
-		<div class="pgnav">
+	<!-- 	<div class="pgnav">
 			<span class="pagination swiper-pagination-fraction"><span class="swiper-pagination-current">4</span> / <span class="swiper-pagination-total">20</span></span> <a href="javascript:void(0);" class="bt more" onclick="petShopMainResult.goBannerList('/event/shop/petshopEventList', '519');">+</a>
-		</div>
+		</div> -->
 		<div class="swiper-container slide swiper-container-initialized swiper-container-horizontal swiper-container-autoheight">
 			<div class="sld-nav"><button type="button" class="bt prev" tabindex="0" role="button" aria-label="Previous slide">이전</button><button type="button" class="bt next" tabindex="0" role="button" aria-label="Next slide">다음</button></div>
 			<ul class="swiper-wrapper list" style="transition-duration: 0ms; transform: translate3d(-23230px, 0px, 0px); height: 360px;"><li class="swiper-slide swiper-slide-duplicate" id="topbnr_3239" data-index="1" data-bannerid="3239" data-bannername="2022 할로윈 특별전" data-bannertype="샵 메인,특별기획전" data-swiper-slide-index="0">
@@ -671,6 +687,8 @@ var gogoSwiper = (function() {
 <input type="hidden" id="dispCornNm_onlyApet" value="오직 어펫에서만!">
 <input type="hidden" id="dispClsfCornNo_onlyApet" value="1342">
 
+
+
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
@@ -682,12 +700,12 @@ var gogoSwiper = (function() {
 
 <c:forEach var="data" items="${prdList }">
 
-	<div class="gd-item amplitudeMainData swiper-slide active" data-idx="0" data-goodsid="GI251053225" data-displayid="1257" data-displayname="오직 어펫에서만!" data-productid="GI251053225" data-productname="그르르 캣크다스 참치맛 200g" data-brandid="58" data-brandname="그르르" data-categorypath="고양이 > 간식 > 간식파우치" data-price="9000" data-discountprice="4000" data-swiper-column="0" data-swiper-row="0" style="order: 0; margin-right: 30px;">
+	<div class="gd-item amplitudeMainData swiper-slide active"  style="order: 0; margin-right: 30px;">
 		<!-- NOTE: 랭킹 상품 그룹인 경우 'rank-label' 로 순위 표기 -->
 		
-				<a class="gd-link" href="prddetail.do?productid=${data.productid}">
+				<a class="gd-link all_items" href="prddetail.do?productid=${data.productid}">
 						<div class="gd-thumb">
-			<img class="thumb-img" src="http://localhost/mpnp/images/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+			<img class="thumb-img" src="http://localhost/mpnp/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="http://localhost/mpnp/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
 								<div class="gd-flag">
 									</div>
 								<button class="btn-favorite " data-content="GI251053225" data-url="/goods/insertWish?goodsId=GI251053225" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251053225" data-target="goods">찜하기</button>
@@ -718,14 +736,37 @@ var gogoSwiper = (function() {
 				</a>
 		</div>
 </c:forEach>	
+<div class="page">
+		<c:if test="${ not empty result  }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+
+ 	<form name="hidFrm" id="hidFrm" action="index.do">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
+	</form> 
+
+
+
 	
 		<div class="gd-item swiper-slide" data-swiper-column="19" data-swiper-row="1" style="-webkit-box-ordinal-group: 39; order: 39; margin-top: 30px; margin-right: 30px;">
 		</div>
-				</div>
+				
 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 <div class="sld-navigation hide_mo">
-<button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
-<button type="button" class="sld-nav next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false">다음</button>
+<button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
+<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button>
+</div>
 </div>
 <script type="text/javascript">
 $(function() {
@@ -930,6 +971,7 @@ petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, moreYn)
 <!-- 메인 신상품 -->		
 
 </div>
+<c:if test="${empty id }">
 			<div id="521" name="dispCorn_div" data-index="6"><!-- 미로그인 배너 -->
 <section class="sect mn nlogn">
 	<div class="hdts" id="corner521">
@@ -943,7 +985,7 @@ petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, moreYn)
 	</div>
 </section>
 </div>
-
+</c:if>
 	
 
 

@@ -18,21 +18,22 @@
 
 <!-- 검색결과 총 갯수-->
 
-<select id= "selectTotalCnt" resultType="int" parameterType="String">
+<select id= "selectTotalCnt" resultType="int" parameterType="SearchVO">
 
 select count(productid) cnt from product
 where
-name like '%'||#{keyword}||'%'
+name like '%'||#{name}||'%'
 
 </select>
 
 <!-- 검색결과 -->
-<select id ="searchPrd" resultMap="shResult" parameterType="String">
+<select id ="searchPrd" resultMap="shResult" parameterType="SearchVO">
 
 select productid,name,price,th_img
 from product
 where replace(name,' ','') like '%'||#{name}||'%'
-
+offset (#{pageFlag}-1) *6 rows
+fetch next 6 rows only
 
 </select> 
 

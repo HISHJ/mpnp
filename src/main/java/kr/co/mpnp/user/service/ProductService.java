@@ -3,10 +3,14 @@ package kr.co.mpnp.user.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import kr.co.mpnp.user.dao.ProductDAO;
 import kr.co.mpnp.user.domain.ProductDomain;
 import kr.co.mpnp.user.domain.WishDomain;
 import kr.co.mpnp.user.vo.ProductCartVO;
+import kr.co.mpnp.user.vo.ProductVO;
+import kr.co.mpnp.user.vo.WishListVO;
 
 	
 public class ProductService {
@@ -22,18 +26,54 @@ public class ProductService {
 	
 	
 	//상품 중분류
-	public List<ProductDomain> searchPrdList(String subid){
-		List<ProductDomain> list = pDAO.selectprdList(subid);
+	public List<ProductDomain> searchPrdList(ProductVO pVO){
+		List<ProductDomain> list = pDAO.selectprdList(pVO);
 		return list;
 	}
+	
+	//상품이미지
+	public List<ProductDomain> searchPrdImg(String productid){
+		List<ProductDomain> list=pDAO.selectPrdImg(productid);
+		return list;
+	}
+	
 	//상품총 갯수
-	public int searchPrdCnt (String subid) {
-		int cnt=pDAO.selectprdCnt(subid);
+	public int searchPrdCnt (ProductVO pVO) {
+		int cnt=pDAO.selectprdCnt(pVO);
 		
 		
 		return cnt;
 		
 	}
+	
+	//페이징
+	
+	
+	//마지막 페이지 수
+	public int lastPage(int searchPrdCnt) {
+		int lastPage=(int)Math.ceil((double) searchPrdCnt /8);
+		
+		return lastPage;
+	}
+	
+	//현재페이지 시작번호
+	public int startNum(int curPage) {
+		int startNum=curPage-(curPage-1)%8;
+		return startNum;
+		
+	}
+	//한페이지당 보여줄 페이지수
+	public int isLast(int lastPage,int startNum) {
+		int isLast =2; //0,1,2, 3페이지씩
+		if(startNum+3>lastPage) {
+			isLast= lastPage-startNum;
+			
+		}
+		return isLast;
+		
+	}
+
+	
 	
 	//장바구니 추가
 	public int addCart(ProductCartVO cVO) {
@@ -55,23 +95,18 @@ public class ProductService {
 	
 	//찜추가
 	public int addWish(ProductCartVO cVO) {
+		int addWish=pDAO.insertWishList(cVO);
 		
-		//찜 데이터 체크
-		int check=pDAO.checkWish(cVO);
-		//찜 삭제
-	
-		if(check!=0){	//찜에 이미 들어있는경우 2로반환
-			return 2;
-		}
-		//장바구니 등록&에러시 0반환
-		try {//장바구니에 등록완료 =>1
-			return pDAO.insertWishList(cVO);
-		}catch(Exception e) { //에러==>0
-			return 0;
-		}
-		
-		
+		return addWish;
+			
 	}//addCart
+	
+	//찜여부 확인
+	public boolean CheckWish(ProductCartVO cVO) {
+		boolean check=pDAO.checkWish(cVO);
+		
+		return check;
+	}
 	
 
 	
@@ -80,14 +115,15 @@ public class ProductService {
 	ProductCartVO	cVO= new ProductCartVO();
 			cVO.setId("id010");
 			cVO.setProductid("p0001");
-			
-		
-			
-			int result=ps.addWish(cVO);
-			//int check=ps.addCart(cVO);
-			System.out.println("result : "+result);
-			//System.out.println("result : "+check);
-			
+//			
+//		ProductVO pVO= new ProductVO();
+//		pVO.setsub_id("s0001");
+//			System.out.println(ps.searchPrdCnt(pVO));
+//			 int result=ps.addWish(cVO);
+			int check=ps.addCart(cVO);
+		//	System.out.println("result : "+result);
+			System.out.println("result : "+check);
+		//	System.out.println(ps.addWish(cVO));
 		
 	}
 

@@ -11,22 +11,20 @@ import kr.co.mpnp.user.domain.ProductReviewDomain;
 
 public class ProductReviewDAO {
 
+	//후기리스트
 	public List<ProductReviewDomain> selectProductReview(String productid){
 		
 		List<ProductReviewDomain> list=null;
 		MyBatisHandler mbh= MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
-		//2.
 		
-		try {
-			
+		
+		//2.		
 			list=ss.selectList("kr.co.mpnp.user.mapper.ProductReviewMapper.selectProductReview",productid);
+			
 			ss.commit();
 			
-		}catch(PersistenceException pe) {
-			pe.printStackTrace();
-		}
-		
+	
 		//3.
 		mbh.closeHandler(ss);
 		return list;
@@ -55,15 +53,38 @@ public class ProductReviewDAO {
 		return list;
 		
 	}
+	
+	//이미지조회
+	public List<ProductReviewDomain> selectImg(String reviewid){
+		List<ProductReviewDomain> list=null;
+		MyBatisHandler mbh= MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		//2.
+		
+		try {
+			
+			list=ss.selectList("kr.co.mpnp.user.mapper.ProductReviewMapper.selectReviewImg",reviewid);
+			ss.commit();
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		//3.
+		mbh.closeHandler(ss);
+		
+		return list;
+		
+	}
 
 	
 	public static void main(String[] args) {
 		
 		ProductReviewDAO pDAO = new ProductReviewDAO();
 		
-		 System.out.println(pDAO.selectProductReview("p0001"));
+	 System.out.println(pDAO.selectProductReview("p0001"));
 		System.out.println(pDAO.selectStarCnt("p0001"));
-		
+	
 	}
 	
 	

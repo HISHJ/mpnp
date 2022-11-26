@@ -6,16 +6,16 @@ import java.util.List;
 public class AdminProductDomain {
 
 	
-	private String productid,subid,mainid,subname,mainname,productname,thimg,infoimg,status;
+	private String productid,subid,mainid,subname,mainname,productname,thimg,infoimg,status,product_imgid,prdImg1;
 	private int price;
 	private List<String> prdImg;
 	private Date inputdate;
 	public AdminProductDomain() {
-		
+	
 	}
 	public AdminProductDomain(String productid, String subid, String mainid, String subname, String mainname,
-			String productname, String thimg, String infoimg, String status, int price, List<String> prdImg,
-			Date inputdate) {
+			String productname, String thimg, String infoimg, String status, String product_imgid, String prdImg1,
+			int price, List<String> prdImg, Date inputdate) {
 	
 		this.productid = productid;
 		this.subid = subid;
@@ -26,6 +26,8 @@ public class AdminProductDomain {
 		this.thimg = thimg;
 		this.infoimg = infoimg;
 		this.status = status;
+		this.product_imgid = product_imgid;
+		this.prdImg1 = prdImg1;
 		this.price = price;
 		this.prdImg = prdImg;
 		this.inputdate = inputdate;
@@ -84,6 +86,18 @@ public class AdminProductDomain {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getProduct_imgid() {
+		return product_imgid;
+	}
+	public void setProduct_imgid(String product_imgid) {
+		this.product_imgid = product_imgid;
+	}
+	public String getPrdImg1() {
+		return prdImg1;
+	}
+	public void setPrdImg1(String prdImg1) {
+		this.prdImg1 = prdImg1;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -106,10 +120,11 @@ public class AdminProductDomain {
 	public String toString() {
 		return "AdminProductDomain [productid=" + productid + ", subid=" + subid + ", mainid=" + mainid + ", subname="
 				+ subname + ", mainname=" + mainname + ", productname=" + productname + ", thimg=" + thimg
-				+ ", infoimg=" + infoimg + ", status=" + status + ", price=" + price + ", prdImg=" + prdImg
-				+ ", inputdate=" + inputdate + "]";
+				+ ", infoimg=" + infoimg + ", status=" + status + ", product_imgid=" + product_imgid + ", prdImg1="
+				+ prdImg1 + ", price=" + price + ", prdImg=" + prdImg + ", inputdate=" + inputdate + "]";
 	}
 	
+
 	
 	
 }//class

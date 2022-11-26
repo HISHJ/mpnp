@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.user.domain.MainDomain;
 import kr.co.mpnp.user.service.MainService;
+import kr.co.mpnp.user.vo.mainVO;
 
 @Controller
 public class mainController {
@@ -25,12 +26,28 @@ public class mainController {
 		
 		session.setAttribute("id", "id007");
 		 MainService ms = new MainService(); 
+		 mainVO mVO= new mainVO();
 		 List<MainDomain> list =null;
 		 if(mainid==null) {
 			 mainid="m0001";
 		 }
 		 list=ms.searchPrdList(mainid);
 		model.addAttribute("prdList",list);
+		//페이징변수
+				int totalData =ms.searchPrdCnt(mainid);
+				int lastPage = ms.lastPage(totalData);
+				int curPage = mVO.getPageFlag();
+				int startNum = ms.startNum(curPage);
+				int isLast = ms.isLast(lastPage, startNum);
+						
+				//view로 전송
+				model.addAttribute("totalData", totalData);
+				model.addAttribute("lastPage", lastPage);
+				model.addAttribute("startNum", startNum);
+				model.addAttribute("isLast", isLast);
+				model.addAttribute("curPage", curPage);
+		
+		
 		System.out.println(session.getAttribute("id"));
 		return"user/main/index";
 	}

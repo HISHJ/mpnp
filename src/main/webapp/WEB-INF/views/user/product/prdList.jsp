@@ -62,7 +62,14 @@
 		
 		 })//click
 		
-		
+		//페이징
+		 function movePage( page ) {
+		 	$("#pageFlag").val( page );
+		 	$("#hidFrm").submit();
+		 }
+
+		 
+		 
 		
 		})
 		
@@ -193,7 +200,7 @@
 		<script >
 			function setCateList(subid){
 				
-				location.href="prdList.do?subid="+subid
+				location.href="prdList.do?sub_id="+subid
 				
 			}
 		
@@ -356,7 +363,7 @@
 					<div class="inr" style="margin-bottom:10px;">
 						<div class="uioptsorts cates">
 							<div class="dx lt">
-								<div class="tot">총 <em class="n" id="goodsCount">${prdcnt }</em>개 상품</div>
+								<div class="tot">총 <em class="n" id="goodsCount">${totalData}</em>개 상품</div>
 							</div>
 							<!-- <div class="dx rt">
 								<nav class="filter">
@@ -393,11 +400,11 @@
 var goodsCount = '21';
 $('#goodsCount').text(goodsCount);
 </script> -->
-<c:forEach var="list" items="${sub }">
+<c:forEach var="list" items="${sub}">
 <div class="gd-item  amplitudeMainData airbridge" data-idx="0" data-index="1" data-goodsid="GI251033031" data-displayid="" data-displayname="" data-productid="GI251033031" data-productname="ANF 캣 홀리스틱 헬시 키튼 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
 		<a class="gd-link" href="prddetail.do?productid=${list.productid}" data-dispcornno="" data-disptype="10" data-idx="0" data-content="GI251033031" data-url="/goods/indexGoodsDetail?goodsId=GI251033031">
 			<div class="gd-thumb">
-				<img class="thumb-img" src="http://localhost/mpnp/images/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="${list.productname }" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+				<img class="thumb-img" src="http://localhost/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="${list.productname }" onerror="http://localhost/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
 				<div class="gd-flag">
 					</div>
 				<button class="btn-favorite " data-content="GI251033031" data-url="/goods/insertWish?goodsId=GI251033031" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033031" data-target="goods">찜하기</button>
@@ -429,6 +436,31 @@ $('#goodsCount').text(goodsCount);
 </c:forEach>
 
 			</section>
+			<div class="page">
+		<c:if test="${ not empty sub  }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+
+ 	<form name="hidFrm" id="hidFrm" action="prdList.do">
+ 	<input type="hidden" id="sub_id" value="${param.sub_id }">
+ 	<input type="text" id="sub_id" value="${param.sub_id }">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
+	</form> 
+			
+			
+			
+			
 			</div>
 	</div>
 </main>
