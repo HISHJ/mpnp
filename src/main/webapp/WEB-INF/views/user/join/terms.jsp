@@ -198,31 +198,39 @@
  <script>
 	//전체동의 체크,해제
 	$(function(){
-	 $("#sAgreeAllChecked").click(function(){
+		$("#sAgreeAllChecked").click(function(){
 			
 			if($("#sAgreeAllChecked").is(":checked")){
-				
 				$("input[name=chk]").prop("checked",true);
-	
 			}else{
 			$("input[name=chk]").prop("checked",false);
 	
 			};//end else
-	
-	 })//
+	 	});
 
 	 	 
-	$("input[name=chk]").click(function() {
-		var total = $("input[name=chk]").length;
-		var checked = $("input[name=chk]:checked").length;
-
-		if(total != checked) $("#sAgreeAllChecked").prop("checked", false);
-		else $("#sAgreeAllChecked").prop("checked", true); 
-	});
-
-
+		//작은 체크 하나라도 해제시 큰 체크 해제되는 거
+		$("input[name=chk]").click(function() {
+			var total = $("input[name=chk]").length;
+			var checked = $("input[name=chk]:checked").length;
 	
-	})
+			if(total != checked) $("#sAgreeAllChecked").prop("checked", false);
+			else $("#sAgreeAllChecked").prop("checked", true); 
+		});
+		
+		//체크 다 체크 돼있어야 다음 페이지로 이동
+		$("#nextBtn").click(function() {
+			var total = $("input[name=chk]").length;
+			var checked = $("input[name=chk]:checked").length;
+			if(total != checked){
+				alert("이용 약관에 모두 동의해주세요");
+				return;
+			}else{
+				location.href="join_form.do";
+			}
+		});
+		
+	});//ready
 	
 	
 	
@@ -255,7 +263,8 @@
 	</div>
 	
 	<div class="ec-base-button">
-		<a href="join_form.do" class="btnSubmitFix sizeM">회원가입</a>
+	
+		<a class="btnSubmitFix sizeM" id="nextBtn">회원가입</a>
 	</div>
 	</div>		
 <!--❤️main끝-->			

@@ -51,10 +51,12 @@
 		 $(".open_cat").css('display','block');
 		 $(".open_dog").css('display','none');
 		
-		 })//click
+		 });//click
+		 
+		 
 		
 		
-		})
+		});//ready
 		
 		</script>
 
@@ -397,48 +399,21 @@
 				return false;
 			}
 			 
-			if($("#pass").val().search(/\s/) !== -1 || $("#pass").val().search(/[|]/gi) !== -1){
-				$("#pass_error").html("공백이나 제한된 특수문자는 사용하실 수 없어요");
-				//$("#pass").focus();
-				return false;
-			}
-			
-			var pswdCheck = pswdValid.checkPswd($("#pass").val());
-			if(pswdCheck == "falseLength"){
-				$("#pass_error").html("8~15자 이내로 입력해주세요.");
-				//$("#pass").focus();
-				return false;
-			}
-			
-			if(pswdCheck == "falseCheck"){
-				$("#pass_error").html("영문, 숫자, 특수문자를 각각 1자리 이상 포함해주세요");
-				//$("#pass").focus();
-				return false;
-			}
-			
-			if(!pswdValid.checkPswdMatch($("#pass").val())){
-				$("#pass_error").html("3자리 연속 반복된 문자나 숫자는 입력할 수 없어요");
-				//$("#pass").focus();
-				return false;
-			}
-			
-			if(!pswdValid.checkIncludeIdValue($("#pass").val(),"jsh4135@naver.com") ) {
-				$("#pass_error").html("아이디와 4자 이상 동일할 수 없어요.");
-				//$("#pass").focus();
-				return false;
-			}
-	
-			/* if(!pswdValid.checkIncludeIdValue($("#pass").val(), "")){
-				$("#pass_error").html("생년월일과 4자 이상 동일할 수 없습니다.");
-				//$("#pass").focus();
-				return false;
-			} */
+			var pass=$("#pass").val();
+			var num = pass.search(/[0-9]/);
+			var eng = pass.search(/[a-zA-Z]/);
+			var spe= pass.search(/[~!@#$%^&*()_+|<>?:{}]/); 
+			//비밀번호 유효성 검사 :영문, 숫자, 특수문자 중 2종류 이상 8~12자 이내
+					if(pass.length < 8 || pass.length >13){
+						$("#pass_error").html("8자리 ~ 12자리 이내로 입력해주세요");
+						  return ;
+					}else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+						$("#pass_error").html("영문,숫자,특수문자 중 2가지 이상을 포함해주세요");
+						  return;
+					}
 	
 			if($("#passCheck").val() != $("#pass").val()){
 				$("#passCheck_error").html("동일한 비밀번호를 입력해주세요.");
-				//$("#passCheck").focus();
-				  /* const target = document.getElementById('modifyPassBtn');
-  				  target.disabled = true;  안먹히네;*/
 				return false;
 			}
 			
@@ -451,8 +426,10 @@
 	
 	$(function() {
 		$("#modifyPassBtn").click(function() {
-			alert("!!");
-			$("#modifyPassFrm").submit();
+			fncPswdCheck();
+			if(fncPswdCheck()==true){
+				$("#modifyPassFrm").submit();
+			}
 		});
 	});
 	</script>
@@ -486,7 +463,6 @@
 						<div class="pc-tit">
 							<h2>비밀번호 변경</h2>
 						</div>
-				
 						<div class="fake-pop">
 							<input type="hidden" id="RSAModulus" value="913bdf5042384fe17f4214726154170906dd67eeb2b5d138a4b077e104beb3efe9c45481f5d6b13e70add0c02d5c58ed75a0877aabf37e210e1c0b17838b33a037a901a397289df12732f427c63a5397aeb0ad340b91a98e8e3e1da08cad8ff3d966451506871301987988c93d26c4faa4ecd97d6d70b3fc460204a2e42c2afd" />
 							<input type="hidden" id="RSAExponent" value="10001" />
@@ -496,20 +472,20 @@
 							</div>
 							
 							<form id="modifyPassFrm" action="m_modifypass_process.do">
-							<input type="text" id="id" name="id" value="${param.id }">
+							<%-- <input type="text" id="id" name="id" value="${param.id }"> --%>
 								<div class="member-input email mt60">
 									<ul class="list">
 										<li>
 											<strong class="tit">새 비밀번호</strong>
 											<div class="input del">
-												<input type="password" class="inputPswd" id="pass" name="pass" placeholder="영문, 숫자, 특수문자 포함 8자 이상 " autocomplete="new-password" maxlength="15" autofocus="autofocus">
+												<input type="password" class="inputPswd" id="pass" name="pass" placeholder="영문,숫자,특문 중 두 개 이상 포함 8~12자" autocomplete="new-password" maxlength="12" autofocus="autofocus">
 											</div>
 											<p class="validation-check" id="pass_error"></p>
 										</li>
 										<li>
 											<strong class="tit">새 비밀번호 확인</strong>
 											<div class="input del">
-												<input type="password" class="inputPswd" id="passCheck" placeholder="비밀번호를 다시 한번 입력해주세요" autocomplete="new-password" maxlength="15">
+												<input type="password" class="inputPswd" id="passCheck" placeholder="비밀번호를 다시 한번 입력해주세요" autocomplete="new-password" maxlength="12">
 											</div>
 											<p class="validation-check" id="passCheck_error" ></p>
 										</li>
@@ -522,10 +498,10 @@
 								</div> -->
 								<div class="btnSet">
 <!-- 									<a href="javascript:fncUpdatePswd();" id="updateBtn" class="btn lg a gray"  data-content="" data-url="" disabled>완료</a> -->
-									<button type="button" id="modifyPassBtn" class="btn lg a gray">완료</button>
+									<button type="button" id="modifyPassBtn" class="btn lg a gray">확인</button>
 								</div>
-							</form>
 							</div>
+							</form>
 						</div>
 					</div>
 				</div>

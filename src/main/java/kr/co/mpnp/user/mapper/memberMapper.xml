@@ -12,7 +12,7 @@
 <select id="selectLogin"  parameterType="memberVO" resultType="int">
 select count(*) cnt
 from member 
-where id=#{id} and pass=#{pass}
+where id=#{id} and pass=#{pass} and status='정상'
 </select>
 
 
@@ -20,14 +20,14 @@ where id=#{id} and pass=#{pass}
 <select id="selectMemberId" parameterType="memberVO" resultType="memberDomain">
 select id,to_char(inputdate,'yyyy-MM-dd')inputdate 
 from member 
-where name=#{name} and phone=#{phone}
+where name=#{name} and phone=#{phone} and status='정상'
 </select>
 
 <!-- 사용자-비번찾기 -->
 <select id="selectMemberPass" parameterType="memberVO" resultType="memberDomain">
 select id, pass
 from member 
-where id=#{id} and name=#{name} and phone=#{phone}
+where id=#{id} and name=#{name} and phone=#{phone} and status='정상'
 </select>
 
 <!-- 사용자-비번변경 -->
@@ -50,9 +50,17 @@ where id=#{id}
 	 11.15: 상태, 가입일, 회원등급 추가
 	 sysdate만 써도되지만 코드 딱 떨어지게 하기위해 ..  -->
 <insert id="insertMember" parameterType="memberVO">
-insert into member (id,pfimg,nick,name,pass,phone,status,gradeid,inputdate)
-values(#{id},#{pfimg},#{nick},#{name},#{pass},#{phone},
-#{status},#{gradeid},to_char(sysdate,'yyyy-MM-dd'))
+insert into member (id,nick,name,pass,phone,status,gradeid,inputdate
+	<if test="pfimg!=null">
+	 	,pfimg
+	</if>
+	)
+values(#{id},#{nick},#{name},#{pass},#{phone},
+#{status},#{gradeid},to_char(sysdate,'yyyy-MM-dd')
+	<if test="pfimg!=null">
+	 	,pfimg=#{pfimg}
+	</if>
+	)
 </insert>
 
 

@@ -1,12 +1,12 @@
 package kr.co.mpnp.user.vo;
 
 public class MypageVO {
-	private String id,pass,name,phone,nick,pfimg;
+	private String id,pass,name,phone,nick,pfimg,gradeid;
 	
 	public MypageVO() {
 	}
 
-	public MypageVO(String id, String pass, String name, String phone, String nick, String pfimg) {
+	public MypageVO(String id, String pass, String name, String phone, String nick, String pfimg, String gradeid) {
 		super();
 		this.id = id;
 		this.pass = pass;
@@ -14,6 +14,7 @@ public class MypageVO {
 		this.phone = phone;
 		this.nick = nick;
 		this.pfimg = pfimg;
+		this.gradeid = gradeid;
 	}
 
 	public String getId() {
@@ -64,11 +65,20 @@ public class MypageVO {
 		this.pfimg = pfimg;
 	}
 
+	public String getGradeid() {
+		return gradeid;
+	}
+
+	public void setGradeid(String gradeid) {
+		this.gradeid = gradeid;
+	}
+
 	@Override
 	public String toString() {
 		return "MypageVO [id=" + id + ", pass=" + pass + ", name=" + name + ", phone=" + phone + ", nick=" + nick
-				+ ", pfimg=" + pfimg + "]";
+				+ ", pfimg=" + pfimg + ", gradeid=" + gradeid + "]";
 	}
-
+	
+	
 
 }

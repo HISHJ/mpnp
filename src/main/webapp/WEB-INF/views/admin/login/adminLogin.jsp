@@ -11,7 +11,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>관리자-로그인</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
       <style type="text/css">
   	
   	body { background: navy !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
@@ -115,6 +115,6 @@ function chkNull(){
             
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="http://localhost/mpnp/3rdAdmin/js/scripts.js"></script>
     </body>
 </html>

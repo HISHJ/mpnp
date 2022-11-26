@@ -17,7 +17,10 @@ import kr.co.mpnp.user.vo.MemberVO;
 public class MemberController {
 	
 	@RequestMapping(value = "/login_form.do", method=GET )
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
+		
+		session.removeAttribute("id");
+		session.invalidate();
 		
 		return "user/member/login";
 	}//loginForm
@@ -72,12 +75,18 @@ public class MemberController {
 	}//findPassForm
 	
 	@RequestMapping(value = "/m_findpass_process.do", method=GET )
-	public String findPassProcess(MemberVO mVO, Model model) {
+	public String findPassProcess(HttpSession session, MemberVO mVO, Model model) {
 		
 		MemberService ms=new MemberService();
-		ms.searchMemberPass(mVO);
+		MemberDomain md=ms.searchMemberPass(mVO);
+		model.addAttribute("passFind", md);
 		
-		String url="";//비번찾기 실패시 어떻게 처리할지 생각해보슈
+		System.out.println("m_findpass_process-id: "+mVO.getId());
+		
+		if(md!=null) {
+			session.setMaxInactiveInterval(60*3); //10분
+			session.setAttribute("id", mVO.getId()); 
+		}
 		
 		return "user/member/pass_modify"; 
 	}//findPassProcess
@@ -91,8 +100,15 @@ public class MemberController {
 	}//passModifyForm
 	
 	@RequestMapping(value = "/m_modifypass_process.do", method=GET )
-	public String passModifyProcess(MemberVO mVO) {		
-		System.out.println("들어오는 아이디"+mVO.getId());
+	public String passModifyProcess(HttpSession session,MemberVO mVO) {		
+		//System.out.println("들어오는 아이디"+mVO.getId());
+		// param으로 받으면 안되고 세션꺼를 받아와야해 > 마이페이지에서 패스 수정할땐 말이야
+		
+		String id=(String)session.getAttribute("id");
+		System.out.println("마이페이지 비번 수정 프로세스 아이디 "+id);
+		
+		mVO.setId(id);
+		
 		
 		MemberService ms=new MemberService();
 		ms.modifyMemberPass(mVO);

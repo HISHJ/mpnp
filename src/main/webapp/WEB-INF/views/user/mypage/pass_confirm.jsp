@@ -53,7 +53,17 @@
 		
 		 })//click
 		 
-		 $("#passChkBtn").click(function() {
+ 		 $("#passChkBtn").click(function() {
+ 			 
+ 			/* var passAlert=$("#passAlert").val()
+ 				alert("passAlert: "+passAlert);  잘 들어오는데 왜 ㅡㅡ*/
+ 			var pass=$("#pass").val()
+ 			var passChk=$("#passChk").val()
+ 			if(pass!=passChk){
+ 				alert("비밀번호를 확인해주세요");
+ 				return;
+ 			}
+
 			$("#passChkFrm").submit();
 		});
 		
@@ -232,28 +242,32 @@
 			</div>
 			<!-- // PC 타이틀 모바일에서 제거  -->
 
+			<form id="passChkFrm" action="pass_confirm_process.do">
 			<div class="fake-pop">
 				<div class="result">
 					<p class="sub">회원님의 소중한 개인정보 보호를 위해<br> 비밀번호 확인이 필요합니다.</p>
 				</div>
-				<form id="passChkFrm" action="pass_confirm_process.do">
 				<div class="member-input email mt60">
 					<ul class="list">
 						<li>
 							<div class="input coms">
-								<input type="password" id="pass" name="pass" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="20" style="padding-right: 29px;" autofocus="autofocus">
+								<input type="password" id="pass" name="pass" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="20" style="padding-right: 29px;" autofocus="autofocus"> 
 							</div>
 							<p class="validation-check" id="errorMsg" style="display:none;">error message</p>
 						</li>
 					</ul>
+				<input type="hidden" id="what" name="what" value="${param.what }" >
 				</div>
 				<div class="pbt mt30">
 					<div class="btnSet" id="confirmBtn">
 						<a id="passChkBtn" class="btn lg a" data-content="1319790">확인</a>
-<!-- 						<a href="javascript:checkMemberPassword();" class="btn lg a" data-url="/mypage/info/checkMemberPassword" data-content="1319790">확인</a> -->
 					</div>
+				<input type="text" id="passChk" name="passChk" value="${onlyForPass.pass }" autocomplete="new-password" style="border: none; color: white;" readonly="readonly"> 
 				</div>
-			</div>
+				<%-- <input type="hidden" id="passAlert"  value="${onlyForPass.pass }" autocomplete="new-password" style="border: none; color: white;" readonly="readonly"> 
+				 --%></div>
+			</div> 
+		 </form>
 		</div>
 	</div>
 </main>

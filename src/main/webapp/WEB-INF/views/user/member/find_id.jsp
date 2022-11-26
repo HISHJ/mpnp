@@ -59,7 +59,58 @@
 		 });
 		
 		
-		});
+		});//ready
+		
+		/* 전화번호 하이픈추가  */
+		function PhoneNumber(obj) {
+		    var number = obj.value.replace(/[^0-9]/g, "");
+		    var phone = "";
+		    
+			if(number.substr(0,2)==02){
+			    if(number.length < 3) {
+			        return number;
+			    } else if(number.length < 6) {
+			        phone += number.substr(0, 2);
+			        phone += "-";
+			        phone += number.substr(2);
+			        
+			    } else if(number.length < 10) {
+			        phone += number.substr(0, 2);
+			        phone += "-";
+			        phone += number.substr(2, 3);
+			        phone += "-";
+			        phone += number.substr(5);
+			    } else {
+			        phone += number.substr(0, 2);
+			        phone += "-";
+			        phone += number.substr(2, 4);
+			        phone += "-";
+			        phone += number.substr(6,4);
+			    }
+			}else{
+				if(number.length < 4) {
+		        return number;
+		   		} else if(number.length < 7) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3);
+		    	} else if(number.length < 11) {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 3);
+		        phone += "-";
+		        phone += number.substr(6);
+		    } else {
+		        phone += number.substr(0, 3);
+		        phone += "-";
+		        phone += number.substr(3, 4);
+		        phone += "-";
+		        phone += number.substr(7);
+		    }
+		}
+		    obj.value = phone;
+			return false;
+	}//PhoneNumber
 		
 		</script>
 
@@ -218,8 +269,9 @@
 													<div class="tel_w">
 													<ul class="clearfix tel">
 														<li>
-														<!-- input에 있는 패턴은 뭐지? 웹 창에 적용이 안되는데  -->
-															<input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" class="small numberOnly">
+														<!-- input에 있는 패턴은 뭐지? 웹 창에 적용이 안되는데 > db에서 조회할때 쓰이는 건가봄  -->
+															<input type="tel" name="phone" id="phone" onkeyup="PhoneNumber(this)"  maxlength="13" class="small numberOnly">
+<!-- 															<input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" class="small numberOnly"> -->
 														</li>
 													</ul>
 												</div>

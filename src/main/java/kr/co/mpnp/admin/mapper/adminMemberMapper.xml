@@ -16,13 +16,27 @@
 select  m.id, m.nick, m.status, g.gradeid, m.inputdate
 from    member m, grade g
 where   m.gradeid=g.gradeid
+<if test="id != null">
+	and m.id like '%'||#{id}||'%'
+</if>
 <if test="nick != null">
-and m.nick=#{nick}
+	and m.nick like '%'||#{nick}||'%'
 </if>
 <if test=" gradeid != null">
-and  m.gradeid =#{gradeid}
+	and  m.gradeid =#{gradeid}
+</if>
+<if test=" status != null">
+	and  m.status =#{status}
 </if>
 </select>
+
+<!-- 1.관리자-회원조회-등급조회 -->
+<select id="selectGrade" parameterType="adminMemberVO" resultType="adminMemberDomain">
+select gradeid
+from   grade
+</select>
+
+
 <!-- 2.관리자-회원상세정보 -->
 <select id="selectMemberDetail" parameterType="adminMemberVO" resultType="adminMemberDomain">
 <!-- 누적금액은 우선킵  -->
@@ -34,7 +48,7 @@ where	m.gradeid=g.gradeid and m.id=#{id}
 <!-- 3.관리자-회원삭제 -->
 <update id="updateMember" parameterType="adminMemberVO">
 update  member
-set    status='탈퇴'
+set    pass='',pfimg='',nick='',name='',phone='',status='탈퇴'
 where  id=#{id}
 </update>
 

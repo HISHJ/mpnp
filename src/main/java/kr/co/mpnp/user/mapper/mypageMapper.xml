@@ -7,9 +7,9 @@
 
 <!-- 11.15: 쿼리문 수정완료. select 쿼리문은 진도 나가는거 따라서 수정해야함 -->
 
-<!-- 마이페이지 첫화면 이름등급 조회 -->
+<!-- 마이페이지 첫화면-->
 <select id="selectMypageMember"  parameterType="mypageVO" resultType="mypageDomain">
-select name, gradeId 
+select name, gradeId,pfimg
 from   member 
 where  id=#{id}
 </select>
@@ -34,7 +34,7 @@ where  id=#{id}
 
 <!-- 사용자-회원정보조회 -->
 <select id="selectMemberInfo" parameterType="mypageVO" resultType="mypageDomain">
-select pfimg,nick,id,name,pass,phone
+select pfimg,nick,id,name,pass,phone,gradeid
 from member 
 where id=#{id}
 </select>
@@ -43,7 +43,12 @@ where id=#{id}
 <!-- 사용자-회원정보수정 -->
 <update id="updateMemberInfo" parameterType="mypageVO">
 update member
-set pfimg=#{pfimg},nick=#{nick},phone=#{phone}
+<set>
+	nick=#{nick},phone=#{phone}
+	<if test="pfimg!=null">
+	 	pfimg=#{pfimg}
+	</if>
+</set>
 where id=#{id}
 <!-- where id=#{id} and pass=#{pass} -->
 </update>
@@ -65,7 +70,7 @@ where id=#{id} and  pass=#{pass}
 </update>
 
 
-<!-- 사용자-회원탈퇴 -->
+<!-- 사용자-회원탈퇴3 -->
 <insert id="insertQuitMember" parameterType="mypageVO">
 insert into quitmember(id,inputdate) 
 values(#{id},to_char(sysdate,'yyyy-MM-dd')) <!-- inputdate으로만 받아도되나 -->

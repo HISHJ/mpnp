@@ -23,9 +23,18 @@ public class MypageDAO {
 			return mDAO;
 	}
 	
-	//마이페이지 첫화면 이름,등급 조회
-	public MypageDomain selectMypageMember(MemberVO mVO) {
+	//마이페이지 첫화면 이름,등급 조회 +프로필사진, 장바구니갯수
+	public MypageDomain selectMypageMember(String id) {
 		MypageDomain md=null;
+		
+		//1.MyBatis Handler얻기
+		MyBatisHandler mbh=MyBatisHandler.getInstance();
+		SqlSession ss=mbh.getHandler();
+		//2.쿼리문실행
+		md=ss.selectOne("kr.co.mpnp.user.mapper.mypageMapper.selectMypageMember",id);
+				
+		//3.MyBatis Handler 끊기
+		mbh.closeHandler(ss);
 		
 		return md;
 		
@@ -47,7 +56,7 @@ public class MypageDAO {
 		if(cnt!=0) {
 			flag=true;
 		}else {
-			System.out.println("실패하였습니다");
+			System.out.println("비번 확인 실패하였습니다");
 		}
 		//cnt 테스트
 		System.out.println(cnt+"건");
@@ -71,7 +80,7 @@ public class MypageDAO {
 		if(cnt!=0) {
 			ss.commit();//와 이거 잊지말자 .... 
 		}else {
-			System.out.println("실패하였습니다");
+			System.out.println("비번 변경 실패하였습니다");
 		}
 		//cnt 테스트
 		System.out.println(cnt+"건");
@@ -90,11 +99,6 @@ public class MypageDAO {
 		//1.MyBatis Handler얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		
-//		System.out.println("횐정보조회 id "+mVO.getId()); //잘 들어온다
-//		System.out.println("횐정보조회 pass "+mVO.getPass());
-//		System.out.println("횐정보조회 name "+mVO.getName()); //얘 말고 
-				
 		//2.쿼리문실행
 		md=ss.selectOne("kr.co.mpnp.user.mapper.mypageMapper.selectMemberInfo",id);
 				

@@ -18,6 +18,13 @@ public class AdminMemberService {
 		List<AdminMemberDomain> list= amd.selectMember(amVO);
 		return  list;
 	}
+	
+	//관리자-등급조회
+	public List<AdminMemberDomain> searchGrade(AdminMemberVO amVO){
+		AdminMemberDAO amd=AdminMemberDAO.getInstance();
+		List<AdminMemberDomain> list= amd.selectGrade(amVO);
+		return  list;
+	}
 
 	//관리자-회원상세정보
 	public AdminMemberDomain searchMemberDetail(String id){

@@ -42,6 +42,25 @@ public class  AdminMemberDAO {
 		
 		return list;
 	}
+	
+	//관리자-회원조회-등급조회
+	public List<AdminMemberDomain> selectGrade(AdminMemberVO amVO){
+		//List<AdminMemberDomain> list= new ArrayList<AdminMemberDomain>();
+		List<AdminMemberDomain> list= null;
+		
+		// MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss = mbh.getHandler();
+		// 쿼리 실행
+		list = ss.selectList("kr.co.mpnp.adminMemberMapper.selectGrade",amVO);
+		
+		System.out.println(list);
+		
+		// 연결끊기
+		mbh.closeHandler(ss);
+		
+		return list;
+	}
 
 	//관리자-회원상세정보
 	public AdminMemberDomain selectMemberDetail(String id){

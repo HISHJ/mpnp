@@ -286,7 +286,8 @@ function goPageWithClosingGnb(url) {
 									</dl>
 									<dl>
 										<dt>회원등급</dt>
-										<dd>${requestScope.join.gradeid}</dd>
+										<dd>NEW</dd>
+<%-- 										<dd>${requestScope.join.gradeid}</dd> 굳이 이렇게 받을필요없지 고정이니까 --%>
 									</dl>
 								</div>
 							<div class="pbt mt30">

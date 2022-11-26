@@ -277,8 +277,15 @@ function goPageWithClosingGnb(url) {
 						</div>
 						<!-- // PC 타이틀 모바일에서 제거  -->
 						<div class="fake-pop">
+							<c:if test="${ not empty idFind.id }">
 							<div class="result">
 								<span class="blue">아이디 찾기</span>를 완료하였습니다.</div>
+							</c:if>
+							<c:if test="${ empty idFind.id }">
+							<div class="result">
+								<span class="blue">아이디 찾기</span>를 실패하였습니다.</div>
+							</c:if>
+							<c:if test="${ not empty idFind.id }">
 							<div class="end-box mt30">
 									<dl>
 										<dt>아이디</dt>
@@ -289,6 +296,7 @@ function goPageWithClosingGnb(url) {
 										<dd>${idFind.inputdate }</dd>
 									</dl>
 								</div>
+							</c:if>
 							<div class="pbt mt30">
 								<div class="btnSet">
 <!-- 									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a> -->

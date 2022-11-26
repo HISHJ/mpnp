@@ -1,5 +1,7 @@
 package kr.co.mpnp.user.service;
 
+import org.json.simple.JSONObject;
+
 import kr.co.mpnp.user.dao.MypageDAO;
 import kr.co.mpnp.user.domain.MemberDomain;
 import kr.co.mpnp.user.domain.MypageDomain;
@@ -10,8 +12,11 @@ import kr.co.mpnp.user.vo.MypageVO;
 public class  MypageService {
 	
 	//마이페이지 첫화면 이름,등급 조회
-	public MypageDomain searchMypageMember(MypageVO mVO) {
+	public MypageDomain searchMypageMember(String id) {
 		MypageDomain md=null;
+		
+		MypageDAO mDAO=MypageDAO.getInstance();
+		md=mDAO.selectMypageMember(id);
 		
 		return md;
 		
@@ -25,7 +30,6 @@ public class  MypageService {
 		flag=mDAO.selectPass(mVO);
 		
 		return flag;
-		
 	}
 
 	

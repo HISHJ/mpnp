@@ -58,6 +58,7 @@
 		 $("#quitMemberBtn").click(function() {
 			$("#quitMemberFrm").submit();
 		});
+		 
 		
 		});//ready
 		
@@ -236,6 +237,8 @@
 									<p class="info">필수 입력 정보</p>
 									<div class="input disabled">
 										<input type="password" class="ipt" name="pass" id="pass" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="12">
+										<input type="text" id="passChk" name="passChk" value="${passChk.pass }" style="border: none; color: white;" readonly="readonly"> 
+				
 									</div>
 								</li>
 							</ul>

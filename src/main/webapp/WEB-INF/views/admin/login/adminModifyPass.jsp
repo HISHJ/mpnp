@@ -9,7 +9,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>정보변경-비밀번호 변경</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="http://localhost/mpnp/3rdAdmin/css/styles.css" rel="stylesheet" />
         <style type="text/css">
         
         body{background-color : #fff;}
@@ -168,6 +168,6 @@
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="http://localhost/mpnp/3rdAdmin/js/scripts.js"></script>
     </body>
 </html>

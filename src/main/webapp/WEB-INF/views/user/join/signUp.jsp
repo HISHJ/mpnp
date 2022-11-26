@@ -184,39 +184,32 @@
 }//PhoneNumber
 
 $(function() {
+	
+	
+	//아이디 유효성, 중복검사
+	$("#id_error").html("");
+	$("#passCheck_error").html("");
+	
     $("#id").change(function(){ 
   	   $("#chkmemberIdYN").val("N");
      });
 
+    //와...힘들었다
      $(".chkmemberId").click(function(){
-  	   var id = $("#id").val();
+		$("#id_error").html("");
+  	 	var id = $("#id").val();
+		var num = id.search(/[0-9]/); //안들어오면 -1. typeof-number 
+		var eng = id.search(/[a-zA-Z]/);//숫자길이. 안들어오면 -1. typeof-number 
   	   if(id == ''){
-  		  alert("아이디를 입력해주세요.");
-  		  $('#id').focus();
+		  $("#id_error").html("아이디를 입력해주세요");
+  		  //$('#id').focus();
   		  return false;
-  	   }
-
-  	  if(!id.match('^[a-zA-Z0-9]{4,20}$')) {
-  		  alert('아이디는 특수문자를 제외한 영문, 숫자 조합 6~15자로 사용 가능합니다.');
-  		 $('#id').focus();
-  		  return false;
-  	  }
-
-/*  	  $.post( //이거 뭔데 어떻게 쓰는거지
- 		"/portal/member/user/checkDupId.json",
- 		{id : id},
- 		function(data){
-
- 			if(data.idCnt > 0) {
- 				alert("아이디가 중복됩니다.");
- 				$("#chkmemberIdYN").val("N");
- 				$('#id').focus();
- 				return false;
- 			}
-
- 			alert("사용 가능한 아이디입니다.");
- 			$("#chkmemberIdYN").val("Y");
- 		}); //function */
+  	   }else if(num ==-1 || eng ==-1 ||id.length < 6) { 
+			$("#id_error").html("영문, 숫자 조합 6~15자로 입력해주세요");
+	  		//$('#id').focus();
+	  			return false;
+  	  	}
+		
  		
 		$.ajax({
 			url:"join_idchk_process.do",
@@ -241,11 +234,48 @@ $(function() {
 					
 				}
 			}
-		})
- 		
- 		
- 		
-     });//id를 입력해주세요 
+		});//ajax
+		
+		$(document).on("blur", "#pass", function(){
+			fncPswdCheck();
+		});
+		
+		
+     });//ready
+     
+   //비밀번호 유효성
+		function fncPswdCheck(){
+			$("#pass_error").html("");
+			
+			if($("#pass").val() == ""){
+				$("#pass_error").html("비밀번호를 입력해주세요.");
+				//$("#pass").focus();
+				return false;
+			}
+			 
+			var pass=$("#pass").val();
+			var num = pass.search(/[0-9]/);
+			var eng = pass.search(/[a-zA-Z]/);
+			var spe= pass.search(/[~!@#$%^&*()_+|<>?:{}]/); 
+			//비밀번호 유효성 검사 :영문, 숫자, 특수문자 중 2종류 이상 8~12자 이내
+					if(pass.length < 8 || pass.length >13){
+						$("#pass_error").html("8자리 ~ 12자리 이내로 입력해주세요");
+						  return ;
+					}else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+						$("#pass_error").html("영문,숫자,특수문자 중 2가지 이상을 포함해주세요");
+						  return;
+					}
+	
+			if($("#passCheck").val() != $("#pass").val()){
+				$("#passCheck_error").html("동일한 비밀번호를 입력해주세요.");
+				return false;
+			}
+			
+			return true;
+		}	
+     
+     
+     
      
      
 	$("#saveBtn").click(function() {
@@ -259,58 +289,67 @@ $(function() {
 		
 		for(var i=0; i<blockExt.length; i++){
 			if(blockExt[i]==pfimgExt){
-				flag=true;
+			flag=true;
 			}
 		}
+		
+		if(pfimg==null||pfimg==""){
+			flag=true;
+		}
+		
 		if(!flag){
 			alert("이미지파일만 넣으라구");
 			return flag;
-		}
+		} 
 		
 		//아이디 중복검사 안했을떄, 검사 하고 아이디 바꿨을 떄
 		if ($("#chkmemberIdYN").val()=="N") {
-			alert("아이디 중복 검사를 해주세요");
+			$("#id_error").html("아이디 중복 검사를 해주세요.");
 			return;
 		}
 		
-		//아이디 제외 유효성 검증
+/* 		//아이디 제외 유효성 검증
 		var pass=$("#pass").val();
 		if(pass.trim()==""){
+			$("#id_error").html("아이디 중복 검사를 해주세요.");
 			alert("비밀번호를 입력해주세요");
 			$("#pass").focus();	
 			return;
-		}
+		} */
 		
-		var pass2=$("#pass2").val();
-		if(pass2.trim()==""){
+		var passCheck=$("#passCheck").val();
+		if(passCheck.trim()==""){
 			alert("비밀번호 확인을 해주세요");
-			$("#pass2").focus();	
+			$("#passCheck").focus();	
 			return;
-		}
+		} 
 		
-		var name=$("#name").val();
-		if(name.trim()==""){
-			alert("이름을 입력해주세요");
-			$("#name").focus();	
-			return;
-		}
-		
-		var phone=$("#phone").val();
-		if(phone.trim()==""){ //이거 이상한데 >length
-			alert("전화번호를 입력해주세요");
-			alert(phone.length);
-			$("#phone").focus();	
+		if(!fncPswdCheck()){
+			alert("비밀번호 제대로 보고 입력하세요");
+			$("#passCheck").focus();	
 			return;
 		}
 		
 		var nick=$("#nick").val();
 		if(nick.trim()==""){
-			alert("닉네임을 입력해주세요");
+			alert("닉네임을 확인해주세요");
 			$("#nick").focus();	
 			return;
 		}
 		
+		var name=$("#name").val();
+		if(name.trim()=="" ){
+			alert("이름을 확인해주세요");
+			$("#name").focus();	
+			return;
+		}
 		
+		var phone=$("#phone").val();
+		if(phone.trim()==""){
+			alert("전화번호를 확인해주세요");
+			$("#phone").focus();	
+			return;
+		}
 		
 		$("#signUpFrm").submit();
 	});
@@ -502,7 +541,7 @@ $(function() {
 <!--❤️사이드바 끝-->
 <!--❤️main-->
   <!--❤️main-->
-	<input type="hidden" id="decodeNickNm" value="jsh1706"/>
+	<input type="" id="decodeNickNm" value="jsh1706"/>
 		
 	<style>
 		.expire{
@@ -541,8 +580,8 @@ $(function() {
 					</div>
 					<div class="fake-pop">
 						<div class="pct">
-						<form id="signUpFrm" action="join_add_process.do" method="post" enctype="multipart/form-data">
 							<div class="poptents">
+						<form id="signUpFrm" action="join_add_process.do" method="post" enctype="multipart/form-data">
 								<!-- 프로필 사진 -->
 								<div class="my-picture">
 									<p class="picture">
@@ -566,21 +605,36 @@ $(function() {
 												<input type="hidden" name="chkmemberIdYN" id="chkmemberIdYN" value="N"/>
 												<input type="text" id="id"  name="id" class="required_join_input cleanValMsg" placeholder="영문, 숫자 조합 6~15자" maxlength="15"  style="padding-right: 29px;">
 											</div>
+											<p class="validation-check" id="id_error"></p>
 
 										</li>
 										<li>
 											<strong class="tit requied">비밀번호</strong>
 											<div class="input del">
-												<input type="password" name="pass" id="pass" placeholder="영문, 숫자, 특수문자 포함 8자 이상" maxlength="15" autocomplete="new-password">
+												<input type="password" name="pass" id="pass" placeholder="영문,숫자,특문 중 두 개 이상 포함 8~12자" maxlength="12" autocomplete="new-password">
 											</div>
-											<p class="validation-check" id="join_pswd_error"></p>
+											<p class="validation-check" id="pass_error"></p>
 										</li>
 										<li>
 											<strong class="tit requied">비밀번호 확인</strong>
 											<div class="input del">
-												<input type="password" id="repass" name="repass" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" autocomplete="new-password">
+												<input type="password" id="passCheck" name="passCheck" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="12" autocomplete="new-password">
 											</div>
-											<p class="validation-check" id="join_pswd_check_error"></p>
+											<p class="validation-check" id="passCheck_error" ></p>
+										</li>
+										 <!-- 본인인증 안내 -->
+										<li id="mobile-li-cert">
+										</li>
+										<li>
+											<strong class="tit requied">닉네임</strong>
+											<div class="input del">
+												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="두 글자 이상 입력해주세요." maxlength="20" value="">
+<!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
+											</div>
+											<!-- 회원등급 hidden으로 얘네 안써줘도됨. mapper가 이미 해주고있음 -->
+												<input type="hidden" id="gradeid" name="gradeid" value="G1">
+												<input type="hidden" id="status" name="status" value="정상">
+											<p id="join_nickNm_error" class="validation-check"></p>
 										</li>
 										<li>
 											<strong class="tit requied">이름</strong>
@@ -591,26 +645,13 @@ $(function() {
 										<li id="mobile-li-default">
 											<strong class="tit requied">휴대폰 번호</strong>
 											<div class="input">
-												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13" placeholder="휴대폰번호를 입력해주세요">
+												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13"  placeholder="휴대폰번호를 입력해주세요">
 												</div>
-										</li>
-										 <!-- 본인인증 안내 -->
-										<li id="mobile-li-cert">
-										</li>
-										<li>
-											<strong class="tit requied">닉네임</strong>
-											<div class="input del">
-												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
-<!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
-											</div>
-											<!-- 회원등급 hidden으로 -->
-												<input type="hidden" id="gradeid" name="gradeid" value="G1">
-												<input type="hidden" id="status" name="status" value="정상">
-											<p id="join_nickNm_error" class="validation-check"></p>
 										</li>
 								
 									</ul>
 								</div>
+	</form>
 								<!-- // 회원 정보 입력 -->
 							</div>
 						</div>
@@ -625,7 +666,6 @@ $(function() {
 				</div>
 			</div>
 		</main>
-	</form>
 	<!-- e -->
 
 					</main>

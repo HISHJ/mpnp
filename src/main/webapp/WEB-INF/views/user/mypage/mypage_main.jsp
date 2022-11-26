@@ -311,9 +311,14 @@
 				<ul class="sm">
 					<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
 					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
+					<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
+					<li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >배송지 관리</a></li>
+<!-- 				<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
+					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
 					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
 					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
-					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >배송지 관리</a></li>
+					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >배송지 관리</a></li> -->
 				</ul>
 			</div>
 
@@ -370,19 +375,22 @@
 <div class="my_user_info_wrap">
 	<div class="my_user_profile">
 		<div class="my_user_photo">
-			<a href="javascript:location.href='/mypage/info/indexManageCheck'" title="프로필수정하기">
-				<img src="common/images/img_default_profile.svg" class="img">
+			<a title="프로필수정하기">
+			<c:choose>
+				<c:when test="${not empty mypageMain.pfimg }"><img src="http://localhost/mpnp/upload_pf/${mypageMain.pfimg }" class="img"> </c:when>
+				<c:otherwise><img src="http://localhost/mpnp/3rdAdmin/img/no_img.jpg" class="img"> </c:otherwise>
+			</c:choose>
 				<button class="btn_profile_edit"><span class="hide_txt">수정</span></button>
 			</a>
 		</div>
 		<div class="my_user_info">
 			<div class="my_user_name">
 				<span class="nm" style="pointer:cursor" onclick="location.href='/mypage/info/indexManageCheck'">
-					유설빈</span>
+					${mypageMain.name }</span>
 </div>
 			<div class="my_user_membership">
 				<span>
-					<a class="rank_icon" href="javascript:rankBox();"><i class="label welcome">웰컴</i></a>
+					<a class="rank_icon" href="javascript:rankBox();"><i class="label welcome">${mypageMain.gradeid }</i></a>
 						등급 입니다</span>
 		
 				<div class="grade_click" style="display:flex;align-items:center;">

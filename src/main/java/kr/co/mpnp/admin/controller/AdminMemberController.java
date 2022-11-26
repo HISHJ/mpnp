@@ -21,7 +21,7 @@ import kr.co.mpnp.admin.vo.AdminMemberVO;
 @Controller
 public class AdminMemberController {
 	
-	//멤버조회
+	//멤버조회(검색조회-등급 포함)
 	@RequestMapping(value = "/admin_m_list.do", method=GET )
 	public String adminMList(HttpSession session, AdminMemberVO amVO, Model model) {
 		AdminMemberService ams=new AdminMemberService();
@@ -29,6 +29,8 @@ public class AdminMemberController {
 		List<AdminMemberDomain> list= ams.searchMember(amVO);
 		model.addAttribute("memberList",list);
 		
+		List<AdminMemberDomain> gradeList= ams.searchGrade(amVO);
+		model.addAttribute("gradeList",gradeList);
 		
 		
 		return "admin/member/memberBoard";

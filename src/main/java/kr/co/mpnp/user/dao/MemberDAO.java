@@ -95,6 +95,7 @@ public class MemberDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		
+		System.out.println("비번변경 아이디, 새비번"+mVO.getId()+"/"+mVO.getPass());
 		//2.쿼리문실행
 		int cnt=ss.update("kr.co.mpnp.user.mapper.memberMapper.updateMemberPass",mVO);
 		if(cnt!=0) {

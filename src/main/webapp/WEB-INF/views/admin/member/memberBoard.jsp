@@ -30,19 +30,13 @@ if( session.getAttribute("adminId") == null){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(function(){
-		   	$("#idSearchBtn").click(function() {
-	    		$("#idFrm").submit();
-			});//아이디 검색
-			
-	    	$("#ChkSearchBtn").click(function() {
-	    		$("#chkFrm").submit();
-			});// 수신동의검색
-			
-	    	$("#statusSearchBtn").click(function() {
-	    		$("#statusFrm").submit();
-	    	});//상태 검색
+			$("#searchBtn").click(function(){
+				$("#searchMemberFrm").submit();
+			})
 	    	
    		});//ready
+   		
+   			//아마 필요없는 애
 	    	function HiddenVal(Id){
 	    		$("#memberId").val(Id);
 	    		$("#userFrm").submit();
@@ -73,42 +67,37 @@ if( session.getAttribute("adminId") == null){
                                 회원 조회
                             </div>
                             <div class="card-body">
-                           <form name="idFrm" id="idFrm">
+                            <form name="searchMemberFrm" id="searchMemberFrm" action="admin_m_list.do">
                            	<div class="dataTable-top"></div>
                                 <label>닉네임　　</label>
                            	  	<input type="text"  name="nick" class="dataTable-input" style="width: auto; display: inline-block;"> 
-                                <input type="button" id="idSearchBtn" name="nick" value="검색">
-                             </form>
+                           	<div class="dataTable-top"></div>
+                                <label>아이디　　</label>
+                           	  	<input type="text"  name="id" class="dataTable-input" style="width: auto; display: inline-block;"> 
                            
-                           
-                           
-                           <form name="chkFrm" id="chkFrm">
                                 <div class="dataTable-top"></div>
                                 <label>회원등급　</label>
                                 <select name="gradeid" class="dataTable-selector" aria-label="Default select example">
-								<option>G1</option>
-								<option>G2</option>
-								<option>G3</option>
-								<option>G4</option>
+									<!-- <option value="">등급선택</option> 와 이거 처리를 못하겠어-->
+								<c:forEach items="${gradeList }" var="grade">
+									<option>${grade.gradeid }</option>
+								</c:forEach>
 								</select>
-                                <input type="button" id="ChkSearchBtn" value="검색">
                                 
-                            </form>
                             
-							<form name="statusFrm" id="statusFrm">
                                 <div class="dataTable-top"></div>
                                 <label>회원상태　</label>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" >
+                                        <input class="form-check-input" type="radio" name="status" value="정상" >
                                         <label class="form-check-label" for="inlineRadio1">정상</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="Y">
+                                        <input class="form-check-input" type="radio" name="status" value="탈퇴">
                                         <label class="form-check-label" for="inlineRadio2">탈퇴</label>
                                     </div>
-                                    <input type="button" id="statusSearchBtn" name="showSatusSearchBtn" value="검색">
-                                 </form>   
-                                <a href="http://localhost/group2_prj/admin/useBoard.jsp"><button id="addBtn" type="button" class="btn btn-outline-info float-end mx-md-4" >전체보기</button></a>
+                                    <input type="button" id="searchBtn" name="searchBtn" value="검색">
+                             </form>   
+                                <a href="admin_m_list.do"><button id="addBtn" type="button" class="btn btn-outline-info float-end mx-md-4" >전체보기</button></a>
                                 </div>
                             </div>
                         	<form id="userFrm" name="userFrm" action="" method="post">
