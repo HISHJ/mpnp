@@ -915,7 +915,7 @@ function addWish(){
 	if(!loginChk()){
 	 	return;
 }
-	
+	alert("${wishFlag}")
 	  var productid=$("#productid").val();
 	  var id=$("#id").val();
 	  

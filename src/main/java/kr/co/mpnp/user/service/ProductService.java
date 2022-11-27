@@ -102,8 +102,8 @@ public class ProductService {
 	}//addCart
 	
 	//Âò¿©ºÎ È®ÀÎ
-	public boolean CheckWish(ProductCartVO cVO) {
-		boolean check=pDAO.checkWish(cVO);
+	public boolean checkWish(ProductCartVO cVO) {
+		boolean check=pDAO.selectcheckWish(cVO);
 		
 		return check;
 	}
@@ -124,7 +124,8 @@ public class ProductService {
 		//	System.out.println("result : "+result);
 			System.out.println("result : "+check);
 		//	System.out.println(ps.addWish(cVO));
-		
+		System.out.println(ps.checkWish(cVO));
+		System.out.println(ps.checkWish(cVO));
 	}
 
 	

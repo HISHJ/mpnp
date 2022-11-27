@@ -46,10 +46,7 @@
    rel="stylesheet">
    <!--버튼클릭시 카테고리 변경  -->
 	<script>
-	function main(mainid){
-		location.href="index.do?mainid="+mainid;
-	}
-		
+
 	/* 
 	    $(function(){
 			 $(".bt_dog").click(function(){
@@ -74,6 +71,8 @@
 			
 	    });
 	 */
+	 
+
 		
 		</script>
 
@@ -186,8 +185,8 @@
 				<nav class="tmenu">
 					<ul class="list">
 			
-						<li id="liTag_10" class="active"><a href="/shop/home/" class="bt">스토어</a></li> <!-- APET-1250 210728 kjh02  -->
-						<li id="liTag_00" class=""><a href="/mypage/indexMyPage/" class="bt">MY</a></li>
+						<li id="liTag_10" class="active"><a href="index.do" class="bt">스토어</a></li> <!-- APET-1250 210728 kjh02  -->
+						<li id="liTag_00" class=""><a href="mypage_form.do" class="bt">MY</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -222,17 +221,29 @@
 		<script >
 		/*설빈*/
 		
+		//검색
+		$(function(){
+			$("#srchWord").keydown( function(evt) {
+				if( evt.which ==13 ){// 눌린키의 키코드를 which 속성으로 받을 수 있다.
+					search()
+				}//end if
+			
+		});;
+		
+		$("#mainList").click(function(){
+			mainList()
+		});
+		
+		)};
 		
 		//중분류 이동
 			function setCateList(sub_id){
 				location.href="prdList.do?sub_id="+sub_id
 			}
 		
-		//검색
-		
-		
 			
 	function search(){
+			
 		var keyword=$("#srchWord").val();
 		if(keyword.trim()==""){
 			alert("검색어를 입력해주세요.");
@@ -240,6 +251,13 @@
 		}
 		
 		location.href="search_prd_list.do?name="+keyword
+	}
+	
+	//메인 전체보기 이동
+	function mainList(){
+		var main_id=$("#hidFrm").val();
+		location.href="mainList.do?main_id"+main_id
+		
 	}
 	
 
@@ -343,10 +361,10 @@
 
 			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 				<ul class="sm">
-					<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
-					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
-					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
-					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
+					<li><a class="bt" href="order_information_form.do">주문내역</a></li>
+					<li><a class="bt" href="writable_review_list.do" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
+					<li><a class="bt" href="pass_confirm_process.do" >비밀번호 설정</a></li>
+					<li><a class="bt" href="pass_confirm_process.do"  >회원정보 수정</a></li>
 				</ul>
 			</div>
 
@@ -709,8 +727,8 @@ var gogoSwiper = (function() {
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
-			<button class="btn-more" ><a href="javascript:mainList()">전체보기</a></button>
-			<input type="text" value="${param.main_id }">
+			<button class="btn-more" id="mainList" >전체보기</button>
+		
 					</h3>
 			<div id="corner1257" class="wrap-gd-unit gd-sd gd-col-4 is-cart">
 			<div class="gd-unit swiper swiper-container-initialized swiper-container-horizontal swiper-container-multirow">
@@ -753,6 +771,10 @@ var gogoSwiper = (function() {
 						</div>
 				</a>
 		</div>
+		
+	<form name="hidFrm" id="hidFrm">
+	<input type=hidden  id="main_id"value="${data.main_id}">
+	</form>
 </c:forEach>	
 
 
@@ -764,10 +786,11 @@ var gogoSwiper = (function() {
 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 <div class="sld-navigation hide_mo">
 <!-- <button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
-<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button> -->
+<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button>  -->
 </div>
 </div>
-<script type="text/javascript">
+
+<%-- <script type="text/javascript">
 $(function() {
 var slidesPerColumn = 1, slidesPerGroup = 4;
 
@@ -831,7 +854,8 @@ if (petShopMainResult.focus.indexOf('OnlyApet') > -1) {
 		}
 }
 });
-</script></div>
+</script> --%>
+</div>
 	</section>
 		
 </div>

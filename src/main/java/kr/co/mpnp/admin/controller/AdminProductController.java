@@ -90,7 +90,7 @@ public class AdminProductController {
 		AdminProductVO apVO = new AdminProductVO();
 		int result=0;
 		//이미지 업로드
-		File saveDir =new File("C:/Users/user/git/mpnp/src/main/webapp/images");
+		File saveDir =new File("C:/Users/user/git/mpnp/src/main/webapp/upload/product");
 		int maxSize=1024*1024*20;//byte*kb*mb*gb 
 		try {
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(),
@@ -143,7 +143,7 @@ public class AdminProductController {
 		AdminProductVO apVO = new AdminProductVO();
 		int result=0;
 		//이미지 업로드
-		File saveDir =new File("C:/Users/user/git/mpnp/src/main/webapp/images");
+		File saveDir =new File("C:/Users/user/git/mpnp/src/main/webapp/upload/product");
 		int maxSize=1024*1024*20;//byte*kb*mb*gb 
 		try {
 			MultipartRequest mr = new MultipartRequest(request, saveDir.getAbsolutePath(),

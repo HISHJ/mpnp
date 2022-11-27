@@ -203,7 +203,7 @@ private static ProductDAO pDAO;
 	}
 	
 	//Âò ¿©ºÎ
-	public boolean  checkWish(ProductCartVO cVO) {
+	public boolean  selectcheckWish(ProductCartVO cVO) {
 		int check=0;
 		boolean wishChk=false;
 		//1.MyBatisHandler¾ò±â
@@ -234,11 +234,11 @@ private static ProductDAO pDAO;
 		ProductVO pVO= new ProductVO();
 		ProductCartVO cVO = new ProductCartVO();
 		cVO.setId("id001");
-		cVO.setProductid("p0001");
+		cVO.setProductid("p0010");
 		pVO.setsub_id("s0001");
 System.out.println(pDAO.selectprdList(pVO));
 System.out.println(pDAO.selectprdCnt(pVO));
-System.out.println(pDAO.checkWish(cVO));
+System.out.println(pDAO.selectcheckWish(cVO));
 		
 		
 	}

@@ -60,14 +60,14 @@ public String searchPrdDetail( String reviewid,@RequestParam(value="productid") 
 	ProductService ps= new ProductService();
 	ProductReviewService pr = new ProductReviewService();
 	//세션 값 확인
-	String id =(String)session.getAttribute("id001");
-	if(session.getAttribute("id")!=null) {
-		
-		cVO.setId(id);
-		model.addAttribute("wishFlag",ps.CheckWish(cVO));
-		model.addAttribute("id",id);
-	}
-
+	String id =(String)session.getAttribute("id");
+//	if(session.getAttribute("id")!=null) {
+//		
+//	}
+//
+//	cVO.setId("id001");
+//	model.addAttribute("wishFlag",ps.checkWish(cVO));
+//	model.addAttribute("id",id);
 
 	
 
