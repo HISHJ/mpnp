@@ -4,16 +4,16 @@ import java.util.List;
 
 public class OrderVO {
 	private String memberName,phone, orderId, prdId, zipcode,addr,addrDetail,
-	shipReq,cartId,inputDate, id,status, defaultFlag, ship_name,receiver,  receiver_phone;
+	shipReq,cartId,inputDate, id,status, defaultFlag, ship_name,receiver,  receiver_phone,desId;
 	private int discountPrice, totalPrdPrice, actualPrice,prdCnt, cartCnt,prdPrice, totalPrice,totalPrdCnt;
 	private List<OrderPrdVO> orders;
 	public OrderVO() {
 	}
 	public OrderVO(String memberName, String phone, String orderId, String prdId, String zipcode, String addr,
 			String addrDetail, String shipReq, String cartId, String inputDate, String id, String status,
-			String defaultFlag, String ship_name, String receiver, String receiver_phone, int discountPrice,
-			int totalPrdPrice, int actualPrice, int prdCnt, int cartCnt, int prdPrice, int totalPrice, int totalPrdCnt,
-			List<OrderPrdVO> orders) {
+			String defaultFlag, String ship_name, String receiver, String receiver_phone, String desId,
+			int discountPrice, int totalPrdPrice, int actualPrice, int prdCnt, int cartCnt, int prdPrice,
+			int totalPrice, int totalPrdCnt, List<OrderPrdVO> orders) {
 		super();
 		this.memberName = memberName;
 		this.phone = phone;
@@ -31,6 +31,7 @@ public class OrderVO {
 		this.ship_name = ship_name;
 		this.receiver = receiver;
 		this.receiver_phone = receiver_phone;
+		this.desId = desId;
 		this.discountPrice = discountPrice;
 		this.totalPrdPrice = totalPrdPrice;
 		this.actualPrice = actualPrice;
@@ -137,6 +138,12 @@ public class OrderVO {
 	public void setReceiver_phone(String receiver_phone) {
 		this.receiver_phone = receiver_phone;
 	}
+	public String getDesId() {
+		return desId;
+	}
+	public void setDesId(String desId) {
+		this.desId = desId;
+	}
 	public int getDiscountPrice() {
 		return discountPrice;
 	}
@@ -197,10 +204,10 @@ public class OrderVO {
 				+ ", zipcode=" + zipcode + ", addr=" + addr + ", addrDetail=" + addrDetail + ", shipReq=" + shipReq
 				+ ", cartId=" + cartId + ", inputDate=" + inputDate + ", id=" + id + ", status=" + status
 				+ ", defaultFlag=" + defaultFlag + ", ship_name=" + ship_name + ", receiver=" + receiver
-				+ ", receiver_phone=" + receiver_phone + ", discountPrice=" + discountPrice + ", totalPrdPrice="
-				+ totalPrdPrice + ", actualPrice=" + actualPrice + ", prdCnt=" + prdCnt + ", cartCnt=" + cartCnt
-				+ ", prdPrice=" + prdPrice + ", totalPrice=" + totalPrice + ", totalPrdCnt=" + totalPrdCnt + ", orders="
-				+ orders + "]";
+				+ ", receiver_phone=" + receiver_phone + ", desId=" + desId + ", discountPrice=" + discountPrice
+				+ ", totalPrdPrice=" + totalPrdPrice + ", actualPrice=" + actualPrice + ", prdCnt=" + prdCnt
+				+ ", cartCnt=" + cartCnt + ", prdPrice=" + prdPrice + ", totalPrice=" + totalPrice + ", totalPrdCnt="
+				+ totalPrdCnt + ", orders=" + orders + "]";
 	}
 	
 	

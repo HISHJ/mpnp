@@ -20,35 +20,150 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     	<script type="text/javascript">
-    	
-    	//추가하기버튼
-    	function addBtn() {
-    		$("#gradeFrm").submit();
-/*     		
+/*     	$(function(){
+    		$(".add_btn").click(function(){
     		//유효성 검증 
-    		var name=$("#name").val();
+    			if(confirm("등급을 추가하시겠습니까?")){
+    		var name=$("#gradeName").val();
+			var gradeId=$("#gradeId").val();
+			var level = $("#level").val();
+			var discount = $("#discountRate").val()*1;
+			var minPrice = $("#minPrice").val()*1;
+			var maxPrice = $("#maxPrice").val()*1;
+			var gradeInfo = $("#gradeInfo").val()
+			
+			if( gradeId.trim()==""){ //null 아니라 ""로 처리
+				alert("등급코드를 입력해주세요");
+				$("#gradeId").focus();	
+				return false;
+			}
+			
 			if(name.trim()==""){ //null 아니라 ""로 처리
 				alert("등급명을 입력해주세요");
 				$("#name").focus();	
-				return;
+				return false;
 			}
 			
-			var gradeLev=$("#gradeLev").val();
-			if( gradeLev.trim()==""){ //null 아니라 ""로 처리
+			if( level.trim()==""){ //null 아니라 ""로 처리
 				alert("등급레벨을 입력해주세요");
-				$("#gradeLev"").focus();	
-				return;
+				$("#level").focus();	
+				return false;
 			}
+			
+			if( discount.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 할인율을 입력해주세요");
+				$("#discount").focus();	
+				return false;
+			}
+			
+			if(  minPrice.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 최소금액을 입력해주세요");
+				$("#minPrice").focus();	
+				return false;
+			}
+			if(  maxPrice.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 최소금액을 입력해주세요");
+				$("#maxPrice").focus();	
+				return false;
+			}//
+			if(  gradeInfo.trim()==""){ //null 아니라 ""로 처리
+				alert("새로운 등급에 대한 소개를 작성해주세요");
+				$("#gradeInfo").focus();	
+				return false;
+			}//
+			
+			alert("----------");
+			$.ajax({
+				url:"admin_g_add_process.do",
+				data:"gradeName=" + gradeName+"&level=" + level + "&discountRate=" + discountRate	+ "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&gradeId=" + gradeId,	
+				dataType:"json",
+				success:function(jsonObj){
+					if(jsonObj.addFlag){
+						alert("등급추가가 완료되었습니다");
+						location.href="admin_g_list.do";
+					}
+				}
+				error:function(xhr){
+					alert(xhr.status);
+					alert(xhr.statusText);
+					alert(xhr.state());
+				},
+				
+				
+			})//ajax
+    			}
+    		})//click
+    	})//ready */
+    	
+    	$(function(){
+    		$(".add_btn").click(function(){
+    		//유효성 검증 
+
+    		var name=$("#gradeName").val();
+			var gradeId=$("#gradeId").val();
+			var level = $("#level").val();
+			var discount = $("#discountRate").val()*1;
+			var minPrice = $("#minPrice").val()*1;
+			var maxPrice = $("#maxPrice").val()*1;
+			var gradeInfo = $("#gradeInfo").val()
+			
+			if( gradeId.trim()==""){ //null 아니라 ""로 처리
+				alert("등급코드를 입력해주세요");
+				$("#gradeId").focus();	
+				return false;
+			}
+			
+			if(name.trim()==""){ //null 아니라 ""로 처리
+				alert("등급명을 입력해주세요");
+				$("#name").focus();	
+				return false;
+			}
+			
+			if( level.trim()==""){ //null 아니라 ""로 처리
+				alert("등급레벨을 입력해주세요");
+				$("#level").focus();	
+				return false;
+			}
+			
+			if( discount.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 할인율을 입력해주세요");
+				$("#discount").focus();	
+				return false;
+			}
+			
+			if(  minPrice.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 최소금액을 입력해주세요");
+				$("#minPrice").focus();	
+				return false;
+			}
+			if(  maxPrice.trim()==""){ //null 아니라 ""로 처리
+				alert("적용할 최소금액을 입력해주세요");
+				$("#maxPrice").focus();	
+				return false;
+			}//
+			if(  gradeInfo.trim()==""){ //null 아니라 ""로 처리
+				alert("새로운 등급에 대한 소개를 작성해주세요");
+				$("#gradeInfo").focus();	
+				return false;
+			}//
+			
+			if(confirm("등급을 추가하시겠습니까?")){
+				$("#gradeFrm").submit();
+			} 
+			
+    			})//click
+        	})//ready
+			
 			
 
 			
 			
-			if(confirm("등급을 추가하시겠습니까?")){
+		/* 	if(confirm("등급을 추가하시겠습니까?")){
 				$("#gradeFrm").submit();
-			}  */
+			}   */
 				
 			
-		}//addBtn
+		
 		
     	
     	</script>
@@ -58,7 +173,7 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-                <form method="get" action="admin_g_add_process.do" id="gradeFrm" name="gradeFrm"> 
+                <form method="post" action="admin_g_add_process.do" id="gradeFrm" name="gradeFrm" method="post"> 
                     <div class="container">
                         <div class="row justify-content-center">
                             <!-- col lg 5 - 크기 조정 -->
@@ -70,24 +185,24 @@
                                         <div class="dataTable-top"></div>
                                          <div class="row">
                                             <div class="col-3"><b>등급코드</b></div> 
-                                            <div class="col-4"><input id="gradeId" name="gradeId" type="text" class="dataTable-input" value="등급코드"></div>
+                                            <div class="col-4"><input id="gradeId" name="gradeId" type="text" class="dataTable-input" placeholder="등급코드"></div>
                                         </div>
                                         <div class="row" style="margin-top:10px;">
                                             <div class="col-3"><b>등급명</b></div> 
-                                            <div class="col-4"><input id="gradeName" name="gradeName" type="text" class="dataTable-input" value="등급명"></div>
+                                            <div class="col-4"><input id="gradeName" name="gradeName" type="text" class="dataTable-input"  placeholder="등급명"></div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>등급레벨</b></div> 
                                             <div class="col-2">
-                                                <input id="level" name="level" type="text" class="dataTable-input" value="" placeholder="">
+                                                <input id="level" name="level" type="text" class="dataTable-input" placeholder="등급레벨"  style="width:100px">
                                             </div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>할인율</b></div> 
                                             <div class="col-2">
-                                                <input id="discountRate" name="discountRate" type="text" class="dataTable-input" value="" placeholder="">
+                                            <input type="text" name="discountRate" id="discountRate" class="dataTable-input" placeholder="할인율">
                                             </div>
                                             <div class="col-2 mt-2">(%)</div>
                                         </div>
@@ -102,14 +217,15 @@
                                         <div class="row">
                                             <div class="col-3"><b>설명</b></div> 
                                             <div class="col-8">
-                                            <textarea class="dataTable-input" name="gradeInfo" id="gradeInfo"></textarea>
+                                            <textarea class="dataTable-input" name="gradeInfo" id="gradeInfo" placeholder="등급에 대한 정보를 입력해주세요"></textarea>
                                             
                                             </div>
                                         </div>
+                                        </form>
                                         
                                              <div class="mt-4 mb-0">
                                                  <div class="col text-center">
-                                                     <button class="btn btn-info btn-sm" onclick="addBtn()" >추가</button>
+                                                     <button class="btn btn-info btn-sm add_btn"  >추가</button>
                                                      <a class="btn btn-light btn-sm" onclick="history.back()">닫기</a>
                                                  </div>
                                              </div>
@@ -118,7 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
+                        
                 </main>
                     </div>
                     

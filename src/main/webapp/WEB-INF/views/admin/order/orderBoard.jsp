@@ -53,7 +53,7 @@ $(function(){
 })
 
 function getHiddenVal(orderId,status){
-	 $("#orderId").val(orderId);
+	 $("#orderId").val(orderId) 
 	 $("#memberId").val(status)
 	 $("#resultFrm").submit();
 	
@@ -87,16 +87,15 @@ function getHiddenVal(orderId,status){
                                <!-- 다 검색으로 조회가능 하지만 우선 만듬 -->
                             <form name="memberFrm" id="memberFrm"" >
                            	 <div class="dataTable-top"></div>
-                                <label>회원명</label>
-                           	  	<input type="text"  name="memberName" class="dataTable-input" style="width: auto; display: inline-block;"> 
-                                <input type="button" id="nameSearchBtn" name="memberName" value="검색">
+                                <label>아이디</label>
+                           	  	<input type="text"  name="memberId" class="dataTable-input" style="width: auto; display: inline-block;"> 
+                                <input type="button" id="nameSearchBtn" name="memberId" value="검색">
                              </form>
                              
                             <form name="orderFrm" id="orderFrm" >
                            	 <div class="dataTable-top"></div>
                                 <label>상태</label>
                                 <select name="status" class="dataTable-selector" aria-label="Default select example" style="margin-left:18px;">
-								<option>주문취소</option>
 								<option>주문완료</option>
 								<option>배송완료</option>
 								<option>구매확정</option>
@@ -121,16 +120,30 @@ function getHiddenVal(orderId,status){
                    		  <input type="hidden" name="orderId" id="orderId" >
                    		  <input type="hidden" name="memberId" id="memberId" >
                    		  
+                   		          <script>
+                                    $(function(){
+                                    	var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+                                    	var price;
+                                    	var rate;
+                                    	var act_price
+                                    	$(".act_price").each(function(i,element){
+                                    	 	price = $(element).find("#price").val()*1;
+                                    	 	rate = price.toString().replace(expression,",");
+                                    	 	$(this).html(rate);
+                                    	})
+                                    })//ready
+                                   </script>
+                   		  
 		 				
                                 <table id="datatablesSimple">
                                
                                     <thead>
                                         <tr>
                                             <th>주문코드</th>
-                                            <th>이름</th>
+                                            <th>아이디</th>
                                             <th>주문상품</th>
                                             <th>상태</th>
-                                            <th>금액</th>
+                                            <th>상품금액</th>
                                             <th>주문일</th>
                                             <th>관리</th>
                                         </tr>
@@ -138,27 +151,32 @@ function getHiddenVal(orderId,status){
                                     <tfoot>                                         
                                         <tr>
                                             <th>주문코드</th>
-                                            <th>이름</th>
+                                            <th>아이디</th>
                                             <th>주문상품</th>
                                             <th>상태</th>
-                                            <th>금액</th>
+                                            <th>상품금액</th>
                                             <th>주문일</th>
                                             <th>관리</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                            
 						
 									 <c:forEach items="${orderList}" var="order">
-                              	 		<tr>
+                              	 		<tr >
                                             <td>${order.orderId}</td>
-                                            <td>${order.memberName}</td>
-                                            <td>${order.p_name} 외</td>
+                                            <td>${order.memberId}</td>
+                                            <td>${order.p_name}</td>
                                             <td>${order.status}</td>
-                                            <td class="act_price">${order.actualPrice}</td>
+                                            <td class="act_price">
+                                             <input type="hidden" id="price" name="price" value="${order.price}">
+                                            ${order.price}</td>
                                             <td>${order.inputdate}</td>                                          
                                             <td><input type="button" value="상세보기" onClick="getHiddenVal('${order.orderId}','${order.memberId}')"></td> 
                                         </tr>
-                                            <input type="hidden" id="price" name="price" value="${order.actualPrice}">
+                               <%--              <div class="result_tr">
+                                            <input type="hidden" id="price" name="price" value="${order.price}">
+                                    		</div> --%>
                                      </c:forEach>  
                                     </tbody>                                    
                                 </table>

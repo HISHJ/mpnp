@@ -2,6 +2,8 @@ package kr.co.mpnp.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.admin.domain.AdminGradeDomain;
 import kr.co.mpnp.admin.service.AdminGradeService;
@@ -37,16 +40,29 @@ public class AdminGradeContorller {
 		return "/admin/grade/grade_add";
 	}// adminGAddForm
 
+//	////DB전달 완료
+//	// 등급추가버튼클릭(완료)
+//	@ResponseBody
+//	@RequestMapping(value = "/admin_g_add_process.do", method = GET,produces = "application/json;charset=UTF-8")
+//	public String adminGAddProcess(HttpSession session, AdminGradeVO agVO) {
+//
+//		// System.out.println(agVO);
+//		AdminGradeService ags = new AdminGradeService();
+//		// agVO.getMaxPrice() //파스인트
+//
+//		return ags.addGrade(agVO);
+//	}// adminGAddProcess
 	////DB전달 완료
 	// 등급추가버튼클릭(완료)
-	@RequestMapping(value = "/admin_g_add_process.do", method = GET)
+	
+	@RequestMapping(value = "/admin_g_add_process.do",method = GET,produces = "application/json;charset=UTF-8")
 	public String adminGAddProcess(HttpSession session, AdminGradeVO agVO) {
-
+		int cnt = 0;
 		// System.out.println(agVO);
 		AdminGradeService ags = new AdminGradeService();
-		int cnt = ags.addGrade(agVO);
-		System.out.println(cnt + "건 추가");
-
+		cnt =ags.addGrade(agVO); 
+		// agVO.getMaxPrice() //파스인트
+		
 		return "/admin/grade/grade_add_process";
 	}// adminGAddProcess
 	
@@ -56,8 +72,6 @@ public class AdminGradeContorller {
 	@RequestMapping(value = "/admin_g_detail_form.do", method = GET)
 	public String adminGDetailForm(String gradeId ,HttpSession session,Model model) {
 		  model.addAttribute("gradeId", gradeId);
-		  //String gId=request.getParameter("gradeId");
-		 // System.out.println(gradeId);
 		  AdminGradeService agServ = new AdminGradeService(); 
 		  AdminGradeDomain agDom =agServ.searchGrade(gradeId); 
 		  model.addAttribute("agDom",agDom);
@@ -69,12 +83,13 @@ public class AdminGradeContorller {
 	//DB전달 완료
 	// 등급상세정보변경
 	@RequestMapping(value = "/admin_g_modify_process.do", method = GET)
-	public String adminGModifyProcess(HttpSession session,AdminGradeVO agVO) {
+	public String adminGModifyProcess(HttpSession session,AdminGradeVO agVO,Model model) {
 	
 		  System.out.println("업데이트 테스트"+agVO);
 		  AdminGradeService agServ = new AdminGradeService(); 
 		  int cnt = agServ.modifyGradeInfo(agVO);
 		  System.out.println(cnt + "건 변경");
+		 model.addAttribute("cnt ",cnt );
 		  
 		return "/admin/grade/gradeDetail_modify_process";
 	}// adminGModifyProcess

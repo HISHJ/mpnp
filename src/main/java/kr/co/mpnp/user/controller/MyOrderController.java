@@ -14,21 +14,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.user.domain.MyOrderDomain;
 import kr.co.mpnp.user.service.MyOrderService;
+import kr.co.mpnp.user.vo.MyOrderVO;
 
 @Controller
 public class MyOrderController {
 
 	// 주문내역 페이지 진입(아이디)
 	@RequestMapping(value = "/order_information_form.do", method = GET)
-	public String searchOrderList(HttpSession session, String id, Model model) {
+	public String searchOrderList(HttpSession session,MyOrderVO mvo, Model model) {
 	   
 		List<MyOrderDomain> list = null;
+		mvo.setId("test1126");
+	
+		mvo.getFindStartDate();
+		mvo.getFindEndDate();
+		mvo.getId();
 	   MyOrderService moServ = new MyOrderService();
-	   list = moServ.searchOrderList("id001") ;
+	   list = moServ.searchOrderList(mvo);
 	   model.addAttribute("list",list);
 	  
 		return "/user/mypage/order_information";
 	}// searchOrderList
+	
+	//날짜 조회
+	@ResponseBody
+	@RequestMapping(value="/order_date_process.do", method=GET)
+	public String searchDate(HttpSession session,MyOrderVO mvo,Model model) {
+		 MyOrderService moServ = new MyOrderService();
+		 mvo.setId("test1126");
+		String jsonObj  = moServ.searchDate(mvo);
+		return jsonObj; 
+	}//
 	
 
 	// 선택주문취소(,주문상세코드)
@@ -66,7 +82,7 @@ public class MyOrderController {
 		moDOM2 = mSer.searchOrderShip(orderId);//배송지
 		int prdPrice = mSer.searchPriceIndivisual(orderId);//상품 총가격
 		int actualPrce = mSer.selectPriceTotal(orderId);// 최종 결제금액
-		int discountRate = mSer.selectDiscountRate("id001");// 할인율
+		int discountRate = mSer.selectDiscountRate("test1126");// 할인율
 		
 		model.addAttribute("prdPrice",prdPrice); //상품 총가격
 		model.addAttribute("actualPrce",actualPrce); //최종결제금액(감산된 상태)

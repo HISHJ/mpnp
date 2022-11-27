@@ -21,6 +21,14 @@
 </script>
 </head>
 <body>
-${param.gradeName} 의 상태가 변경되었습니다.
+<%--  <c:if test="${ cnt eq 1 }"> --%>
+<script>
+$(function(){
+alert("${param.gradeName} 의 상태가 변경되었습니다.");
+location.href="admin_g_list.do";
+})
+</script>
+<%-- </c:if> --%>
+
 </body>
 </html>

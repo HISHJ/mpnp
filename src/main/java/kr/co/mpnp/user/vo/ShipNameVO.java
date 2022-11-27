@@ -1,14 +1,15 @@
 package kr.co.mpnp.user.vo;
 
 public class ShipNameVO {
-	 private String name, id;
+	 private String name,id,desId;
 
 	public ShipNameVO() {
 	}
 
-	public ShipNameVO(String name, String id) {
+	public ShipNameVO(String name, String id, String desId) {
 		this.name = name;
 		this.id = id;
+		this.desId = desId;
 	}
 
 	public String getName() {
@@ -27,11 +28,19 @@ public class ShipNameVO {
 		this.id = id;
 	}
 
+	public String getDesId() {
+		return desId;
+	}
+
+	public void setDesId(String desId) {
+		this.desId = desId;
+	}
+
 	@Override
 	public String toString() {
-		return "ShipNameVO [name=" + name + ", id=" + id + "]";
+		return "ShipNameVO [name=" + name + ", id=" + id + ", desId=" + desId + "]";
 	}
-	 
+
 	 
 
 }

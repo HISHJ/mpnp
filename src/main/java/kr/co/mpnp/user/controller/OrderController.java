@@ -49,10 +49,9 @@ public class OrderController {
 	     System.out.println("p@@@@@@"+oIfVO); //파라메터 (ok)
 	     System.out.println("db@@@@@@"+opvo ); //성공 ㅠㅠ
 	    model.addAttribute("opvo", opvo);
-		/////////////////////////////////////////////////////////
-		oVO.setId("id006");
+		oVO.setId("test1126");
 		oVO.setDefaultFlag("O");
-		 String flag = ordSer.searchOrderChk("id006");
+		 String flag = ordSer.searchOrderChk("test1126");
 		 String id= oVO.getId();
 		//내역조회
 		 OrderDomain orDom = null;
@@ -67,7 +66,10 @@ public class OrderController {
 			OrderShipDomain osDom = null;
 			OrderDomain oDom2 = null;
 			osDom =ordSer.searchDestination(oVO); //기본배송지 주소 조회
+			System.out.println("#####1126" + osDom );
+			List<OrderShipDomain> list = null;
 			list = ordSer.searchShipName(id);//해당아이디의 배송지 별칭 조회
+			System.out.println("#####1126 14:28" + list );
 			
 			model.addAttribute("oDom2", oDom2);
 			model.addAttribute("list",list);
@@ -81,10 +83,10 @@ public class OrderController {
 	//배송지변경버튼(ajax)
 	@ResponseBody
 	@RequestMapping(value = "/order_ship_addr.do", method = GET, produces = "application/json;charset=UTF-8")
-	public String changeShipAddr(HttpSession session, String shipName,Model model) {
+	public String changeShipAddr(HttpSession session, String desid,Model model) {
 		ShipNameVO snVO = new ShipNameVO();
-		snVO.setId("id006");
-		snVO.setName(shipName);
+		snVO.setId("test1126");
+		snVO.setDesId(desid);
 		String jsonObj =ordSer.seachChangeDestination(snVO);
 		return jsonObj;
 	}
@@ -94,15 +96,11 @@ public class OrderController {
 	public String orderCompleteProcess(HttpSession session, OrderVO oVO,Model model) {
 		session.setAttribute("discountPrice", oVO.getDiscountPrice());
 		session.setAttribute("totalPrice", oVO.getTotalPrice());
-		oVO.setId("id006");
-		 String flag = ordSer.searchOrderChk("id006");
-		 System.out.println("오더-1111---" +oVO.getOrderId()); //ok 
+		oVO.setId("test1126");
+		 System.out.println("오더-1111---" +oVO.getOrderId()); //
 		 
-		 ordSer.searchOrer(oVO); //트랜잭션
-		 System.out.println("오더-22222---" +oVO.getOrderId()); // 트랜잭션 처리 후 주문코드가 들어옴
-		if(flag == null || "".equals(flag)) { // 기본배송지설정이 안된 회원일 경우
-			ordSer.addShipAddr(oVO);//배송지추가
-		 }
+		ordSer.searchOrer(oVO); //트랜잭션
+		System.out.println("오더-22222---" +oVO.getOrderId()); // 트랜잭션 처리 후 주문코드가 들어옴
 		session.setAttribute("orderId", oVO.getOrderId()); //트랜잭션 처리 후 주문코드값 들어옴
 		return "/user/order/orderPayment_process";
 	}// end orderComplete

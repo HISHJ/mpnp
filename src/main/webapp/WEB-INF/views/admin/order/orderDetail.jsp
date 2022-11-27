@@ -49,14 +49,14 @@ $(function(){
 	  var rate_price = prdSum * rate;
 	
 	 
-var deli_fee = 2500;
+var deli_fee = 0;
 
 var actual_price;
 if(prdSum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-	  deli_fee = 0;
+	  deli_fee = 2500;
 } //end if
 
-actual_price = prdSum - rate_price -deli_fee ; 
+actual_price = prdSum - rate_price +deli_fee ; 
 
 
 //숫자에 단위 넣기
@@ -71,15 +71,34 @@ const ship_fee = deli_fee.toString()
 const price_ = price.toString().replace(expression, ",");
 
 
-$(".prdPri").html(total_pri); //상품 총 금액
-$(".disPri").html("-" + rate_); //할인금액
-$(".deliFee").html("-" +ship_fee);//배송비
-$(".actualPri").html(cn1);//총 결제금액
+$(".prdPri").html(total_pri +"원"); //상품 총 금액
+if(rate_price > 0 && deli_fee >0){
+$(".disPri").html("-" + rate_ + "원"); //할인금액
+$(".deliFee").html("-" +ship_fee + "원");//배송비
+}else{
+	$(".disPri").html( rate_ + "원"); //할인금액
+	$(".deliFee").html(ship_fee + "원");//배송비
+}
+$(".actualPri").html(cn1 +"원");//총 결제금액
 //$(".pri").html(price_);
 
 
 })//reay
 </script>
+<script>
+
+$(function(){
+	var expression = /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g;
+	var price;
+	var rate;
+	var act_price
+	$(".act_price").each(function(i,element){
+	 	price = $(element).find("#price").val()*1;
+	 	rate = price.toString().replace(expression,",");
+	 	$(this).html(rate + "원");
+	})
+})//ready
+
 </script>
 
 <div class="hidList">
@@ -143,10 +162,12 @@ $(".actualPri").html(cn1);//총 결제금액
                                             <c:forEach items="${list}" var="list">
                                             <tr>
                                                 <td>${list.productName}</td>
-                                                <td class="pri">${list.price}원</td>
+                                                <td class="act_price">${list.price}원
+                                                 <input type="hidden" id="price" name="price" value="${list.price}">
+                                                </td>
                                                 <td>${list.totalCnt}개</td>
                                             </tr>
-                                                <input type="hidden" id="price" name="price" value="${list.price}">
+                                               
                                             </c:forEach>
                                             </table>
                                         </div>
@@ -179,11 +200,45 @@ $(".actualPri").html(cn1);//총 결제금액
                                                 </table>
                                             </div>
                                         </div>
-                                        <script>
-                                        function addBtn(){
-                                        	$("#statusFrm").submit();
-                                        }
+                                        <script type="text/javascript">
+                                        $(function(){
+                                        	 const oriStatus =$("select[name=status]").val();
+                                        	 if(oriStatus == "구매확정"){
+                                        		 $(".selectStatus").attr('disabled',true);
+                                        		 $(".selectStatus").css('background-color',"#f7f7f7");
+                                        		 $(".selectStatus").css('color',"grey");
+                                        	 }
+                                        	 if(oriStatus == "배송완료"){
+                                        		 $("#id_0").attr('disabled',true);
+                                        		 $("#id_0").css('background-color',"#f7f7f7");
+                                        		 $("#id_0").css('color',"grey");
+                                        	 }
+                                        	 if(oriStatus == "주문완료"){
+                                        		 $("#id_2").attr('disabled',true);
+                                        		 $("#id_2").css('background-color',"#f7f7f7");
+                                        		 $("#id_2").css('color',"grey");
+                                        	 }
+                                
+                                        })//ready
+                                             function addBtn(){
+                                        	 const oriStatus =$("select[name=status]").val();
+                                        	  if(oriStatus == "구매확정"){
+                                           	    alert("주문 상태를 구매확정으로 변경하시겠습니까?")
+                                        		  $("#statusFrm").submit();
+                                           	     return;
+                                        	  }//end if
+                                        	  
+                                        	  if(oriStatus == "배송완료"){
+                                             	    alert("주문 상태를 배송완료로 변경하시겠습니까?")
+                                          		  $("#statusFrm").submit();
+                                             	    return;
+                                          	  }//end if
+                                          	  
+                                        	 
+	                                        }//end addBtn()
                                         </script>
+                                       
+                                    
 										<div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-2"><b>상태</b></div> 
@@ -191,11 +246,11 @@ $(".actualPri").html(cn1);//총 결제금액
                           
                                             <form action="orderModify_process.do" id="statusFrm" name="statusFrm">
                                             <input type="hidden" id="orderId" name="orderId" value="${aoDom.orderId}"/>
-			                                <select name="status" class="dataTable-selector" aria-label="Default select example">
+			                                <select id="status" name="status" class="dataTable-selector selectStatus" aria-label="Default select example" >
 												
-												<option ${aoDom.status eq '주문완료'?"selected='selected'":"" }>주문완료</option>
-												<option ${aoDom.status eq '배송완료'?"selected='selected'":"" }>배송완료</option>
-												<option ${aoDom.status eq '구매확정'?"selected='selected'":"" }>구매확정</option>
+												<option id="id_0" value="주문완료" ${aoDom.status eq '주문완료'?"selected='selected'":"" }>주문완료</option>
+												<option id="id_1" value="배송완료" ${aoDom.status eq '배송완료'?"selected='selected'":"" }>배송완료</option>
+												<option id="id_2" value="구매확정" ${aoDom.status eq '구매확정'?"selected='selected'" :"" }>구매확정</option>
 											</select>
 											
 											    </form>

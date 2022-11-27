@@ -7,7 +7,6 @@ public AdminOrderVO() {
 }
 
 public AdminOrderVO(String memberName, String status, String orderId, String memberId) {
-	super();
 	this.memberName = memberName;
 	this.status = status;
 	this.orderId = orderId;

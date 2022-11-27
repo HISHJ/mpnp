@@ -83,14 +83,14 @@
 		  
 		
 		  //총 결제금액 구하기
-		  var deli_fee = 2500;
+		  var deli_fee =0;
 		  
 		   var actual_price;
 		  if(prdPrice < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-			  deli_fee = 0;
+			  deli_fee = 2500;
 		  } //end if
 	
-		  actual_price = prdPrice - rate_price -deli_fee ; 
+		  actual_price = prdPrice - rate_price + deli_fee ; 
 		 
 		  //상품개별비용
 		  
@@ -105,9 +105,10 @@
         .replace(expression, ","); // 배송비
        
 		  $(".total_pri").html(total_pri); //상품 총 금액
-		  if(rate_price <0 && deli_fee <0 ){
+		  if(rate_price > 0 ){
 		  $(".dc_price").html("-" +rate_); //할인금액
-		  $(".deli_pri").html("-" +ship_fee);//배송비
+		  $(".deli_pri").html("+" + ship_fee);//배송비
+		 
 		  }else{
 			  $(".dc_price").html(rate_ ); //할인금액
 			  $(".deli_pri").html(ship_fee);//배송비
@@ -352,14 +353,14 @@
 									<li>
 										<div class="dt">할인 금액</div>
 										<div class="dd">
-											<span class="prc">-<em class="p dc_price">0</em><i class="w">원</i></span>
+											<span class="prc"><em class="p dc_price">0</em><i class="w">원</i></span>
 											<input type="hidden" id="discountRate" name="discountRate" value="${discountRate}">
 										</div>
 									</li>
 									<li>
 										<div class="dt">배송비</div>
 										<div class="dd">
-											<span class="prc">-<em class="p deli_pri">2,500</em><i class="w">원</i></span>
+											<span class="prc"><em class="p deli_pri">2,500</em><i class="w">원</i></span>
 										</div>
 									</li>
 								

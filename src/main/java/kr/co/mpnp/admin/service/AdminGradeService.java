@@ -2,6 +2,8 @@ package kr.co.mpnp.admin.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import kr.co.mpnp.admin.dao.AdminGradeDAO;
 import kr.co.mpnp.admin.domain.AdminGradeDomain;
 import kr.co.mpnp.admin.vo.AdminGradeVO;
@@ -22,15 +24,25 @@ public class AdminGradeService {
 		return list;
 	}// searchGrade
 
+//	// 등급추가
+//	public String addGrade(AdminGradeVO agVO) {
+//		int cnt =0;
+//		
+//		JSONObject jsonObj = new JSONObject();
+//		
+//		boolean addFlag = agDAO.insertGrade(agVO)==1?true:false;
+//		jsonObj.put("addFlag", addFlag);
+//		return jsonObj.toJSONString();
+//
+//	}// addGrade
 	// 등급추가
 	public int addGrade(AdminGradeVO agVO) {
 		int cnt =0;
 		
-//		AdminGradeDAO agDAO = AdminGradeDAO.getInstance();
 		cnt = agDAO.insertGrade(agVO);
-
+		
 		return cnt;
-
+		
 	}// addGrade
 
 	// 등급상세보기

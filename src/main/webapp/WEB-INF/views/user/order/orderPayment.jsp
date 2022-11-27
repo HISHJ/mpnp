@@ -160,6 +160,32 @@ li.open, div.ctset {
 				return ;
 			}//addr2
 			
+		
+			
+			//var shipReq=$("#shipReq").val();
+			if($("#ship_name").val().length ==0 ){
+				alert("배송지 별칭을 입력해주세요");
+				
+			  $("#ship_name").focus();
+				return ;
+			}//addr2
+			
+			//var shipReq=$("#shipReq").val();
+			if($("#receiver").val().length ==0 ){
+				alert("받는 사람의 이름을 입력해주세요");
+				
+			  $("#receiver").focus();
+				return ;
+			}//addr2
+			
+			//var shipReq=$("#shipReq").val();
+			if($("#receiver_phone").val().length ==0 ){
+				alert("받는 사람의 번호를 입력해주세요");
+				
+			  $("#receiver_phone").focus();
+				return ;
+			}//addr2
+			
 			//var shipReq=$("#shipReq").val();
 			if($("#shipReq").val().length ==0 ){
 				alert("배송요청사항을 입력해주세요.");
@@ -168,7 +194,7 @@ li.open, div.ctset {
 				return ;
 			}//addr2
 			
-			if($("#shipReq").val().length < 5 && $("#shipReq").val().length > 50 ){
+			if($("#shipReq").val().length < 5 || $("#shipReq").val().length > 50 ){
 				alert("요청사항은 최소 5자 이상 50자 이하 입력가능합니다");
 				$("#shipReq").focus();
 				return ;
@@ -226,6 +252,7 @@ li.open, div.ctset {
 					  });//end forEach
 					  
 					  
+					  
 					  //할인액 구하기
 					  //할인율 가져오기
 					  var rate = ($("#discount_rate").val()*1)/100;
@@ -238,10 +265,11 @@ li.open, div.ctset {
 					  
 					   var actual_price;
 					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-						  deli_fee = 2500;
+						  deli_fee =2500;
 					  } //end if
 				
-					  actual_price = sum - rate_price -deli_fee ; 
+					  actual_price = (sum - rate_price) + deli_fee ; 
+					 // alert(actual_price);
 					 
 					  
 					  //숫자에 단위 넣기

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.MyOrderDomain;
+import kr.co.mpnp.user.vo.MyOrderVO;
 //설빈
 //모든 쿼리 검증 완료
 public class MyOrderDAO {
@@ -28,7 +29,7 @@ public class MyOrderDAO {
 	//검증
 	// 기간별 주문내역조회
 	//골든에서는 값이 다 들어오는데 왜 여기는 부분적으로 들어오는지 모르겠다
-	public List<MyOrderDomain> selectOrderAList(String orID) {
+	public List<MyOrderDomain> selectOrderAList(MyOrderVO mvo) {
 		List<MyOrderDomain> list = null;
 		
 		// MyBatisHandler얻기
@@ -38,7 +39,7 @@ public class MyOrderDAO {
 
 		try {
 			// 쿼리 실행
-			list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderAllList", orID);
+			list = ss.selectList("kr.co.mpnp.myOrderMapper.selectOrderAllList", mvo);
 			System.out.println(list);
 		} catch (PersistenceException pe) {
 			pe.printStackTrace();

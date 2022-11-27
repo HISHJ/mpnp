@@ -281,7 +281,7 @@
 							<li id="couponDcLi">
 								<div class="dt">등급할인</div>
 								<div class="dd">
-									<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">-${discountPrice}</em><i class="w">원</i></span>
+									<span class="prc dis"><em class="p" id="order_payment_total_dc_amt_view">${discountPrice}</em><i class="w">원</i></span>
 									<input type="hidden" id="order_payment_total_dc_amt" value="${discountPrice}">
 								</div>
 							</li>
@@ -290,7 +290,7 @@
 							<li>
 								<div class="dt">배송비</div>
 								<div class="dd">
-									<span class="prc">-<em class="p" id="order_payment_total_dlvr_amt_view">0</em><i class="w">원</i></span>
+									<span class="prc"><em class="p" id="order_payment_total_dlvr_amt_view">0</em><i class="w">원</i></span>
 									<input type="hidden" id="gb_01_total_dlvr_amt" value="0">
 									<input type="hidden" id="gb_02_total_dlvr_amt" value="0">
 									<input type="hidden" id="order_payment_total_dlvr_amt" value="0">

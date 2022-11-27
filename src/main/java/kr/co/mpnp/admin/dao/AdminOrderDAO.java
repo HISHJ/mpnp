@@ -130,43 +130,9 @@ public class AdminOrderDAO {
 	}// selectOrderDetail
 	
 
-	// 주문상태변경
-//	//주문 완료,배송완료, 구매확정
-//	public int updateOrderStatus(AdminOrderVO aoVO) {
-//		int cnt = 0;
-//
-//		// MyBatisHandler얻기
-//		MyBatisHandler mbh = MyBatisHandler.getInstance();
-//		SqlSession ss = mbh.getHandler();
-//		
-//		try {
-//		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateOrderStatus", aoVO);// 주문상태변경
-//		
-//		if(cnt == 1) { //변경 잘 됐니?
-//			ss.commit();
-//			System.out.println("");
-//		   int cnt2 = 0;
-//		   int cnt3=0;
-//		   cnt2 = ss.update("kr.co.mpnp.adminOrderMapper.updateCompletionDate",aoVO);//구매확정인 경우 구매확저일 업데이트
-//		   cnt3 = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk",aoVO); //구매확정인 경우 후기 체크여부 변경
-//		   if(cnt2==1 && cnt3== 1) {//변경 잘됐니?
-//			   ss.commit();
-//			   System.out.println("구매확정일, 주문상태 전부 변경" + cnt2);
-//		   }else {
-//			   ss.rollback();
-//			   System.out.println("트랜잭션 실패");
-//		   }//end else
-//		}//end p if		
-//		}catch(PersistenceException pe) {
-//			pe.printStackTrace();
-//		}//end catch		
-//		// 연결끊기
-//		mbh.closeHandler(ss);
-//		return cnt;
-//
-//	}// updateOrderStatus
+
 	
-	//주문상태 변경
+	//주문상태 변경(트랜잭션)
 	public int updateOrderStatus(AdminOrderVO aoVO) {
 		int cnt = 0;
 		
@@ -176,12 +142,28 @@ public class AdminOrderDAO {
 		
 		try {
 		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateOrderStatus", aoVO);// 주문상태변경
+		System.out.println(cnt);
 		if(cnt == 1) { //변경 잘 됐니?
 			ss.commit();
-			System.out.println("주문상태가 변경되었습니다.");
-		}else {
-			System.out.println("상태변경에 실패했습니다.");
-		}
+			System.out.println(cnt);
+			int cnt2=0;
+			int cnt3 = 0;
+		 if("구매확정".equals(aoVO.getStatus())) {
+			 
+			cnt2 = ss.update("kr.co.mpnp.adminOrderMapper.updateCompletionDate",aoVO); //구매확정 시 날짜 업데ㅣ트
+			System.out.println(cnt2);
+			cnt3 = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk",aoVO); // 구매확정 시 후기체크 업데ㅣ트
+		   System.out.println(cnt3);
+		}//end if
+		   if(cnt2 !=0 && cnt3 !=0) {
+			  ss.commit();
+			  System.out.println("트랜잭션 성공");
+		  }else {
+			  ss.rollback();
+			  System.out.println("트랜잭션 실패");
+		  }//end else
+		
+		}//end 대왕if
 		}catch(PersistenceException pe) {
 			pe.printStackTrace();
 		}//end catch	
@@ -193,21 +175,29 @@ public class AdminOrderDAO {
 	
 	//검증완료
 		//주문상태가 구매확정인 경우 구매확정일 업데이트(주문코드)
-		public int updateCompletionDate(String orID) {
+		public int updateCompletionDate(AdminOrderVO aoVO) {
 			int cnt = 0;
 			MyBatisHandler mbh = MyBatisHandler.getInstance();
 			SqlSession ss = mbh.getHandler();
 			
-			cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateCompletionDate",orID);
+			try {
+			cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateCompletionDate",aoVO);
 			
 			if(cnt == 1) { //변경 잘 됐니?
-				
-				ss.commit();
-				System.out.println("구매확정일이 추가되었습니다.");
-				
-			}else {
-				System.out.println("구매확정 대상이 아닙니다. ");
-			}//en else
+				int cnt2=0;
+				cnt2 = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk",aoVO);
+				if(cnt2 == 1) {
+					ss.commit();
+					System.out.println("구매확정일과 후기체크가 변경되었습니다.");
+				}else {
+					ss.rollback();
+					System.out.println("구매확정 대상도 후기체크대상도 아닙니다. ");
+				}//end else
+			}//end if	
+			}catch(PersistenceException pe) {
+				pe.printStackTrace();
+			}//end catch	
+		
 
 			// 연결끊기
 			mbh.closeHandler(ss);
@@ -218,7 +208,7 @@ public class AdminOrderDAO {
 	
 	
 	//가격 감산쿼리
-	public int selectPriceIndivisual(String orID) {
+	public int selectPriceIndivisual(String orderId) {
 		int price = 0;
 		
 		// MyBatisHandler얻기
@@ -226,7 +216,7 @@ public class AdminOrderDAO {
 				SqlSession ss = mbh.getHandler();
 				
 				try {
-					price= ss.selectOne("kr.co.mpnp.adminOrderMapper.selectPriceIndivisual", orID);
+					price= ss.selectOne("kr.co.mpnp.adminOrderMapper.selectPriceIndivisual", orderId);
 					System.out.println(price);
 				} catch (PersistenceException pe) {
 					pe.printStackTrace();
@@ -246,13 +236,13 @@ public class AdminOrderDAO {
 	
 	//검증완료
 	//구매확정인 주문코드는 주문상세에서 주문후기를 'N''로 바꿔
-	public int updateReviewChk(String orID) {
+	public int updateReviewChk(AdminOrderVO aoVO) {
 		int cnt=0;
 		
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		
-		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk",orID);
+		cnt = ss.update("kr.co.mpnp.adminOrderMapper.updateReviewChk",aoVO);
 		
 		if(cnt > 1) { //변경 잘 됐니?
 			ss.commit();

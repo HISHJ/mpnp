@@ -41,7 +41,7 @@ function addDBtn(gradeId){
                 <main>
              
                 
-                <form id="gradeFrm" name="gradeFrm" method="get" action="admin_g_remove_process.do">
+                <form id="gradeFrm" name="gradeFrm" method="post" action="admin_g_remove_process.do">
                    <input type="hidden" id="gradeId"  name="gradeId"/>
                     
                     <div class="container-fluid px-4">

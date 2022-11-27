@@ -30,20 +30,20 @@
 
 주문내역 첫조회(다이나믹 필요) -->
  <select id="selectOrderList"  parameterType="AOrderVO" resultMap="AOrderDom" >
-SELECT o.ORDERID, m.NAME memberName,m.id id ,p.NAME, o.ACTUAL_PRICE  actualPrice, o.STATUS status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate
-FROM ORDERS o, ORDER_DETAIL d, PRODUCT p, MEMBER m
-WHERE (d.ORDERID=o.ORDERID and o.ID=m.ID and d.PRODUCTID=p.PRODUCTID)
+SELECT o.ORDERID, o.id id ,p.NAME,  o.STATUS status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate,p.PRICE price
+FROM ORDERS o, ORDER_DETAIL d, PRODUCT p
+WHERE (d.ORDERID=o.ORDERID and d.PRODUCTID = p.PRODUCTID)
 <if test="status != null">
 and o.STATUS =#{status}
 </if>
-<if test="memberName != null">
-and m.NAME like '%' ||   #{memberName}  || '%'
-
+<if test="memberId != null">
+and o.id like '%' ||   #{memberId}  || '%'
 </if>
+ORDER BY o.ORDERID desc
 </select>
  <!-- 임시 할인율 조회 -->
 <select id="selectDiscountRate" parameterType="String" resultType="int" >
-SELECT DISCOUNT_RATE discountRate
+SELECT nvl(max(DISCOUNT_RATE),0) discountRate
 FROM MEMBER m, GRADE g
 WHERE (m.GRADEID = g.GRADEID) and m.id =#{id}
 </select>
@@ -51,7 +51,7 @@ WHERE (m.GRADEID = g.GRADEID) and m.id =#{id}
 
 <!-- 주문 상세내역 조회 -->
 <select id="selectOrderDetail" parameterType="String" resultType="AOrderDomain">
-SELECT orderId ,m.id memberId,m.NAME memberName,m.PHONE PHONE,o.status status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate, o.shipReq, o.ACTUAL_PRICE actualPrice
+SELECT o.ORDERID orderId ,m.id memberId,m.NAME memberName,m.PHONE PHONE,o.status status, to_char(o.INPUTDATE,'yyyy-mm-dd') inputdate, o.shipReq, o.ACTUAL_PRICE actualPrice
 FROM ORDERS o,MEMBER m
 WHERE (o.id=m.id) and orderId=#{orderId}
 
@@ -68,8 +68,8 @@ WHERE  (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID )and o.orderId=#{ord
 <!-- 주문 상세 배송지 조회 -->
 <select id="selectOrderShip" parameterType="String" resultType="AOrderDomain">
 SELECT  d.NAME shipName, d.ZIPCODE zipcode, d.ADDR addr, d.ADDR_DETAIL addrDetail, d.RECEIVER receiver, d.PHONE receiverPhone
-FROM   ORDERS o,DESTINATION d,MEMBER m
-WHERE  (o.ID = m.ID and d.ID = m.ID) and o.orderId=#{orderId}
+FROM   ORDERS o,DESTINATION d
+WHERE   (o.DES_ID = d.DESID) and o.orderId=#{orderId}
 </select>
 
 
@@ -106,17 +106,17 @@ update ORDERS set STATUS =#{status} where ORDERID=#{orderId}
 <!-- 주문상태가 구매확정인 경우 구매확정일 업데이트 -->
 <update id="updateCompletionDate" parameterType="AOrderVO">
 
-update ORDERS set COMPLETIONDATE=sysdate  where STATUS ='구매확정' and ORDERID=#{orderId}
+update ORDERS set COMPLETIONDATE=sysdate  where STATUS =#{status} and ORDERID=#{orderId}
 
 </update>
 
 <!-- 구매확정인 주문코드는 주문상세에서 주문후기를 'N''로 바꿔줘야 하겠지? 쿼리문 계~속 추가된다 -->
-<update id="updateReviewChk" parameterType="String">
+<update id="updateReviewChk" parameterType="AOrderVO">
 update ORDER_DETAIL
 set REVIEW_CHK = 'N'
 where ORDERID in(select ORDERID
                  from ORDERS
-                 where STATUS ='구매확정' and ORDERID=#{orderId})
+                 where STATUS =#{status} and ORDERID=#{orderId})
 </update>        
 
 

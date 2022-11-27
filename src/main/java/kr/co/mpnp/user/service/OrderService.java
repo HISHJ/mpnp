@@ -28,8 +28,8 @@ public class OrderService {
 	}// selectOrderChk
 
 	// 기본배송지가 있는 경우, 해당 아이디의 배송지 별칭 조회
-	public List<String> searchShipName(String id) {
-		List<String> list = null;
+	public List<OrderShipDomain> searchShipName(String id) {
+		List<OrderShipDomain> list = null;
 
 		list = oDAO.selectShipName(id);
 
@@ -70,10 +70,13 @@ public class OrderService {
 		// 2.손자
 		jsonShipName.put("resultFlag", resultFlag);
 		jsonShipName.put("searchKeyword", snVO.getId());
-		jsonShipName.put("name", snVO.getName());
+		 jsonShipName.put("name", snVO.getName());
+		jsonShipName.put("desId", snVO.getDesId());
 		jsonShipName.put("zipcode", orD.getZipcode());
 		jsonShipName.put("addr", orD.getAddr());
 		jsonShipName.put("addrDetail", orD.getAddrDetail());
+		jsonShipName.put("desID", orD.getDesid());
+		jsonShipName.put("shipname", orD.getShipName());
 
 		return jsonShipName.toJSONString();
 	}//
@@ -119,25 +122,32 @@ public class OrderService {
 	//주문 & 주문상세 트랜잭션 처리
 	public void searchOrer( OrderVO oVO ) {
 		String orId = "";
-
+		String desId = ""; //배송지코드
+		
 		orId = oDAO.selectOrderId();// 주문코드 조회
 		oVO.setOrderId(orId);  //vo에 코드 저장
-		if(oVO.getOrderId() != null) {
+		
+		if(oVO.getDesId() !=null) { //배송지코드가 null인 경우에만
+			oDAO.insertOrderInfo(oVO); //주문테이블 추가& 주문상세테이블 추가
+		}else if(oVO.getDesId() ==null) {
+			oDAO.insertShipAddr(oVO); //배송지 추가
+			desId = oDAO.selectDesId(oVO.getId()); //배송지 코드 조회
+			oVO.setDesId(desId); // 배송지 코드 저장
 			oDAO.insertOrderInfo(oVO); //주문테이블 추가& 주문상세테이블 추가
 		}
+		
+		
 
 	}// searchOrerDetailId
 	
 	
-	// 배송지추가-destinatioVO사용예정
-	public int addShipAddr(OrderVO dVO) {
-		int cnt = 0;
-
-		cnt = oDAO.insertShipAddr(dVO);
-
-		return cnt;
-	}// insertShipAddr
-	
+	/*
+	 * // 배송지추가-destinatioVO사용예정 public int addShipAddr(OrderVO dVO) { int cnt = 0;
+	 * 
+	 * cnt = oDAO.insertShipAddr(dVO);
+	 * 
+	 * return cnt; }// insertShipAddr
+	 */	
 	//////////////////////////////////////////////////////////////////////////////////
 
 	// 주문완료내역조회

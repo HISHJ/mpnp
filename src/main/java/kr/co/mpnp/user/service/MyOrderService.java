@@ -1,7 +1,9 @@
 package kr.co.mpnp.user.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import kr.co.mpnp.user.dao.MyOrderDAO;
@@ -15,14 +17,52 @@ public class MyOrderService {
 	}//
 
 	// 기간별 주문내역조회
-	public List<MyOrderDomain> searchOrderList(String id) {
+	public List<MyOrderDomain> searchOrderList(MyOrderVO mvo) {
 		List<MyOrderDomain> list = null;
 		
 		MyOrderDAO oDAO =MyOrderDAO.getInstance();
-		list = oDAO.selectOrderAList(id);
+		list = oDAO.selectOrderAList(mvo);
 
 		return list;
 	}// searchOrderList
+	
+	//기간별 선택 날짜 기간 조회
+	public String searchDate(MyOrderVO mvo) {
+		//조상
+		JSONObject jsonOrder = new JSONObject();
+		boolean resultFalg = false;
+		MyOrderDAO mDAO = MyOrderDAO.getInstance();
+		List<MyOrderDomain> list = mDAO.selectOrderAList(mvo);
+		//손자
+		JSONObject jsonTemp = null;
+		//부모
+		JSONArray jsonArr = new JSONArray();
+		
+		for(MyOrderDomain mod : list) {
+			jsonTemp = new JSONObject();
+			//db조회결과를 jsonObject에 할당
+			jsonTemp.put("orderId",mod.getOrderId());
+			jsonTemp.put("inputDateS",mod.getInputDateS());
+			jsonTemp.put("status",mod.getStatus());
+			jsonTemp.put("prdPrice",mod.getPrdPrice());
+			jsonTemp.put("totalCnt",mod.getTotalCnt());
+			jsonTemp.put("prdName",mod.getPrdName());
+			jsonTemp.put("thImg",mod.getThImg());
+			jsonTemp.put("orDetailId",mod.getOrDetailId());
+			//값을  가진 jsonObject를 array에 할당
+			jsonArr.add(jsonTemp);
+			
+		}//end for
+		//모든 조회결과를 가진 jsonArray를 jsonObject에 저장
+		jsonOrder.put("orderDate", jsonArr);
+		jsonOrder.put("resultFalg", !resultFalg);
+		jsonOrder.put("findStartDate", mvo.getFindStartDate());		
+		jsonOrder.put("findEndDate", mvo.getFindEndDate());		
+		jsonOrder.put("findMemberID", mvo.getId());		
+	
+		return jsonOrder.toJSONString();
+		
+	}// searchDate
 
 	// 주문내역 상세조회
 	public MyOrderDomain searchOrderDetail(String orID) {

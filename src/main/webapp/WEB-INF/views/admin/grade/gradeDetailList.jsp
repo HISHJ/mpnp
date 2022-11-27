@@ -22,8 +22,9 @@
 <script type="text/javascript">
 	//추가하기버튼
 	function addBtn() {
-	 
+	 if(confirm("등급 정보를 변경하시겠습니까?")){
 		$("#graFrm").submit();
+	 }
 	}//addBtn
 </script>
 
@@ -32,7 +33,7 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-                      <form id="graFrm" name="graFrm" action="admin_g_modify_process.do" method=GET>
+                      <form id="graFrm" name="graFrm" action="admin_g_modify_process.do" method="post">
                     <div class="container">
                          <input type="hidden" id="gradeId" name="gradeId"  value="${agDom.gradeId}"/>
                      

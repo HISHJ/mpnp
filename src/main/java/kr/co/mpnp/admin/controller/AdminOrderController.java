@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.admin.domain.AdminOrderDomain;
 import kr.co.mpnp.admin.domain.AdminOrderPrdDomain;
@@ -43,7 +42,6 @@ public class AdminOrderController {
 		AdminOrderDomain aoDom2 = aoService.searchOrderShip(orderId); //주문상세 배송지
 		int discountRate = aoService.searchDiscountRate(memberId);//할인율
 		int totlaPrdPrice = aoService.searchPriceIndivisual(orderId);//주문상품 총 가격
-		System.out.println("@@@@@@22"+ discountRate);
 		model.addAttribute("aoDom", aoDom); //주문자상세
 		model.addAttribute("list", list); //상품상세
 		model.addAttribute("aoDom2",aoDom2); //배송지상세
@@ -58,13 +56,9 @@ public class AdminOrderController {
 	@RequestMapping(value = "/orderModify_process.do", method = GET)
 	public String modifyOrderStatus(AdminOrderVO adVO, Model model) {
       
-		System.out.println("주문변경 @@@2" + adVO);
 		AdminOrderService aoService = new AdminOrderService(); 
-		int cnt = aoService.modifyOrderStatus(adVO);
-		//int cnt2 = aoService.modifyReviewChk(orderId);
-		if(cnt ==1) {
-		System.out.println("@@@@@@@cnt" + cnt + "건 변경됨");
-		};
+		 int cnt=aoService.modifyOrderStatus(adVO); //주문상태변경
+		 model.addAttribute("cnt",cnt);
 		
 		return "/admin/order/orderModify_process";
 	}// modifyOrderStatus

@@ -2,14 +2,14 @@ package kr.co.mpnp.user.domain;
 
 //¼³ºó
 public class OrderDomain {
-	private String memberName, gradeName, zipcode, addr, addrDetail, shipReq, phone, default_flag,shipName;
+	private String memberName, gradeName, zipcode, addr, addrDetail, shipReq, phone, default_flag,shipName,desid;
 	private int discountRate;
 
 	public OrderDomain() {
 	}
 
 	public OrderDomain(String memberName, String gradeName, String zipcode, String addr, String addrDetail,
-			String shipReq, String phone, String default_flag, String shipName, int discountRate) {
+			String shipReq, String phone, String default_flag, String shipName, String desid, int discountRate) {
 		super();
 		this.memberName = memberName;
 		this.gradeName = gradeName;
@@ -20,6 +20,7 @@ public class OrderDomain {
 		this.phone = phone;
 		this.default_flag = default_flag;
 		this.shipName = shipName;
+		this.desid = desid;
 		this.discountRate = discountRate;
 	}
 
@@ -95,6 +96,14 @@ public class OrderDomain {
 		this.shipName = shipName;
 	}
 
+	public String getDesid() {
+		return desid;
+	}
+
+	public void setDesid(String desid) {
+		this.desid = desid;
+	}
+
 	public int getDiscountRate() {
 		return discountRate;
 	}
@@ -107,8 +116,9 @@ public class OrderDomain {
 	public String toString() {
 		return "OrderDomain [memberName=" + memberName + ", gradeName=" + gradeName + ", zipcode=" + zipcode + ", addr="
 				+ addr + ", addrDetail=" + addrDetail + ", shipReq=" + shipReq + ", phone=" + phone + ", default_flag="
-				+ default_flag + ", shipName=" + shipName + ", discountRate=" + discountRate + "]";
+				+ default_flag + ", shipName=" + shipName + ", desid=" + desid + ", discountRate=" + discountRate + "]";
 	}
+
 
 	
 

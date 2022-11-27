@@ -74,11 +74,11 @@ public class AdminOrderService {
 	}// modifyOrderStatus
 	
 	//가격 감산쿼리
-	public int searchPriceIndivisual(String orID) {
+	public int searchPriceIndivisual(String orderId) {
 		int price = 0;
 		
 		AdminOrderDAO roDAO = AdminOrderDAO.getInstance();
-		price = roDAO.selectPriceIndivisual(orID);
+		price = roDAO.selectPriceIndivisual(orderId);
 		
 		return price;
 		
@@ -89,17 +89,17 @@ public class AdminOrderService {
 		int cnt =0;
 		
 		AdminOrderDAO roDAO = AdminOrderDAO.getInstance();
-		//cnt = roDAO.updateCompletionDate(aoVO);
+		cnt = roDAO.updateCompletionDate(aoVO);
 		
 		return cnt;
 	}//
 	
 	//구매확정인 주문코드 주문후기 업데이트(트랜잭션)
-	public int modifyReviewChk(String orId) {
+	public int modifyReviewChk(AdminOrderVO aoVO) {
 		int cnt =0;
 		
 		AdminOrderDAO roDAO = AdminOrderDAO.getInstance();
-		cnt =roDAO.updateReviewChk(orId);
+		cnt =roDAO.updateReviewChk(aoVO);
 		
 		return cnt;
 	}

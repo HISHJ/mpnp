@@ -135,14 +135,14 @@ li.open, div.ctset {
 					  
 					
 					  //총 결제금액 구하기
-					  var deli_fee = 2500;
+					  var deli_fee =0;
 					  
 					   var actual_price;
 					  if(sum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
-						  deli_fee = 0;
+						  deli_fee = 2500;
 					  } //end if
 				
-					  actual_price = sum - rate_price -deli_fee ; 
+					  actual_price =( sum - rate_price) +deli_fee ; 
 					 
 					  
 					  //숫자에 단위 넣기
@@ -427,10 +427,13 @@ li.open, div.ctset {
 															  alert("배송지가 변경되었습니다.");
 															  var addrName = document.getElementById("dlvraGbNmEm");
 															  var addr = document.getElementById("changeAddr");
-															  
-															  $(".dftDelivery").html("배송지");
+															   if($("#zipcode").val() != jsonObj.zipcode){
+															  $("#dftDelivery").html("일반배송지");
+															   }else{
+																   $("#dftDelivery").html("기본배송지");
+															   }
 															  addrName.innerHTML = jsonObj.shipname;
-															  addr.innerHTML = "["+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail +  jsonObj.desID ;
+															  addr.innerHTML = "["+jsonObj.zipcode+"] " + "" + jsonObj.addr +" " + jsonObj.addrDetail;
 															 $("#desId").val( jsonObj.desID);
 														 }
 														 }//end if
@@ -438,8 +441,10 @@ li.open, div.ctset {
 											 }
 											</script>  
 											<input type="hidden" id="desId" name="desId" value="${osDom.desid}"/>
+											<input type="hidden" id="zipcode" name="zipcode" value="${osDom.zipcode}"/>
+											
 											<div class="adrs" id="changeAddr" name="changeAddr">
-												[${osDom.zipcode}] ${osDom.addr}, ${osDom.addrDetail},
+												[${osDom.zipcode}] ${osDom.addr}, ${osDom.addrDetail}
 												</div>
 											
 											<!-- <div class="bts"><a href="javascript:;" onclick="orderDlvra.addressListPop();" data-content="layerAlert" data-url="/order/popupAddressList" class="btn c sm btnDeMod">배송지 변경</a></div> -->

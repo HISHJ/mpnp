@@ -58,8 +58,8 @@ public class OrderDAO {
 	
 	//검증완료
 	//기본배송지가 있는 경우, 해당 아이디의 배송지 별칭 조회
-	public List<String> selectShipName(String id){
-		List<String> list = null;
+	public List<OrderShipDomain> selectShipName(String id){
+		List<OrderShipDomain> list = null;
 		
 		// 핸들러 얻기
 		// MyBatisHandler얻기
@@ -201,12 +201,13 @@ public class OrderDAO {
 	// 주문결제정보추가
 	public int insertOrderInfo(OrderVO orVO) {
 		int cnt = 0;
+	
 		// 핸들러 얻기
 		// MyBatisHandler얻기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
 		try {
-			// 쿼리 실행
+	
 			cnt = ss.insert("kr.co.mpnp.orderMapper.insertOrderInfo", orVO);
 			if (cnt == 1) {
 				int detailCnt = 0;
@@ -244,7 +245,57 @@ public class OrderDAO {
 
 		return cnt;
 
-	}
+	}//
+	
+	// 검증완료
+		// 배송지추가-destinatioVO사용예정
+		public int insertShipAddr(OrderVO dVO) {
+			int cnt = 0;
+
+			// 핸들러 얻기
+			// MyBatisHandler얻기
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			SqlSession ss = mbh.getHandler();
+			try {
+				// 쿼리 실행
+				cnt = ss.insert("kr.co.mpnp.orderMapper.insertShipAddr", dVO);
+			
+				if (cnt == 1) {
+					System.out.println(cnt + "건 추가(배송지)");
+					ss.commit();
+				}
+			} catch (PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			// 연결끊기
+			mbh.closeHandler(ss);
+
+			return cnt;
+
+		}// insertShipAddr
+		
+		//배송지코드 조회
+		public String selectDesId(String id) {
+			String desId = "";
+			
+			// 핸들러 얻기
+			// MyBatisHandler얻기
+			MyBatisHandler mbh = MyBatisHandler.getInstance();
+			SqlSession ss = mbh.getHandler();
+			try {
+				// 쿼리 실행
+				desId = ss.selectOne("kr.co.mpnp.orderMapper.searchDesId", id);
+			
+			
+			} catch (PersistenceException pe) {
+				pe.printStackTrace();
+			}
+			// 연결끊기
+			mbh.closeHandler(ss);
+
+			
+			return desId;
+		} //selectDesId
 
 	
 
@@ -280,32 +331,7 @@ public class OrderDAO {
 	// 검증완료
 
 
-	// 검증완료
-	// 배송지추가-destinatioVO사용예정
-	public int insertShipAddr(OrderVO dVO) {
-		int cnt = 0;
-
-		// 핸들러 얻기
-		// MyBatisHandler얻기
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getHandler();
-		try {
-			// 쿼리 실행
-			cnt = ss.insert("kr.co.mpnp.orderMapper.insertShipAddr", dVO);
-		
-			if (cnt == 1) {
-				System.out.println(cnt + "건 추가(배송지)");
-				ss.commit();
-			}
-		} catch (PersistenceException pe) {
-			pe.printStackTrace();
-		}
-		// 연결끊기
-		mbh.closeHandler(ss);
-
-		return cnt;
-
-	}// insertShipAddr
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////
 

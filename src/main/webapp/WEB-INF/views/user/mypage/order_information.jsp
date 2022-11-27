@@ -171,14 +171,14 @@
 					<div class="pc-re-po01">
 						<div class="oder-step ptb_memOrderbox">
 
-							<nav class="menushop re-po01 date_hidden" style="display:flex;">
+						<!-- 	<nav class="menushop re-po01 date_hidden" style="display:flex;">
 								<button type="button" name="schRange" class="bt st" onclick=" setThreeMonth()">최근 3개월</button>
 								<input type="hidden" name="schRange_" id="schRange_" value="1"/>
 								<button type="button" name="schRange" class="bt st" onclick="clickDate(6)">최근 6개월</button>
 								<input type="hidden" name="schRange_" id="schRange_" value="3"/>
 								<button type="button"  name="schRange" class="bt st" onclick="clickDate(0)">전체보기</button>
 								<input type="hidden" name="schRange_" id="schRange_" value="6"/>
-								<!-- <div class="list">
+								<div class="list">
 									<ul class="menu">
 										<li class="active"><a href="javascript:void(0);" id="period_type_3" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=3&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(3);return false;">최근 3개월</a></li>
 										<li><a href="javascript:void(0);" id="period_type_6" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=6&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(6);return false;">최근 6개월</a></li>
@@ -186,9 +186,9 @@
 										<li><a href="javascript:void(0);" id="period_type_12" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=12&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(12);return false;">최근 12개월</a></li>
 										<li><a href="javascript:void(0);" id="period_type_0" data-content="1319879" data-url="/mypage/order/indexDeliveryList?page=1&amp;rows=20&amp;period=0&amp;ordAcptDtmStart=2022-07-31&amp;ordAcptDtmEnd=2022-10-30&amp;arrOrdDtlStatCd=" class="bt" onclick="orderDeliveryList.setPeriod(0);return false;">직접 입력</a></li>
 									</ul>
-								</div> -->
+								</div>
 							</nav>
-
+ -->
 							<!-- open 클래스 추가 시 open -->
 							<div class="dummy-gray-line " style="margin-bottom:10px;">
 								<div class="dummy-gray-line open">
@@ -378,7 +378,7 @@ $(function(){
 	$(".prcs").each(function(i,element){
 	 	price = $(element).find("#prd").val()*1;
 	 	rate = price.toString().replace(expression,",");
-	 	$(this).html(rate);
+	 	$(this).html(rate + " 원");
 	})
 })//ready
 
@@ -398,7 +398,7 @@ $(function(){
 	
 	var lastmonth =("0" + (1+today.getMonth()-3)).slice(-2)
 	var fdate = year + "-" + lastmonth + "-" + date;
-	alert("마지막날짜"+sdate + "첫ㅉ날짜" + fdate ); //3개월 조회
+	//alert("마지막날짜"+sdate + "첫ㅉ날짜" + fdate ); //3개월 조회
 	
 	
     $("#findStartDate").val(fdate);//값 집어넣기
@@ -514,7 +514,7 @@ function setThreeMonth(){
 															${list.totalCnt} 개
 															</div>
 														<div class="prcs">
-															<span class="prc"><em class="p prdPri">${list.prdPrice}</em><i class="w">원</i></span>
+															<span class="prc"><em class="p prdPri">${list.prdPrice} 원</em><i class="w"></i></span>
 															<input type="hidden" id="prd" name="prd" value="${list.prdPrice}"/>
 																</div>
 													</div>
