@@ -36,7 +36,8 @@ public class OrderController {
      public String temp(Model model) {
     	 
     	 
-    	 return "/user/order/product_info_test";
+    	return "/user/order/product_info_test";
+    	 //return "/user/order/cart_ysb";
     	 
      }
      

@@ -17,19 +17,19 @@
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
 
-<link rel="stylesheet" href="http://localhost/mfnf/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/mfnf/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
 <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
-<link rel="stylesheet" href="http://localhost/mfnf/3rdDesign/css/searchMain.css">
-<script type="text/javascript" src="http://localhost/mfnf/3rdDesign/_script/crypto.js"></script>
+<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/css/searchMain.css">
+<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-ui.min.js"></script>
 
-<script type="text/javascript"  src="http://localhost/mfnf/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/mfnf/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript" 	src="http://localhost/mfnf/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript" 	src="http://localhost/mfnf/3rdDesign/_script/ui_shop.js"></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript" 	src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
 
   <!--google icons-->
 	<link rel="stylesheet"
@@ -39,7 +39,19 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 
+ <style>
+ .page-num,.page-num-click{
+	font-size:18px;
+	font-weight:bold;
+	font-style: italic;
+}
 
+.page-num-click{
+	color:var( --colors-main03);
+}
+
+
+ </style>
 
 
 
@@ -167,7 +179,7 @@ function movePage( page ) {
 		<!-- //어바웃펫 추천 검색어 -->
 		
 		<!-- 최근 본 상품 영역 -->
-		 <section class="search_last_view" id="rcntSearchArea" style="margin-top:-5px" >	<!-- one_line 은 각 구좌별 고유 class명이 들어갑니다 -->
+		 <section class="search_last_view" id="rcntSearchArea" style="margin-top:-5px;" >	<!-- one_line 은 각 구좌별 고유 class명이 들어갑니다 -->
 				<div class="hdts">
 					<a class="hdt" href="/mypage/indexRecentViews">
 						<span class="tit"> 검색결과 (${totalData }건)</span>
@@ -207,7 +219,22 @@ function movePage( page ) {
 	</div>
 		</c:forEach> 
  
-	<div class="page">
+	
+
+
+<div class="gd-item swiper-slide" style="margin-right: 10px;">
+			</div>
+		
+		</div> 
+						<!-- Add Pagination -->
+					<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+				</div>
+			</section>
+			
+			<!--  2022/11/27유설빈 -->
+		
+			
+				<div class="page"  style="width:464px;display:flex;justify-content: center;align-self: center;">
 		<c:if test="${ not empty result  }">
 			<c:if test="${ startNum ne 1 }">
 				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
@@ -223,19 +250,20 @@ function movePage( page ) {
 		</c:if>
 	</div>
 
+
+
  	<form name="hidFrm" id="hidFrm" action="search_prd_list.do">
 	<input type="hidden" id="name" name="name" value="${param.name}">
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
 	</form> 
-
-
-<div class="gd-item swiper-slide" style="margin-right: 10px;">
-			</div>
-		</div> 
-						<!-- Add Pagination -->
-					<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
-				</div>
-			</section>
+			
+			
+			<!--  2022/11/27유설빈 -->
+			 
+			
+			
+			
+			
 			<script type="text/javascript">
 				window.setTimeout(function() {
 					if (ui.prdSwiper.chkInstance('#tmpPrd01')) {

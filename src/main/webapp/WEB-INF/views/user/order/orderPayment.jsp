@@ -269,28 +269,28 @@ li.open, div.ctset {
 					  } //end if
 				
 					  actual_price = (sum - rate_price) + deli_fee ; 
-					 // alert(actual_price);
+					
 					 
 					  
 					  //숫자에 단위 넣기
 					  const rate_ = rate_price.toString()
                       .replace(expression, ","); //할인금액
 					  const total_pri = actual_price.toString()
-                      .replace(expression, ","); //상품 총가격
+                      .replace(expression, ","); //상품 총 결제금액
 					  const cn1 = sum.toString()
-                      .replace(expression, ","); // 총 결제금액
+                      .replace(expression, ","); // 상품 총금액
 					  const ship_fee = deli_fee.toString()
                       .replace(expression, ","); // 배송비
                      
-					  $(".totalProductPrice").html(total_pri); //상품 총 금액
+					  $(".totalProductPrice").html(cn1); //상품 총 금액
 					  $("#order_payment_total_dc_amt_view").html(rate_); //할인금액
 					  $("#order_payment_total_dlvr_amt_view").html(ship_fee);//배송비
 					  $("#order_payment_total_pay_amt_view").html(total_pri);//총 결제금액
 					  $("#order_payment_end_pay_amt_view").html(total_pri);//총 결제금액
 					  
-					 $('#actualPrice').attr("value",sum);
+					 $('#actualPrice').attr("value",actual_price);
 					 $('#discountPrice').attr("value",rate_price);
-					 $('#totalPrice').attr("value",actual_price);
+					 $('#totalPrice').attr("value",sum);
 					 
 					  })//reay
 					</script>
