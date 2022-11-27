@@ -1,14 +1,16 @@
 package kr.co.mpnp.user.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class ReviewDomain {
 
-	private String thImg, name, contents, reviewId, orderDetailId ;
+	private String thImg, name, contents, reviewId, orderDetailId, reviewImgs ;
 	private int price, starScore;
 	private Date purchaseDate, writeDate ;
-	private List<String> reviewImg;
+	private String[] reviewImg;
+	//private List<String> reviewImg;
 	public String getThImg() {
 		return thImg;
 	}
@@ -39,6 +41,12 @@ public class ReviewDomain {
 	public void setOrderDetailId(String orderDetailId) {
 		this.orderDetailId = orderDetailId;
 	}
+	public String getReviewImgs() {
+		return reviewImgs;
+	}
+	public void setReviewImgs(String reviewImgs) {
+		this.reviewImgs = reviewImgs;
+	}
 	public int getPrice() {
 		return price;
 	}
@@ -63,19 +71,20 @@ public class ReviewDomain {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	public List<String> getReviewImg() {
+	
+	public String[] getReviewImg() {
 		return reviewImg;
 	}
-	public void setReviewImg(List<String> reviewImg) {
+	public void setReviewImg(String[] reviewImg) {
 		this.reviewImg = reviewImg;
 	}
 	@Override
 	public String toString() {
 		return "ReviewDomain [thImg=" + thImg + ", name=" + name + ", contents=" + contents + ", reviewId=" + reviewId
-				+ ", orderDetailId=" + orderDetailId + ", price=" + price + ", starScore=" + starScore
-				+ ", purchaseDate=" + purchaseDate + ", writeDate=" + writeDate + ", reviewImg=" + reviewImg + "]";
+				+ ", orderDetailId=" + orderDetailId + ", reviewImgs=" + reviewImgs + ", price=" + price
+				+ ", starScore=" + starScore + ", purchaseDate=" + purchaseDate + ", writeDate=" + writeDate
+				+ ", reviewImg=" + Arrays.toString(reviewImg) + "]";
 	}
-	
 	
 	
 }

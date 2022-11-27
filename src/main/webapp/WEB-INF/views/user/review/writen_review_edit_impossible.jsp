@@ -143,6 +143,22 @@ tr > .btnSet{
 }
 </style>
 
+<!-- 11.24 최정민 -->
+<style>
+.inner-content i{
+	font-size:20px;
+	
+}
+.imgs img{
+	width:150px; height:150px;
+	text-align:center;
+}
+
+.uirevset-my .set.memo .hdt{
+padding:0px;
+}
+
+</style>
 
 </head>
 
@@ -389,40 +405,14 @@ tr > .btnSet{
 
 	
 	</style>
+	
+			
+		 
 				<!--❤️nav-->
 	<script>
 	
-	
 	function imgChk(input){
-		/* 중복테스트 시작      불안정함 imgChk를 인식하고 안하고 그럼 */
-		//alert("ddd??");
-		var dupFlag = false;
-		
-		var arrTest = $(":file");
-		//alert(arrTest.length);
-		var arrLength = arrTest.length;
-		//alert(arrTest[0].value);
-		//alert(arrTest.length>1);
-		//alert(arrTest.length);
-		if(arrLength>1){
-			for(var i=0;i<arrLength-1;i++){
-				//alert("안돼?"+i);
-				//alert("arrTest["+i+"]의 값 : "+arrTest[i].value);
-				//alert("input의 값 : "+input.value);
-				if(arrTest[i].value == input.value){
-					dupFlag = true;
-					break;
-				}
-			} 
-		}
-		if(dupFlag){
-			alert("같은이미지는 등록하실 수 없습니다.");
-			return;
-		};
-		/* 중복테스트 끝*/
-		
-		
-		
+			
 		//alert(input.value);	
 		
 		// 여기서 이미지 유효성검증 할예정
@@ -454,7 +444,7 @@ tr > .btnSet{
 	    //alert(ext=='jpg');
 	    var extArr = ['jpg','jpeg','png','gif'];
 	    if(!extArr.includes(ext)){
-	  	  alert("사용할 수 없는 확장자입니다.");
+	  	  "사용할 수 없는 확장자입니다.";
 	  	  return;
 	    }
 	    // 저 확장자가 아닌것도 여기까진 안오는데 선택한 파일명 나오는 그 input file 버튼 옆에는 뜨는구나
@@ -481,7 +471,7 @@ tr > .btnSet{
 		var cntTest = document.getElementById('myRow').cells.length;
 		// 다 통과하면 addColumn호출
 		addColumn(input);
-	}
+	}	
 		
 	function addColumn(input){
 		
@@ -617,6 +607,8 @@ tr > .btnSet{
 		/* alert(rows.length); */
 		document.getElementById("totalSeat").value = rows.length;
 	}
+	
+	
 	$(function(){
 		$("[name=starRating]").click(function(){
 			//alert(this.value);
@@ -625,31 +617,22 @@ tr > .btnSet{
 	})
 	function writeAdd(){
 		/*  */
+		var contents = document.getElementById("reviewContents").value;
+		alert(contents);
+		if(contents.trim()=="" || contents==null){
+			alert("내용을 입력해주세요");
+			return;
+		}
 		var starScore = document.getElementById("starScore").value;
-		//alert(starScore);
+		alert(starScore);
 		if(starScore.trim()=="" || starScore==null){
 			alert("별점을 선택해주세요");
 			return;
 		}
 		
-		var contents = document.getElementById("reviewContents").value;
-		//alert(contents);
-		if(contents.trim()=="" || contents==null){
-			alert("내용을 입력해주세요");
-			return;
+		if(confirm("후기를 등록하시겠습니까?")){
+			$("#reviewContentsForm").submit();
 		}
-		if(contents.length < 10){
-			alert("10자 이상 입력해주세요.");
-			return;
-		}
-		
-		
-		if(!confirm("후기를 등록하시겠습니까?")){
-			return;
-		}
-		
-		
-		$("#reviewContentsForm").submit();
 				
 		//alert("내용 : "+contents);
 		//alert("별점 : "+contents);
@@ -658,21 +641,52 @@ tr > .btnSet{
 		
 	}
 	
-	/* 11-26 최정민 리뷰 글자수제한 */
-	$(function(){
-		$('.textarea textarea').keyup(function(){
-		  var content = $(this).val();
-		  $('.textarea .count span').html(content.length);
-		  if (content.length > 200){
-		    alert("최대 200자까지 입력 가능합니다.");
-		    $(this).val(content.substring(0, 200));
-		    $('.textarea .count span').html(200);
-		  }
-		})
-	})
+	</script>
+	<script>
+	/* 11-24 지금이거할때가아닌데 */
+	
+/* 	window.onload = function(){
+		var star = "<c:out value='${requestScope.reviewDetail.starScore}'/>";
+		var chkStar = $("#star"+star);
+		 chkStar.attr('checked',"checked");
+		 $("[name=starRating]").attr('disabled',true);
+		//setStarScore();
+	}
+	function setContents(){
+		var con = "<c:out value='${requestScope.reviewDetail.contents}'/>";
+		alert(con);
+		 
+		 // textarea에 바로하니까 앞에 공백이 왜이렇게 생기지??
+		 
+		 //con.replace(/(<br\/>)/g, '\r\n');
+		 
+		 //alert(con);
+		 //let text = document.querySelector(".textarea").value;
+		 //con = con.replaceAll("&lt;br&gt;", '\r\n');
+		 //con.replace(/\n/g, '<br/>');
+		 
+		 //alert(con);
+		 document.getElementById("reviewContents").value = con;
+	} 
+	
+	
+	function setStarScore(){
+		 var star = "<c:out value='${requestScope.reviewDetail.starScore}'/>";
+		 alert(star);
+		 var chkStar = $("#star"+star);
+		 chkStar.attr('checked',"checked");
+		 //document.getElemenById("star"+star).attr("checked","checked");
+		$("[name=starRating]").attr('disabled',true);
+		 //document.getElementById("starScore").value = star;
+	}
+	*/
+	
+	function moveTest(){
+		//alert("수정은없다");
+		location.href="writen_review_list.do";
+	}
 	
 	</script>
-	
 	
 			<!--❤️main-->
 			<!-- 바디 - 여기위로 템플릿 -->
@@ -682,7 +696,7 @@ tr > .btnSet{
 					<!-- 본문 -->
 					<div class="contents" id="contents" style="min-height: 550.8px;">
 						<div class="pc-tit">
-							<h2 id="asd"> 후기 작성</h2>
+							<h2 id="asd"> 후기 상세보기</h2>
 						</div>
 										
 							<form id="reviewContentsForm" action="add_review_process.do" method="POST" enctype="multipart/form-data"><!--  POST -->
@@ -694,81 +708,133 @@ tr > .btnSet{
 									<div class="cdt">
 										<div class="tops">
 											<div class="pic">
-											사진 : <c:out value="${prdImg }"/></div>
+											사진 : <c:out value="${reviewDetail.thImg }"/></div>
 											<div class="name">
-												<div class="tit k0423"><c:out value="${prdName }"/></div>
+												<div class="tit k0423"><c:out value="${reviewDetail.name }"/></div>
 												<div class="stt k0423"></div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div class="flex-box">
-													
-														
-													<div class="set star">
-										<div class="hdt">
-											<span class="tit">구매하신 상품이 만족스러운가요?</span>
-										</div>
-										<div class="cdt">
-	
-											<div class="uiStar">
-												<div class="inner-content">
-												<input type="hidden" name="starScore" id="starScore"/>
-													<input type="radio" name="starRating" value="5" id="star5">
-													<label for="star5"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="4"  id="star4">
-													<label for="star4"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="3" id="star3">
-													<label for="star3"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="2" id="star2">
-													<label for="star2"><i class="fa fa-star"></i></label>
-													<input type="radio" name="starRating" value="1" id="star1">
-													<label for="star1"><i class="fa fa-star"></i></label>
-												</div>
-											</div>
-											<div class="msg">별을 선택하여 만족도를 알려주세요.</div>
-										</div>
-
-										
+								<c:choose>
+								<c:when test="${ not empty reviewDetail.reviewImg }">
+								<div class="set memo" style="height:150px; margin-top:0px;">
+									<div class="hdt" style="margin-top:60px;">
+										<span class="tit" style="font-size:15px; margin-left:40px;">등록하신 이미지</span>
 									</div>
-								
+								<!-- <div class="imgs" style="text-align:center;"> -->
+									<div class="imgarea">
+								<c:forEach var="img" items="${reviewDetail.reviewImg }">
+									<%-- <c:out value="${img }"/> --%>
+										<%-- <img src="E:/dev/workspace_spring/upfileTest/${img }" style="width:150px; width:150px;"/> --%>
+										<img src="http://localhost/mpnp/reviewImages/${img }" style="width:150px; height:150px; border-radius:20px; margin-right:20px;"/>
+								</c:forEach>
+									</div>
+								<!-- </div> -->
 								</div>
-								<div class="set memo">
-										<div class="hdt">
-											<span class="tit">후기 내용 입력</span>
-										</div>
-										<div class="textarea">
-											<textarea name="reviewContents" id="reviewContents" placeholder="다른 고객님들에게 도움이 되는 후기를 입력해주세요. 후기 내용은 최소 10자 이상 입력해주세요."></textarea>
-											<div class="count" style="float:right;"><span>0</span>/200</div>
+								</c:when>
+								<c:otherwise>
+								<div class="set memo" style="height:150px; margin-top:0px;">
+									<div class="hdt" style="margin-top:60px;">
+											<span class="tit" style="font-size:15px; margin-left:40px;">등록하신 이미지</span>
+									</div>
+									<div class="inr-box noneBoxPoint" name="bfNoComment" style="width:100%; text-align:center;">
+										<div class="no_data i1 auto_h view" style="margin-top:90px; right:100px;" >
+										<%-- <c:out value="${img }"/> --%>
+											<%-- <img src="E:/dev/workspace_spring/upfileTest/${img }" style="width:150px; width:150px;"/> --%>
+											<div class="inr">
+												<div class="msg">등록하신 이미지가 업슷ㅂ니다.</div>
+											</div>
 										</div>
 									</div>
-									<div class="set file">
+								</div>
+								<!-- <div class="inr-box noneBoxPoint" name="bfNoComment" >
+									<section class="no_data i1 auto_h view">
+										<div class="inr">
+											<div class="msg">등록하신 이미지가 업슷ㅂ니다.</div>
+										</div>
+									</section>
+								</div> -->
+								</c:otherwise>
+								</c:choose>
+								<!-- <div class="flex-box">
+								<div class="set file">
 										<div class="flex-box">
 											<table id="imgTable">
 												<tr id="myRow" >
-												<td class="btnSet" id="imgs_0" style="margin-right:20px;"><!-- <input type="file" value="addBtn" accept=".gif, .jpg, .png, .jpeg" onchange="imgChk(this)"/> -->
+												<td class="btnSet" id="imgs_0" style="margin-right:20px;"><input type="file" value="addBtn" accept=".gif, .jpg, .png, .jpeg" onchange="imgChk(this)"/>
 												<label class="btn lg btnAddPic" for="inputFile" id="imgAddBtn-comment" >사진 첨부하기</label>
 												<img id='preview_0' src="" style="display:none">
 												<input type="file" id="inputFile" name="reviewImgs_0" accept=".gif, .jpg, .png, .jpeg" onchange="imgChk(this)" style="display:none"/>
-												<!-- <input name='imgXBtn' type='button' value='X' onclick='removeTest(this)'> -->
+												<input name='imgXBtn' type='button' value='X' onclick='removeTest(this)'>
 												</td>
 												</tr>
 											</table>
 										</div>
-										<!--APDO-174 모바일에서는 후기는 모바일앱에서 작성할 수 있습니다.를 제외하고 mweb / pc와 동일하게 맞춤   -->
-										<div class="gmsgListWrap">
-											<p class="gmsg info-t1" id="gsmgInfoRemoveInApp">로그 후기는 모바일앱에서 작성할 수 있습니다. </p> <!-- APET-1250 210728 kjh02  -->
-											<p class="gmsg info-t1">10MB 미만의 JPG, PNG 파일만 등록 가능합니다.</p>
-										</div>
+								</div>			 -->	
+														
+								
+							
+								<div class="set memo">
+									<div class="hdt" style="margin-top:60px;">
+										<span class="tit" style="font-size:15px; margin-left:40px;">작성하신 내용</span>
 									</div>
+									<div class="textarea">
+										<textarea name="reviewContents" id="reviewContents" placeholder="" readonly="readonly"><c:out value="${requestScope.reviewDetail.contents}"/></textarea>
+									</div>
+								</div>
+							
+									<div class="">
+											<div class=""  style="margin:10px; margin-right:40px;">
+												<input type="hidden" name="starScore" id="starScore"/>
+												<div class="inner-content" style="margin:10px;">
+													<input type="radio" name="starRating" value="5" id="star5" disabled="disabled"
+													<c:if test="${reviewDetail.starScore == 5 }">checked</c:if>
+													>
+													<label for="star5"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="4"  id="star4" disabled="disabled"
+													<c:if test="${reviewDetail.starScore == 4 }">checked</c:if>
+													>
+													<label for="star4"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="3" id="star3" disabled="disabled"
+													<c:if test="${reviewDetail.starScore == 3 }">checked</c:if>
+													>
+													<label for="star3"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="2" id="star2" disabled="disabled"
+													<c:if test="${reviewDetail.starScore == 2 }">checked</c:if>
+													>
+													<label for="star2"><i class="fa fa-star"></i></label>
+													<input type="radio" name="starRating" value="1" id="star1" disabled="disabled"
+													<c:if test="${reviewDetail.starScore == 1 }">checked</c:if>
+													>
+													<label for="star1"><i class="fa fa-star"></i></label>
+												</div>
+											</div>
+									</div>
+							</div>
+									<!-- <div class="set file">
+										<div class="flex-box">
+											<table id="imgTable">
+												<tr id="myRow" >
+												<td class="btnSet" id="imgs_0" style="margin-right:20px;"><input type="file" value="addBtn" accept=".gif, .jpg, .png, .jpeg" onchange="imgChk(this)"/>
+												<label class="btn lg btnAddPic" for="inputFile" id="imgAddBtn-comment" >사진 첨부하기</label>
+												<img id='preview_0' src="" style="display:none">
+												<input type="file" id="inputFile" name="reviewImgs_0" accept=".gif, .jpg, .png, .jpeg" onchange="imgChk(this)" style="display:none"/>
+												<input name='imgXBtn' type='button' value='X' onclick='removeTest(this)'>
+												</td>
+												</tr>
+											</table>
+										</div>
+										APDO-174 모바일에서는 후기는 모바일앱에서 작성할 수 있습니다.를 제외하고 mweb / pc와 동일하게 맞춤  
+									</div> -->
 							</form>
 								
 			
 								<div class="btnSet pc pc-bottom-s1 mo-margin-s1">
-									<!-- <a href="javascript:;" class="btn lg d onWeb_if" name="writeCancel">취소</a> -->
-									<input type="button" class="btn lg a disabled onWeb_if" value="취소">
+									<!-- <input type="button" class="btn lg a disabled onWeb_if" style="width:200px;"value="취소"> -->
 									<!-- <a href="javascript:;" class="btn lg a disabled" name="okbtn" onclick="writeAdd()" style="pointer-events:all;">등록</a> -->
-									<input type="button" class="btn lg a disabled" onclick="writeAdd()" style="pointer-events:all;" value="등록">
+									<!-- <input type="button" class="btn lg a disabled" onclick="writeAdd()" style="width:200px;" value="확인"> -->
+									<input type="button" class="btn lg a disabled" onclick="moveTest()" style="width:200px;" value="확인"> 
 										</div>
 						
 							</div>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -81,7 +82,12 @@
 <!--라이브 앱과 연동을위한 JS -->
 <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
 
+<style>
+.uidropmu>.bt.st{
 
+	font-size:15px !important;
+}
+</style>
 
 </head>
 
@@ -319,12 +325,46 @@
 			
 		})
 		function editBtn(reviewId){
-			alert(reviewId);
-			alert($("#selReviewId").val());
+			//alert(reviewId);
+			//alert($("#selReviewId").val());
 			
 			$("#selReviewId").val(reviewId);
-			alert($("#selReviewId").val());
-			$("#frm").submit();
+			//alert($("#selReviewId").val());
+			
+			$("#editFrm").submit();
+		}
+		
+		function removeBtn(reviewId){
+			//alert(reviewId);
+			//alert($("#selReviewId").val());
+			if(confirm("후기를 삭제하시겠습니까?")){
+				//ajax 해도될거같은데?
+				$.ajax({
+				url:"remove_review_process.do",
+				data:"selReviewId="+reviewId,
+				dataType:"json",
+				error:function(xhr){
+					alert(xhr.status);
+					alert(xhr.statusText);
+					alert(xhr.state());
+					console.log(xhr.statusText);
+				
+				},
+				success:function(jsonObj){
+					//alert(jsonObj)
+					if(jsonObj.removeFlag){
+						alert("삭제가완료되었습니다");
+						location.href="writen_review_list.do";
+					}else{
+						alert("ㄴㄴㄴ");
+					}
+				}
+				
+			})					
+						
+		}
+			//alert($("#selReviewId").val());
+			
 		}
 		/* function editBtn(reviewId){
 			alert(reviewId);
@@ -349,7 +389,7 @@
 				<div class="contents" id="contents" style="min-height: 550.8px;">
 					<!-- PC 타이틀 모바일에서 제거  -->
 					<div class="pc-tit">
-						<h2>상품후기</h2>
+						<h2 style="margin-top:120px;">상품후기</h2>
 					</div>
 					<!-- // PC 타이틀 모바일에서 제거  -->
 					<div class="petTabContent leftTab mode_fixed hmode_auto">
@@ -364,6 +404,9 @@
 						</ul>
 						<!--😎작성가능한 후기는 있는데 작성한 후기가 없는 경우-->
 						<!-- tab content -->
+						<form id="editFrm" action="writen_review_detail_form.do">
+							<input type="hidden" value="" name="selReviewId" id="selReviewId">
+						</form>
 						<div class="uiTab_content writenTab" >
 							<ul style="left: -100%;">
 							<c:choose>
@@ -381,24 +424,26 @@
 															alt="상품" class="img">
 															<c:out value="${writenReview.thImg }"/>
 													</p>
-													<div class="txt">
+													<div class="txt" style="margin-left:30px;">
 														<p class="t1"><c:out value="${writenReview.name }"/></p>
-														<p class="t2 k0423"><c:out value="${writenReview.contents }"/></p>
+														<p class="t2 k0423" style="width:550px; height:40px; overflow:hidden;
+														display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;"><c:out value="${writenReview.contents }"/></p>
 													</div>
 												</div>
 												<div class="bottom">
-													<p class="txt">
-														<strong>작성일</strong><c:out value="${writenReview.writeDate }"/>
+													<p class="txt" style="width:150px;">
+														<strong>작성일</strong><%-- <c:out value="${writenReview.writeDate }"/> --%>
+														<fmt:formatDate pattern="yyyy .MM .dd" value="${writenReview.writeDate }"/>
 													</p>
 													<!-- 펫로그 후기는 작성 7일 이후에 수정 불가 CSR-2568 -->
 													<nav class="uidropmu dmenu">
-														<button type="button" class="bt st" style="font-size:15px; ">메뉴열기</button>
+														<button type="button" class="bt st btn" style="font-size:15px;" style="border:1px;">메뉴열기</button>
 														<div class="list">
 															<ul class="menu">
 																<li><button type="button" class="bt"
 																		onclick="editBtn('${writenReview.reviewId}')">수정</button></li>
 																<li><button type="button" class="bt"
-																		onclick="myComment.deleteMyComment(this); return false;">삭제</button></li>
+																		onclick="removeBtn('${writenReview.reviewId}')">삭제</button></li>
 															</ul>
 														</div>
 													</nav>
@@ -411,12 +456,12 @@
 												</div>
 
 												<!-- // 평점 -->
-												<div class="like-area">
+												<!-- <div class="like-area">
 													도움이돼요
 													<button class="like" style="cursor: default;">
 														<span>0</span>
 													</button>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div>
@@ -424,7 +469,7 @@
 								</c:forEach>
 								</c:when>
 								<c:otherwise>
-								<li class="" style="min-height: 369px;">
+								<!-- <li class="" style="min-height: 369px;"> -->
 									<!-- 내역 없을 경우 style block-->
 									<div class="inr-box noneBoxPoint" name="bfNoComment"
 										style="height: 746px;">
@@ -434,7 +479,7 @@
 											</div>
 										</section>
 									</div>
-								</li>
+								<!-- </li> -->
 								</c:otherwise>
 								</c:choose>
 								</ul>

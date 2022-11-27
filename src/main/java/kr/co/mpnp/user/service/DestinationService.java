@@ -14,7 +14,7 @@ public class DestinationService {
 	public List<DestinationDomain> searchDes(String id){
 		List<DestinationDomain> list = null;
 		
-		System.out.println("DestinationService : id - "+id);
+		//System.out.println("DestinationService : id - "+id);
 		DestinationDAO desDAO = DestinationDAO.getInstance();
 		list = desDAO.selectDes(id);
 		
@@ -24,12 +24,12 @@ public class DestinationService {
 	// 배송지추가
 	public String addDes(DestinationVO dtVO){
 		
-		System.out.println("여기는 Service : "+dtVO.toString());
+		//System.out.println("여기는 Service addDes: "+dtVO.toString());
 		
 		JSONObject jsonData = new JSONObject();
 		DestinationDAO desDAO = DestinationDAO.getInstance();
 		//desDAO.insertDes(dtVO);
-		boolean addFlag = desDAO.insertDes(dtVO)==1?true:false;
+		boolean addFlag = desDAO.insertDes(dtVO);
 		jsonData.put("addFlag", addFlag);
 		
 		
@@ -37,15 +37,15 @@ public class DestinationService {
 	}
 	
 	// 배송지 추가,변경시 기본배송지 OX에 의한 update,,,,
-	public boolean editDefault(DestinationVO dtVO){
-		boolean flag = false;
-		System.out.println("여기는 Service dtVO의 id값 : "+dtVO.getId());
-		
-		DestinationDAO desDAO = DestinationDAO.getInstance();
-		flag = desDAO.updateDefault(dtVO.getId())!=0?true:false;
-		
-		return flag;
-	}
+//	public boolean editDefault(DestinationVO dtVO){
+//		boolean flag = false;
+//		System.out.println("여기는 Service dtVO의 id값 : "+dtVO.getId());
+//		
+//		DestinationDAO desDAO = DestinationDAO.getInstance();
+//		flag = desDAO.updateDefault(dtVO.getId())!=0?true:false;
+//		
+//		return flag;
+//	}
 	
 	// 배송지정보변경
 	public String modifyDes(DestinationVO dtVO){
@@ -53,7 +53,7 @@ public class DestinationService {
 		JSONObject jsonData = new JSONObject();
 		DestinationDAO desDAO = DestinationDAO.getInstance();
 		//desDAO.insertDes(dtVO);
-		boolean editFlag = desDAO.updateDes(dtVO)!=0?true:false;
+		boolean editFlag = desDAO.updateDes(dtVO);
 		jsonData.put("editFlag", editFlag);
 		
 		return jsonData.toJSONString();
@@ -62,7 +62,7 @@ public class DestinationService {
 	// 배송지삭제
 	public String removeDes(String dtId){
 		
-		System.out.println("여기는 Service : "+dtId);
+		//System.out.println("여기는 Service : "+dtId);
 		
 		JSONObject jsonData = new JSONObject();
 		DestinationDAO desDAO = DestinationDAO.getInstance();

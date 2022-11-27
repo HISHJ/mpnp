@@ -4,6 +4,9 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart_month");
+var daily = document.getElementsByName("monthly_value");
+var sales = document.getElementsByName("monthly_sales_value");
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
@@ -20,7 +23,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "#495057",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+      data: [sales[4].value , sales[3].value, sales[2].value, sales[1].value, sales[0].value],
     }],
   },
   options: {
@@ -39,7 +42,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 40000,
+          max: 20000000,
           maxTicksLimit: 5
         },
         gridLines: {

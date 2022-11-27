@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info=""%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -358,7 +359,7 @@
 				<div class="contents" id="contents" style="min-height: 550.8px;">
 					<!-- PC 타이틀 모바일에서 제거  -->
 					<div class="pc-tit">
-						<h2>상품후기</h2>
+						<h2 style="margin-top:120px;">상품후기</h2>
 					</div>
 					<!-- // PC 타이틀 모바일에서 제거  -->
 					<div class="petTabContent leftTab mode_fixed hmode_auto">
@@ -400,7 +401,7 @@
 												</div>
 												<div class="bottom">
 													<p class="txt">
-														<strong>구매확정</strong> 2022.10.31
+														<strong>구매확정</strong><fmt:formatDate pattern="yyyy .MM .dd" value="${writableItem.purchaseDate }"/>
 													</p>
 													<button type="button" href="javascript:;" class="btn"
 														onclick="writePage('${writableItem.orderDetailId}','${writableItem.name}','${writableItem.thImg}')">후기 작성</button>
@@ -412,7 +413,7 @@
 								<!-- </li> -->
 							</c:when>
 							<c:otherwise>
-								<li class="" style="min-height: 369px;">
+								<!-- <li class="" style="min-height: 369px;"> -->
 									<!-- 내역 없을 경우 style block-->
 									<div class="inr-box noneBoxPoint" name="aftNoComment"
 										style="height: 473px;">
@@ -422,7 +423,7 @@
 											</div>
 										</section>
 									</div>
-								</li>
+								<!-- </li> -->
 							</c:otherwise>
 							</c:choose>
 							</ul>

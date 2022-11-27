@@ -2,7 +2,7 @@ package kr.co.mpnp.admin.domain;
 
 public class DashMemberDomain {
 
-	private String gradeName, level;
+	private String gradeName, lev;
 	private int minPrice, maxPrice, memCnt;
 	public String getGradeName() {
 		return gradeName;
@@ -10,11 +10,11 @@ public class DashMemberDomain {
 	public void setGradeName(String gradeName) {
 		this.gradeName = gradeName;
 	}
-	public String getLevel() {
-		return level;
+	public String getLev() {
+		return lev;
 	}
-	public void setLevel(String level) {
-		this.level = level;
+	public void setLev(String lev) {
+		this.lev = lev;
 	}
 	public int getMinPrice() {
 		return minPrice;
@@ -36,8 +36,8 @@ public class DashMemberDomain {
 	}
 	@Override
 	public String toString() {
-		return "DashMemberDomain [gradeName=" + gradeName + ", level=" + level + ", minPrice=" + minPrice
-				+ ", maxPrice=" + maxPrice + ", memCnt=" + memCnt + "]";
+		return "DashMemberDomain [gradeName=" + gradeName + ", lev=" + lev + ", minPrice=" + minPrice + ", maxPrice="
+				+ maxPrice + ", memCnt=" + memCnt + "]";
 	}
 	
 	

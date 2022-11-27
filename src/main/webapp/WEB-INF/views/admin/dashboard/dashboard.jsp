@@ -24,7 +24,22 @@
 
     </head>
     <body class="sb-nav-fixed">
-   
+   <c:forEach var="item" items="${requestScope.dailyList}" varStatus="status">
+        <input type="hidden" value="${item.daily }" id="daily_${status.count }" name="daily_value">
+		<input type="hidden" value="${item.sales }" id="sales_${status.count }" name="sales_value">
+   </c:forEach>
+   <c:forEach var="item" items="${requestScope.monthlyList}" varStatus="status">
+        <input type="hidden" value="${item.monthly }" id="daily_${status.count }" name="monthly_value">
+		<input type="hidden" value="${item.sales }" id="sales_${status.count }" name="monthly_sales_value">
+   </c:forEach>
+   <c:forEach var="item" items="${requestScope.dogList}" varStatus="status">
+        <input type="hidden" value="${item.subName }" id="daily_${status.count }" name="dog_subName">
+		<input type="hidden" value="${item.salesCnt }" id="sales_${status.count }" name="dog_count">
+   </c:forEach>
+   <c:forEach var="item" items="${requestScope.catList}" varStatus="status">
+        <input type="hidden" value="${item.subName }" id="daily_${status.count }" name="cat_subName">
+		<input type="hidden" value="${item.salesCnt }" id="sales_${status.count }" name="cat_count">
+   </c:forEach>
    
    <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp" />
         
@@ -45,37 +60,26 @@
                                         등급별 회원현황
                                     </div>
                                     <div class="card-body" style=" height:150px;">
-                                        <table class="table table-hover ">
+                                        <table class="table table-hover "style="table-layout:fixed">
                                         <tr class="fw-bold"> 
-	                                        <td>레벨</td>
-	                                        <td>등급</td>
-	                                        <td>기준</td>
-	                                        <td>회원수</td>
+	                                        <td style="width:25%">레벨</td>
+	                                        <td style="width:20%">등급</td>
+	                                        <td style="width:40%">기준</td>
+	                                        <td style="width:15%">회원수</td>
                                         </tr>
+                                        <c:forEach var="memByGrade" items="${memberList}" varStatus="status">
                                         <tr>
-	                                        <td>1</td>
-	                                        <td>new</td>
-	                                        <td>0~500,000</td>
-	                                        <td>100명</td>
+                                         <%-- // <c:out value="${status.count }"/> // <c:out value="${listMember.size() }"/> --%>
+	                                        <td><c:out value="${memByGrade.lev }"/></td>
+	                                        <td><c:out value="${memByGrade.gradeName }"/></td>
+	                                        <td><c:out value="${memByGrade.minPrice }원 "/>~
+	                                        <c:if test="${status.count < memberList.size()}">
+	                                        <c:out value="${memByGrade.maxPrice }원 "/>
+	                                        </c:if>
+	                                        </td>
+	                                        <td><c:out value="${memByGrade.memCnt }"/>명</td>
                                         </tr>
-                                        <tr>
-	                                        <td>2</td>
-	                                        <td>new</td>
-	                                        <td>0~500,000</td>
-	                                        <td>100명</td>
-                                        </tr>
-                                        <tr>
-	                                        <td>3</td>
-	                                        <td>new</td>
-	                                        <td>0~500,000</td>
-	                                        <td>100명</td>
-                                        </tr>
-                                        <tr>
-	                                        <td>4</td>
-	                                        <td>new</td>
-	                                        <td>0~500,000</td>
-	                                        <td>100명</td>
-                                        </tr>
+                                        </c:forEach>
                                         </table>
                                     </div>   
                                 </div>
@@ -93,6 +97,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="card mb-4">

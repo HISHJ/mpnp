@@ -11,17 +11,28 @@
 		order by default_flag
 	</select>
 
+	<!-- 얘가먼저실행되어야하네 O일경우에 ㅇㅇ -->
 	<update id="updateDefault" parameterType="String">
 		update destination
 		set default_flag = 'X'
 		where id = #{id}
 	</update>
+<!-- 	<update id="updateDefault" parameterType="String">
+		update destination
+		set default_flag = ''
+		where id = #{id}
+	</update> -->
 	
 	<insert id="insertDes" parameterType="kr.co.mpnp.user.vo.DestinationVO">
 		insert into destination (desid, id, name, receiver, phone, zipcode, addr, addr_detail, default_flag)
 		values( concat('des_',lpad(SEQ_DESTINATION.nextval,6,0)),
 				#{id}, #{name}, #{receiver}, #{phone}, #{zipcode}, #{addr}, #{addrDetail}, #{defaultFlag})
 	</insert>
+<!-- 	<insert id="insertDes" parameterType="kr.co.mpnp.user.vo.DestinationVO">
+		insert into destination (desid, id, name, receiver, phone, zipcode, addr, addr_detail, default_flag)
+		values( concat('des_',lpad(SEQ_DESTINATION.nextval,6,0)),
+				#{id}, #{name}, #{receiver}, #{phone}, #{zipcode}, #{addr}, #{addrDetail}, #{defaultFlag})
+	</insert> -->
 	
 	<delete id="deleteDes" parameterType="String">
 		delete from destination
@@ -35,5 +46,6 @@
 		where desid = #{destinationId} and id = #{id}
 	
 	</update>
+	
 	
 </mapper>

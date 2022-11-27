@@ -4,20 +4,88 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mpnp.user.mapper.reviewMapper">
 
-<select id="writableReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
+<!-- 작성가능후기 -->
+<select id="selectWritableReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
 	select p.th_img thImg, p.name name, o.inputdate purchaseDate, od.order_detailid orderDetailId
 	from product p, order_detail od, orders o, member m
 	where (m.id = o.id and o.orderid = od.orderid and od.productid = p.productid) and
 	od.review_chk = 'N' and m.id= #{id}
-</select>
+</select><!-- od.review_chk = 'N' and  -->
 
-
-<select id="writenReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
+<!-- 작성한후기 -->
+<select id="selectWritenReview" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
 	select p.th_img thImg, p.name name, r.contents contents, r.star_score starScore, r.inputdate writeDate, r.reviewid reviewId
 	from product p, order_detail od, orders o, member m, review r
 	where m.id = o.id and o.orderid = od.orderid and od.productid = p.productid
 	and r.order_detailid = od.order_detailid and od.review_chk = 'Y' and o.id = #{id}
+	order by r.inputdate desc
 </select>
+
+<!-- 후기 추가 -->
+<insert id="insertReview" parameterType="kr.co.mpnp.user.vo.ReviewVO">
+insert into review (reviewid, star_score, contents, inputdate, order_detailid)
+values(concat('rev_',lpad(seq_review.nextval,6,0)),
+			#{starScore},#{contents},sysdate,#{orderDetailId})
+</insert>
+
+<!-- 후기코드조회 -->
+<select id="selectReviewId" resultType="String" parameterType="String">
+select reviewid reviewId
+from (
+	select reviewid
+	from review
+	where order_detailId = #{orderDetailId}
+	order by inputdate desc
+)
+where rownum = 1
+</select>
+
+<!-- 후기 이미지추가 -->
+<!-- insert into review_img (reviewid, review_img)
+values(#{reviewId},#{}) --><!-- 이미지여러개면? reviewImg 는 List인데 반복문 돌리기엔 parameterType이 VO하나잖아 -->
+
+<!-- <insert id="addReviewImg" parameterType="java.util.HashMap"> -->
+<!-- <insert id="addReviewImg" parameterType="kr.co.mpnp.user.vo.ReviewVO"> -->
+<insert id="insertReviewImg" parameterType="java.util.List">
+<!-- INSERT  -->
+<foreach collection="list" item="item" separator=" " open="INSERT ALL" close="SELECT * FROM SYS.DUAL" >
+INTO REVIEW_IMG (REVIEWID, REVIEW_IMG)
+VALUES
+(	#{item.reviewId},
+	#{item.reviewImg}
+)
+</foreach>
+</insert>
+
+<!-- 주문상세테이블 후기chk Y로 업데이트  주문상세코드만 받아서? -->
+<update id="updateReviewChk" parameterType="String">
+update order_detail
+set review_chk = 'Y'
+where order_detailid = #{odId}
+</update>
+
+
+<!-- 주문수정페이지 보여주기 -->
+<select id="selectReviewDetail" resultType="kr.co.mpnp.user.domain.ReviewDomain" parameterType="String">
+select p.th_img thImg, p.name name, r.contents contents, r.star_score starScore, od.order_DetailId orderDetailId, images reviewImgs
+from product p, review r, order_detail od,
+(
+	select listagg(review_img,',') within group (order by review_img) images
+	from review_img
+	where reviewid = #{reviewId}
+)
+where od.productid = p.productid and od.order_detailid = r.order_detailid
+and r.reviewid= #{reviewId}
+</select>
+
+<!-- 후기삭제 -->
+<delete id="deleteReview" parameterType="String">
+delete from review
+where reviewid = #{rId}
+</delete>
+
+
+
 
 
 

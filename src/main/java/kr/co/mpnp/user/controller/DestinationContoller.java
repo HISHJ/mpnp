@@ -26,14 +26,15 @@ public class DestinationContoller {
 		
 		DestinationService desService = new DestinationService(); 
 		
-		List<DestinationDomain> desList = desService.searchDes("id005");
-		for(DestinationDomain dd : desList) {
-			System.out.println("DestinationContoller : destinationId - "+dd.getDestinationId());
-		}
+		List<DestinationDomain> desList = desService.searchDes("test1126");
+		//for(DestinationDomain dd : desList) {
+			//System.out.println("DestinationContoller : destinationId - "+dd.getDestinationId());
+			//System.out.println("DestinationContoller : destinationId - "+dd.getDefaultFlag());
+		//}
 		model.addAttribute("desList",desList);
 		
 		
-		return "/user/mypage/delivery_test";
+		return "/user/mypage/delivery";
 	}
 	
 	// 배송지 추가
@@ -41,16 +42,19 @@ public class DestinationContoller {
 	@RequestMapping(value="/des_add_process.do", method=RequestMethod.GET)
 	public String desAddProcess(HttpSession session, DestinationVO dtVO, Model model) {
 		
-		System.out.println(dtVO.toString());
+		//System.out.println(dtVO.toString());
 		//String id = "id005";
-		dtVO.setId("id005");
+		dtVO.setId("test1126");
 		
+		//System.out.println("배송지추가 디폴트플래그 : "+dtVO.getDefaultFlag());
 		
 		DestinationService desService = new DestinationService(); 
 		//desService.addDes(dtVO);
-		if("O".equals(dtVO.getDefaultFlag())) {
-			desService.editDefault(dtVO);
-		}
+		//if("O".equals(dtVO.getDefaultFlag())) {
+//			desService.editDefault(dtVO);
+		//} 트랜잭션처리 테스트하려고 막음  성공하면 안풀거임
+		
+		
 		//return "des_list.do";
 		return desService.addDes(dtVO);
 	}
@@ -60,13 +64,14 @@ public class DestinationContoller {
 	@RequestMapping(value="/des_modify_process.do", method=RequestMethod.GET)
 	public String desLModifyProcess(HttpSession session, DestinationVO dtVO, Model model) {
 		
-		System.out.println("배송지정보변경 dtVO : "+dtVO.toString());
-		dtVO.setId("id005");
+		//System.out.println("배송지정보변경 dtVO : "+dtVO.toString());
+		dtVO.setId("test1126");
+		//System.out.println("배송지변경 디폴트플래그  : "+dtVO.getDefaultFlag());
 		
 		DestinationService desService = new DestinationService(); 
-		if("O".equals(dtVO.getDefaultFlag())) {
-			desService.editDefault(dtVO);
-		}
+		//if("O".equals(dtVO.getDefaultFlag())) {
+//			desService.editDefault(dtVO);
+		//} 트랜잭션처리 테스트하려고 막음  성공하면 안풀거임
 		
 		return desService.modifyDes(dtVO);
 	}
@@ -79,5 +84,6 @@ public class DestinationContoller {
 		DestinationService desService = new DestinationService(); 
 		return desService.removeDes(dtId);
 	}
+	
 	
 }

@@ -4,6 +4,12 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
+
+var dog_subName = document.getElementsByName("dog_subName");
+var dog_count = document.getElementsByName("dog_count");
+var cat_subName = document.getElementsByName("cat_subName");
+var cat_count = document.getElementsByName("cat_count");
+
 var myLineChart = new Chart(ctx, {
   type: 'bar',
   data: {
@@ -12,12 +18,12 @@ var myLineChart = new Chart(ctx, {
       label: "고양이",
       backgroundColor: "#ffaac7",
       borderColor: "#ffaac7",
-      data: [1425, 1512, 1621, 1781, 1921, 11494],
+      data: [cat_count[0].value,cat_count[1].value,cat_count[2].value,cat_count[3].value],
     },{
       label: "강아지",
       backgroundColor: "#669aff",
       borderColor: "#669aff",
-      data: [4215, 5312, 6251, 7841, 9821, 13984],
+      data: [dog_count[0].value,dog_count[1].value,dog_count[2].value,dog_count[3].value],
 
     } ],
   },
@@ -37,7 +43,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 15000,
+          max: 150,
           maxTicksLimit: 5
         },
         gridLines: {

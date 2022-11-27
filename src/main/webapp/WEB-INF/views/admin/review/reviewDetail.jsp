@@ -1,7 +1,7 @@
 <%@page import="javax.script.ScriptContext"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.List"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -36,11 +36,11 @@
 <script>
 $(function(){
 	$("#reviewRemoveBtn").click(function(){
-		alert($("#reviewId").val());
+		//alert($("#reviewId").val());
 		var flag = confirm("정말 삭제하시겠습니까?");
 		if(flag){
 			//$("#reviewIdFrm").submit();
-			alert($("#reviewId").val());
+			//alert($("#reviewId").val());
 			$.ajax({
 				url:"admin_review_delete_process.do",
 				data:"reviewId="+$("#reviewId").val(),
@@ -49,8 +49,8 @@ $(function(){
 					alert(xhr.status);
 				},
 				success:function(jsonObj){
-					alert(jsonObj);
-					alert(jsonObj.removeFlag);
+					//alert(jsonObj);
+					//alert(jsonObj.removeFlag);
 					if(jsonObj.removeFlag){
 						alert("삭제가 완료되었습니다.");
 						location.href="admin_review_list.do";
@@ -64,6 +64,9 @@ $(function(){
 })
 
 </script>
+<style>
+.row{margin-bottom:20px;}
+</style>
 </head>
 <body>
 
@@ -100,12 +103,17 @@ $(function(){
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>별점</b></div> 
-                                            <div class="col-6"><c:out value="${requestScope.reviewDetail.starScore }"/></div>
+                                            <div class="col-6">
+                                            <c:forEach var="i" begin="1" end="${requestScope.reviewDetail.starScore }" step="1">
+                                            ★
+                                            <%-- <c:out value="${requestScope.reviewDetail.starScore }"/> --%>
+                                            </c:forEach>
+                                            </div>
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>작성일자</b></div> 
-                                            <div class="col-6"><c:out value="${requestScope.reviewDetail.inputDate }"/></div>
+                                            <div class="col-6"><fmt:formatDate pattern="yyyy-MM-dd (E) " value="${reviewDetail.inputDate }"/></div>
                                         </div>
                                         <!-- 사진 추가해보고 height 정의해주기  -->
                                         <div class="dataTable-top"></div>

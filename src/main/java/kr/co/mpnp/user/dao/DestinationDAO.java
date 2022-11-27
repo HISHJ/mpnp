@@ -30,7 +30,7 @@ public class DestinationDAO {
 		// 1. Mybatis Handler 받기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		System.out.println("DestinationDAO : ssesion - "+ss);
+		//System.out.println("DestinationDAO : ssesion - "+ss);
 		
 		// 2. 쿼리수행
 		list = ss.selectList("kr.co.mpnp.user.mapper.destinationMapper.selectDesList",id);
@@ -43,94 +43,137 @@ public class DestinationDAO {
 	
 	// 배송지추가
 	//public int insertDes(DestinationVO dtVO){
-	public int insertDes(DestinationVO dtVO){
+	public boolean insertDes(DestinationVO dtVO){
 		
-		System.out.println("여기는DAO : "+dtVO.toString());
+		//System.out.println("여기는DAO : "+dtVO.toString());
 		int cnt = 0;// 쿼리문실행결과 
 		
 		// 1. Mybatis Handler 받기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		System.out.println("DestinationDAO : ssesion - "+ss);
+		//System.out.println("DestinationDAO : ssesion - "+ss);
 		
 		// 2. 쿼리수행
-		cnt = ss.insert("kr.co.mpnp.user.mapper.destinationMapper.insertDes",dtVO);
-		if(cnt==1) {
-			System.out.println(cnt+"건 추가");
-			ss.commit();
-		}else {
-			System.out.println("데이터추가X");
+		
+		
+		
+		boolean defaultFlag = false;
+		boolean insertFlag = false;
+		boolean finalFlag = false;
+		if("O".equals(dtVO.getDefaultFlag())){
+			defaultFlag = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDefault",dtVO.getId())!=0?true:false;
+			insertFlag = ss.insert("kr.co.mpnp.user.mapper.destinationMapper.insertDes",dtVO)!=0?true:false;
+			if(insertFlag && defaultFlag) {
+				//System.out.println("커밋됨");
+				ss.commit();
+				finalFlag = true;
+			}else {
+				//System.out.println("롤백됨");
+				ss.rollback();
+			}
+		}else { // O가 아닐경우에는 update기본배송지 이걸 할 필요가없지 ㅇㅇ
+			insertFlag = ss.insert("kr.co.mpnp.user.mapper.destinationMapper.insertDes",dtVO)!=0?true:false;
+			if(insertFlag) {
+				//System.out.println("커밋됨");
+				ss.commit();
+				finalFlag = true;
+			}else {
+				//System.out.println("롤백됨");
+				ss.rollback();
+			}
 		}
+		
 		// 3. 종료
 		mbh.closeHandler(ss);
-						
-		
 		//return cnt;
-		return cnt; 
+		return finalFlag; 
 	}
 	
-	public int updateDefault(String id){
-		
-		int cnt = 0;// 쿼리문실행결과 
-		
-		MyBatisHandler mbh = MyBatisHandler.getInstance();
-		SqlSession ss = mbh.getHandler();
-		
-		System.out.println("updateDefault에 들어온 id : "+id);
-		cnt = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDefault",id);
-		if(cnt!=0) {
-			ss.commit();
-		}else {
-			System.out.println("데이터추가X");
-			ss.rollback();
-		}
-		mbh.closeHandler(ss);
-		
-		return cnt; 
-	}
+//	public int updateDefault(String id){
+//		
+//		int cnt = 0;// 쿼리문실행결과 
+//		
+//		MyBatisHandler mbh = MyBatisHandler.getInstance();
+//		SqlSession ss = mbh.getHandler();
+//		
+//		System.out.println("updateDefault에 들어온 id : "+id);
+//		cnt = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDefault",id);
+//		if(cnt!=0) {
+//			ss.commit();
+//		}else {
+//			System.out.println("데이터추가X");
+//			ss.rollback();
+//		}
+//		mbh.closeHandler(ss);
+//		
+//		return cnt; 
+//	}
 	
 	// 배송지정보변경
-	public int updateDes(DestinationVO dtVO){
+	public boolean updateDes(DestinationVO dtVO){
 		
-		int cnt = 0;
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		System.out.println("DestinationDAO : ssesion - "+ss);
-		System.out.println("여긴다오::::::::::::::::::::::"+dtVO.toString());
+		//System.out.println("DestinationDAO : ssesion - "+ss);
+		
 		// 2. 쿼리수행
-		cnt = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDes",dtVO);
-		System.out.println(cnt);
-		if(cnt!=0) {
-			System.out.println(cnt+"건 추가");
-			ss.commit();
+		
+		
+		boolean defaultFlag = false;
+		boolean updateFlag = false;
+		boolean finalFlag = false;
+		if("O".equals(dtVO.getDefaultFlag())){
+			//System.out.println("여기까지 옴1");
+			defaultFlag = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDefault",dtVO.getId())!=0?true:false;
+			//System.out.println("여기까지 옴2");
+			updateFlag = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDes",dtVO)!=0?true:false;
+			//System.out.println("여기까지 옴3");
+			if(updateFlag && defaultFlag) {
+				//System.out.println("커밋됨");
+				ss.commit();
+				finalFlag = true;
+			}else {
+				//System.out.println("롤백됨");
+				ss.rollback();
+			}
 		}else {
-			System.out.println("데이터추가X");
+			updateFlag = ss.update("kr.co.mpnp.user.mapper.destinationMapper.updateDes",dtVO)!=0?true:false;
+			if(updateFlag) {
+				//System.out.println("커밋됨");
+				ss.commit();
+				finalFlag = true;
+			}else {
+				//System.out.println("롤백됨");
+				ss.rollback();
+			}
 		}
+		
 		// 3. 종료
 		mbh.closeHandler(ss);
 		
 		
-		return cnt; 
+		return finalFlag; 
 	}
 	
 	
 	// 배송지삭제
 	public int deleteDes(String dtId){
 		
-		System.out.println("여기는DAO : "+dtId);
+		//System.out.println("여기는DAO : "+dtId);
 		int cnt = 0;// 쿼리문실행결과 
 		
 		// 1. Mybatis Handler 받기
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss = mbh.getHandler();
-		System.out.println("DestinationDAO : ssesion - "+ss);
+		//System.out.println("DestinationDAO : ssesion - "+ss);
 		
 		// 2. 쿼리수행
 		cnt = ss.insert("kr.co.mpnp.user.mapper.destinationMapper.deleteDes",dtId);
 		if(cnt==1) {
 			ss.commit();
 		}else {
-			System.out.println("데이터삭제X");
+			//System.out.println("데이터삭제X");
+			ss.rollback();
 		}
 		// 3. 종료
 		mbh.closeHandler(ss);

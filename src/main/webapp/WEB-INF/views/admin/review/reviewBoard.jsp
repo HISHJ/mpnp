@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
-
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info="scriptlet의 사용"%>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@
 
 	<script>
 		function getHiddenVal(reviewId) {
-			alert(reviewId);
+			//alert(reviewId);
 			$("#reviewId").val(reviewId);
 			
 			$("#resultFrm").submit();
@@ -135,7 +135,7 @@
 				<form id="resultFrm" name="resultFrm" action="admin_review_detail_form.do"	method="get">
 					<input type="hidden" name="reviewId" id="reviewId">
 
-					<table id="datatablesSimple">
+					<table id="datatablesSimple"style="table-layout:fixed">
 
 						<thead>
 							<tr>
@@ -143,7 +143,6 @@
 								<th>닉네임</th>
 								<th>내용</th>
 								<th>등록일자</th>
-								<th>신고수</th>
 								<th>관리</th>
 							</tr>
 						</thead>
@@ -153,7 +152,6 @@
 								<th>닉네임</th>
 								<th>내용</th>
 								<th>등록일자</th>
-								<th>신고수</th>
 								<th>관리</th>
 							</tr>
 						</tfoot>
@@ -166,9 +164,9 @@
 								<!-- <td>R_1234556</td> -->
 								<td><c:out value="${review.reviewId }"/></td>
 								<td><c:out value="${review.nick }"/></td>
-								<td><c:out value="${review.contents }"/></td>
-								<td><c:out value="${review.inputDate }"/></td>
-								<td>12</td>
+								<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><c:out value="${review.contents }"/></td>
+								<%-- <td><c:out value="${review.inputDate }"/></td> --%>
+								<td><fmt:formatDate pattern="yyyy-MM-dd (E) " value="${review.inputDate }"/></td>
 								<td><input type="button" value="상세보기"
 									onClick="getHiddenVal('${review.reviewId }')"></td>
 							</tr>

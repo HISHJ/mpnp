@@ -23,7 +23,7 @@ public class AdminReviewController {
 		boolean loginFlag = false;
 		// session에 아이디가 null이 아니어야함
 		loginFlag = session.getAttribute("id")!=null?true:false;
-		System.out.println("AdminReviewController : "+arVO.toString());
+		//System.out.println("AdminReviewController : "+arVO.toString());
 		
 		List<AdminReviewDomain> list = null;
 		//if(loginFlag) {
@@ -31,7 +31,7 @@ public class AdminReviewController {
 			
 			list = arService.searchReviewList(arVO);
 		//}
-		System.out.println("확인용 : "+list);
+		//System.out.println("확인용 : "+list);
 		model.addAttribute("reviewList",list);
 			
 		return "/admin/review/reviewBoard";
@@ -44,14 +44,14 @@ public class AdminReviewController {
 		boolean loginFlag = false;
 		loginFlag = session.getAttribute("id")!=null?true:false;
 		
-		System.out.println(reviewId);
+		//System.out.println(reviewId);
 		
 		//if(loginFlag) {
 			AdminReviewService arService = new AdminReviewService();
 			
 			AdminReviewDomain reviewDetail = arService.searchReviewDetail(reviewId);
 		//}
-		System.out.println("확인용 : "+reviewDetail);
+		//System.out.println("확인용 : "+reviewDetail);
 		model.addAttribute("reviewDetail",reviewDetail);
 		
 		return "/admin/review/reviewDetail";
@@ -62,7 +62,7 @@ public class AdminReviewController {
 	@RequestMapping(value="/admin_review_delete_process.do", method=RequestMethod.GET)
 	public String adminReviewRemoveProcess(HttpSession session, String reviewId, Model model) {
 		
-		System.out.println("넘어오긴하나 "+reviewId);
+		//System.out.println("넘어오긴하나 "+reviewId);
 		AdminReviewService arService = new AdminReviewService();
 		return arService.removeReview(reviewId);
 		//if(arService.removeReview(reviewId)) { // 삭제가 됐다 alert를 어떻게 띄울건데 AJAX...?

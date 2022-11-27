@@ -4,16 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.mpnp.admin.mapper.dashBoardMapper">
 
+	<!-- 등급별 회원조회 -->
 	<select id="selectMemByGrade" resultType="kr.co.mpnp.admin.domain.DashMemberDomain">
-		select g.gradelevel level, g.name gradeName, g.min_price minPrice, g.max_price maxPrice,count(m.gradeid) memCnt
+		select g.gradelevel lev, g.name gradeName, g.min_price minPrice, g.max_price maxPrice,count(m.gradeid) memCnt
 		from member m, grade g
 		where m.gradeid = g.gradeid
 		group by g.gradeid, g.name, g.min_price, g.max_price, g.gradelevel
 		order by g.gradelevel 
 	</select>
 	
-	
-	<select id="selectMemBye" resultType="kr.co.mpnp.admin.domain.DashMemberDomain">
+	<!--  -->
+	<!-- <select id="selectMemBye" resultType="kr.co.mpnp.admin.domain.DashMemberDomain">
 		select count(p.sub_id), sc.sub_name
 		from product p
 		right outer join sub_category sc
@@ -21,10 +22,62 @@
 		where sc.main_id='m0002'
 		group by p.sub_id, sc.sub_name, sc.sub_id
 		order by sc.sub_id
+	</select> -->
+	
+	<select id="selectCountByCategory" resultType="kr.co.mpnp.admin.domain.DashCategoryDomain" parameterType="String">
+		select dogs.sId subId, dogs.sub_name subName, count(o.actual_price) salesCnt
+		from order_detail od, product p, orders o,
+		(
+		select sc.sub_id sId, sc.sub_name sub_name
+		from product p, main_category mc, sub_category sc
+		where mc.main_id = sc.main_id and mc.main_name = #{main_name}
+		group by sc.sub_id, sc.sub_name
+		order by sc.sub_id
+		) dogs
+		where p.productid = od.productid(+)
+		and od.orderid = o.orderid(+)
+		and dogs.sId = p.sub_id(+)
+		group by dogs.sId, dogs.sub_name
+		order by dogs.sid
 	</select>
 
 	
-
+	<!-- 일별 매출조회 -->
+	<select id="selectDailySales" resultType="kr.co.mpnp.admin.domain.DashDailySalesDomain">
+	<![CDATA[
+		select to_char(days.dt,'yyyy-mm-dd') daily, nvl(sum(actual_price),0) sales
+		from orders o,
+		(
+		select to_date(to_char(sysdate,'yyyy-mm-dd'),'YYYY-MM-DD') - level +1 as dt
+		from dual
+		connect by level <= (to_date(to_char(sysdate,'yyyy-mm-dd'),'YYYY-MM-DD')
+													-to_date(to_char(sysdate-4,'yyyy-mm-dd'),'YYYY-MM-DD')+1)
+		) days
+		where days.dt = o.inputdate(+)
+		group by days.dt
+		order by days.dt desc
+	]]>
+	</select>
 	
+	<!-- 월별 매출조회 -->
+	<select id="selectMonthlySales" resultType="kr.co.mpnp.admin.domain.DashMonthlySalesDomain">
+	<![CDATA[
+		select b.month as monthly, nvl(sum(a.sales),0) sales
+		from
+		(
+		select to_char(inputdate, 'YYYY-MM') as inpudate, sum(actual_price) sales
+		from orders
+		group by inputdate
+		) a,
+		(
+		select to_char(add_months(sysdate, - level +1), 'YYYY-MM') as month
+		from dual
+		connect by level <= months_between( to_date(to_char(sysdate, 'YYYY-MM'), 'YYYY-MM'), to_date(to_char(add_months(sysdate, -5), 'YYYYMM'), 'YYYYMM') )
+		) b
+		where b.month = a.inpudate(+)
+		group by b.month
+		order by b.month desc
+	]]>
+	</select>
 
 </mapper>
