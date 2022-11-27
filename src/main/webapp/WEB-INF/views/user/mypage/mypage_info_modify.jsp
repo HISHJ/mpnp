@@ -328,6 +328,9 @@
 											<strong class="tit requied">닉네임</strong>
 											<div class="input del disabled">
 												<input type="text" id="nick" name="nick" class="valChkRequired" value="${requestScope.mypage.nick }"  maxlength ="22" placeholder="닉네임을 입력해주세요." style="-webkit-text-fill-color:black;" >
+												<!-- 메인에서 등급보여줄 때 사용하려고 -->
+												<input type="hidden" id="gradeid" name="gradeid" class="valChkRequired" value="${requestScope.mypage.gradeid }"  maxlength ="22" placeholder="닉네임을 입력해주세요." style="-webkit-text-fill-color:black;" >
+											
 											</div>
 										</li>
 									</ul>

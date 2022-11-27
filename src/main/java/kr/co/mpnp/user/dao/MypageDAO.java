@@ -118,8 +118,10 @@ public class MypageDAO {
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
 		
-		System.out.println("회원정보수정 id "+mVO.getId()); 
-		System.out.println("회원정보수정 pass "+mVO.getPass());
+		System.out.println("회원정보수정 DAO id "+mVO.getId()); 
+		System.out.println("회원정보수정 DAO pass "+mVO.getPass());
+		System.out.println("회원정보수정 DAO name "+mVO.getName());
+		System.out.println("회원정보수정 DAO grade "+mVO.getGradeid());
 		
 		//2.쿼리문실행
 		int cnt=ss.update("kr.co.mpnp.user.mapper.mypageMapper.updateMemberInfo",mVO);

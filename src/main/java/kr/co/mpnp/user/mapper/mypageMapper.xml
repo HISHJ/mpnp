@@ -9,7 +9,7 @@
 
 <!-- 마이페이지 첫화면-->
 <select id="selectMypageMember"  parameterType="mypageVO" resultType="mypageDomain">
-select name, gradeId,pfimg
+select name, gradeid,pfimg
 from   member 
 where  id=#{id}
 </select>

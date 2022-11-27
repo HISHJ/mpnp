@@ -15,7 +15,7 @@ import kr.co.mpnp.admin.vo.AdminLoginVO;
 @Controller
 public class AdminLoginController {
 	
-	@RequestMapping(value = "/admin_login_form.do", method=GET )
+	@RequestMapping(value = "/admin_login_form.do", method=GET ) //admin index 여기로 연결하기
 	public String adminLoginForm(HttpSession session) {
 		
 		//여기에 세션을 받아야해? 아이디가 안들어왔는데 ? 
@@ -38,7 +38,7 @@ public class AdminLoginController {
 		if(flag) {
 			session.setMaxInactiveInterval(60*30); //30분
 			session.setAttribute("id", alVO.getId()); 
-			url="admin/dashboard/dashboardHJYtest";
+			url="redirect:dashboard_main.do";
 		}
 		
 		return url; 
@@ -51,7 +51,7 @@ public class AdminLoginController {
 		session.invalidate();
 		
 		//return "redirect:/admin/login/adminLogin"; //안됨. view바깥으로 내놔야 이동가능한듯
-		return "redirect:/indexHJY.jsp"; //테스트용1-성공
+		return "admin/login/adminLogin"; //테스트용1-성공
 		//return "admin/login/adminLogoutTest"; //테스트용2-안끊김. 이동은 됨
 	}//adminLogoutProcess
 	
