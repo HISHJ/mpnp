@@ -48,8 +48,7 @@ where p.sub_id=s.sub_id and s.main_id=#{main_id}
 
 
 <!--상품 전체보기 조회  -->
-<!-- 대분류 조회  -->
- <select id="selectPrdList" resultMap="mainResult" parameterType="String">
+ <select id="selectAllList" resultMap="mainResult" parameterType="MainVO">
 <!--  select p.name  ,p.price ,p.th_img ,p.productid,p.sub_id, s.main_id
 from  product p,order_detail o,review r ,sub_category s
 where p.productid =o.productid and o.order_detailid=r.order_detailid and p.sub_id=s.sub_id and s.main_id=#{s.main_id} -->
