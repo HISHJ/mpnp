@@ -5,25 +5,56 @@
 <configuration>
 	<properties resource="properties/database.properties"/>
 		<typeAliases>
-		<typeAlias type="kr.co.mpnp.user.domain.MainDomain" alias="main"/>
-		<typeAlias type="kr.co.mpnp.user.domain.ProductDomain" alias="product"/>
-		<typeAlias type="kr.co.mpnp.user.domain.ProductReviewDomain" alias="pr"/>
-		<typeAlias type="kr.co.mpnp.user.domain.SearchDomain" alias="Search"/>
-		 <typeAlias type="kr.co.mpnp.user.domain.MemberDomain" alias="memD"/>
-         <typeAlias type="kr.co.mpnp.user.domain.MypageDomain" alias="mypageD"/>
-		 <typeAlias type="kr.co.mpnp.user.vo.MemberVO" alias="memVO"/>
-         <typeAlias type="kr.co.mpnp.user.vo.MypageVO" alias="mypageVO"/>
-         
-		<typeAlias type="kr.co.mpnp.admin.domain.AdminOrderDomain" alias="AOrderDomain" />
-    		<typeAlias type="kr.co.mpnp.admin.domain.AdminOrderPrdDomain" alias="AOrderPrdDomain" />
-    		<typeAlias type="kr.co.mpnp.admin.vo.AdminOrderVO" alias="AOrderVO" />
-		<typeAlias type="kr.co.mpnp.user.domain.MyOrderDomain" alias="MyOrderDomain" />
-    		<typeAlias type="kr.co.mpnp.user.vo.MyOrderVO" alias="MyOrderVO" />
-    		<typeAlias type="kr.co.mpnp.user.domain.OrderDomain" alias="OrderDomain"/>
-    		<typeAlias type="kr.co.mpnp.user.vo.OrderVO" alias="OrderVO" />
-			<typeAlias type="kr.co.mpnp.user.vo.DestinationVO" alias="DestinationVO" />    	
-			<typeAlias type="kr.co.mpnp.user.vo.ShipNameVO" alias="ShipNameVO" />    	
-    		<typeAlias type="kr.co.mpnp.user.domain.OrderShipDomain" alias="OrderShipDomain"/>
+    		
+    		<!-- 하지윤:관리자 -->
+    		<typeAlias type="kr.co.mpnp.admin.domain.AdminMemberDomain" alias="adminMemberDomain"/>
+    		<typeAlias type="kr.co.mpnp.admin.vo.AdminMemberVO" alias="adminMemberVO"/>
+    		
+     		<typeAlias type="kr.co.mpnp.admin.domain.AdminLoginDomain" alias="adminLoginDomain"/>
+    		<typeAlias type="kr.co.mpnp.admin.vo.AdminLoginVO" alias="adminLoginVO"/>
+    		
+    		<!-- 하지윤:사용자 -->
+    		<typeAlias type="kr.co.mpnp.user.domain.MemberDomain" alias="memberDomain"/>
+    		<typeAlias type="kr.co.mpnp.user.vo.MemberVO" alias="memberVO"/>
+    		<typeAlias type="kr.co.mpnp.user.domain.MypageDomain" alias="mypageDomain"/>
+    		<typeAlias type="kr.co.mpnp.user.vo.MypageVO" alias="mypageVO"/>
+    		
+    		<!-- 최정민 없음 -->
+    		
+    		<!-- 정선홍 -->
+	    	<typeAlias type="kr.co.mpnp.user.domain.MainDomain" alias="main"/>
+	        <typeAlias type="kr.co.mpnp.user.domain.ProductDomain" alias="productDomain"/>
+	        <typeAlias type="kr.co.mpnp.user.domain.WishDomain" alias="wishDomain"/>
+	        <typeAlias type="kr.co.mpnp.user.domain.ProductReviewDomain" alias="ProductReviewDomain"/>
+	        <typeAlias type="kr.co.mpnp.user.domain.SearchDomain" alias="Search"/>
+	        <typeAlias type="kr.co.mpnp.user.vo.ProductVO" alias="productVO"/>
+	        <typeAlias type="kr.co.mpnp.user.vo.ProductCartVO" alias="productCartVO"/>
+	        <typeAlias type="kr.co.mpnp.user.vo.WishListVO" alias="WishLishVO"/>
+	        <typeAlias type="kr.co.mpnp.user.vo.SearchVO" alias="SearchVO"/>
+	    	<typeAlias type="kr.co.mpnp.user.vo.MainVO" alias="MainVO"/> 
+	        <typeAlias type="kr.co.mpnp.admin.vo.AdminProductVO" alias="AdminProductVO"/>
+	        <typeAlias type="kr.co.mpnp.admin.vo.AdminPrdImgVO" alias="AdminPrdImgVO"/>
+	        <typeAlias type="kr.co.mpnp.admin.domain.AdminCategoryDomain" alias="AdminCategoryDomain" />
+	        <typeAlias type="kr.co.mpnp.admin.domain.AdminProductDomain" alias="AdminProductDomain" />
+	        
+	        <!-- 유설븐 -->
+	        <typeAlias type="kr.co.mpnp.admin.domain.AdminOrderDomain" alias="AOrderDomain" />
+            <typeAlias type="kr.co.mpnp.admin.domain.AdminOrderPrdDomain" alias="AOrderPrdDomain" />
+            <typeAlias type="kr.co.mpnp.admin.vo.AdminOrderVO" alias="AOrderVO" /> 
+
+
+        	<typeAlias type="kr.co.mpnp.user.domain.MyOrderDomain" alias="MyOrderDomain" />
+            <typeAlias type="kr.co.mpnp.user.vo.MyOrderVO" alias="MyOrderVO" />
+            <typeAlias type="kr.co.mpnp.user.domain.OrderDomain" alias="OrderDomain"/>
+            <typeAlias type="kr.co.mpnp.user.vo.OrderVO" alias="OrderVO" />
+            <typeAlias type="kr.co.mpnp.user.vo.DestinationVO" alias="DestinationVO" />
+
+            <typeAlias type="kr.co.mpnp.user.vo.ShipNameVO" alias="ShipNameVO" />
+            <typeAlias type="kr.co.mpnp.user.domain.OrderShipDomain" alias="OrderShipDomain"/>
+            <typeAlias type="kr.co.mpnp.user.vo.OrderPrdVO" alias="OrderPrdVO" />
+    		
+    		
+	
 	</typeAliases>
 	
   <environments default="development">
@@ -38,22 +69,36 @@
     </environment>
   </environments>
   <mappers>
-      <mapper resource="kr/co/mpnp/user/mapper/MainMapper.xml"/>
-      <mapper resource="kr/co/mpnp/user/mapper/ProductMapper.xml"/>
-      <mapper resource="kr/co/mpnp/user/mapper/ProductReviewMapper.xml"/>
-     <mapper resource="kr/co/mpnp/user/mapper/SearchMapper.xml"/> 
-      <mapper resource="kr/co/mpnp/admin/mapper/AdminProductMapper.xml"/>
-       <mapper resource="kr/co/mpnp/dao/mapper/memberMapper.xml"/>
-    <mapper resource="kr/co/mpnp/dao/mapper/mypageMapper.xml"/>
     
-   <mapper resource="kr/co/mpnp/admin/dao/mapper/adminOrderMapper.xml"/>
-     <mapper resource="kr/co/mpnp/admin/dao/mapper/gradeMapper.xml"/>
- <mapper resource="kr/co/mpnp/user/dao/mapper/orderMapper.xml"/>
-    <mapper resource="kr/co/mpnp/user/dao/mapper/myOrderMapper.xml"/>
+    <!-- 11.19 하지윤 관리자 -->
+	<mapper resource="kr/co/mpnp/admin/mapper/adminMemberMapper.xml"/>
+	<mapper resource="kr/co/mpnp/admin/mapper/adminLoginMapper.xml"/>
+	<!-- 11.20 하지윤 사용자 -->
+	<mapper resource="kr/co/mpnp/user/mapper/memberMapper.xml"/>
+	<mapper resource="kr/co/mpnp/user/mapper/mypageMapper.xml"/>
+	
+	<!-- 11-19 최정민 추가 -->
+   <mapper resource="kr/co/mpnp/user/mapper/destinationMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/cartMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/reviewMapper.xml"/>
 
-  
-  
-  
+   <!-- 11-20 최정민 추가 -->
+   <mapper resource="kr/co/mpnp/admin/mapper/adminReviewMapper.xml"/>
+   <mapper resource="kr/co/mpnp/admin/mapper/dashBoardMapper.xml"/>
+   
+   <!-- 정선홍 -->
+   <mapper resource="kr/co/mpnp/user/mapper/MainMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/ProductMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/ProductReviewMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/SearchMapper.xml"/> 
+   <mapper resource="kr/co/mpnp/user/mapper/WishListMapper.xml"/> 
+   <mapper resource="kr/co/mpnp/admin/mapper/AdminProductMapper.xml"/>
+   
+   <!-- 유설븐 -->
+   <mapper resource="kr/co/mpnp/admin/mapper/adminOrderMapper.xml"/> 
+   <mapper resource="kr/co/mpnp/admin/mapper/gradeMapper.xml"/> 
+   <mapper resource="kr/co/mpnp/user/mapper/orderMapper.xml"/>
+   <mapper resource="kr/co/mpnp/user/mapper/myOrderMapper.xml"/>
   
   </mappers>
 </configuration>
