@@ -183,96 +183,17 @@ checkbox{
 </script>
 		<!-- header pc-->
 		<header class="header pc cu mode0" data-header="set0" id="header_pc">
-			<input type="password" style="display: none;" />
-			<!-- 크롬 패스워드 자동완성 방지 -->
-			<div class="hdr">
-				<div class="inr">
-					<div class="tdt">
-						<ul class="menu">
-							<li><a href="/join/indexTerms?header=Y&goSns=Y" class="bt">회원가입</a></li>
-							<li><a href="javascript:clickLogin();" class="bt">로그인</a></li>
-							<!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
-
-						</ul>
-					</div>
-					<div class="hdt">
-						<!-- mobile -->
-						<button class="mo-header-btnType02">취소</button>
-						<!-- on 클래스 추가 시 활성화 -->
-						<!-- // mobile -->
-						<button class="btnGnb" type="button">메뉴</button>
-						<!-- -->
-						<h1 class="logo shop">
-							<a class="bt" href="javascript:goShopDeleteCookie();">AboutPet</a>
-						</h1>
-						<nav class="menushop">
-							<button type="button" class="bt st" id="headerTxt"></button>
-							<div class="list">
-								<ul class="menu">
-									<li class=""><a class="bt" href="javascript:void(0);"
-										onclick="sendDispClsfNo(300000173)"><b class="t"
-											id="b_tag_300000174">강아지</b></a></li>
-									<li class="active"><a class="bt"
-										href="javascript:void(0);" onclick="sendDispClsfNo(300000174)"><b
-											class="t" id="b_tag_300000174">고양이</b></a></li>
-
-								</ul>
-							</div>
-						</nav>
-						<!-- -->
-						<!-- mobile -->
-						<button class="mo-header-backNtn" onclick="storageHist.goBack();">뒤로</button>
-						<div class="mo-heade-tit">
-							<span class="tit"></span>
-						</div>
-						<div class="mo-header-rightBtn">
-							<button class="mo-header-btnType01">
-								<span class="mo-header-icon"></span>
-							</button>
-						</div>
-						<button class="mo-header-close"></button>
-						<!-- // mobile -->
-						<nav class="tmenu">
-							<ul class="list">
-
-								<li id="liTag_10" class="active"><a href="/shop/home/"
-									class="bt">스토어</a></li>
-								<!-- APET-1250 210728 kjh02  -->
-								<li id="liTag_00" class=""><a href="/mypage/indexMyPage/"
-									class="bt">MY</a></li>
-							</ul>
-						</nav>
-					</div>
-					<div class="cdt">
-						<div class="schs">
-							<div class="form ">
-								<div class="input del kwd">
-									<input id="srchWord" name="srchWord" type="search"
-										maxlength="50" value="" autocomplete="off"
-										placeholder="검색어를 입력해주세요.">
-								</div>
-								<button type="button" class="btnSch" data-content=""
-									data-url="/commonSearch">검색</button>
-
-								<!-- 자동완성 드롭박스 -->
-								<div class="key-word-list" id="key-word-list"
-									style="display: none;">
-									<ul></ul>
-								</div>
-								<!-- 자동완성 드롭박스 -->
-							</div>
-						</div>
-						<div class="menu">
-							<!-- <button id="alertBtn" class="bt alim  " type="button">알림</button> -->
-							<button class="bt cart" type="button"
-								onclick="location.href='/order/indexCartList/'"></button>
-							<button id="srchClsBtn" class="bt close" type="button"
-								style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
-							<div class="alims" id="alertDiv"></div>
-						</div>
-					</div>
-				</div>
+	    <input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
+	    <div class="hdr">
+	        <div class="inr">
+		
+			<c:import url="../../user/main/user_header.jsp">
+	            <c:param name="id" value="${sessionScope.id }"></c:param>
+			</c:import>
+		
+		
 			</div>
+	    </div>
 		</header>
 
 
@@ -353,6 +274,7 @@ checkbox{
 
 		if(total != checked) $("#chkAll").prop("checked", false);
 		else $("#chkAll").prop("checked", true); 
+		//calPrice();
 	});
 	
 	})
@@ -443,10 +365,13 @@ checkbox{
 			
 			//alert(this.value);
 			//alert($(this).attr("id"));
-		
+			//alert(this.value);
 			var chkVal = this.value;
+			//alert(chkVal);
+
 			var chkCartId = $(this).attr("id");
-			
+			//alert("진짜왜그러ㅑㄴ"+chkVal);
+			//alert(chkCartId);
 			///////////////////////
 			// 지금 선택된 애의 가격
 			//alert("장바구니아이템 가격 : "+$("#priceBy_"+chkCartId).val());
@@ -482,12 +407,24 @@ checkbox{
 						//alert("변경이 완료되었습니다");
 
 						$("#totalTest").val(json.test);
-						//$("#priceBy_"+chkCartId).val(chkVal*$("#oneBy_"+chkCartId).val());
+						$("#priceBy_"+chkCartId).val(chkVal*$("#oneBy_"+chkCartId).val());
+						
+						//alert(typeof($("#hid_cnt_"+chkCartId)));
+						$("#hid_cnt_"+chkCartId).val(chkVal);
+						//alert($("#hin_cnt_"+chkCartId).val(chkVal));
+						//hid_cnt_
+						//$("#hin_cnt_"+chkCartId).val(chkVal);
+						
+						//alert($('#'+chkCartId).val());
+						//$('#'+chkCartId).val(chkVal).prop("selected",true);
+						//cnt_${cartItem.cartId}
+						//alert($("#cnt_"+chkCartId).val());
 						/* 2022-11-27-00-32 최정민 수정 */
-						var priceTest = (chkVal*$("#oneBy_"+chkCartId).val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-						$("#priceBy_"+chkCartId).val(priceTest);
+						//var priceTest = (chkVal*$("#oneBy_"+chkCartId).val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+						//$("#priceBy_"+chkCartId).val(priceTest);
 						
 						// 여기까지하면 각 값이 바뀌었으니까 총 가격연상해서 배송비 3000, 0 , 총가격 뱉어주는 함수실행
+						//var priceTest = (chkVal*$("#oneBy_"+chkCartId).val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 						calPrice();
 					}	
 					
@@ -519,10 +456,12 @@ checkbox{
 		var sum = 0;
 		var price = 0;
 		for(var i=0;i<chkArr.length;i++){
-			//alert($("#priceBy_"+chkArr[i]).val());
-			price = $("#priceBy_"+chkArr[i]).val().replace(",","");
+			//alert("여기냐??"+$("#priceBy_"+chkArr[i]).val());
+			price = $("#priceBy_"+chkArr[i]).val().replace(/,/gi,""); // 100만단위일경우 한개만지워져서 /,/gi 정규식으로 다지움
+			//alert("쉼표지운거아냐??"+price);
 			//sum += ($("#priceBy_"+chkArr[i]).val()*1);
 			sum += price*1;
+			//sum += Number(price);
 		}
 		//alert("최종가격 : "+sum);
 		
@@ -549,9 +488,15 @@ checkbox{
 			//$("#shipPrice2").text(ship);
 		}
 		
+		//alert("가공전 숫자sum : "+sum);
+		//alert("가공전 숫자sum : "+sum2);
+		
+		
 		sum = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		sum2 = sum2.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		//alert("가공후 숫자형태 : "+sum);
+		
+		//alert("가공후 숫자sum : "+sum);
+		//alert("가공후 숫자sum : "+sum2);
 		
 		$("#shipPrice1").text(ship);
 		$("#shipPrice2").text(ship);
@@ -561,16 +506,82 @@ checkbox{
 		$("#cartTotalPrice4").text(sum2);
 		$("#cartTotalPrice5").text(sum);
 		$("#chkTotalCnt").text(chkArr.length);
+		
+		//$("[name=priceByCart=")
+		
+		
+		/* NaN 뜨면 이거 지워그냥 */
+		$("[name=priceByCart]").each(function(index,item){
+			//alert(item.value);
+			var testPrice = item.value;
+			testPrice = testPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			$(item).val(testPrice);
+		})
+		
 	}
 	
 	window.onload = function(){
 		calPrice();
 	}
 	
+	/* $(function(){
+		$(".btnOrder").click(function(){
+			$("#cartForm").submit();
+		})
+	}) */
+	
 	</script>
 	<!-- ************************************************************************ -->
+	<script>
+	//주문하기 버튼
+		$(function(){
+			$(".btnOrder").click(function(){
+				var form_contents = "";
+				var orderNumber = 0;
+				
+				/* 0개 주문못하게 막아야함 */
+				var chkCnt = $("input:checkbox[name=cartIds]:checked").length;
+				alert("선택된 장바구니 갯수 : "+chkCnt);
+				
+				if(confirm("선택하신 상품을 주문하시겠습니까?")){
+					//hidden 동적 추가
+					$(".untcart").each(function(i, element){
+						//alert(element);
+						if($(element).find("[name=cartIds]").is(":checked") === true){
+							var cartId = $(element).find("[name=cartIds]").val(); //카트 아이디
+							//alert("prd자료형 : "+$("[name=pId]"));
+							//alert("prd자료형 : "+$(".indi_prdId").val());
+							var prdId= $(element).find("[name=pId]").val() //상품코드
+							//var prdId= $(element).find(".indi_prdId").val() //상품코드
+							//var prdId= $(".indi_prdId").val(); //상품코드
+							var prdCnt = $(element).find("[name=totalCnt]").val() ; //상품 수량
+							//alert(cartId+" / "+prdId+" / "+prdCnt);
+							var cartId_Input  = "<input name='orders["+ orderNumber  +"].cartId' type='hidden' value='" + cartId+"'>"; 
+							form_contents += cartId_Input;
+						 	var prd_id_Input  = "<input name='orders["+ orderNumber  +"].prdId' type='hidden' value='" + prdId+"'>"; 
+							form_contents += prd_id_Input;
+							
+							var prdCnt_Input  = "<input name='orders["+ orderNumber  +"].prdCnt' type='hidden' value='" +prdCnt+"'>"; 
+							form_contents += prdCnt_Input;
+							orderNumber += 1;
+						}//end checked
+					});//end cart Info
+					
+					$("#cartForm").html(form_contents);
+					$("#cartForm").submit();
+				
+				}
+			})
+			
+		})
+	</script>
 
-					<form id="cartForm" method="GET" name="form">
+
+
+
+	<!-- ************************************************************************ -->
+																	<!-- orderPayment_form_Test.do -->
+					<form id="cartForm" method="GET" name="form" action="orderPayment_form.do">
 						<input type="hidden" name="fstPurchBeneTgYn" id="fstPurchBeneTgYn"
 							value="N">
 						<div class="allcheck scroll_fixed">
@@ -622,8 +633,8 @@ checkbox{
 									<c:forEach var="cartItem" items="${cartList }">
 									<li>
 									<!-- 유설빈님 상품아이디 여기있어요 -->
-										<input type="hidden" value="${cartItem.productId }" id="prdId_${cartItem.productId }" name="pId"/>
 										<div class="untcart " id="untcart163361418348766992">
+										<input type="hidden" value="${cartItem.productId }" id="prdId_${cartItem.productId }" name="pId" class="indi_prdId"/>
 											<label class="checkbox">
 											<input type="checkbox" id="${cartItem.cartId}" name="cartIds"
 											value="${cartItem.cartId}" checked="checked">
@@ -645,7 +656,8 @@ checkbox{
 												<!-- <div class="uispined st load itemCntChk" style="text-align: center;"> -->
 												<div class="" style="text-align: left; margin-left:20px;  ">
 												
-												<input type="hidden" value="${cartItem.totalCnt }" name="totalCnt"/>
+												<input type="hidden" value="${cartItem.totalCnt }" name="totalCnt" id="hid_cnt_${cartItem.cartId}"/>
+												<%-- <select name="itemCnt" id="${cartItem.cartId}" style="text-align: left; font-size:15px;  margin-top:25px;margin-left:20px;"> --%>
 												<select name="itemCnt" id="${cartItem.cartId}" style="text-align: left; font-size:15px;  margin-top:25px;margin-left:20px;">
 												<c:forEach var="i" begin="1" end="10" step="1">
 													<option value="${i }" <c:if test="${cartItem.totalCnt == i }">selected="selected"</c:if>><c:out value="${i }"/></option>
@@ -663,7 +675,8 @@ checkbox{
 														<input type="text" readonly="readonly" id="priceBy_${cartItem.cartId}"
 														<%-- name="priceByCart" style="font-size:15px; font-weight: 700; width:70px; border:0 solid black;" value="${cartItem.productPrice * cartItem.totalCnt}"/> --%>
 														name="priceByCart" style="font-weight: 700; width:70px; border:0 solid black; text-align: right;"
-														value="<fmt:formatNumber value='${cartItem.productPrice * cartItem.totalCnt }' pattern='#,###'/>"/>
+														value="${cartItem.productPrice * cartItem.totalCnt}"/>
+														<%-- <fmt:formatNumber value='${cartItem.productPrice * cartItem.totalCnt }' pattern='###,###,###'/> --%>
 														<%-- <c:out value=""/> --%>
 														</em><i class="w">원</i></span>
 														<div class="free">

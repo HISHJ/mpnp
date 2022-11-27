@@ -25,6 +25,7 @@ public class CartController {
 	@RequestMapping(value="/cart_list.do",method=RequestMethod.GET)
 	public String searchCartList(HttpSession session, Model model) {
 		
+		
 		String id = (String)session.getAttribute("id");
 		System.out.println("CartController : id - "+id);
 		
@@ -63,9 +64,9 @@ public class CartController {
 	public String removeCart(HttpSession session, @RequestParam(value="chkBox[]") List<String> chkArr, Model model) {
 		// 삭제되었는지도 보여줘야하니까 model이 있어야하나..?
 		//System.out.println("몇개체크됐나요 : "+chkArr.size());
-		for(String chk : chkArr) {
-			System.out.println("선택된거 잘 들어왔나 : "+chk);
-		}
+		//for(String chk : chkArr) {
+			//System.out.println("선택된거 잘 들어왔나 : "+chk);
+		//}
 		
 		List<CartVO> list = new ArrayList<CartVO>();
 		String id = "id002"; // session.getAttribute("id");
@@ -74,10 +75,10 @@ public class CartController {
 			cVO = new CartVO();
 			cVO.setMemberId(id);
 			cVO.setCartId(chk);
-			System.out.println("for문안에서 돌고있는 cVO : "+cVO.toString());
+			//System.out.println("for문안에서 돌고있는 cVO : "+cVO.toString());
 			list.add(cVO);
 		}
-		System.out.println("만들어진 list 길이 : "+list.size());
+		//System.out.println("만들어진 list 길이 : "+list.size());
 		
 		CartService cartService = new CartService(); 
 		
@@ -106,7 +107,7 @@ public class CartController {
 		int cnt = Integer.parseInt(cMap.get("cnt"));
 		CartVO cVO = new CartVO();
 		//cVO.setMemberId((String)session.getAttribute("id"));
-		cVO.setMemberId("id010");
+		cVO.setMemberId("id002");
 		cVO.setCartId(cartId);
 		cVO.setCnt(cnt);
 		
