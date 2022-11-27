@@ -45,8 +45,8 @@ where id=#{id}
 update member
 <set>
 	nick=#{nick},phone=#{phone}
-	<if test="pfimg!=null">
-	 	pfimg=#{pfimg}
+	<if test="pfimg!=null and !''.equals(pfimg)">
+	 	,pfimg=#{pfimg}
 	</if>
 </set>
 where id=#{id}

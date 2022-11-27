@@ -16,16 +16,16 @@
 select  m.id, m.nick, m.status, g.gradeid, m.inputdate
 from    member m, grade g
 where   m.gradeid=g.gradeid
-<if test="id != null">
+<if test="id != null and !''.equals(id)">
 	and m.id like '%'||#{id}||'%'
 </if>
-<if test="nick != null">
+<if test="nick != null and !''.equals(nick)">
 	and m.nick like '%'||#{nick}||'%'
 </if>
-<if test=" gradeid != null">
+<if test=" gradeid != null and !''.equals(gradeid)">
 	and  m.gradeid =#{gradeid}
 </if>
-<if test=" status != null">
+<if test=" status != null and !''.equals(status)">
 	and  m.status =#{status}
 </if>
 </select>

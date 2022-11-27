@@ -58,10 +58,16 @@
 					flag=true;
 				}
 			}
+			
+			if(pfimg==null||pfimg==""){
+				flag=true;
+			}
+			
 			if(!flag){
 				alert("이미지파일만 넣으라구");
 				return flag;
 			}
+			
 			$("#myModifyFrm").submit();
 		});
 	});

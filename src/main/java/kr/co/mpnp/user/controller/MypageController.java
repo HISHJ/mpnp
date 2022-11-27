@@ -205,8 +205,12 @@ public class MypageController {
 	
 	//È¸¿øÅ»Åð Æû
 	@RequestMapping(value = "/m_quit_form.do", method=GET )
-	public String memberQuitForm() {
+	public String memberQuitForm(HttpSession session,Model model) {
+		String id=(String)session.getAttribute("id");
+		MypageService ms=new MypageService();
+		MypageDomain md= ms.searchMemberInfo(id);
 		
+		model.addAttribute("quitMemChk", md);
 		return "user/mypage/quitMember";
 	}//memberQuitForm
 	
@@ -226,7 +230,6 @@ public class MypageController {
 		//Å»ÅðÅ×ÀÌºí¿¡ insert
 		ms.addQuitMember(mVO);
 		
-		model.addAttribute("passChk",mVO);
 		
 		
 		return "user/mypage/quitMemberComfirm";

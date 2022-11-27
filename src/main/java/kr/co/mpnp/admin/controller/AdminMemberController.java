@@ -24,16 +24,23 @@ public class AdminMemberController {
 	//멤버조회(검색조회-등급 포함)
 	@RequestMapping(value = "/admin_m_list.do", method=GET )
 	public String adminMList(HttpSession session, AdminMemberVO amVO, Model model) {
-		AdminMemberService ams=new AdminMemberService();
 		
-		List<AdminMemberDomain> list= ams.searchMember(amVO);
-		model.addAttribute("memberList",list);
+		String url="admin/login/adminLogin";
 		
-		List<AdminMemberDomain> gradeList= ams.searchGrade(amVO);
-		model.addAttribute("gradeList",gradeList);
+		if(session.getAttribute("id")!=null) {
+			AdminMemberService ams=new AdminMemberService();
+			
+			List<AdminMemberDomain> list= ams.searchMember(amVO);
+			model.addAttribute("memberList",list);
+			
+			List<AdminMemberDomain> gradeList= ams.searchGrade(amVO);
+			model.addAttribute("gradeList",gradeList);
+			
+			url="admin/member/memberBoard";
+		}
 		
 		
-		return "admin/member/memberBoard";
+		return url;
 	}//adminMList
 	
 	//멤버상세보기
@@ -70,7 +77,7 @@ public class AdminMemberController {
 		AdminQuitMemberService aqs=new AdminQuitMemberService();
 		aqs.addQuitMember(id);
 		
-		return "admin/member/memberBoard"; //return한 페이지는 리스트 조회한 결과가 없는걸까
+		return "redirect:admin_m_list.do"; //return한 페이지는 리스트 조회한 결과가 없는걸까
 	}//adminMRemoveProcess
 	
 	//멤버등급변경
@@ -83,7 +90,7 @@ public class AdminMemberController {
 		AdminMemberService ams=new AdminMemberService();
 		ams.modifyMemberGrade(amVO);
 		
-		return "admin/member/memberBoard";
+		return "redirect:admin_m_list.do";
 	}//adminGradeProcess
 	
 	

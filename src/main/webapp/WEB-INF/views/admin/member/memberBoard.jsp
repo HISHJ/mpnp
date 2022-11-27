@@ -79,6 +79,7 @@ if( session.getAttribute("adminId") == null){
                                 <label>회원등급　</label>
                                 <select name="gradeid" class="dataTable-selector" aria-label="Default select example">
 									<!-- <option value="">등급선택</option> 와 이거 처리를 못하겠어-->
+									<option value="">등급선택</option>
 								<c:forEach items="${gradeList }" var="grade">
 									<option>${grade.gradeid }</option>
 								</c:forEach>

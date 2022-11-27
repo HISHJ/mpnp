@@ -56,7 +56,13 @@
 		 });//click
 		
 		 $("#quitMemberBtn").click(function() {
-			$("#quitMemberFrm").submit();
+			 if($("#passChk").val() == $("#pass").val()){
+				$("#quitMemberFrm").submit();
+			 }else{
+				 //alert("비밀번호가 일치하지 않습니다");
+				 $("#pass_error").html("비밀번호가 일치하지 않습니다");
+				 return;
+			 }
 		});
 		 
 		
@@ -237,9 +243,9 @@
 									<p class="info">필수 입력 정보</p>
 									<div class="input disabled">
 										<input type="password" class="ipt" name="pass" id="pass" placeholder="비밀번호를 입력해주세요" autocomplete="new-password" maxlength="12">
-										<input type="text" id="passChk" name="passChk" value="${passChk.pass }" style="border: none; color: white;" readonly="readonly"> 
-				
+										<input type="hidden" id="passChk" name="passChk" value="${quitMemChk.pass }" style="border: none; color: white;" readonly="readonly"> 
 									</div>
+									<p class="validation-check" id="pass_error"></p>
 								</li>
 							</ul>
 						</div>

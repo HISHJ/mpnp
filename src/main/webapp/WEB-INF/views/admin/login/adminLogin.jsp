@@ -1,7 +1,6 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,45 +24,40 @@
  
 <script type="text/javascript">
 $(function(){
-	//아이디 키코드
 	$('#id').keydown(function(evt){
 		if(evt.which == 13){
 		chkNull()
 		};//end if
 	});//keydown
-	//비밀번호키코드
+	
 	$('#pass').keydown(function(evt){
 		if(evt.which ==13){
 		chkNull()
 		};//end if
 		
 	});//keydown
-	//로그인버튼 클릭
+
 	$('#lobinBtn').click(function(){
 		chkNull()
 	});//click
 })//end ready
 
 function chkNull(){
-	//아이디 입력값 얻기
 	let id=$("#id").val();
 	if(id.trim() == ""){
 		alert("아이디를 입력해주세요.")
-		$("#id").val(""); //초기화
-		$("#id").focus(); //아이디 입력안하면 아이디 입력란으로 focus
-		return false; //submit안함
+		$("#id").val(""); 
+		$("#id").focus(); 
+		return false; 
 	}else{
-		//아이디값 넣으면 비밀번호 입력칸으로 focus
 		$("#pass").focus(); 
 	}
-	//비밀번호 입력값 얻기
 	let pass = $("#lobinBtn").val();
 	if(pass.trim() == ""){
 		alert("비밀번호를 입력해주세요.");
-		$("#lobinBtn").val("");//초기화	
-		return false; //submit안함
+		$("#lobinBtn").val("");	
+		return false; 
 	}//endif
-	//데이터 전송(일단 다 입력했으니 값 전송(값에 대한 유효성 검증은 다음jsp에서))
 	$("#adminLoginFrm").submit();
 	
 }//chkNull 
@@ -88,9 +82,10 @@ function chkNull(){
                                                 <label for="inputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="pass" name="pass" type="text" placeholder="Password" value="asdf"/>
+                                                <input class="form-control" id="pass" name="pass" type="text" placeholder="Password" value="sksi"/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
+
                                           
                                             
                                  
@@ -103,8 +98,8 @@ function chkNull(){
                                     </div>
                                     <div class="card-footer text-center py-3 bg-footer" >
                                         <div class="big"> 아이디/비밀번호 분실 및 로그인 관련 문의는<br/>
-                                         담당부서 전산정보실 담당자 홍길동 연락처 02-312-4112<br/>
-                                        이메일 admin@gmail.com로 문의하시기 바랍니다.</div>
+                                         전산정보실 담당자 홍길동<br/>
+                                        연락처 02-312-4112로 문의하시기 바랍니다.</div>
                                     </div>
                                 </div>
                             </div>

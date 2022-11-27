@@ -200,11 +200,13 @@ $(function() {
   	 	var id = $("#id").val();
 		var num = id.search(/[0-9]/); //안들어오면 -1. typeof-number 
 		var eng = id.search(/[a-zA-Z]/);//숫자길이. 안들어오면 -1. typeof-number 
+		var kor = id.search(/[ㄱ-ㅎ가-힣]/);
+		var spe = id.search(/[~!@#$%^&*()_+|<>?:{}]/); 
   	   if(id == ''){
 		  $("#id_error").html("아이디를 입력해주세요");
   		  //$('#id').focus();
   		  return false;
-  	   }else if(num ==-1 || eng ==-1 ||id.length < 6) { 
+  	   }else if( num ==-1 || eng ==-1 || spe!=-1 || kor!=-1 || id.length < 6) { 
 			$("#id_error").html("영문, 숫자 조합 6~15자로 입력해주세요");
 	  		//$('#id').focus();
 	  			return false;
@@ -240,12 +242,22 @@ $(function() {
 			fncPswdCheck();
 		});
 		
+		$(document).on("blur", "#passCheck", function(){
+			if($("#passCheck").val() != $("#pass").val()){
+				$("#passCheck_error").html("동일한 비밀번호를 입력해주세요.");
+				//$("#passCheck").focus();
+			}else{
+				$("#passCheck_error").html("");
+			}
+		});
+		
 		
      });//ready
      
    //비밀번호 유효성
 		function fncPswdCheck(){
 			$("#pass_error").html("");
+			//$("#passCheck_error").html("");
 			
 			if($("#pass").val() == ""){
 				$("#pass_error").html("비밀번호를 입력해주세요.");
@@ -279,6 +291,9 @@ $(function() {
      
      
 	$("#saveBtn").click(function() {
+		$("#nick_error").html("");
+		$("#name_error").html("");
+		$("#phone_error").html("");
 		
 		//파일 등록
 		var pfimg=$("#pfimg").val();
@@ -325,28 +340,39 @@ $(function() {
 		} 
 		
 		if(!fncPswdCheck()){
-			alert("비밀번호 제대로 보고 입력하세요");
+			fncPswdCheck();
 			$("#passCheck").focus();	
 			return;
-		}
+		} 
 		
 		var nick=$("#nick").val();
-		if(nick.trim()==""){
-			alert("닉네임을 확인해주세요");
+		var korNick = nick.search(/[ㄱ-ㅎ]/);
+		var speNick = nick.search(/[~!@#$%^&*()_+|<>?:{}]/); 
+		if(nick.trim()=="" || korNick!=-1 || speNick!=-1){
+			//alert("닉네임을 확인해주세요");
+			$("#nick_error").html("닉네임을 확인해주세요");
 			$("#nick").focus();	
 			return;
 		}
 		
 		var name=$("#name").val();
-		if(name.trim()=="" ){
-			alert("이름을 확인해주세요");
+		var numName = name.search(/[0-9]/); 
+		var korName = name.search(/[ㄱ-ㅎ]/);
+		var speName = name.search(/[~!@#$%^&*()_+|<>?:{}]/); 
+		if(name.trim()=="" || numName!=-1 || korName!=-1 || speName!=-1 ){
+			//alert("이름을 확인해주세요");
+			$("#name_error").html("이름을 확인해주세요");
 			$("#name").focus();	
 			return;
 		}
 		
 		var phone=$("#phone").val();
-		if(phone.trim()==""){
-			alert("전화번호를 확인해주세요");
+		var engPhone = phone.search(/[a-zA-Z]/);
+		var korPhone = phone.search(/[ㄱ-ㅎ가-힣]/);
+		var spePhone = phone.search(/[~!@#$%^&*()_+|<>?:{}]/); 
+		if(phone.trim()=="" || engPhone!=-1 || korPhone!=-1 || spePhone!=-1){
+			//alert("전화번호를 확인해주세요");
+			$("#phone_error").html("전화번호를 확인해주세요");
 			$("#phone").focus();	
 			return;
 		}
@@ -628,9 +654,10 @@ $(function() {
 										<li>
 											<strong class="tit requied">닉네임</strong>
 											<div class="input del">
-												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="두 글자 이상 입력해주세요." maxlength="20" value="">
+												<input type="text" id="nick" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value="">
 <!-- 												<input type="text" id="join_nickname" name="nick" class="required_join_input cleanValMsg" placeholder="닉네임을 입력해주세요." maxlength="20" value=""> -->
 											</div>
+											<p class="validation-check" id="nick_error" ></p>
 											<!-- 회원등급 hidden으로 얘네 안써줘도됨. mapper가 이미 해주고있음 -->
 												<input type="hidden" id="gradeid" name="gradeid" value="G1">
 												<input type="hidden" id="status" name="status" value="정상">
@@ -639,14 +666,16 @@ $(function() {
 										<li>
 											<strong class="tit requied">이름</strong>
 											<div class="input">
-											<input type="text" name="name"  id="name" placeholder="이름을 입력해주세요" >
-												</div>
+												<input type="text" name="name"  id="name" placeholder="이름을 입력해주세요" >
+											</div>
+											<p class="validation-check" id="name_error" ></p>
 										</li>
 										<li id="mobile-li-default">
 											<strong class="tit requied">휴대폰 번호</strong>
 											<div class="input">
 												<input type="text" id="phone" name="phone" onkeyup="PhoneNumber(this)"  maxlength="13"  placeholder="휴대폰번호를 입력해주세요">
-												</div>
+											</div>
+											<p class="validation-check" id="phone_error" ></p>
 										</li>
 								
 									</ul>

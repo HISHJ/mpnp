@@ -33,9 +33,8 @@
     
     
     //유효성검증 시작
-    $(function(){
-    	//기존 비번 키코드
-    	$("#password").keydown(function(evt){
+    	/* //기존 비번 키코드
+    	$("#pass").keydown(function(evt){
     		if(evt.which == 13){
     			passChk();
     		};//end if
@@ -52,66 +51,68 @@
     		if(evt.which == 13){
     			passChk();
     		};//end if
-    	});//keydown
+    	});//keydown */
     	
     	
+    $(function(){
     	$("#changBtn").click(function(){
-    		passChk();
-    	 
+    		//passChk(); 
+     		if(passChk()){ //이거 하는 자체가 함수를 부르는거야
+	    		$("#changPassFrm").submit();
+    		} 
     	})///end click
     })//ready
     
     function passChk(){
     	
-    /* 	let pass = $("#password").val();
-    	let newpass = $("#newpass").val();
-    	let newPass2 = $("#newpass2").val();
+    	var pass = $("#pass").val();
+    	var newpass = $("#newpass").val();
+    	var newpass2 = $("#newpass2").val();
     	
-    	//특수문자 제한
         var num = newpass.search(/[0-9]/);
 		var eng = newpass.search(/[a-zA-Z]/);
 		var spe=  newpass.search(/[~!@#$%^&*()_+|<>?:{}]/); 
     	
     	
-    	if(pass.trim() == ""){
-    		alert("현재 비밀번호를 입력해주세요.");
-    		$('#password').focus();
+    	if(pass.trim()==""){
+    		alert("현재 비밀번호를 입력해주세요."); //왜 두번 불리지 ? 함수를 두번부르는 중 
+    		$('#pass').focus();
     		return false;
-    	}//end if
+    	}
     	
-    	if(newpass.trim()==""){
+     	if(newpass.trim()==""){
     		alert("새로운 비밀번호를 입력해주세요");
     		$('#newpass').focus();
     		return false;
-    	}//end if
+    	}
     	
-    	if(newPass2.trim()==""){
-    		alert("새로운 비밀번호를 재입력해주세요");
+    	if(newpass2.trim()==""){
+    		alert("새로운 비밀번호를 입력해주세요");
     		$('#newpass2').focus();
     		return false;
-    	}//end if
+    	}
     	
-    	if(newpass.trim() != newPass2.trim()){
+    	if(newpass.trim() != newpass2.trim()){
     		alert("비밀번호가 일치하지 않습니다.");
-    		$('#newpass').val("");
     		$('#newpass2').val("");
-    		$('#password').focus();
+    		$('#newpass2').focus();
     		return false;
-    	}//입력 != 재입력
+    	}
     	
-    	if(newpass.length<7||newpass.length>21){
+    	 if(newpass.length<8||newpass.length>21){
     		 alert("8자리 ~ 21자리 이내로 입력해주세요.");
     		 $('#newpass').focus();
-    	}//비번 길이제한
+      		 return false;
+    	}
     	
     	 if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
 			  alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 			  $("#newpass").focus();
 			  return false;
-		}//비번 영문+특문+숫자 */
-
+		}
     	
-    	 $("#changPassFrm").submit();
+     	alert("passChk 끝");//안옴
+	return true;
     	
     }//passChk()
     </script>
@@ -130,7 +131,7 @@
                                             <div class="mt-4 mb-0">
                                                 <div class="form-group">
                                                     <div class="col-mb-3">
-                                                    <input class="form-control" id="password" name="password" type="password" placeholder="현재 비밀번호" autofocus="autofocus"  style="padding:15px;"/>
+                                                    <input class="form-control" id="pass" name="pass" type="password" placeholder="현재 비밀번호" autofocus="autofocus"  style="padding:15px;"/>
                                                     </div>
                                                 </div>
                                             </div>

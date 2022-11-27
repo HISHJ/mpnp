@@ -388,7 +388,7 @@
 			}
 		}
 		
-		//유효성 체크
+		//비번 유효성 체크
 		function fncPswdCheck(){
 			$("#pass_error").html("");
 			$("#passCheck_error").html("");
@@ -427,7 +427,7 @@
 	$(function() {
 		$("#modifyPassBtn").click(function() {
 			fncPswdCheck();
-			if(fncPswdCheck()==true){
+			if(fncPswdCheck()){
 				$("#modifyPassFrm").submit();
 			}
 		});
