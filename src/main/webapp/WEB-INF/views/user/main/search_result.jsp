@@ -196,7 +196,7 @@ function movePage( page ) {
 							<div class="gd-item amplitudeMainData airbridge swiper-slide active" data-idx="0" data-index="1" data-goodsid="GS251062051" data-displayid="" data-displayname="" data-productid="GS251062051" data-productname="[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)" data-brandid="" data-brandname="" data-categorypath="" data-price="9000" data-discountprice="3400" data-petgbcd="" style="margin-right: 10px;">
 		<a class="gd-link" href="prddetail.do?productid=${result.productid}" data-dispcornno="" data-disptype="commonSearchHist" data-idx="0" data-content="GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
 			 <div class="gd-thumb">
-				<img class="thumb-img" src="http://localhost/mpnp/images/${result.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+				<img class="thumb-img" src="http://localhost/mpnp/upload/product/${result.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
 				<div class="gd-flag">
 					</div>
 				<!-- <button class="btn-favorite " data-content="GS251062051" data-url="/goods/insertWish?goodsId=GS251062051" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GS251062051" data-target="goods">찜하기</button>

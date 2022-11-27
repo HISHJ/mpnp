@@ -12,16 +12,17 @@ public class MainVO {
 		this.main_id = main_id;
 		this.pageFlag = pageFlag;
 	}
-	public synchronized String getMain_id() {
+	
+	public  String getMain_id() {
 		return main_id;
 	}
-	public synchronized void setMain_id(String main_id) {
+	public  void setMain_id(String main_id) {
 		this.main_id = main_id;
 	}
-	public synchronized int getPageFlag() {
+	public  int getPageFlag() {
 		return pageFlag;
 	}
-	public synchronized void setPageFlag(int pageFlag) {
+	public  void setPageFlag(int pageFlag) {
 		this.pageFlag = pageFlag;
 	}
 	@Override

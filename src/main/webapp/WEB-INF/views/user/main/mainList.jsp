@@ -66,6 +66,14 @@
 		
 		})
 		
+		
+				//페이징
+		 function movePage( page ) {
+		 	$("#pageFlag").val( page );
+		 	$("#hidFrm").submit();
+		 }
+		
+		
 		</script>
 
 <!--라이브 앱과 연동을위한 JS -->
@@ -369,6 +377,30 @@ $('#goodsCount').text(goodsCount);
 		</a>
 	</div>
 </c:forEach>
+
+		<div class="page" style="width:464px;display:flex;justify-content: center;align-self: center;">
+		<c:if test="${ not empty prdList  }" >
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+	
+ 	<form name="hidFrm" id="hidFrm" action="mainList.do">
+ 	<input type="hidden" id="sub_id" name="main_id" value="${param.main_id }">
+	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
+	</form> 
+			
+
+
 
 			</section>
 			</div>

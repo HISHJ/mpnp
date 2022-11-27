@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.co.mpnp.handler.MyBatisHandler;
 import kr.co.mpnp.user.domain.MainDomain;
+import kr.co.mpnp.user.vo.MainVO;
 
 
 public class MainDAO {
@@ -49,16 +50,38 @@ public class MainDAO {
 		mbh.closeHandler(ss);
 		return list;
 	}
+	//ÆäÀÌÂ¡ »óÇ° ÀüÃ¼º¸±â
+	public List<MainDomain> selectAllList(MainVO mVO){
+		List<MainDomain> list=null;
+		
+		//1.MyBatisHandler?–»ê¸?
+		MyBatisHandler mbh= MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		//2.
+		
+		try {
+			
+			list=ss.selectList("kr.co.mpnp.user.mapper.MainMapper.selectAllList",mVO);
+			ss.commit();
+			
+		}catch(PersistenceException pe) {
+			pe.printStackTrace();
+		}
+		
+		//3.
+		mbh.closeHandler(ss);
+		return list;
+	}
 	
 	//»óÇ° ÃÑ °¹¼ö
-	public int selectprdCnt(String main_id) {
+	public int selectprdCnt(MainVO mVO) {
 		int cnt=0;
 		
 		//1.MyBatisHandler¾ò±â
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		//2.Äõ¸®¹® ½ÇÇà
-		cnt=ss.selectOne("kr.co.mpnp.user.mapper.MainMapper.selectprdCnt", main_id);
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.MainMapper.selectprdCnt", mVO);
 		//3.¿¬°á²÷±â
 		mbh.closeHandler(ss);
 		
@@ -90,10 +113,11 @@ public class MainDAO {
 	public static void main(String[] args) {
 		
 		MainDAO mDAO= new MainDAO();
-		
+		MainVO mVO  = new MainVO();
+		mVO.setMain_id("m0001");
 		// mDAO.selectProductList("m0001"); 
-		 
-		System.out.println(mDAO.selectprdCnt("m0001"));
+		 System.out.println(mDAO.selectAllList(mVO));
+		System.out.println(mDAO.selectprdCnt(mVO));
 		System.out.println(mDAO.selectPrdList("m0001")); 
 		System.out.println(mDAO.TotalCnt("id007")); 
 		/*

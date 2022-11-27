@@ -384,7 +384,7 @@ $('#goodsCount').text(goodsCount);
 </div>
 </div>
 			</section>
-			<div class="page">
+			<div class="page" style="width:464px;display:flex;justify-content: center;align-self: center;">
 		<c:if test="${ not empty sub  }">
 			<c:if test="${ startNum ne 1 }">
 				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>

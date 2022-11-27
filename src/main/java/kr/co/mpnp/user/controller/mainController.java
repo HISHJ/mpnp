@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.mpnp.user.domain.MainDomain;
 import kr.co.mpnp.user.service.MainService;
+import kr.co.mpnp.user.vo.MainVO;
 
 
 @Controller
@@ -37,11 +38,10 @@ public class mainController {
 		}
 		 List<MainDomain> list =ms.searchPrdList(mainid);
 
-				int totalData =ms.searchPrdCnt(mainid);
+		
 				
 						
 				//view로 전송
-				model.addAttribute("totalData", totalData);
 				model.addAttribute("prdList",list);
 			
 		
@@ -53,15 +53,29 @@ public class mainController {
 	//메인-> 상품전체보기
 	
 	@RequestMapping(value="/mainList.do", method=GET)
-	public String mainList(HttpSession session,Model model,String main_id) {
+	public String mainList(HttpSession session,Model model,MainVO mVO) {
 		
 		MainService ms= new MainService();
 		 List<MainDomain> list =
-		 ms.searchPrdList(main_id); 
-		 int cnt=ms.searchPrdCnt(main_id);
+		 ms.searchAllList(mVO); 
+		 int cnt=ms.searchPrdCnt(mVO);
 
 		 model.addAttribute("prdList",list);
 		 model.addAttribute("cnt", cnt);
+		
+			//페이징변수
+			int totalData =ms.searchPrdCnt(mVO);
+			int lastPage = ms.lastPage(totalData);
+			int curPage = mVO.getPageFlag();
+			int startNum = ms.startNum(curPage);
+			int isLast = ms.isLast(lastPage, startNum);
+					
+			//view로 전송
+			model.addAttribute("totalData", totalData);
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("startNum", startNum);
+			model.addAttribute("isLast", isLast);
+			model.addAttribute("curPage", curPage);
 		
 		
 		

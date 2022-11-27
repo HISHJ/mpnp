@@ -6,6 +6,7 @@ import java.util.List;
 
 import kr.co.mpnp.user.dao.MainDAO;
 import kr.co.mpnp.user.domain.MainDomain;
+import kr.co.mpnp.user.vo.MainVO;
 
 public class MainService {
 	
@@ -20,9 +21,18 @@ public class MainService {
 	 return list;
 	 
 	 }
+	 
+	 
+	 //페이징 전체리스트
+	 public List<MainDomain> searchAllList(MainVO mVO){
+		 List<MainDomain> list=mainDAO.selectAllList(mVO);
+		 
+		 return list;
+	 }
+	 
 	 //총 게시물 수
-		public int searchPrdCnt (String mainid) {
-			int cnt=mainDAO.selectprdCnt(mainid);
+		public int searchPrdCnt (MainVO mVO) {
+			int cnt=mainDAO.selectprdCnt(mVO);
 			
 			return cnt;
 			
@@ -36,31 +46,31 @@ public class MainService {
 		}
 		
 		
-//		
-//		//마지막 페이지 수
-//		public int lastPage(int searchPrdCnt) {
-//			int lastPage=(int)Math.ceil((double) searchPrdCnt /8);
-//			
-//			return lastPage;
-//		}
-//		
-//		//현재페이지 시작번호
-//		public int startNum(int curPage) {
-//			int startNum=curPage-(curPage-1)%8;
-//			return startNum;
-//			
-//		}
-//		//한페이지당 보여줄 페이지수
-//		public int isLast(int lastPage,int startNum) {
-//			int isLast =2; //0,1,2, 3페이지씩
-//			if(startNum+3>lastPage) {
-//				isLast= lastPage-startNum;
-//				
-//			}
-//			return isLast;
-//			
-//		}
-		public static void main(String[] args) {
+	
+		//마지막 페이지 수
+		public int lastPage(int searchPrdCnt) {
+			int lastPage=(int)Math.ceil((double) searchPrdCnt /8);
+			
+			return lastPage;
+		}//lastPage
+		
+		//현재페이지 시작번호
+		public int startNum(int curPage) {
+			int startNum=curPage-(curPage-1)%8;
+			return startNum;
+			
+		}//startNum
+		//한페이지당 보여줄 페이지수
+		public int isLast(int lastPage,int startNum) {
+			int isLast =2; //0,1,2, 3페이지씩
+			if(startNum+3>lastPage) {
+				isLast= lastPage-startNum;
+				
+			}
+			return isLast;
+			
+		}//isLast
+	public static void main(String[] args) {
 			
 	MainService ms= new MainService();
 			System.out.println(ms.CartTotalCnt("id001"));
