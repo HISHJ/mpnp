@@ -24,7 +24,7 @@ public class mainController {
 	public String main(HttpSession session,Model model,String mainid ) {
 		 MainService ms = new MainService(); 
 //	
-	session.setAttribute("id", "id001");
+	//session.setAttribute("id", "id001");
 		 String id=(String)session.getAttribute("id");
 	if(id!=null) {
 		int cnt=ms.CartTotalCnt(id);

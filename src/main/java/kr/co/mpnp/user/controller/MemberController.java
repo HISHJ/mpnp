@@ -31,11 +31,11 @@ public class MemberController {
 		MemberService ms=new MemberService();
 		boolean flag=ms.searchLogin(mVO);
 		
-		String url="redirect:/indexHJY.jsp"; //실패했을때 처리해줘야해.. 지금은 기력이없고 내일
+		String url="redirect:/index.do"; //실패했을때 처리해줘야해.. 지금은 기력이없고 내일
 		if(flag) {
 			session.setMaxInactiveInterval(60*10); //10분
 			session.setAttribute("id", mVO.getId()); 
-			url="redirect:/indexHJY.jsp";
+			url="redirect:/index.do";
 		}
 		
 		return url;//원래는 메인으로 갈 것
@@ -47,7 +47,7 @@ public class MemberController {
 		session.removeAttribute("id");
 		session.invalidate();
 		
-		return "redirect:/indexHJY.jsp"; //메인으로 갈 것
+		return "redirect:/index.do"; //메인으로 갈 것
 	}//logoutPcoess
 	
 	@RequestMapping(value = "/m_findid_form.do", method=GET )

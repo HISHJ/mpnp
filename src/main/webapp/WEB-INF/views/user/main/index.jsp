@@ -120,9 +120,14 @@
 <!-- 기본 컨텐츠 -->
 	<div class="wrap" id="wrap">
 		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
-		
+
+<c:import	url="../../user/main/user_header.jsp">
+			<c:param name="id" value="${sessionScope.id }"></c:param>
+</c:import>
+
 	
-<header class="header pc cu mode0" data-header="set0" id="header_pc">
+	
+<%-- <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
 		<div class="inr">
@@ -214,7 +219,7 @@
 						</div>
 </div>
 	</div>
-</header>
+</header> --%>
 
 		
 		
@@ -225,21 +230,24 @@
 		$(function(){
 			$("#srchWord").keydown( function(evt) {
 				if( evt.which ==13 ){// 눌린키의 키코드를 which 속성으로 받을 수 있다.
-					search()
+					search();
 				}//end if
 			
-		});;
+		});//keydown
+		});//ready
+	
 		
 		$("#mainList").click(function(){
-			mainList()
+			var main_id=$("#hidFrm").val();
+			alert(main_id)
+			location.href="mainList.do?main_id="+main_id
 		});
 		
-		)};
 		
 		//중분류 이동
 			function setCateList(sub_id){
 				location.href="prdList.do?sub_id="+sub_id
-			}
+			}//setCateList
 		
 			
 	function search(){
@@ -251,15 +259,16 @@
 		}
 		
 		location.href="search_prd_list.do?name="+keyword
-	}
+	}//search
 	
 	//메인 전체보기 이동
-	function mainList(){
+/* 	function mainList(){
 		var main_id=$("#hidFrm").val();
+		alert(main_id)
 		location.href="mainList.do?main_id"+main_id
 		
-	}
-	
+	}//mainList
+	 */
 
 
 			/* 카테고리 	버튼 클릭시 상품 변경 */
@@ -362,7 +371,7 @@
 			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 				<ul class="sm">
 					<li><a class="bt" href="order_information_form.do">주문내역</a></li>
-					<li><a class="bt" href="writable_review_list.do" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
+					<li><a class="bt" href="writable_review_list.do" data-content="0">상품 후기</a></li>
 					<li><a class="bt" href="pass_confirm_process.do" >비밀번호 설정</a></li>
 					<li><a class="bt" href="pass_confirm_process.do"  >회원정보 수정</a></li>
 				</ul>
@@ -773,7 +782,8 @@ var gogoSwiper = (function() {
 		</div>
 		
 	<form name="hidFrm" id="hidFrm">
-	<input type=hidden  id="main_id"value="${data.main_id}">
+	<input type="hidden"  id="main_id" value="${data.main_id}">
+<%-- 	<input type="text" id="main_id" value="${data.main_id}"> --%>
 	</form>
 </c:forEach>	
 
