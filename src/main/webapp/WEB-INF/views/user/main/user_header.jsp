@@ -2,7 +2,27 @@
     pageEncoding="UTF-8" info="header"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
- 
+
+<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/ui.js%22%3E"></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
+
+ <script>
+//검색
+			
+	function search(){
+		var keyword=$("#srchWord").val();
+		if(keyword.trim()==""){
+			alert("검색어를 입력해주세요.");
+			return;
+		}
+		
+		location.href="search_prd_list.do?name="+keyword
+	}//search
+
+
+
+</script>
  <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -17,7 +37,7 @@
 					</ul>
 					</c:if>
 					<c:if test="${not empty sessionScope.id }">
-						    <div class="usr">
+						    <div class="usr" style="width:200px;">
               <a class="rank_icon" href="javascript:rankBox();"><em class="lv welcome">웰컴</em></a>
                 <a href="javascript:;" class="name"><b class="t">${sessionScope.id }</b><i class="i">님</i></a>
               <div class="sbm">
@@ -38,7 +58,7 @@
 				<button class="btnGnb" type="button">메뉴</button>
 <!-- -->
 				<h1 class="logo shop">
-					<a class="bt" href="javascript:goShopDeleteCookie();">AboutPet</a>
+					<a class="bt" href="index.do">AboutPet</a>
 				</h1>
 				<nav class="menushop">
 							<button type="button" class="bt st" id="headerTxt"></button>

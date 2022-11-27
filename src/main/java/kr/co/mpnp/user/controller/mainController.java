@@ -20,26 +20,23 @@ import kr.co.mpnp.user.service.MainService;
 public class mainController {
 	//메인화면
 	
+
+	
 	@RequestMapping(value="/index.do", method=GET)
 	public String main(HttpSession session,Model model,String mainid ) {
-		 MainService ms = new MainService(); 
-//	
+		 
+	MainService ms = new MainService(); 
 	//session.setAttribute("id", "id001");
 		 String id=(String)session.getAttribute("id");
 	if(id!=null) {
 		int cnt=ms.CartTotalCnt(id);
 		model.addAttribute("CartCnt", cnt);
 	}
+		if(mainid==null) {
+		 mainid="m0001";
+		}
+		 List<MainDomain> list =ms.searchPrdList(mainid);
 
-		
-		 List<MainDomain> list =null;
-		 if(mainid==null) {
-			 mainid="m0001";
-		 }
-		 list=ms.searchPrdList(mainid);
-
-	
-	
 				int totalData =ms.searchPrdCnt(mainid);
 				
 						
@@ -54,14 +51,14 @@ public class mainController {
 	
 	
 	//메인-> 상품전체보기
-	@ResponseBody
+	
 	@RequestMapping(value="/mainList.do", method=GET)
-	public String mainList(HttpSession session,Model model,String mainid) {
+	public String mainList(HttpSession session,Model model,String main_id) {
 		
 		MainService ms= new MainService();
 		 List<MainDomain> list =
-		 ms.searchPrdList(mainid); 
-		 int cnt=ms.searchPrdCnt(mainid);
+		 ms.searchPrdList(main_id); 
+		 int cnt=ms.searchPrdCnt(main_id);
 
 		 model.addAttribute("prdList",list);
 		 model.addAttribute("cnt", cnt);

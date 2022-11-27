@@ -8,7 +8,8 @@ import kr.co.mpnp.user.dao.MainDAO;
 import kr.co.mpnp.user.domain.MainDomain;
 
 public class MainService {
-
+	
+	
 	MainDAO mainDAO = MainDAO.getInstance();
 	
 	//메인 리스트

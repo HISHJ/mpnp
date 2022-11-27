@@ -51,14 +51,14 @@ public class MainDAO {
 	}
 	
 	//»óÇ° ÃÑ °¹¼ö
-	public int selectprdCnt(String mainid) {
+	public int selectprdCnt(String main_id) {
 		int cnt=0;
 		
 		//1.MyBatisHandler¾ò±â
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		//2.Äõ¸®¹® ½ÇÇà
-		cnt=ss.selectOne("kr.co.mpnp.user.mapper.MainMapper.selectprdCnt", mainid);
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.MainMapper.selectprdCnt", main_id);
 		//3.¿¬°á²÷±â
 		mbh.closeHandler(ss);
 		
@@ -93,7 +93,7 @@ public class MainDAO {
 		
 		// mDAO.selectProductList("m0001"); 
 		 
-	
+		System.out.println(mDAO.selectprdCnt("m0001"));
 		System.out.println(mDAO.selectPrdList("m0001")); 
 		System.out.println(mDAO.TotalCnt("id007")); 
 		/*
