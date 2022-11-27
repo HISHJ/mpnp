@@ -1,30 +1,30 @@
 package kr.co.mpnp.user.vo;
 
-public class mainVO {
+public class MainVO {
 
-	private String mainid,productid,orderdetailid,reviewid ;
+	private String main_id,productid,orderdetailid,reviewid ;
 	private int pageFlag=1;
-	/* mainId(대분류코드) , productId(상품코드), orderDetailID(주문상세코드), reviewID(후기코드) */
+	/* main_id(대분류코드) , productId(상품코드), orderDetailID(주문상세코드), reviewID(후기코드) */
 
-	public mainVO() {
+	public MainVO() {
 		
 	}
 
-	public mainVO(String mainid, String productid, String orderdetailid, String reviewid, int pageFlag) {
+	public MainVO(String main_id, String productid, String orderdetailid, String reviewid, int pageFlag) {
 	
-		this.mainid = mainid;
+		this.main_id = main_id;
 		this.productid = productid;
 		this.orderdetailid = orderdetailid;
 		this.reviewid = reviewid;
 		this.pageFlag = pageFlag;
 	}
 
-	public String getMainid() {
-		return mainid;
+	public String getmain_id() {
+		return main_id;
 	}
 
-	public void setMainid(String mainid) {
-		this.mainid = mainid;
+	public void setmain_id(String main_id) {
+		this.main_id = main_id;
 	}
 
 	public String getProductid() {
@@ -61,7 +61,7 @@ public class mainVO {
 
 	@Override
 	public String toString() {
-		return "mainVO [mainid=" + mainid + ", productid=" + productid + ", orderdetailid=" + orderdetailid
+		return "mainVO [main_id=" + main_id + ", productid=" + productid + ", orderdetailid=" + orderdetailid
 				+ ", reviewid=" + reviewid + ", pageFlag=" + pageFlag + "]";
 	}
 

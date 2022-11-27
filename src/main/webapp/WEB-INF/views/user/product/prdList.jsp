@@ -62,16 +62,23 @@
 		
 		 })//click
 		
-		//페이징
-		 function movePage( page ) {
-		 	$("#pageFlag").val( page );
-		 	$("#hidFrm").submit();
-		 }
 
 		 
 		 
 		
 		})
+		//페이징
+		 function movePage( page ) {
+		 	$("#pageFlag").val( page );
+		 	$("#hidFrm").submit();
+		 }
+		
+		function setCateList(sub_id){
+			
+			location.href="prdList.do?sub_id="+sub_id
+			
+		}
+	
 		
 		</script>
 
@@ -198,16 +205,10 @@
 					<!-- s : LNB 영역 -->
 
 		<script >
-			function setCateList(subid){
-				
-				location.href="prdList.do?sub_id="+subid
-				
-			}
 		
 		
 		</script>
 		
-
 
 
 <nav class="lnb shop" id="lnb">
@@ -220,25 +221,29 @@
 		</div>
 
 				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
+				
 								<ul class="sm">
-									<li class=""><a class="bt" href="javascript:setCateList('s0001');"><b class="t">강쥐사료</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('s0002');"><b class="t">간식</b></a></li>
+									<li class=""><a class="bt" onclick="javascript:setCateList('s0001')"><b class="t">강쥐사료</b></a></li>
+									<li class=""><a class="bt" onclick="javascript:setCateList('s0002')"><b class="t">간식</b></a></li>
 								</ul>
 								<ul class="sm_2">
-									<li class=""><a class="bt" href="javascript:setCateList('s0003');"><b class="t">패션/의류</b></a></li>
-									<li class=""><a class="bt" href="javascript:setCateList('s0004');"><b class="t">기타</b></a></li>
+									<li class=""><a class="bt" onclick="javascript:setCateList('s0003')"><b class="t">패션/의류</b></a></li>
+									<li class=""><a class="bt"onclick="javascript:setCateList('s0004')"><b class="t">기타</b></a></li>
 								 </ul> 
+								 
 				</li>
-
+	
 				<li class="open open_cat" id="tab_category_12565" style="width:200px;display:none;">
 					<ul class="sm">
-						<li class=""><a class="bt" href="javascript:setCateList('s0005');"><b class="t">냥이사료</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('s0006');"><b class="t">간식</b></a></li>
+						<li class=""><a class="bt" onclick="javascript:setCateList('s0005')"><b class="t">냥이사료</b></a></li>
+						<li class=""><a class="bt"onclick="javascript:setCateList('s0006')"><b class="t">간식</b></a></li>
 					</ul>
 					<ul class="sm_2">
-						<li class=""><a class="bt" href="javascript:setCateList('s0007');"><b class="t">패션/의류</b></a></li>
-						<li class=""><a class="bt" href="javascript:setCateList('s0008');"><b class="t">기타</b></a></li>
+						<li class=""><a class="bt" onclick="javascript:setCateList('s0007')"><b class="t">패션/의류</b></a></li>
+						<li class=""><a class="bt" onclick="javascript:setCateList('s0008')"><b class="t">기타</b></a></li>
 					 </ul> 
+				 
+					 
 	</li>
 		</nav>
 		<nav class="menushop"style="margin-right:20px;margin-top:30px;">
@@ -357,8 +362,11 @@
 					</li> 
 					</ul>
 			</section>  -->
+			</form>
 			<section class="sect ct recmd" id="recommendGoodsList" style="display: none"></section>
 			<section class="sect ct cates">
+				
+
 				<div class="sticky_filter">
 					<div class="inr" style="margin-bottom:10px;">
 						<div class="uioptsorts cates">
@@ -434,7 +442,9 @@ $('#goodsCount').text(goodsCount);
 		</a>
 	</div>
 </c:forEach>
-
+</div>
+</div>
+</div>
 			</section>
 			<div class="page">
 		<c:if test="${ not empty sub  }">
@@ -451,10 +461,9 @@ $('#goodsCount').text(goodsCount);
 			</c:if>
 		</c:if>
 	</div>
-
+	
  	<form name="hidFrm" id="hidFrm" action="prdList.do">
- 	<input type="hidden" id="sub_id" value="${param.sub_id }">
- 	<input type="text" id="sub_id" value="${param.sub_id }">
+ 	<input type="hidden" id="sub_id" name="sub_id" value="${param.sub_id }">
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
 	</form> 
 			
@@ -464,6 +473,7 @@ $('#goodsCount').text(goodsCount);
 			</div>
 	</div>
 </main>
+	
 <!--❤️main-->
 				
 		<!-- s : 본문영역 -->			

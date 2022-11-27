@@ -55,20 +55,29 @@ public String searchPrdList(ProductVO pVO,Model model) {
 @RequestMapping(value="/prddetail.do", method=GET)
 public String searchPrdDetail( String reviewid,@RequestParam(value="productid") String productid,
 		HttpSession session,Model model) {
-	//세션 값 확인
-	if(session.getAttribute("id")!=null) {
-		String id =(String)session.getAttribute("id");
-		model.addAttribute("id",id);
-	}
 	
+	ProductCartVO cVO = new ProductCartVO();
 	ProductService ps= new ProductService();
 	ProductReviewService pr = new ProductReviewService();
-	ProductCartVO cVO= new ProductCartVO();
+	//세션 값 확인
+	String id =(String)session.getAttribute("id001");
+	if(session.getAttribute("id")!=null) {
+		
+		cVO.setId(id);
+		model.addAttribute("wishFlag",ps.CheckWish(cVO));
+		model.addAttribute("id",id);
+	}
+
+
+	
+
+
+
 	ProductDomain pd=ps.searchPrdDetail(productid);
 	List<ProductReviewDomain> list = pr.searchProductReview(productid);
 	List<ProductReviewDomain > slist=pr.searchStarCnt(productid);	
+	
 
-	//model.addAttribute("wishFlag",ps.CheckWish(cVO));
 	model.addAttribute("prdImg", ps.searchPrdImg(productid));
 
 	model.addAttribute("data", pd);
@@ -88,8 +97,8 @@ public String addCart(ProductCartVO cVO,HttpSession session) throws Exception {
 	ProductService ps=new ProductService();
 	//로그인 확인 : 나중에 session받아오기..!
 	int result=0;
-
-	if(session.getAttribute("id")!=null) {
+	String id =(String)session.getAttribute("id");
+	if(id!=null) {
 		
 		result=ps.addCart(cVO);
 	} else {//세션에 아이디 없을때

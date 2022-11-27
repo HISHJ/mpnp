@@ -232,9 +232,13 @@ private static ProductDAO pDAO;
 		
 		ProductDAO pDAO= new ProductDAO();
 		ProductVO pVO= new ProductVO();
+		ProductCartVO cVO = new ProductCartVO();
+		cVO.setId("id001");
+		cVO.setProductid("p0001");
 		pVO.setsub_id("s0001");
 System.out.println(pDAO.selectprdList(pVO));
 System.out.println(pDAO.selectprdCnt(pVO));
+System.out.println(pDAO.checkWish(cVO));
 		
 		
 	}

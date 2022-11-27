@@ -128,12 +128,28 @@
 	<div class="hdr">
 		<div class="inr">
 			<div class="tdt">
+			<c:if test="${empty sessionScope.id }">
 				<ul class="menu">					
 					<li><a href="/join/indexTerms?header=Y&goSns=Y" class="bt">회원가입</a></li>
 		                <li><a href="javascript:clickLogin();" class="bt">로그인</a></li>
 		                <!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
 				
 					</ul>
+					</c:if>
+					<c:if test="${not empty sessionScope.id }">
+						    <div class="usr">
+              <a class="rank_icon" href="javascript:rankBox();"><em class="lv welcome">웰컴</em></a>
+                <a href="javascript:;" class="name"><b class="t">${sessionScope.id }</b><i class="i">님</i></a>
+              <div class="sbm">
+                <ul class="sm">
+                <li><a href="/mypage/info/indexPswdUpdate" data-content="1319879" data-url="/mypage/info/indexPswdUpdate" class="bt">비밀번호 설정</a></li>
+                    <li><a href="/mypage/info/indexManageDetail" data-content="1319879" data-url="/mypage/info/indexManageDetail" class="bt">회원정보 수정</a></li>
+                    <li><a href="/logout" data-content="1319879" data-url="/logout" class="bt">로그아웃</a></li>
+                  </ul>
+              </div>
+            </div>
+		</c:if>
+					
 			</div>
 			<div class="hdt">
 				<!-- mobile -->
@@ -189,6 +205,8 @@
 						<div class="menu">
 							
 							<button class="bt cart" type="button" onclick="location.href='/order/indexCartList/'" >
+								<em class="n">${CartCnt}</em>
+							
 									</button>
 							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
 							<div class="alims" id ="alertDiv">
@@ -206,8 +224,8 @@
 		
 		
 		//중분류 이동
-			function setCateList(subid){
-				location.href="prdList.do?sub_id="+subid
+			function setCateList(sub_id){
+				location.href="prdList.do?sub_id="+sub_id
 			}
 		
 		//검색
@@ -267,6 +285,7 @@
 			    		});//click
 			    });//ready 
 			    
+			    
 					 
 					  
 				
@@ -292,9 +311,7 @@
 			<button type="button" class="bt st  bt_cat" value="m0002">고양이</button>
 	
 		</div>
-		<!-- 대분류 히든값  -->
-		<input type="hidden" value="m0001"/>
-		<input type="hidden" value="m0002"/>
+	
 		
 
 				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
@@ -692,14 +709,15 @@ var gogoSwiper = (function() {
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
-			<button class="btn-more" ><a href="mainList.do?mainid=">전체보기</a></button>
-		</h3>
+			<button class="btn-more" ><a href="javascript:mainList()">전체보기</a></button>
+			<input type="text" value="${param.main_id }">
+					</h3>
 			<div id="corner1257" class="wrap-gd-unit gd-sd gd-col-4 is-cart">
 			<div class="gd-unit swiper swiper-container-initialized swiper-container-horizontal swiper-container-multirow">
 <div class="inner swiper-wrapper" style="width: 5200px; transform: translate3d(0px, 0px, 0px);">
 
-<c:forEach var="data" items="${prdList }">
 
+<c:forEach var="data" items="${prdList }">
 	<div class="gd-item amplitudeMainData swiper-slide active"  style="order: 0; margin-right: 30px;">
 		<!-- NOTE: 랭킹 상품 그룹인 경우 'rank-label' 로 순위 표기 -->
 		
@@ -736,25 +754,6 @@ var gogoSwiper = (function() {
 				</a>
 		</div>
 </c:forEach>	
-<div class="page">
-		<c:if test="${ not empty result  }">
-			<c:if test="${ startNum ne 1 }">
-				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
-				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
-			</c:if>
-			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
-				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
-			</c:forEach>
-			<c:if test="${ lastPage gt startNum+2 }">
-				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
-				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
-			</c:if>
-		</c:if>
-	</div>
-
- 	<form name="hidFrm" id="hidFrm" action="index.do">
-	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
-	</form> 
 
 
 
@@ -764,8 +763,8 @@ var gogoSwiper = (function() {
 				
 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 <div class="sld-navigation hide_mo">
-<button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
-<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button>
+<!-- <button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
+<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button> -->
 </div>
 </div>
 <script type="text/javascript">
@@ -971,7 +970,7 @@ petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, moreYn)
 <!-- 메인 신상품 -->		
 
 </div>
-<c:if test="${empty id }">
+<c:if test="${empty sessionScope.id }">
 			<div id="521" name="dispCorn_div" data-index="6"><!-- 미로그인 배너 -->
 <section class="sect mn nlogn">
 	<div class="hdts" id="corner521">

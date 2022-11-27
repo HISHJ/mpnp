@@ -66,6 +66,24 @@ public class MainDAO {
 		return cnt;
 	}
 	
+	//장바구니 갯수
+	public int TotalCnt(String id) {
+	int cnt=0;
+		
+		//1.MyBatisHandler얻기
+		MyBatisHandler mbh = MyBatisHandler.getInstance();
+		SqlSession ss= mbh.getHandler();
+		//2.쿼리문 실행
+		cnt=ss.selectOne("kr.co.mpnp.user.mapper.MainMapper.selectCart", id);
+		//3.연결끊기
+		mbh.closeHandler(ss);
+		
+		
+		return cnt;
+		
+		
+	}
+	
 	
 
 	
@@ -77,7 +95,7 @@ public class MainDAO {
 		 
 	
 		System.out.println(mDAO.selectPrdList("m0001")); 
-		System.out.println(mDAO.selectprdCnt("m0001")); 
+		System.out.println(mDAO.TotalCnt("id007")); 
 		/*
 		 * System.out.println(mDAO.selectStar("pr_0000017"));
 		 * System.out.println(mDAO.selectReviewcnt("pr_0000017"));

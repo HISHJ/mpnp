@@ -89,11 +89,21 @@
   <header class="header pc cu mode0 noneAc" data-header="set0" id="header_pc">
     <input type="password" style="display:none;"><!-- 크롬 패스워드 자동완성 방지 -->
     <div class="hdr">
-      <div class="inr">
-        <div class="tdt">
-          <div class="usr">
+<div class="hdr">
+		<div class="inr">
+			<div class="tdt">
+			<c:if test="${empty sessionScope.id }">
+				<ul class="menu">					
+					<li><a href="/join/indexTerms?header=Y&goSns=Y" class="bt">회원가입</a></li>
+		                <li><a href="javascript:clickLogin();" class="bt">로그인</a></li>
+		                <!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
+				
+					</ul>
+					</c:if>
+					<c:if test="${not empty sessionScope.id }">
+						    <div class="usr">
               <a class="rank_icon" href="javascript:rankBox();"><em class="lv welcome">웰컴</em></a>
-                <a href="javascript:;" class="name"><b class="t">seb0103@daum.net</b><i class="i">님</i></a>
+                <a href="javascript:;" class="name"><b class="t">${sessionScope.id }</b><i class="i">님</i></a>
               <div class="sbm">
                 <ul class="sm">
                 <li><a href="/mypage/info/indexPswdUpdate" data-content="1319879" data-url="/mypage/info/indexPswdUpdate" class="bt">비밀번호 설정</a></li>
@@ -102,7 +112,9 @@
                   </ul>
               </div>
             </div>
-          
+		</c:if>
+					
+			</div>
         </div>
         <div class="hdt">
           <!-- mobile -->
@@ -194,14 +206,14 @@
                     <ul class="swiper-wrapper slide" style="transform: translate3d(0px, 0px, 0px);">
                       <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
                         <a href="javascript:" class="box"><span class="pic">
-                        <img class="img" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                        <img class="img" src="http://localhost/mpnp/upload/product/${data.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
                       </li>
                       <c:if test="${not empty prdImg }">
                      
                       <c:forEach var="Img" items="${prdImg }">
                       <li class="swiper-slide active swiper-slide-active" style="margin-bottom: 10px;">
                         <a href="javascript:" class="box"><span class="pic">
-                        <img class="img" src="http://localhost/mpnp/images/${Img.prdimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
+                        <img class="img" src="http://localhost/mpnp/upload/product/${Img.prdimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4"></span></a>
                       </li>
                      </c:forEach>
                     </c:if> 
@@ -219,7 +231,7 @@
                       <li class="swiper-slide swiper-slide-active" style="width: 500px;">
                         <a href="javascript:" class="box">
                           <span class="pic">
-                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mpnp/images/${data.thimg}?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
+                          <img class="img" onclick="detailGoodsImgPop(this)" src="http://localhost/mpnp/upload/product/${data.thimg}?type=f&amp;w=500&amp;h=500&amp;quality=90&amp;align=4">
                           </span>
                         </a>
                       </li>
@@ -396,7 +408,7 @@
     
   
     <div class="html_editor pc template_area" id="contentPc">
-      <p><img src="http://localhost/mpnp/images/${data.infoimg}" alt="img" class="full_img_area">
+      <p><img src="http://localhost/mpnp/upload/product/${data.infoimg}" alt="img" class="full_img_area">
       &nbsp;</p>
     <!--   <script type="text/javascript">
     /* console.log("성분 정보 변동 여부 : " + goods.igdtInfoLnkYn); */
@@ -648,7 +660,7 @@
        
                       <li class="swiper-slide swiper-slide-active" style="margin-right: 8px;">
                           <a href="javascript:;" class="pic">
-                          <img class="img" name="plgImgList" src="http://localhost/mpnp/upload/product/${Img}?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4" alt="첨부이미지" onerror=" http://localhost/mpnp/images/${img.review_img }?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4"></a>
+                          <img class="img" name="plgImgList" src="http://localhost/mpnp/upload/product/${Img}?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4" alt="첨부이미지" onerror=" http://localhost/mpnp/upload/product/${img.review_img }?type=f&amp;w=600&amp;h=799&amp;quality=90&amp;align=4"></a>
                         </li>
                            </c:forTokens>
                       </c:if>
@@ -755,6 +767,70 @@
   
       <div class="cdtwrap" style="max-height: 548.8px;">
 <script>
+$(function(){
+$("#addCart_btn").dblclick(function(){
+	addCart();
+})//click
+
+$("#goodsWish").click(function(){
+		addWish();
+})
+
+});//ready
+//로그인 여부
+function loginChk(){
+	var login =true;
+	var userid=$("#id").val();
+	alert(userid)
+	if(userid==null){
+		alert("로그인 후에 시도해주세요.")
+		login=false;
+	}
+		
+	return login;	
+}
+
+//장바구니 버튼 클릭시
+
+
+//찜 여부
+
+	
+function like_func(){
+	var Flag=true;
+	
+	  var productid=$("#productid").val();
+	  var id="${sessionScope.id}";
+	  
+	var data={
+			id : id,
+			productid : productid
+	
+	};//data
+	
+	
+	$.ajax({
+		
+		url : "prddetail.do",
+		type:"get",
+		data : data,
+		success: function(data){
+			if(data==true){
+				
+			$(".btZZim").addClass("on");
+		}else{
+		}
+			
+			
+		},error : function(xhr){
+		
+		}
+		
+	});//ajax
+	
+
+}
+
 //상품수량변경
 function count(type)  {
 
@@ -777,6 +853,107 @@ function count(type)  {
   	$("#TotalPrice").html(sum);
   	$("#emPriceTotalAmt").html(sum);
 }
+
+
+//상품 수량
+
+
+
+//장바구니 추가-> 1번클릭했을때는 창을 띄우고 2번째 클릭했을때 장바구니 추가 되어야함(수정)
+
+
+function addCart(){
+
+	if(!loginChk()){
+		 	return;
+	}
+
+	 var cartcnt = $("#buyQty412810").val();
+	 var id = $("#id").val();
+	 var data={
+			  cartcnt : cartcnt,
+			  productid : "${data.productid}",
+			  id:id
+	 	};
+
+console.log(data);
+ 
+	  $.ajax({
+		  url :"cart_insert.do",
+		  type:"post",
+		  data : data,
+		  success : function(result){
+			  if(result==0){
+					 alert("result 0 : 잠시후에 다시 시도해주세요") ;
+				  }else if(result==1){
+					  alert("장바구니에 추가되었습니다.");
+				  }else if(result==2){
+					  alert("장바구니에 이미 추가되었습니다.");
+				  }else{
+					  alert("로그인 후에 시도해주세요.")
+				  }
+			 console.log(result);
+		  },
+		  error : function(){
+			  alert(" error : 잠시후 다시 시도해주세요.");
+		  }
+		  
+		  
+	  }); //ajax
+	  
+
+	  
+	  
+}//addCart
+	
+
+
+
+
+
+function addWish(){
+	if(!loginChk()){
+	 	return;
+}
+	
+	  var productid=$("#productid").val();
+	  var id=$("#id").val();
+	  
+	var data={
+			id : id,
+			productid : productid
+	
+	};//data
+	
+	console.log(data);
+$.ajax({
+			url : "addWish.do",
+			type:"post",
+			data : data,
+			success : function(result){
+				 if(result==1){
+	  					alert("찜리스트에 추가되었습니다.");
+	  					$(".btZZim").addClass("on");
+				  }else if(result==-1){
+					  alert("로그인 후에 사용해주세요.");
+				  }else if(result==0){
+					  alert("찜에서 삭제되었습니다.") ;
+					  $(".btZZim").removeClass("on");
+				  }
+				  
+				 console.log(result);
+			},
+			error : function(result){
+				
+				alert("잠시후에 다시 시도해주세요.")
+			
+			}
+			
+
+	});//jax
+
+	};
+	  
 
 </script>
 
@@ -863,10 +1040,31 @@ function count(type)  {
       <div class="btns">
         <!-- 스탬프 상품은 찜하기 불가 -->
         <div class="zims">
-            <button type="button" class="bt btZZim" id="goodsWish" ><span class="t"><span class="material-symbols-outlined">
+        	<c:choose>
+        		<c:when test="${sessionScope.id ne null }">
+            <button type="button" class="bt btZZim" id="goodsWish" >
+            <span class="t">
+            <span class="material-symbols-outlined">
               bookmark
               </span></span></button><!-- .on class명 있으면 찜한 상태임 -->
+              </c:when>
+              <c:otherwise>
+             	<a href="javascript:loginChk()">	
+            <button type="button" class="bt btZZim" id="goodsWish" >
+            <span class="t">
+            <span class="material-symbols-outlined">
+              bookmark
+              </span></span></button>
+              </a><!-- .on class명 있으면 찜한 상태임 -->
+              
+              </c:otherwise>
+              </c:choose>
           </div>
+          <form name="hidFrm" id="hidFrm">
+          <c:if test="${not empty sessionScope.id }">
+          	<input type="hidden" id="id" name="id" value="${sessionScope.id }">
+          </c:if>
+          </form>
         <!-- soldOutYn 품절 여부 0보다 크면 Y -->
         <div class="obts">
           <!-- 사전예약 상품이 아니면 -->
@@ -882,100 +1080,7 @@ function count(type)  {
   
   <script>
   
-  
-  //상품 수량
-  
-  
-  
-  //장바구니 추가-> 1번클릭했을때는 창을 띄우고 2번째 클릭했을때 장바구니 추가 되어야함(수정)
-  
-  
-  $("#addCart_btn").dblclick(function(){
-
-	 var cartcnt = $("#buyQty412810").val();
-	 var id = $("#id").val();
- 	 var data={
-			  cartcnt : cartcnt,
-			  productid : "${data.productid}",
-			  id:id
-	 	};
-  
-  console.log(data);
-   
-	  $.ajax({
-		  url :"cart_insert.do",
-		  type:"post",
-		  data : data,
-		  success : function(result){
-			  if(result==0){
-					 alert("result 0 : 잠시후에 다시 시도해주세요") ;
-				  }else if(result==1){
-					  alert("장바구니에 추가되었습니다.");
-				  }else if(result==2){
-					  alert("장바구니에 이미 추가되었습니다.");
-				  }else{
-					  alert("로그인 후에 시도해주세요.")
-				  }
-			 console.log(result);
-		  },
-		  error : function(){
-			  alert(" error : 잠시후 다시 시도해주세요.");
-		  }
-		  
-		  
-	  }); //ajax
-	  
-
-	  
-	  
-  });//addCart
-	
-  
-  
-  
-  
-  
-  
-	$("#goodsWish").click(function(){
-	
-	  var productid=$("#productid").val();
-	  var id=$("#id").val();
-	  
-  	var data={
-  			id : id,
-  			productid : productid
-  	
-  	};//data
-  	
-  	console.log(data);
- $.ajax({
-  			url : "addWish.do",
-  			type:"post",
-  			data : data,
-  			success : function(result){
-  				 if(result==1){
-	  					alert("찜리스트에 추가되었습니다.");
-	  					$(".btZZim").addClass("on");
-				  }else if(result==-1){
-					  alert("로그인 후에 사용해주세요.");
-				  }else if(result==0){
-					  alert("찜에서 삭제되었습니다.") ;
-					  $(".btZZim").removeClass("on");
-				  }
-				  
-  				 console.log(result);
-  			},
-  			error : function(result){
-  				
-  				alert("잠시후에 다시 시도해주세요.")
-  			
-  			}
-  			
-
-	});//jax
-  
-	});//add
-	  
+ 
   
 
   </script>

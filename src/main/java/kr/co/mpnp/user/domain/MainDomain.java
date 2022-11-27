@@ -4,19 +4,19 @@ public class MainDomain {
 
 	/*- productId(��ǰ�ڵ�), productName(��ǰ��),thImg(��ǰ�̹���), price(��ǰ����) , reviewCnt(�ıⰹ��) ,starScoreAvg(�������?) Ŀ�Խõ�*/
 	
-	private String productid,productname,thimg,mainid,subid,reviewid;
+	private String productid,productname,thimg,main_id,subid,reviewid;
 	private int price,reviewcnt,star_score;
 	private double starScoreAvg;
 	public MainDomain() {
 		
 	}
-	public MainDomain(String productid, String productname, String thimg, String mainid, String subid, String reviewid,
+	public MainDomain(String productid, String productname, String thimg, String main_id, String subid, String reviewid,
 			int price, int reviewcnt, int star_score, double starScoreAvg) {
 	
 		this.productid = productid;
 		this.productname = productname;
 		this.thimg = thimg;
-		this.mainid = mainid;
+		this.main_id = main_id;
 		this.subid = subid;
 		this.reviewid = reviewid;
 		this.price = price;
@@ -42,11 +42,11 @@ public class MainDomain {
 	public void setThimg(String thimg) {
 		this.thimg = thimg;
 	}
-	public String getMainid() {
-		return mainid;
+	public String getmain_id() {
+		return main_id;
 	}
-	public void setMainid(String mainid) {
-		this.mainid = mainid;
+	public void setmain_id(String main_id) {
+		this.main_id = main_id;
 	}
 	public String getSubid() {
 		return subid;
@@ -86,8 +86,8 @@ public class MainDomain {
 	}
 	@Override
 	public String toString() {
-		return "MainDomain [productid=" + productid + ", productname=" + productname + ", thimg=" + thimg + ", mainid="
-				+ mainid + ", subid=" + subid + ", reviewid=" + reviewid + ", price=" + price + ", reviewcnt="
+		return "MainDomain [productid=" + productid + ", productname=" + productname + ", thimg=" + thimg + ", main_id="
+				+ main_id + ", subid=" + subid + ", reviewid=" + reviewid + ", price=" + price + ", reviewcnt="
 				+ reviewcnt + ", star_score=" + star_score + ", starScoreAvg=" + starScoreAvg + "]";
 	}
 
