@@ -370,7 +370,7 @@ $(function() {
 		var engPhone = phone.search(/[a-zA-Z]/);
 		var korPhone = phone.search(/[ㄱ-ㅎ가-힣]/);
 		var spePhone = phone.search(/[~!@#$%^&*()_+|<>?:{}]/); 
-		if(phone.trim()=="" || engPhone!=-1 || korPhone!=-1 || spePhone!=-1){
+		if(phone.trim()=="" || engPhone!=-1 || korPhone!=-1 || spePhone!=-1||phone.length>13){
 			//alert("전화번호를 확인해주세요");
 			$("#phone_error").html("전화번호를 확인해주세요");
 			$("#phone").focus();	

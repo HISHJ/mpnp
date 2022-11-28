@@ -428,17 +428,17 @@
 
 					<dl class="sect shop line">
 <dt>
-	<span>내 쇼핑정보</span>
+<span>내 쇼핑정보</span>
 </dt>
 <dd>
 	<ul class="coupon">
 	
 		<li>
-			<a class="my3" href="/mypage/shop/myWishList" data-url="/mypage/shop/myWishList" data-content="1319879">
+			<a class="my3" href="wishList.do" data-content="1319879">
 			<span>찜한상품</span></a>
 		</li>
 		<li>
-			<a class="my4" href="/order/indexCartList/">
+			<a class="my4" href="cart_list.do">
 			<em class="n">2</em>
 			<span>장바구니</span></a>
 		</li>
@@ -446,25 +446,17 @@
 	<div class="barwrap">
 		<ul class="bar">
 			<li>
-				<a href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
+				<a href="order_information_form.do" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
 				<span class="tit">주문/배송</span>   
 				<span class="next"></span>
 				</a>
 			</li>
 			<li>
-				<a href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
+				<a href="writable_review_list.do" data-url="/mypage/order/indexDeliveryList" data-content="1319879">
 				<span class="tit">상품 후기</span>   
 				<span class="next"></span>
 				</a>
 			</li>
-			<li>
-				<!-- <span class="tit new">취소/반품/교환</span> -->
-				<a href="/mypage/order/indexClaimList" data-url="/mypage/order/indexClaimList" data-content="1319879">
-				<span class="tit">주문 취소</span>
-				<span class="next"></span>
-				</a>
-			</li>
-			
 		</ul>
 	
 	</div>
