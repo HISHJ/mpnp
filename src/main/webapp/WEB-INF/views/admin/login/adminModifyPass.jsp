@@ -111,7 +111,6 @@
 			  return false;
 		}
     	
-     	alert("passChk 끝");//안옴
 	return true;
     	
     }//passChk()
@@ -126,13 +125,12 @@
                             <div class="col-lg-5"  style="height:500px;">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5" style="height:100%;border:2px solid #6c757d;">
                                     <div class="card-header navy bg-dark"><h3 class="text-start text-white font-weight-light my-4" style="font-weight: bold;">비밀번호 변경</h3></div>
-                                    <form class="form-horizontal" id="changPassFrm" name="changePassFrm" action="admin_modify_pass_process.do" method="get">
+                                    <form class="form-horizontal" id="changPassFrm" name="changePassFrm" action="admin_modify_pass_process.do" method="post">
                                     <div class="card-body">
                                             <div class="mt-4 mb-0">
                                                 <div class="form-group">
                                                     <div class="col-mb-3">
                                                     <input class="form-control" id="pass" name="pass" type="password" placeholder="현재 비밀번호" autofocus="autofocus"  style="padding:15px;"/>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">

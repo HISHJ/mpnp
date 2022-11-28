@@ -295,7 +295,7 @@
 								<div class="my-picture">
 									<p class="picture">
 										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="http://localhost/mpnp/upload_pf/${requestScope.mypage.pfimg }" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
-										<c:if test="${not empty requestScope.mypage.pfimg }"><img src="http://localhost/mpnp/upload/pfimg/${requestScope.mypage.pfimg }" class="img" style="height: auto"> </c:if>
+										<c:if test="${not empty requestScope.mypage.pfimg }"><img src="http://mpnp.sist.co.kr/mpnp/upload/pfimg/${requestScope.mypage.pfimg }" class="img" style="height: auto"> </c:if>
 									</p>
 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
 									<input type="file" id="pfimg" name="pfimg" style="display: none" onchange="thImgSet(this)">

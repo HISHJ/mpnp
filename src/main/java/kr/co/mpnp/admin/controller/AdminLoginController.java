@@ -1,12 +1,15 @@
 package kr.co.mpnp.admin.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import kr.co.mpnp.admin.service.AdminLoginService;
@@ -27,7 +30,7 @@ public class AdminLoginController {
 	}//adminLoginForm
 	
 	@RequestMapping(value = "/admin_login_process.do", method=GET )
-	public String adminLoginProcess(HttpSession session,AdminLoginVO alVO, Model model) {
+	public String adminLoginProcess(HttpSession session,AdminLoginVO alVO) {
 		
 		//System.out.println(alVO.getId()+"/"+alVO.getPass()); //확인완료
 		AdminLoginService als=new AdminLoginService();
@@ -67,7 +70,7 @@ public class AdminLoginController {
 		return url;
 	}//adminModifyPassForm
 	
-	@RequestMapping(value = "/admin_modify_pass_process.do", method=GET )
+	@RequestMapping(value = "/admin_modify_pass_process.do", method=POST )
 	public String adminModifyPassProcess(HttpSession session,AdminLoginVO alVO) {
 		//System.out.println("수정컨트롤러 임다");
 		String id=(String)session.getAttribute("adminId");
