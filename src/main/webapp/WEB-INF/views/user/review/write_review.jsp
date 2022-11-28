@@ -632,7 +632,8 @@ tr > .btnSet{
 									<div class="cdt">
 										<div class="tops">
 											<div class="pic">
-											<img src="http://localhost/mpnp/upload/product/${prdImg }">
+											<img src="http://mpnp.sist.co.kr/mpnp/upload/product/${prdImg }">
+											<%-- <img src="http://localhost/mpnp/upload/product/${prdImg }"> --%>
 											<%-- 사진 : <c:out value="${prdImg }"/> --%></div>
 											<div class="name">
 												<div class="tit k0423"><c:out value="${prdName }"/></div>

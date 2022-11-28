@@ -338,7 +338,10 @@
 														<!-- <img
 															src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg"
 															alt="상품" class="img"> -->
-															<img src="http://localhost/mpnp/upload/product/${writenReview.thImg }"
+															<%-- <img src="http://localhost/mpnp/upload/product/${writenReview.thImg }"
+															alt="상품" class="img"> --%>
+															
+															<img src="http://mpnp.sist.co.kr/mpnp/upload/product/${writenReview.thImg }"
 															alt="상품" class="img">
 															<%-- <c:out value="${writenReview.thImg }"/> --%>
 													</p>

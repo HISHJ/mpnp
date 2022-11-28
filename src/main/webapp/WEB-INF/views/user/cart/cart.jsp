@@ -651,9 +651,12 @@ checkbox{
 											<div class="box">
 												<div class="tops">
 													<a href="javascript:;"class="pic"><!-- 상품상세이동 -->
-														<img
+														<!-- <img
 														src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/goods/GI251051246/23cf8322-0287-4298-8267-af005d6c1486.jpg?type=f&amp;w=259&amp;h=259&amp;quality=90&amp;align=4"
-														alt="가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래" style="width:100px; height:100px;">
+														alt="가필드 고양이모래 보라(굵은입자) 4.53kg 카사바모래" style="width:100px; height:100px;"> -->
+														<img
+														src="http://mpnp.sist.co.kr/mpnp/upload/product/${cartItem.thImg }"
+														alt="${cartItem.productName }" style="width:100px; height:100px;">
 													</a>
 													<div class="name" style="font-weight: 700; width:400px; margin-left:70px;">
 														<c:out value="${cartItem.productName }"/>

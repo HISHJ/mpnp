@@ -669,7 +669,8 @@ padding:0px;
 								<c:forEach var="img" items="${reviewDetail.reviewImg }">
 									<%-- <c:out value="${img }"/> --%>
 										<%-- <img src="E:/dev/workspace_spring/upfileTest/${img }" style="width:150px; width:150px;"/> --%>
-										<img src="http://localhost/mpnp/upload/review/${img }" style="width:150px; height:150px; border-radius:20px; margin-right:20px;"/>
+										<%-- <img src="http://localhost/mpnp/upload/review/${img }" style="width:150px; height:150px; border-radius:20px; margin-right:20px;"/> --%>
+										<img src="http://mpnp.sist.co.kr/mpnp/upload/review/${img }" style="width:150px; height:150px; border-radius:20px; margin-right:20px;"/>
 								</c:forEach>
 									</div>
 								<!-- </div> -->

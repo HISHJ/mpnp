@@ -308,8 +308,11 @@
 													<p class="pic">
 														<!-- <img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg"
 															alt="상품" class="img"> -->
-														<img src="http://localhost/mpnp/upload/product/${writableItem.thImg }"
-															alt="상품" class="img">
+															
+														<%-- <img src="http://localhost/mpnp/upload/product/${writableItem.thImg }"
+															alt="상품" class="img"> --%>
+														<img src="http://mpnp.sist.co.kr/mpnp/upload/product/${writableItem.thImg }"
+															alt="상품" class="img"> 
 													</p>
 													<div class="txt">
 														<p class="t1"><c:out value="${writableItem.name }"/></p>
