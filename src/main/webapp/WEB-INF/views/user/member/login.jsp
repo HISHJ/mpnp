@@ -189,11 +189,11 @@
               <!-- // 회원 정보 입력 -->
             </div>
           </div>
-          <div class="check-wrap">
+       <!--    <div class="check-wrap">
               <label class="checkbox">
                 <input type="checkbox" name="keepYn" id="keepYn" value="Y" checked="checked"><span class="txt">아이디 저장</span>
               </label>
-            </div>
+            </div> -->
           </form>
         <div class="pbt pull">
           <div class="btnSet" id="inactiveBtn">

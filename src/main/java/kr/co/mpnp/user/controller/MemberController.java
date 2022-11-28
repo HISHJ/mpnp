@@ -31,7 +31,7 @@ public class MemberController {
 		MemberService ms=new MemberService();
 		boolean flag=ms.searchLogin(mVO);
 		
-		String url="redirect:/index.do"; //실패했을때 처리해줘야해.. 지금은 기력이없고 내일
+		String url="user/member/login_fail"; //페이지 이동 보이는게 맘에 안들지만 ...
 		if(flag) {
 			session.setMaxInactiveInterval(60*10); //10분
 			session.setAttribute("id", mVO.getId()); 
@@ -76,7 +76,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/m_findpass_process.do", method=GET )
 	public String findPassProcess(HttpSession session, MemberVO mVO, Model model) {
-		
+		String url="user/member/find_pass_fail";
 		MemberService ms=new MemberService();
 		MemberDomain md=ms.searchMemberPass(mVO);
 		model.addAttribute("passFind", md);
@@ -86,9 +86,10 @@ public class MemberController {
 		if(md!=null) {
 			session.setMaxInactiveInterval(60*3); //10분
 			session.setAttribute("id", mVO.getId()); 
+			url="user/member/pass_modify";
 		}
 		
-		return "user/member/pass_modify"; 
+		return url; 
 	}//findPassProcess
 	
 	

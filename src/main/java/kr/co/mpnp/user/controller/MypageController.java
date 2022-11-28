@@ -126,7 +126,7 @@ public class MypageController {
 		System.out.println("회원정보수정 아이디!!"+request.getAttribute("id"));//null
 
 		
-		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload_pf");
+		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload/pfimg");
 		int maxSize=1024*1024*20;
 		
 		

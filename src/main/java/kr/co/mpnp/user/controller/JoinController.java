@@ -51,7 +51,7 @@ public class JoinController {
 	public String joinAddProcess(HttpServletRequest request, Model model) {
 		
 		MemberVO mVO=new MemberVO();
-		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload_pf");
+		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload/pfimg");
 		int maxSize=1024*1024*20;
 		
 		

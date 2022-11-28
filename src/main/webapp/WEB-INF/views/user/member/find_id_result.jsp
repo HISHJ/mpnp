@@ -235,12 +235,22 @@ function goPageWithClosingGnb(url) {
 									</dl>
 								</div>
 							</c:if>
+							<c:if test="${ not empty idFind.id }">
 							<div class="pbt mt30">
 								<div class="btnSet">
 <!-- 									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a> -->
 									<a href="login_form.do" class="btn lg a" data-content=""  >로그인하기</a>
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${ empty idFind.id }">
+							<div class="pbt mt30">
+								<div class="btnSet">
+<!-- 									<a href="/indexLogin" class="btn lg a" data-content="" data-url="/indexLogin" >로그인하기</a> -->
+									<a href="javascript:history.back()" class="btn lg a" data-content=""  >뒤로가기</a>
+								</div>
+							</div>
+							</c:if>
 <!-- 							<a class="lnk-pw center" href="/login/indexFindPswd" data-content="" data-url="/login/indexFindPswd" >비밀번호가 생각나지 않으세요?</a> -->
 							<a href="m_findpass_form.do" class="lnk-pw center" data-content=""  >비밀번호가 생각나지 않으세요?</a>
 						</div>

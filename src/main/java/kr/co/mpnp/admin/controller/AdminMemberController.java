@@ -27,7 +27,7 @@ public class AdminMemberController {
 		
 		String url="admin/login/adminLogin";
 		
-		if(session.getAttribute("id")!=null) {
+		if(session.getAttribute("adminId")!=null) {
 			AdminMemberService ams=new AdminMemberService();
 			
 			List<AdminMemberDomain> list= ams.searchMember(amVO);
@@ -83,9 +83,9 @@ public class AdminMemberController {
 	//멤버등급변경
 	@RequestMapping(value = "/admin_m_grade_process.do", method = GET)
 	public String adminGradeProcess(HttpSession session, AdminMemberVO amVO, Model model) {
-		session.getAttribute("id"); 
+		session.getAttribute("adminId"); 
 		System.out.println("등급수정 !"+amVO.getGradeid());
-		System.out.println("수정할 아이디 !"+session.getAttribute("id")); //불러옴
+		System.out.println("수정할 아이디 !"+session.getAttribute("adminId")); //불러옴
 		
 		AdminMemberService ams=new AdminMemberService();
 		ams.modifyMemberGrade(amVO);

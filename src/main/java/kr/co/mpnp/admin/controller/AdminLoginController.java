@@ -20,7 +20,7 @@ public class AdminLoginController {
 		
 		//여기에 세션을 받아야해? 아이디가 안들어왔는데 ? 
 		//이전에 있을 세션에 있는 id 지우는 용
-		session.removeAttribute("id");
+		session.removeAttribute("adminId");
 		session.invalidate();
 		
 		return  "admin/login/adminLogin";
@@ -37,7 +37,7 @@ public class AdminLoginController {
 		
 		if(flag) {
 			session.setMaxInactiveInterval(60*30); //30분
-			session.setAttribute("id", alVO.getId()); 
+			session.setAttribute("adminId", alVO.getId()); 
 			url="redirect:dashboard_main.do";
 		}
 		
@@ -46,7 +46,7 @@ public class AdminLoginController {
 	
 	@RequestMapping(value = "/admin_logout_process.do", method=GET )
 	public String adminLogoutProcess(HttpSession session) {
-		session.removeAttribute("id");
+		session.removeAttribute("adminId");
 		
 		session.invalidate();
 		
@@ -60,7 +60,7 @@ public class AdminLoginController {
 		
 		//세션에 아이디 없을때 처리
 		String url="admin/login/adminLogin";
-		if(session.getAttribute("id")!=null) {
+		if(session.getAttribute("adminId")!=null) {
 			url="admin/login/adminModifyPass";
 		}
 		
@@ -70,7 +70,7 @@ public class AdminLoginController {
 	@RequestMapping(value = "/admin_modify_pass_process.do", method=GET )
 	public String adminModifyPassProcess(HttpSession session,AdminLoginVO alVO) {
 		//System.out.println("수정컨트롤러 임다");
-		String id=(String)session.getAttribute("id");
+		String id=(String)session.getAttribute("adminId");
 		
 		AdminLoginService als=new AdminLoginService();
 		
