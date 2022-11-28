@@ -46,7 +46,7 @@ $(function(){
 	  var rate = ($("#discountRate").val()*1)/100;
 		
 	  //해당 상품에 적용되는 할인 액
-	  var rate_price = prdSum * rate;
+	  var rate_price = Math.ceil(prdSum * rate);
 	
 	 
 var deli_fee = 0;
@@ -244,7 +244,7 @@ $(function(){
                                             <div class="col-2"><b>상태</b></div> 
                                             <div class="col-5">
                           
-                                            <form action="orderModify_process.do" id="statusFrm" name="statusFrm">
+                                            <form action="http://localhost/mpnp/admin_orderModify_process.do" id="statusFrm" name="statusFrm">
                                             <input type="hidden" id="orderId" name="orderId" value="${aoDom.orderId}"/>
 			                                <select id="status" name="status" class="dataTable-selector selectStatus" aria-label="Default select example" >
 												

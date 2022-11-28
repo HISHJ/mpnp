@@ -79,7 +79,7 @@
 		  //할인율 가져오기
 		  var rate = ($("#discountRate").val()*1)/100;
 		  //해당 상품에 적용되는 할인 액
-		  var rate_price = prdPrice * rate;
+		  var rate_price =Math.ceil(prdPrice * rate);
 		  
 		
 		  //총 결제금액 구하기
@@ -217,7 +217,7 @@
 												<c:forEach items="${list}" var="list">
 													<div class="pic">
 														<a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
-														<img src="http://localhost/mpnp/images/${list.prdImg}" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+														<img src="http://localhost/mpnp/upload/product/${list.prdImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.prdImg}">
 														</a>
 													</div>
 													
@@ -227,7 +227,7 @@
 																${list.prdName }</a>
 														</div>
 														<div class="stt">
-	<!-- 														/ -->
+
 															${list.totalCnt}개
 															</div>
 														<div class="prcs">

@@ -269,7 +269,7 @@ public class MyOrderDAO {
 	//검증완료
 	/////////// 페이징
 	// 전체 게시물 수 조회
-	public int selectTotalPageCount() {
+	public int selectTotalPageCount(MyOrderVO moVO) {
 		int totalCnt = 0;
 		
 		 // MyBatisHandler얻기
@@ -279,7 +279,7 @@ public class MyOrderDAO {
 
  		try {
  			// 쿼리 실행
- 			totalCnt = ss.selectOne("kr.co.mpnp.myOrderMapper.selectTotalPageCount");
+ 			totalCnt = ss.selectOne("kr.co.mpnp.myOrderMapper.selectTotalPageCount",moVO);
  			System.out.println(totalCnt);
  		} catch (PersistenceException pe) {
  			pe.printStackTrace();
@@ -305,8 +305,9 @@ public class MyOrderDAO {
 ////	  moDAO.selectOrderStatusCnt(m);
 // // moDAO.selectPriceIndivisual("od_0000005");
 ////	  moDAO.selectPriceTotal("or_0000004");
-	
- od.selectDiscountRate("id001");
-	  
+	MyOrderVO moVO = new MyOrderVO();
+	moVO.setId("id005");
+ //od.selectDiscountRate("id001");
+	System.out.println(od.selectTotalPageCount(moVO));  
 	 }//main
 }// class

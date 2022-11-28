@@ -30,14 +30,15 @@
 
 <select id="selectOrderAllList" parameterType="MyOrderVO" resultType="MyOrderDomain">
 
-SELECT o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, p.PRICE prdPrice,r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId
+SELECT o.id memberId, o.ORDERID orderId,to_char(o.INPUTDATE,'yyyy-mm-dd') inputDateS, o.STATUS status, p.PRICE prdPrice,r.TOTALCNT totalCnt, p.NAME prdName,p.th_img thImg, r.ORDER_DETAILID orDetailId
 FROM ORDERS o, PRODUCT p, ORDER_DETAIL r
 WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID ) and o.id=#{id}
 <if test="findStartDate != null and findEndDate != null">
 and #{findStartDate}  <![CDATA[< ]]> to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') <![CDATA[ < ]]>#{findEndDate}
-
-
 </if>
+order by o.ORDERID
+offset (#{pageFlag}-1)*4 rows
+fetch next 4 rows only
 
 
 </select>
@@ -115,7 +116,8 @@ delete from ORDERS where ORDERID=#{orderId}
 <!-- 페이징 :전체 게시물 수 조회 -->
 <select id="selectTotalPageCount"  resultType="int">
 select count(*) cnt
-from ORDER_DETAIL
+from ORDERS 
+where id=#{id}
 </select>
 
 

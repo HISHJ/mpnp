@@ -81,7 +81,7 @@ function addDBtn(gradeId){
                                             <td>${grade. gradeName}</td>
                                             <td>${grade.discountRate}(%)</td>
                                             <td><%-- <button class="btn btn-info btn-sm" onclick="addBtn('${grade.gradeId}')" >수정</button> --%>
-                                           <a class="btn btn-info btn-sm" href="admin_g_detail_form.do?gradeId=${grade.gradeId}" >수정</a>
+                                           <a class="btn btn-info btn-sm" href="http://localhost/mpnp/admin_g_detail_form.do?gradeId=${grade.gradeId}" >수정</a>
                                            <!--  <a class="btn btn-light btn-sm" onclick="addDBtn()" >삭제</a> -->                                          
                                            <%--  <button class="btn btn-light btn-sm" onclick="addDBtn('${grade.gradeId}')" >삭제</button></td>        --%>                                   
                                         </tr>

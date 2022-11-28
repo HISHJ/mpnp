@@ -25,7 +25,7 @@
 <script>
 $(function(){
 alert("${param.gradeName} 의 상태가 변경되었습니다.");
-location.href="admin_g_list.do";
+location.href="http://localhost/mpnp/admin_g_list.do";
 })
 </script>
 <%-- </c:if> --%>

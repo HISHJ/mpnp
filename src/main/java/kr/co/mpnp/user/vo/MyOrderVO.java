@@ -8,7 +8,7 @@ import java.util.Date;
 public class MyOrderVO {
 	 private String id, orderId, review_chk,deliveryId, deliveryName, zipcode, addr, addrDetail, phone, receiver, shipReq, orderStatus,
 	  orderDetailId, prdtId, prdName, thImg, findStartDate, findEndDate,inputDateS,cartID;
-	  private int actualPrice, totalPrdCnt, productPrice, totalPageCnt, totalPage, currentPage, startNum, endNum, pageScale;
+	  private int actualPrice, totalPrdCnt, productPrice, totalPageCnt, totalPage, currentPage, startNum, endNum, pageScale, pageFlag=1;
 	  private Date inputDate, completionDate;
 
 	  public MyOrderVO() {
@@ -18,9 +18,9 @@ public class MyOrderVO {
 			String zipcode, String addr, String addrDetail, String phone, String receiver, String shipReq,
 			String orderStatus, String orderDetailId, String prdtId, String prdName, String thImg, String findStartDate,
 			String findEndDate, String inputDateS, String cartID, int actualPrice, int totalPrdCnt, int productPrice,
-			int totalPageCnt, int totalPage, int currentPage, int startNum, int endNum, int pageScale, Date inputDate,
-			Date completionDate) {
-		super();
+			int totalPageCnt, int totalPage, int currentPage, int startNum, int endNum, int pageScale, int pageFlag,
+			Date inputDate, Date completionDate) {
+		
 		this.id = id;
 		this.orderId = orderId;
 		this.review_chk = review_chk;
@@ -50,6 +50,7 @@ public class MyOrderVO {
 		this.startNum = startNum;
 		this.endNum = endNum;
 		this.pageScale = pageScale;
+		this.pageFlag = pageFlag;
 		this.inputDate = inputDate;
 		this.completionDate = completionDate;
 	}
@@ -286,6 +287,14 @@ public class MyOrderVO {
 		this.pageScale = pageScale;
 	}
 
+	public int getPageFlag() {
+		return pageFlag;
+	}
+
+	public void setPageFlag(int pageFlag) {
+		this.pageFlag = pageFlag;
+	}
+
 	public Date getInputDate() {
 		return inputDate;
 	}
@@ -312,9 +321,11 @@ public class MyOrderVO {
 				+ findEndDate + ", inputDateS=" + inputDateS + ", cartID=" + cartID + ", actualPrice=" + actualPrice
 				+ ", totalPrdCnt=" + totalPrdCnt + ", productPrice=" + productPrice + ", totalPageCnt=" + totalPageCnt
 				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNum=" + startNum + ", endNum="
-				+ endNum + ", pageScale=" + pageScale + ", inputDate=" + inputDate + ", completionDate="
-				+ completionDate + "]";
+				+ endNum + ", pageScale=" + pageScale + ", pageFlag=" + pageFlag + ", inputDate=" + inputDate
+				+ ", completionDate=" + completionDate + "]";
 	}
+
+	
 
 	
 	  

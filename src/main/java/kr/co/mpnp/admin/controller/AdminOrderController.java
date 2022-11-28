@@ -19,20 +19,24 @@ import kr.co.mpnp.admin.vo.AdminOrderVO;
 public class AdminOrderController {
 	
 	// 주문조회페이지
-	@RequestMapping(value = "/orderMain_list.do", method = GET)
+	@RequestMapping(value = "/admin_orderMain_list.do", method = GET)
 	public String orderList(HttpSession session, AdminOrderVO adVO, Model model) {
-		List<AdminOrderDomain> list = null;
+		
+		String url = "redirect:admin_login_form.do";
+		
+		if(session.getAttribute("adminId")!=null) {
 
 	     AdminOrderService aoService = new AdminOrderService();
-		 list = aoService.searchOrderList(adVO);
+	     List<AdminOrderDomain> list  = aoService.searchOrderList(adVO);
 		 model.addAttribute("orderList", list);
-		 
-		return "/admin/order/orderBoard";
+		 url ="/admin/order/orderBoard";
+		}
+		return url;
 
 	}// orderList
 
 	// 주문상세조회(주문코드)
-	@RequestMapping(value = "/orderDetail_form.do", method = GET)
+	@RequestMapping(value = "/admin_orderDetail_form.do", method = GET)
 	public String orderListDetail(HttpSession session, String memberId, String orderId, Model model) {
 
 		AdminOrderService aoService = new AdminOrderService();
@@ -53,7 +57,7 @@ public class AdminOrderController {
 
 	// 주문상태변경
 
-	@RequestMapping(value = "/orderModify_process.do", method = GET)
+	@RequestMapping(value = "/admin_orderModify_process.do", method = GET)
 	public String modifyOrderStatus(AdminOrderVO adVO, Model model) {
       
 		AdminOrderService aoService = new AdminOrderService(); 

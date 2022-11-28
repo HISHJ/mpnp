@@ -367,6 +367,16 @@ function setThreeMonth(){
 	  })//aajx 
 	  
 }
+
+
+
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#hidFrm").submit();
+}
+
+
 </script>
 
 	
@@ -433,7 +443,7 @@ function setThreeMonth(){
 												<div class="tops" style="margin-bottom:30px;">
 													<div class="pic">
 														<a href="javascript:void(0);" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="orderDeliveryListBtn.goOrderDetail('C202210301001496');return false;">
-														<img src="http://localhost/mpnp/images/${list.thImg}" class="img" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+														<img src="http://localhost/mpnp/upload/product/${list.thImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.thImg}'">
 														</a>
 													</div>
 													<div class="name">
@@ -462,7 +472,36 @@ function setThreeMonth(){
 						</div>
 					
 					</div>
+					
+					
+					
+					
 					</c:forEach>
+								<div class="page"  style="width:464px;display:flex;justify-content: center;align-self: center;">
+		<c:if test="${ not empty list   }">
+			<c:if test="${ startNum ne 1 }">
+				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
+				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
+			</c:if>
+			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
+				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
+			</c:forEach>
+			<c:if test="${ lastPage gt startNum+2 }">
+				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
+				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
+			</c:if>
+		</c:if>
+	</div>
+
+	<form name="hidFrm" id="hidFrm" action="order_information_form.do">
+		<input type="hidden" id="id" name="id" value="${param.id}">
+		<input type="text" id="memberId" name="memberId" value="${param.id}">
+		<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
+	</form> 
+					
+
+ 
+					
 						 
 <div class="btn_fixed_wrap t2" style="display: none;">
 	<button class="btn_round" onclick="searchAllOrder();" style="display:none;">전체주문보기</button><!-- 하단 gnb 있을 시 t2추가 -->

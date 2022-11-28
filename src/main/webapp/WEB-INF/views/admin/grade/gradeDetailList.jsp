@@ -33,7 +33,7 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
-                      <form id="graFrm" name="graFrm" action="admin_g_modify_process.do" method="post">
+                      <form id="graFrm" name="graFrm" action="http://localhost/mpnp/admin_g_modify_process.do" method="post">
                     <div class="container">
                          <input type="hidden" id="gradeId" name="gradeId"  value="${agDom.gradeId}"/>
                      

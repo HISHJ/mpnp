@@ -116,7 +116,7 @@ function getHiddenVal(orderId,status){
                    
                         
                                
-                           <form id="resultFrm" name="resultFrm" action="orderDetail_form.do" method="get"> 
+                           <form id="resultFrm" name="resultFrm" action="http://localhost/mpnp/admin_orderDetail_form.do" method="get"> 
                    		  <input type="hidden" name="orderId" id="orderId" >
                    		  <input type="hidden" name="memberId" id="memberId" >
                    		  

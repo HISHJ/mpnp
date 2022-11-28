@@ -22,30 +22,51 @@ public class MyOrderController {
 	// 주문내역 페이지 진입(아이디)
 	@RequestMapping(value = "/order_information_form.do", method = GET)
 	public String searchOrderList(HttpSession session,MyOrderVO mvo, Model model) {
-	   
-		List<MyOrderDomain> list = null;
-		mvo.setId("test1126");
-	
+		String url="user/member/login";
+		
+		   MyOrderService moServ = new MyOrderService();
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+		mvo.setId(id);
 		mvo.getFindStartDate();
 		mvo.getFindEndDate();
 		mvo.getId();
-	   MyOrderService moServ = new MyOrderService();
-	   list = moServ.searchOrderList(mvo);
+	   List<MyOrderDomain> list = moServ.searchOrderList(mvo);
 	   model.addAttribute("list",list);
-	  
-		return "/user/mypage/order_information";
+		 url = "/user/mypage/order_information";
+		}
+		
+		//페이징
+		//페이징변수
+		int totalData =moServ.totalCount(mvo);
+		int lastPage = moServ.lastPage(totalData);
+		int curPage = mvo.getPageFlag();
+		int startNum = moServ.startNum(curPage);
+		int isLast = moServ.isLast(lastPage, startNum);
+				
+		//view로 전송
+		model.addAttribute("totalData", totalData);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("startNum", startNum);
+		model.addAttribute("isLast", isLast);
+		model.addAttribute("curPage", curPage);
+	
+		
+		
+		
+		return url;
 	}// searchOrderList
 	
-	//날짜 조회
-	@ResponseBody
-	@RequestMapping(value="/order_date_process.do", method=GET)
-	public String searchDate(HttpSession session,MyOrderVO mvo,Model model) {
-		 MyOrderService moServ = new MyOrderService();
-		 mvo.setId("test1126");
-		String jsonObj  = moServ.searchDate(mvo);
-		return jsonObj; 
-	}//
-	
+	/*
+	 * //날짜 조회
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/order_date_process.do", method=GET) public String
+	 * searchDate(HttpSession session,MyOrderVO mvo,Model model) { MyOrderService
+	 * moServ = new MyOrderService(); mvo.setId("test1126"); String jsonObj =
+	 * moServ.searchDate(mvo); return jsonObj; }//
+	 */	
 
 	// 선택주문취소(,주문상세코드)
 	@ResponseBody
@@ -70,8 +91,12 @@ public class MyOrderController {
 
 	// 주문상세페이지 진입(주문코드야)
 	@RequestMapping(value = "/order_detail_form.do", method = GET)
-	public String searchOrderDetailForm(String orderId, Model model) {
-		System.out.println(orderId);
+	public String searchOrderDetailForm(HttpSession session,String orderId, Model model) {
+
+	String url="user/member/login";
+		
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
 		
 		MyOrderService mSer = new MyOrderService();
 		MyOrderDomain moDom = new MyOrderDomain();
@@ -82,7 +107,7 @@ public class MyOrderController {
 		moDOM2 = mSer.searchOrderShip(orderId);//배송지
 		int prdPrice = mSer.searchPriceIndivisual(orderId);//상품 총가격
 		int actualPrce = mSer.selectPriceTotal(orderId);// 최종 결제금액
-		int discountRate = mSer.selectDiscountRate("test1126");// 할인율
+		int discountRate = mSer.selectDiscountRate(id);// 할인율
 		
 		model.addAttribute("prdPrice",prdPrice); //상품 총가격
 		model.addAttribute("actualPrce",actualPrce); //최종결제금액(감산된 상태)
@@ -90,9 +115,11 @@ public class MyOrderController {
 		model.addAttribute("moDOM2",moDOM2);
 		model.addAttribute("moDom", moDom);
 		model.addAttribute("list",list);
-
 		
-		return "/user/mypage/myorder_detail";
+		url ="/user/mypage/myorder_detail";
+		}
+		
+		return url;
 		
 
 	}// searchOrderDetailForm

@@ -58,7 +58,7 @@ public class ProductService {
 	
 	//현재페이지 시작번호
 	public int startNum(int curPage) {
-		int startNum=curPage-(curPage-1)%8;
+		int startNum=curPage-(curPage-1)%3;
 		return startNum;
 		
 	}

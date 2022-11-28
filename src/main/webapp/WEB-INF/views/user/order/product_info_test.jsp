@@ -535,7 +535,7 @@
 	</div>
 	
 				<!-- 주문 form  -->
-					<form action="orderPayment_form.do" method="get" id="orderFrm" name="orderFrm">
+					<form action="orderPayment_form.do" method="post" id="orderFrm" name="orderFrm">
 					
 					</form>
 </footer>

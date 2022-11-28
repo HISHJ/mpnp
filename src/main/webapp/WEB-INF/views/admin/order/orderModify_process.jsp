@@ -19,7 +19,7 @@
 <script type="text/javascript">
 $(function(){
 	alert("주문상태가 성공적으로 변경되었습니다.");
-	location.href="orderMain_list.do";
+	location.href="http://localhost/mpnp//admin_orderMain_list.do";
 })
 </script>
 </c:if>

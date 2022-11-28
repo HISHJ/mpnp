@@ -409,7 +409,7 @@ $('#goodsCount').text(goodsCount);
 	</div>
 	
  	<form name="hidFrm" id="hidFrm" action="mainList.do">
- 	<input type="hidden" id="sub_id" name="main_id" value="${param.main_id }">
+ 	<input type="hidden" id="main_id" name="main_id" value="${param.main_id }">
 	<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
 	</form> 
 			
