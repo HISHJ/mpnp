@@ -1,3 +1,4 @@
+<%@page import="kr.co.mpnp.user.service.MainService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -86,8 +87,17 @@
 	}//search
 
 
+
 	
 </script>
+	<%
+	 MainService ms = new MainService();
+	 String id= (String)session.getAttribute("id");
+	 int cnt =0;
+	 if(id!=null){
+		 cnt = ms.CartTotalCnt(id);
+	 }
+	%>
  <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -170,7 +180,7 @@
 						<div class="menu">
 							<a href="cart_list.do">
 							<button class="bt cart" type="button"  >
-								<em class="n">${CartCnt}</em>
+								<em class="n"><%= cnt %></em>
 							
 									</button></a>
 							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
@@ -468,8 +478,8 @@
     <!-- 구매만족도 -->
     <div class="uisatis" id="estmArea" style="">
       <div class="starpan">
-    <div class="inr">
-      <div class="ptbox">
+    <div class="inr" style="margin-left:350px;margin-top:20px">
+      <div class="ptbox"  >
         <div class="pnt">${data.staravg }</div>
         <div class="sta starpoint"><span class="stars p_4_5"></span></div>
       </div>
@@ -477,13 +487,7 @@
       <div class="ptlit">
         <ul class="plist">
           <li class="act">
-     <%--      <c:forEach var="slist" items="${slist }">
-            <span class="pnt"><b class="p">${slist.starscore }</b><i class="w">점</i></span>
-   	<!-- 	    <span class="gage"><em class="bar" style="width: 78.94736842105263%;"></em></span>  -->
-            <span class="pct"><b class="p">${slist.totalpeople }</b><i class="w">명</i></span>
-            </c:forEach>
-          </li> --%>
-         
+
           </ul>
       </div>
         
@@ -633,7 +637,6 @@
           <!-- 로그후기 일 경우 -->
               <!-- // 로그후기 일 경우 -->
             <div class="msgs" style="white-space: pre-wrap;" data-goods-estm-tp="PLG">
-
  			${rev.contents }
         </div>
       </div>

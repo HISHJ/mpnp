@@ -134,7 +134,7 @@ header
   color: #9a9a9a;
 }
 
-/*햄버거바 추후 삭제*/
+/*�뻹踰꾧굅諛� 異뷀썑 �궘�젣*/
 .header.pc>.hdr .hdt .btnGnb {
   background: url("common\icon_header_menu.svg") no-repeat;
 }
@@ -253,7 +253,7 @@ h1 {
   margin-left: 26px;
 }
 
-/*스토어,로그 onClick Evnet*/
+/*�뒪�넗�뼱,濡쒓렇 onClick Evnet*/
 
 .header.pc>.hdr .hdt .tmenu .list>li.active>.bt {
   font-weight: 700;
@@ -270,7 +270,7 @@ h1 {
   right: 5px;
 }
 
-/*오른쪽 검색 - 문제 : 커서가 안들어감*/
+/*�삤瑜몄そ 寃��깋 - 臾몄젣 : 而ㅼ꽌媛� �븞�뱾�뼱媛�*/
 .header.pc>.hdr .cdt {
   display: flex;
   align-items: center;
@@ -339,7 +339,7 @@ h1 {
   background: transparent;
 }
 
-/*장바구니*/
+/*�옣諛붽뎄�땲*/
 .header.pc>.hdr .cdt .menu {
   display: flex;
   margin-left: 30px;
@@ -496,7 +496,7 @@ h1 {
 ul.list li a.bt_{
   color: #669aff;
 }
-/*검색창*/
+/*寃��깋李�*/
 input#srchWord{
   padding-bottom:5px;
 }
@@ -706,7 +706,7 @@ nav.gnb .cdt .menu .list>li.shop .ctset .sm {
   flex-wrap: wrap;
 }
 
-/* side bar 설빈쓰*/
+/* side bar �꽕鍮덉벐*/
 nav.lnb{
   border-right:1px solid #f7f7f7
 }
@@ -791,6 +791,7 @@ ul.sm li:first-child{
 ul.sm li a b, ul.sm_2 li a b{
  font-weight: 500;
  font-size:14rem;
+ cursor: pointer;
 }
 
 /*layout.css*/
@@ -799,7 +800,7 @@ ul.sm li a b, ul.sm_2 li a b{
 
 body>.wrap{min-width: 1220px;}
 
-/* 헤더 */
+/* �뿤�뜑 */
 .header.mo{ min-height: 56px; }
 .header.mo>.hdr{height:56px;}
 .header.mo>.hdr>.inr {height:56px;width: 100%;background:#fff;position:fixed;display:flex;justify-content: space-between;align-items: center;padding: 0px 18px 0px 18px;z-index: 300;}
@@ -885,7 +886,7 @@ body>.wrap{min-width: 1220px;}
 .header.pc>.hdr .hdt .btnGnb:hover{background-image: url(../../_images/common/icon_header_menu_over@2x.png);}
 .header.pc>.hdr .hdt .logo{display: block;margin: 0px 0px 4px 20px;}
 .header.pc>.hdr .hdt .logo .bt{background:url("../images/logo.png") no-repeat;display: block;width:131px;height:35px;background-size: auto 100%;font-size: 0;}
-/* 2021.04.30.베타로고*/
+/* 2021.04.30.踰좏�濡쒓퀬*/
 .header.pc>.hdr .hdt .tmenu{display: flex;margin: 21px 0px 0px 36px;}
 .header.pc>.hdr .hdt .tmenu .list{ display: flex; }
 .header.pc>.hdr .hdt .tmenu .list>li{}
@@ -950,17 +951,17 @@ body>.wrap{min-width: 1220px;}
 
 /* header mode14 */
 .header.cu.mode14 > .hdr .hdt .tmenu{display:none;}
-.header.cu.mode14 > .hdr .cdt{width:calc(100% - 190px);} /* 2021.05.11 수정함 */
+.header.cu.mode14 > .hdr .cdt{width:calc(100% - 190px);} /* 2021.05.11 �닔�젙�븿 */
 .header.cu.mode14 > .hdr .cdt .schs{display:flex; justify-content:flex-end; width:100%;}
 .header.cu.mode14 > .hdr .cdt .schs .form.open{width:100%;}
-.header.cu.mode14 > .hdr .cdt .menu{margin-left:78px; width:24px;} /* 2021.05.11 수정함 */
+.header.cu.mode14 > .hdr .cdt .menu{margin-left:78px; width:24px;} /* 2021.05.11 �닔�젙�븿 */
 .header.cu.mode14 > .hdr .cdt .menu > .bt.close{display:block;}
 .header.mode14 > .hdr .cdt .menu{position:relative; height:40px;}
-.header.cu.mode14 > .hdr .cdt .menu > .bt.close{width:24px;  height: 24px; right: 0; top: 50%; margin-left: 0; transform: translateY(-50%);} /* 2021.05.11 수정함 */
+.header.cu.mode14 > .hdr .cdt .menu > .bt.close{width:24px;  height: 24px; right: 0; top: 50%; margin-left: 0; transform: translateY(-50%);} /* 2021.05.11 �닔�젙�븿 */
 .header > .hdr .cdt .menu > .bt.close{display:none; position:absolute; top:0; right:-7px; width:40px; height:40px; background:url(../../_images/common/icon-header-close@2x.png) no-repeat center center; background-size:24px auto;}
 .header.cu.mode14 > .hdr .cdt .menu > .alim, .header.cu.mode14 > .hdr .cdt .menu > .cart, .header.cu.mode14 > .hdr .cdt .menu > .alims{display:none;}
 .header.cu.mode14 > .hdr .cdt .schs .form{width:350px;}
-.header.cu.mode14 > .hdr .cdt .schs .form.open .btnSch {right: 14px; top: 50%; transform: translateY(-50%);} /* 2021.05.11 수정함 */
+.header.cu.mode14 > .hdr .cdt .schs .form.open .btnSch {right: 14px; top: 50%; transform: translateY(-50%);} /* 2021.05.11 �닔�젙�븿 */
 
 
 /* GNB */
@@ -1004,9 +1005,9 @@ nav.gnb .cdt .menu .list>li>.box .sm>li>.bt{font-size:15rem;color: #333333;displ
 nav.gnb .cdt .menu .list>li .slideShop{margin: 10px -20px 18px;padding: 0px 0px;}
 nav.gnb .cdt .menu .list>li .slideShop .swiper-container{ padding: 0px 20px; }
 nav.gnb .cdt .menu .list>li .slideShop .slide{}
-nav.gnb .cdt .menu .list>li .slideShop .slide>li{width: auto; margin-right: 8px !important;} /* APET-1132 - 탭 디자인 변경 2021.09.14 수정함 */
-nav.gnb .cdt .menu .list>li .slideShop .slide>li .bt{min-width: 61px;height: 34px;background:#f8f9fb;color: #666;font-size: 14rem;border:0;border-radius: 4px;display: block;padding: 6px 12px;text-align: center;white-space: nowrap;} /* APET-1132 - 탭 디자인 변경 2021.09.14 수정함 */
-nav.gnb .cdt .menu .list>li .slideShop .slide>li.active .bt{background-color:#669aff; border-color:#669aff; color: #ffffff; font-weight:700;} /* APET-1132 - 탭 디자인 변경 2021.09.14 수정함 */
+nav.gnb .cdt .menu .list>li .slideShop .slide>li{width: auto; margin-right: 8px !important;} /* APET-1132 - �꺆 �뵒�옄�씤 蹂�寃� 2021.09.14 �닔�젙�븿 */
+nav.gnb .cdt .menu .list>li .slideShop .slide>li .bt{min-width: 61px;height: 34px;background:#f8f9fb;color: #666;font-size: 14rem;border:0;border-radius: 4px;display: block;padding: 6px 12px;text-align: center;white-space: nowrap;} /* APET-1132 - �꺆 �뵒�옄�씤 蹂�寃� 2021.09.14 �닔�젙�븿 */
+nav.gnb .cdt .menu .list>li .slideShop .slide>li.active .bt{background-color:#669aff; border-color:#669aff; color: #ffffff; font-weight:700;} /* APET-1132 - �꺆 �뵒�옄�씤 蹂�寃� 2021.09.14 �닔�젙�븿 */
 nav.gnb .cdt .menu .list>li.shop .ctset .sm{display: flex;flex-wrap: wrap;}
 nav.gnb .cdt .menu .list>li.shop .ctset .sm>li{ margin-top: 10px;}
 nav.gnb .cdt .menu .list>li.shop .ctset .sm>li:nth-child(odd) {width: calc(50% - 10px); margin-right: 10px;}
@@ -1032,7 +1033,7 @@ body.gnbOn .btnGnb{}
 .gnbScreen {display: none;background-color: rgba(0,0,0,0.12);width: 100%;height: 100%;zoom: 1;position: fixed;left: 0px;z-index: 700;top: 0px;/* transition: all 0.4s ease 0.0s;*/}
 
 
-/* 페이지 헤더 */
+/* �럹�씠吏� �뿤�뜑 */
 .pageHead{height:56px;}
 .pageHead>.inr{display:flex;height:56px;position:fixed;left:0;right:0;top:0;justify-content: space-between;align-items: center;background-color: #ffffff;padding: 0px 20px 0px 20px;z-index: 200;}
 .pageHead>.inr .bt.txt{font-size:13rem;padding: 5px 0px;}
@@ -1075,11 +1076,11 @@ body.gnbOn .btnGnb{}
 .floatNav>.inr .bts .bt{display: block;width: 60px;height: 60px;background: no-repeat;margin-top: 18px;font-size:9rem;background-size: 100% auto;font-size: 0rem;z-index: 50;position: relative;}
 .floatNav>.inr .bts .bt.tops{background-image: url(../../_images/common/floating_top@2x.png);border: #dddddd solid 1px;border-radius: 100px;background-color: #ffffff;box-shadow: 0 5px 6px 0 rgba(0, 0, 0, 0.06);}
 .floatNav>.inr .bts .bt.talk{background-image: url(../../_images/common/floating_cstalk@2x.png);}
-/* APET-1245 210720 lju02 시작 */
+/* APET-1245 210720 lju02 �떆�옉 */
 .floatNav>.inr .bts .bt.talk::after{content:"";display:block;width:14px;height:14px;position:absolute;right:1px;top:2px;}
 .floatNav>.inr .bts .bt.talk.receive::after{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Crect width='14' height='14' fill='%23F77' rx='7' transform='matrix(-1 0 0 1 14 0)'/%3E%3Cpath fill='%23FFF' fill-rule='nonzero' d='M5.756 9.545V6.459h.062l2.276 3.086h.855V4.613h-.988v3.073h-.062L5.63 4.613h-.862v4.932z'/%3E%3C/g%3E%3C/svg%3E");}
 .floatNav>.inr .bts .bt.talk.wait::after{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='7' cy='7' r='7' fill='%238DDCFF'/%3E%3Ccircle cx='4' cy='7' r='1' fill='%23FFF'/%3E%3Ccircle cx='7' cy='7' r='1' fill='%23FFF'/%3E%3Ccircle cx='10' cy='7' r='1' fill='%23FFF'/%3E%3C/g%3E%3C/svg%3E");}
-/* APET-1245 210720 lju02 끝 */
+/* APET-1245 210720 lju02 �걹 */
 .floatNav>.inr .pd{ position: relative; }
 /* .floatNav>.inr .pd.tp{display:none;} */
 .floatNav>.inr .pd.tk{}
@@ -1091,14 +1092,14 @@ body.gnbOn .btnGnb{}
 .floatNav.on>.inr .pd.tk .tpn .txt{opacity:1;}
 /* .floatNav.isTop>.inr .pd.tp{display:block;} */
 
-/* 바닥일때 */
+/* 諛붾떏�씪�븣 */
 .floatNav.bot>.inr .bts{position:absolute;}
 .isMenuBar .floatNav.bot>.inr .bts{ bottom: 14px; }
 .isCartNavs .floatNav>.inr .bts{bottom: 94px;}
 .isCartNavs .floatNav.bot>.inr .bts{bottom: 34px;}
 
 
-/* 하단 메뉴바 */
+/* �븯�떒 硫붾돱諛� */
 nav.menubar{/* height:56px; */}
 nav.menubar>.inr{height:56px;position: fixed;bottom: 0px;width: 100%;background:#FBFBFB;z-index:200;border: solid 0.5px #e1e1e1;}
 nav.menubar>.inr .menu{display:flex;}
@@ -1117,7 +1118,7 @@ nav.menubar>.inr .menu>li.my.active .bt::before  {background-image:url(../../_im
 
 /* LNB */
 nav.lnb{display:none;max-width: 1240px;margin: 0 auto;position: relative;}
-nav.lnb>.inr{width: 160px;min-width: 150px;position: fixed;margin: 0 auto;padding: 0px 0px 10px 0px;left: 10%;top: 138px;overflow-x: hidden;overflow-y: auto;max-height: calc(100vh - 120px);} /* 2021.05.11 수정함 */ /* 2021.05.14 수정함 */
+nav.lnb>.inr{width: 160px;min-width: 150px;position: fixed;margin: 0 auto;padding: 0px 0px 10px 0px;left: 10%;top: 138px;overflow-x: hidden;overflow-y: auto;max-height: calc(100vh - 120px);} /* 2021.05.11 �닔�젙�븿 */ /* 2021.05.14 �닔�젙�븿 */
 
 nav.lnb>.inr::-webkit-scrollbar{display: none;}
 nav.lnb>.inr::-webkit-scrollbar-thumb{ }	
@@ -1201,7 +1202,7 @@ nav.lnb>.inr{}
 .no_data.h_t1{height:calc(100vh - 350px);} 
 .no_data.h_t2{height:calc(100vh - 310px);}
 .no_data.i1 > .none:before,
-.no_data.i1 > .inr:before{content:""; display:block; height:100px; margin:0 0 12px; background:url(../../_images/common/img_empty_ghost.svg) no-repeat center; background-size:auto 100%;} /* APET-1493 220222 lju02 */
+.no_data.i1 > .inr:before{content:""; display:block; height:100px; margin:0 0 12px; background:url(../../_images/common/img_empty_ghost.svg) no-repeat center; background-size:auto 100%;} /*혻APET-1493 220222 lju02 */
 .no_data.i2 > .inr:before{content:""; display:block; height:128px; margin:0 0 20px; background:url(../../_images/common/img-empty-cart@2x.png) no-repeat center; background-size:auto 100%;} 
 .no_data.i3 > .inr:before{content:""; display:block; height:128px; margin:0 0 20px; background:url(../../_images/common/img-my-add-mypet@2x.png) no-repeat center; background-size:auto 100%;} 
 .no_data.i4 > .inr:before{content:""; display:block; height:128px; margin:0 0 20px; background:url(../../_images/common/img-log-create@2x.png) no-repeat center; background-size:auto 100%;} 
@@ -1222,17 +1223,17 @@ nav.lnb>.inr{}
 .no_data .msg_info{margin-top:6px;color:#9a9a9a;font-size:13px;text-align: center;}/* CSR-2491 220224 lju02 */
 
 .no_data.txt {position:relative;margin: 95px 0 95px}	/* APETQA-5843 210617 lju02 */
-.pc-tit+.no_data {margin-top: -128px;} /* APETQA-6650 2021.08.19 수정함 */
+.pc-tit+.no_data {margin-top: -128px;} /* APETQA-6650 2021.08.19 �닔�젙�븿 */
 
-/* 이벤트 페이지 내 플로팅 버튼 */
+/* �씠踰ㅽ듃 �럹�씠吏� �궡 �뵆濡쒗똿 踰꾪듉 */
 .btn-evt-floating {position:sticky;text-align:center;bottom:20px;margin-bottom:30px;}
 .btn-evt-floating a {display:inline-block;height:50px;line-height:50px;font-size:16px;color:#fff;font-weight:bold;box-shadow:0 5px 6px 0 rgba(0, 0, 0, 0.06);background-color:#669aff;border-radius:25px;padding:0 32px;}
 
-/* 푸터 위로가기 버튼 사이즈 변경 */
+/* �뫖�꽣 �쐞濡쒓�湲� 踰꾪듉 �궗�씠利� 蹂�寃� */
 .floatNav>.inr .bts .bt {width:50px;height:50px;}
 .floatNav>.inr .bts .bt.tops {border-radius:25px;}
 
-/* 푸터영역 케어톡, 상담톡 공통 */
+/* �뫖�꽣�쁺�뿭 耳��뼱�넚, �긽�떞�넚 怨듯넻 */
 .wrap-floating-talk {height:50px;transition:height .05s ease-in;margin-top:12px;}
 .wrap-floating-talk.expand {height:181px;padding-top:8px;}
 
@@ -1244,21 +1245,21 @@ nav.lnb>.inr{}
 .wrap-floating-talk .care-talk span em,
 .wrap-floating-talk .counsel-talk span em {display:block;color:#fff57e;}
 
-/* 푸터영역 상담톡 */
+/* �뫖�꽣�쁺�뿭 �긽�떞�넚 */
 .wrap-floating-talk .counsel-talk {display:none;position:relative;margin-top:12px;}
 .wrap-floating-talk.active .counsel-talk {display:block;}
 .wrap-floating-talk .counsel-talk .btn-talk {width:50px;height:50px;font-size:0;}
 .wrap-floating-talk .counsel-talk .btn-talk:after {content:'';position:absolute;top:0;left:0;width:50px;height:50px;background-image:url('../../_images/common/icon_caretalk.svg');background-size:contain;background-position:center;background-repeat:no-repeat;}
 
-/* 푸터영역 케어톡, 상담톡 닫기버튼 */
+/* �뫖�꽣�쁺�뿭 耳��뼱�넚, �긽�떞�넚 �떕湲곕쾭�듉 */
 .wrap-floating-talk .collapse-talk {display:none;position:relative;margin-top:12px;}
 .wrap-floating-talk.active .collapse-talk {display:block;}
 .wrap-floating-talk .collapse-talk .btn-collapse {width:50px;height:50px;font-size:0;background-image:url('../../_images/common/icon_collapse_talk.svg');background-size:contain;background-position:center;background-repeat:no-repeat;box-shadow:0 5px 6px 0 rgb(0 0 0 / 6%);border-radius:25px;}
 
-/* 위로가기 버튼 */
+/* �쐞濡쒓�湲� 踰꾪듉 */
 .floatNav .pd.tp.disabled {display:none !important;}
 
-/* 푸터영역 케어톡 */
+/* �뫖�꽣�쁺�뿭 耳��뼱�넚 */
 .floatNav .care-talk.tk-animation .btn-talk {
   position: relative;
   width: 50px;
@@ -1327,25 +1328,25 @@ nav.lnb>.inr{}
 
 
 /* ------------------------------------------------- */
-/* TV, 로그, 스토어 메인 헤더 UI 변경
+/* TV, 濡쒓렇, �뒪�넗�뼱 硫붿씤 �뿤�뜑 UI 蹂�寃�
 /* ------------------------------------------------- */
 
-/* 사이드 메뉴 버튼 */
+/* �궗�씠�뱶 硫붾돱 踰꾪듉 */
 .header.pc>.hdr .hdt .btnGnb {background:url('../../_images/common/icon_header_menu.svg') no-repeat;}
 .header.pc>.hdr .hdt .btnGnb:hover {background:url('../../_images/common/icon_header_menu_hover.svg') no-repeat;}
 
-/* 헤더 우측 검색버튼 */
+/* �뿤�뜑 �슦痢� 寃��깋踰꾪듉 */
 .header.pc>.hdr .cdt .schs .form .btnSch {background:url('../../_images/common/icon_header_search_pc.svg') no-repeat;}
 
-/* 헤더 우측 알림 버튼 */
+/* �뿤�뜑 �슦痢� �븣由� 踰꾪듉 */
 .header.pc>.hdr .cdt .menu .bt.alim {background:url('../../_images/common/icon_header_alarm.svg') no-repeat;}
 .header.pc>.hdr .cdt .menu .bt.alim:hover {background:url('../../_images/common/icon_header_alarm_hover.svg') no-repeat;}
 .header.pc>.hdr .cdt .menu .bt.alim:after {top:-3px;right:-3px;border-radius:3px;}
 
-/* 헤더 우측 장바구니 버튼 */
+/* �뿤�뜑 �슦痢� �옣諛붽뎄�땲 踰꾪듉 */
 .header.pc>.hdr .cdt .menu .bt.cart {background:url('../../_images/common/icon_header_cart.svg') no-repeat;}
 .header.pc>.hdr .cdt .menu .bt.cart:hover {background:url('../../_images/common/icon_header_cart_hover.svg') no-repeat;}
 .header.pc>.hdr .cdt .menu .bt.cart .n {line-height:18px;font-size:12px;font-weight:500;text-align:center;padding:0 5px;}
 
 
-/*사이드바*/
+/*�궗�씠�뱶諛�*/

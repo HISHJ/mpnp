@@ -80,4 +80,6 @@ public class mainController {
 		return "user/main/mainList";
 	}
 	
+
+	
 }

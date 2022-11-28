@@ -1,11 +1,12 @@
+<%@page import="kr.co.mpnp.user.service.MainService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="header"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
 
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/ui.js%22%3E"></script>
-<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
+ <script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/ui.js%22%3E"></script> 
+ <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
+ <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script> 
 
  <script>
 //검색
@@ -23,6 +24,15 @@
 
 
 </script>
+<%
+ MainService ms = new MainService();
+ String id= (String)session.getAttribute("id");
+ int cnt =0;
+ if(id!=null){
+	 cnt = ms.CartTotalCnt(id);
+ }
+
+%>
  <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
@@ -105,7 +115,7 @@
 						<div class="menu">
 							<a href="cart_list.do">
 							<button class="bt cart" type="button"  >
-								<em class="n">${CartCnt}</em>
+								<em class="n" ><%=cnt%></em>
 							
 									</button></a>
 							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
