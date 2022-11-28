@@ -49,7 +49,7 @@
                                  회원관리
                              </a>
                             <hr>
-                            <a class="nav-link" href="orderMain_list.do">
+                            <a class="nav-link" href="admin_orderMain_list.do">
                                  <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                  주문관리
                              </a>
