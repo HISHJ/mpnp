@@ -232,7 +232,7 @@
 		
 		
 		<script >
-		/*설빈*/
+		
 		
 		//검색
 		$(function(){
@@ -244,24 +244,26 @@
 		});//keydown
 		});//ready
 	
-		
- 		$("#mainList").click(function(){
-			var main_id=$("#main_id").val();
-			alert(main_id)
-			location.href="mainList.do?main_id="+main_id
+		//메인  카테고리 이동
+ 	/* 	$("#mainList").click(function(){
 			
-/* 				$.ajax({
-			    				 url : "mainList.do", // 이 주소로 
-			    	              type : "get",
-			    	              data : {"main_id" : main_id}, 
-			    	              success : function(data){ 
-			location.href="mainList.do?main_id="+main_id
-			    	              }, error : function(xhr){
-			    	            	  alert(xhr.status)}
-			    	              
-		}); */
-		});	
-		 
+		});	 */
+
+		function mainList(){
+			var main_id=$("#main_id").val();
+			
+			$.ajax({
+				 url : 'mainList.do', // 이 주소로 
+	              type : "GET",
+	              data : {main_id: main_id} , 
+	              success : function(data){ 
+	            	  location.href="mainList.do?main_id="+main_id
+	              },error : function(data){
+	            	 alert('잠시후에 다시 시도해주세요')
+	              }//error
+		});//ajax
+		}
+		
 		//중분류 이동
 			function setCateList(sub_id){
 				location.href="prdList.do?sub_id="+sub_id
@@ -276,7 +278,21 @@
 			return;
 		}
 		
-		location.href="search_prd_list.do?name="+keyword
+		
+		$.ajax({
+				 url : 'search_prd_list.do', // 이 주소로 
+	              type : "GET",
+	              data : {name : keyword}, 
+	              success : function(data){ 
+	            	  location.href="search_prd_list.do?name="+keyword
+	              },error : function(data){
+	            	 alert('error')
+	              }//error
+				
+		
+		
+		});//ajax
+		
 	}//search
 /* 	
 	메인 전체보기 이동 	
@@ -294,17 +310,16 @@
 	 	 $(function(){
 			    	$("button").on('click',function(){
 			    			var mainid = $(this).val();  //버튼이 클릭 되었을 때 그 버튼의 value를 var kind로 가져와서	
-			    			
+			    		
 			    			console.log(mainid)
 			    			$.ajax({
 			    				 url : 'index.do', // 이 주소로 
-			    	              type : "get",
-			    	              data : {"mainid" : mainid}, 
-			    	             
+			    	              type : "GET",
+			    	              data : {"mainid" : mainid},
 			    	              success : function(data){ 
 			    	            
-			    	                /*  $("#prdList").append(data) */ 
-			    	                $('body').html(data)
+			   
+			    	                $('body').html(data) 
 			    	         	 	if(mainid=="m0002"){
 			    	            		
 			    	             		 $(".bt_dog").removeClass("active"); 
@@ -329,7 +344,7 @@
 			    	               
 			    	              }//error
 			    			})//ajax 
-			    		});//click
+			    		});//click 
 			    });//ready 
 			    
 			    
@@ -559,7 +574,7 @@ else{
 <div class="swiper-container slide swiper-container-initialized swiper-container-horizontal" >
 	<ul class="swiper-wrapper list" style="transform: translate3d(0px, 0px, 0px);"  >
 	<li class="swiper-slide swiper-slide-active" id="shortcut_2362" data-bnrdscrt="사료" data-bnrtext="사료샘플" style="width: 76.5px; margin-right: 36px;">
-		<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?cateCdL=12565&amp;cateCdM=12673&amp;dispClsfNo=12697', '1313', '2362', 'shortcut' ,false)">
+		<a href="javascript:setCateList('s0001');" class="box recent" >
 					<div class="gds">
 						<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-petfood-dry3x.jpg" alt="사료샘플" class="img">
 						<!-- <img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/display/2362/5609de03-c91b-462a-bf66-3822e5e56b2f.jpg?type=f&amp;w=150&amp;h=150&amp;quality=90&amp;align=4" alt="사료샘플" class="img"> -->
@@ -569,7 +584,7 @@ else{
 			</li>
 	
 	<li class="swiper-slide" id="shortcut_2367" data-bnrdscrt="간식" data-bnrtext="간식" style="width: 76.5px; margin-right: 36px;">
-		<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?cateCdL=12565&amp;cateCdM=12673&amp;dispClsfNo=12686', '1313', '2367', 'shortcut' ,false)">
+		<a href="javascript:setCateList('s0002');" class="box recent" >
 					<div class="gds">
 						<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-sanck-handmade3x.jpg" alt="건식" class="img">
 					</div>
@@ -578,7 +593,7 @@ else{
 			</li>
 
 			<li class="swiper-slide" id="shortcut_2380" data-bnrdscrt="패션/의류" data-bnrtext="패션/의류">
-				<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?dispClsfNo=12685&amp;cateCdL=12565&amp;cateCdM=12685', '1313', '2380', 'shortcut' ,false)">
+				<a href="javascript:setCateList('s0003');" class="box recent" >
 							<div class="gds">
 								<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-supplies-clothes3x.jpg" alt="패션/의류" class="img">
 							</div>
@@ -586,7 +601,7 @@ else{
 						</a>
 					</li>
 			<li class="swiper-slide" id="shortcut_2376" data-bnrdscrt="기타" data-bnrtext="기타">
-				<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?dispClsfNo=100000244&amp;cateCdL=12565&amp;cateCdM=100000244', '1313', '2376', 'shortcut' ,false)">
+				<a href="javascript:setCateList('s0004');" class="box recent" >
 							<div class="gds">
 								<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-supplies-toy3x.jpg" alt="펫가전" class="img">
 							</div>
@@ -606,7 +621,7 @@ else{
 	<div class="swiper-container slide swiper-container-initialized swiper-container-horizontal" >
 		<ul class="swiper-wrapper list" style="transform: translate3d(0px, 0px, 0px);"  >
 		<li class="swiper-slide swiper-slide-active" id="shortcut_2362" data-bnrdscrt="사료" data-bnrtext="사료샘플" style="width: 76.5px; margin-right: 36px;">
-			<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?cateCdL=12565&amp;cateCdM=12673&amp;dispClsfNo=12697', '1313', '2362', 'shortcut' ,false)">
+			<a href="javascript:setCateList('s0005');" class="box recent" >
 						<div class="gds">
 							<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-petfood-dry3x.jpg" alt="사료샘플" class="img">
 							<!-- <img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/display/2362/5609de03-c91b-462a-bf66-3822e5e56b2f.jpg?type=f&amp;w=150&amp;h=150&amp;quality=90&amp;align=4" alt="사료샘플" class="img"> -->
@@ -616,7 +631,7 @@ else{
 				</li>
 		
 		<li class="swiper-slide" id="shortcut_2367" data-bnrdscrt="간식" data-bnrtext="간식" style="width: 76.5px; margin-right: 36px;">
-			<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?cateCdL=12565&amp;cateCdM=12673&amp;dispClsfNo=12686', '1313', '2367', 'shortcut' ,false)">
+			<a href="javascript:setCateList('s0006');" class="box recent" >
 						<div class="gds">
 							<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-sanck-pouch3x.jpg" alt="건식" class="img">
 						</div>
@@ -625,7 +640,7 @@ else{
 				</li>
 	
 				<li class="swiper-slide" id="shortcut_2380" data-bnrdscrt="패션/의류" data-bnrtext="패션/의류">
-					<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?dispClsfNo=12685&amp;cateCdL=12565&amp;cateCdM=12685', '1313', '2380', 'shortcut' ,false)">
+					<a href="javascript:setCateList('s0007');" class="box recent" >
 								<div class="gds">
 									<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-supplies-scratcher3x.jpg" alt="패션/의류" class="img">
 								</div>
@@ -633,7 +648,7 @@ else{
 							</a>
 						</li>
 				<li class="swiper-slide" id="shortcut_2376" data-bnrdscrt="기타" data-bnrtext="기타">
-					<a href="javascript:void(0);" class="box recent" onclick="callAmplitudeShortCut(this);petShopMainResult.goBanner('/shop/indexCategory?dispClsfNo=100000244&amp;cateCdL=12565&amp;cateCdM=100000244', '1313', '2376', 'shortcut' ,false)">
+					<a href="javascript:setCateList('s0008');" class="box recent" >
 								<div class="gds">
 									<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-petfood-adult3x.jpg" alt="펫가전" class="img">
 								</div>
@@ -756,7 +771,7 @@ var gogoSwiper = (function() {
 	<section class="sect mn">
 		<h3>
 			<span class="txt">오직 <span style="color:var(--colors-main03)">멍품냥품</span>에서만!</span>
-			<button class="btn-more" id="mainList" >전체보기</button>
+			<button class="btn-more" id="mainList"  onclick="mainList()">전체보기</button>
 		
 					</h3>
 					
@@ -812,15 +827,15 @@ var gogoSwiper = (function() {
 
 
 	
-		<div class="gd-item swiper-slide" data-swiper-column="19" data-swiper-row="1" style="-webkit-box-ordinal-group: 39; order: 39; margin-top: 30px; margin-right: 30px;">
+<!-- 		<div class="gd-item swiper-slide" data-swiper-column="19" data-swiper-row="1" style="-webkit-box-ordinal-group: 39; order: 39; margin-top: 30px; margin-right: 30px;">
 		</div>
 				
 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
 <div class="sld-navigation hide_mo">
-<!-- <button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
-<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button>  -->
+ <button type="button" class="sld-nav prev swiper-button-disabled" tabindex="0" id="before" role="button" aria-label="Previous slide" aria-disabled="true">이전</button>
+<button type="button" class="sld-nav next" tabindex="0" role="button" id="next" aria-label="Next slide" aria-disabled="false">다음</button>   
 </div>
-</div>
+</div> -->
 
 <%-- <script type="text/javascript">
 $(function() {
@@ -1035,7 +1050,7 @@ petShopMainResult.goNewGoodsList(dispClsfNo, dispCornNo, dispClsfCornNo, moreYn)
 	<div class="bnbox">
 		<div class="tit">회원가입 후 멍품냥품을 즐겨보세요!</div>
 		<div class="bts">
-			<a href="login.html"  data-content="" data-url="https://aboutpet.co.kr/join/indexTerms?header=Y&amp;goSns=Y" class="bt reg">회원가입하기</a>
+			<a href="join_terms.do"  class="bt reg">회원가입하기</a>
 			</div>
 	</div>
 </section>

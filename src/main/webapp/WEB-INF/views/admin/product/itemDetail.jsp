@@ -165,29 +165,62 @@
     				return;
     			}
             	
-    	/* 		//이미지 파일 확장자 제한
+    			//이미지 파일 확장자 제한
     			var blockExt="jpg,jpeg,png,do".split(",");
-    			var flag=false;
+    			var flag1=false;
     			
     			var thImgExt=thImg.substring(thImg.lastIndexOf(".")+1);
-    			var mImgExt=mImg.substring(mImg.lastIndexOf(".")+1);
     			var infoImgExt=infoImg.substring(infoImg.lastIndexOf(".")+1);
     			
     			//이렇게 하면 쓸데없이 많이 도는거 같은데 ...
-    			for(var i=0; i<blockExt.length; i++){
+    		for(var i=0; i<blockExt.length; i++){
     				for(var j=0; j<blockExt.length; j++){
     					for(var k=0; k<blockExt.length; k++){
-    						if(blockExt[i]==thImgExt&&(blockExt[j]==mImgExt||mImgExt=="")&&blockExt[k]==infoImgExt){
-    							flag=true;
+    						if(blockExt[i]==thImgExt&&blockExt[k]==infoImgExt){
+    							flag1=true;
     						}
     					}
     				}
-    			}
-    			
-    			if(!flag){
-    				alert("※파일 형식을 다시 확인해주세요");
+    			} 
+    			 
+    	 	if(!flag1){
+    			alert("※파일 형식을 다시 확인해주세요");
     				return flag;
-    			} */
+    			} 
+    			 
+    	
+    	 	
+    	 	//상품이미지 확장자 확인
+     	 		var mImg0=$("#multiImg0").val();
+    			var mImg1=$("#multiImg1").val();
+    			var mImg2=$("#multiImg2").val();
+    			
+    			
+    		
+    			
+    		 	if( mImg0 != "" ){
+    				var ext = mImg0.split('.').pop().toLowerCase();
+    				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    					 alert('※파일 형식을 다시 확인해주세요');
+    					 return;
+    				      }
+    				} 
+    			
+    		 	if( mImg1 != "" ){
+    				var ext = mImg1.split('.').pop().toLowerCase();
+    				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    					 alert('※파일 형식을 다시 확인해주세요');
+    					 return;
+    				      }
+    				} 
+    			
+    		 	if( mImg2 != "" ){
+    				var ext = mImg2.split('.').pop().toLowerCase();
+    				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    					 alert('※파일 형식을 다시 확인해주세요');
+    					 return;
+    				      }
+    				} 
     			
         		if(confirm("상품을 수정하시겠습니까?")){
         		
@@ -273,12 +306,20 @@
                                             <div class="col-4">
                                                <select name="sub_id" id="sub" class="dataTable-dropdown dataTable-selector">
                                                 	<option value="none">---분류2---<option>
-                                                
-                                            	   <c:if test="${not empty data.subid }">
-                                                	<option value="${data.subid }" selected>${data.subname }</option>
-                                                	<option value="${list.subid }"> ${list.subname }</option>
-                                                	
-                                                	</c:if>
+                                                <c:choose>
+                                                	<c:when test="${data.mainid eq 'm0001' }">
+                                                		<option ${data.subid eq 's0001'?"selected='selected'":""}>강쥐사료</option>
+                                                		<option ${data.subid eq 's0002'?"selected='selected'":""}>간식</option>
+                                                		<option ${data.subid eq 's0003'?"selected='selected'":""}>패션/의류</option>
+                                                		<option ${data.subid eq 's0004'?"selected='selected'":""}>기타</option>
+                                                		</c:when>
+                                                	<c:when test="${data.mainid eq 'm0002' }">
+                                                		<option ${data.subid eq 's0005'?"selected='selected'":""}>냥이사료</option>
+                                                		<option ${data.subid eq 's0006'?"selected='selected'":""}>간식</option>
+                                                		<option ${data.subid eq 's0007'?"selected='selected'":""}>패션/의류</option>
+                                                		<option ${data.subid eq 's0008'?"selected='selected'":""}>기타</option>
+                                                		</c:when>
+                                            	   </c:choose>
 												  </select>  
                                             </div>
                                         </div>

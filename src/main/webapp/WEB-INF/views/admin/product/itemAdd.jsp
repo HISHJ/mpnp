@@ -127,45 +127,98 @@
 				return;
 			}
 			var thImg=$("#thImg").val();
-			var mImg0=$("#multiImg0").val();
-			var mImg1=$("#multiImg1").val();
-			var mImg2=$("#multiImg2").val();
 			var infoImg=$("#infoImg").val();
 			
 			
 			//파일은 focus 안돼서 뺌
 		
-			
+			//썸네일, 정보이미지 확장자 확인
 			if(thImg==""||infoImg==""){ //main이미지는 없는 것도 있으니까
 				alert("업로드할 파일을 선택해주세요");
 				return;
 			}
 			  
 
-	/* 		//이미지 파일 확장자 제한
+		//이미지 파일 확장자 제한
 			var blockExt="jpg,jpeg,png,do".split(",");
-			var flag=false;
+			var flag1=false;
 			
 			var thImgExt=thImg.substring(thImg.lastIndexOf(".")+1);
-		/* 	var mImgExt=mImg.substring(mImg.lastIndexOf(".")+1); 
 			var infoImgExt=infoImg.substring(infoImg.lastIndexOf(".")+1);
 			
 			//이렇게 하면 쓸데없이 많이 도는거 같은데 ...
 		for(var i=0; i<blockExt.length; i++){
 				for(var j=0; j<blockExt.length; j++){
 					for(var k=0; k<blockExt.length; k++){
-						if(blockExt[i]==thImgExt&& (blockExt[j]==mImgExt||mImgExt=="")&& blockExt[k]==infoImgExt){
-							flag=true;
+						if(blockExt[i]==thImgExt&&blockExt[k]==infoImgExt){
+							flag1=true;
 						}
 					}
 				}
-			} */
+			} 
 			 
-	/* 	 	if(!flag){
-				alert("※파일 형식을 다시 확인해주세요");
+	 	if(!flag1){
+			alert("※파일 형식을 다시 확인해주세요");
 				return flag;
 			} 
-			  */
+			 
+	
+	 	
+	 	//상품이미지 확장자 확인
+ 	 		var mImg0=$("#multiImg0").val();
+			var mImg1=$("#multiImg1").val();
+			var mImg2=$("#multiImg2").val();
+			
+			
+		
+			
+		 	if( mImg0 != "" ){
+
+				var ext = mImg0.split('.').pop().toLowerCase();
+
+				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+
+					 alert('※파일 형식을 다시 확인해주세요');
+
+					 return;
+
+				      }
+
+				} 
+			
+		 	if( mImg1 != "" ){
+
+				var ext = mImg1.split('.').pop().toLowerCase();
+
+				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+
+					 alert('※파일 형식을 다시 확인해주세요');
+
+					 return;
+
+				      }
+
+				} 
+			
+		 	if( mImg2 != "" ){
+
+				var ext = mImg2.split('.').pop().toLowerCase();
+
+				      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+
+					 alert('※파일 형식을 다시 확인해주세요');
+
+					 return;
+
+				      }
+
+				} 
+			
+			
+			
+	
+			 
+	 	
 
 		
 			if(confirm("상품을 추가하시겠습니까?")){

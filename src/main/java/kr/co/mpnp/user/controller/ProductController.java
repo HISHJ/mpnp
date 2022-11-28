@@ -19,6 +19,7 @@ import kr.co.mpnp.user.service.ProductReviewService;
 import kr.co.mpnp.user.service.ProductService;
 import kr.co.mpnp.user.vo.ProductCartVO;
 import kr.co.mpnp.user.vo.ProductVO;
+import kr.co.mpnp.user.vo.WishListVO;
 
 @Controller
 public class ProductController {
@@ -56,30 +57,32 @@ public String searchPrdList(ProductVO pVO,Model model) {
 public String searchPrdDetail( String reviewid,@RequestParam(value="productid") String productid,
 		HttpSession session,Model model) {
 	
+	WishListVO wVO= new WishListVO();
 	ProductCartVO cVO = new ProductCartVO();
 	ProductService ps= new ProductService();
 	ProductReviewService pr = new ProductReviewService();
 	//세션 값 확인
 	String id =(String)session.getAttribute("id");
-//	if(session.getAttribute("id")!=null) {
-//		
-//	}
-//
-//	cVO.setId("id001");
-//	model.addAttribute("wishFlag",ps.checkWish(cVO));
-//	model.addAttribute("id",id);
+	if(id!=null) {
+		wVO.setId(id);
+		wVO.setProductid(productid);
+		
+		model.addAttribute("wishFlag",ps.checkWish(wVO));
+		System.out.println(ps.checkWish(wVO));
+	}
 
-	
+	System.out.println(wVO);
 
 
 
 	ProductDomain pd=ps.searchPrdDetail(productid);
 	List<ProductReviewDomain> list = pr.searchProductReview(productid);
 	List<ProductReviewDomain > slist=pr.searchStarCnt(productid);	
-	
+	System.out.println(pd);
 
 	model.addAttribute("prdImg", ps.searchPrdImg(productid));
 
+	model.addAttribute("id",id);
 	model.addAttribute("data", pd);
 	model.addAttribute("review", list);
 	model.addAttribute("star",slist);

@@ -81,6 +81,21 @@
 	
 		
 		</script>
+		
+		
+		 <style>
+ .page-num,.page-num-click{
+	font-size:18px;
+	font-weight:bold;
+	font-style: italic;
+}
+
+.page-num-click{
+	color:var( --colors-main03);
+}
+
+
+ </style>
 
 <!--라이브 앱과 연동을위한 JS -->
 <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
@@ -188,12 +203,12 @@
 			<h2 class="bt bt_my">MY</h2>
 		
 
-			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
+		<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 				<ul class="sm">
-					<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
-					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
-					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
-					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
+					<li><a class="bt" href="order_information_form.do">주문내역</a></li>
+					<li><a class="bt" href="writable_review_list.do" data-content="0">상품 후기</a></li>
+				<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
+                    <li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
 				</ul>
 			</div>
 
@@ -384,7 +399,7 @@ $('#goodsCount').text(goodsCount);
 </div>
 </div>
 			</section>
-			<div class="page" style="width:464px;display:flex;justify-content: center;align-self: center;">
+			<div class="page" style="width:100%;display:flex;justify-content: center;align-self: center;">
 		<c:if test="${ not empty sub  }">
 			<c:if test="${ startNum ne 1 }">
 				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>

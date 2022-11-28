@@ -66,8 +66,9 @@ public class AdminProductController {
 	public String searchPrdDetailForm(HttpSession session,@RequestParam(value="productid") String productid, String mainid,Model model) {
 		AdminProductDomain ap=as.searchPrdDetail(productid);
 		List<AdminProductDomain> list=as.searchPrdImg(productid);
+		List<AdminCategoryDomain> clist =as.searchCategory2(mainid);
 		
-	
+		model.addAttribute("clist", clist);
 		model.addAttribute("img", list);
 		model.addAttribute("data",ap);
 		
@@ -121,7 +122,7 @@ public class AdminProductController {
 			e.printStackTrace();
 		}
 			
-	return result+" ";
+	return "admin/product/itemBoard";
 
 		
 	

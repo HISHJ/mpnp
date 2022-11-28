@@ -42,7 +42,7 @@ where p.productid=o.productid(+) and o.order_detailid=r.order_detaili(+)d and p.
 select m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate ,
 LISTAGG(ri.review_img, ',') WITHIN GROUP(order by ri.reviewid) AS review_img
 from member m, orders o, order_detail od ,review r ,review_img ri
-where m.id=o.id(+) and o.orderid=od.orderid(+) and od.order_detailid =  r.order_detailid(+) and r.reviewid=ri.reviewid(+) and od.productid=#{productid}
+where m.id=o.id and o.orderid=od.orderid and od.order_detailid =  r.order_detailid and r.reviewid=ri.reviewid(+) and od.productid=#{productid}
 group by  m.pfimg,m.nick,o.id,od.productid,r.reviewid, r.star_score, r.contents, r.inputdate 
 
 

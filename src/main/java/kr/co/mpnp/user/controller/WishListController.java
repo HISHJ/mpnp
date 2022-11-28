@@ -25,13 +25,15 @@ public class WishListController {
 	//찜 리스트 목록(아이디)
 	@RequestMapping(value="wishList.do",method=GET)
 	public String searchWishLishForm(HttpSession session,Model model){
-		session.setAttribute("id", "id002");
 		WishListService ws = new WishListService();
 		if(session.getAttribute("id")!=null) {
 			String id=(String)session.getAttribute("id");
 			List<WishDomain> list= ws.searchWishList(id);
 			model.addAttribute("id", id);
-			model.addAttribute("wish", list);			
+			model.addAttribute("wish", list);	
+			
+		}else {
+			
 		}
 		
 		

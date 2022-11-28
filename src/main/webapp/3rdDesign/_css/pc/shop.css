@@ -933,7 +933,7 @@ nav.location .loc>li .menu>li .bt .t{}
 .uiPdOrdPan .tots .amts .amt .s{}
 .uiPdOrdPan .tots .price{}
 .uiPdOrdPan .tots .price .t{ font-weight: 700; }
-.uiPdOrdPan .tots .price .prc{ font-weight: 700; color: #669aff; font-size: 22rem; }
+.uiPdOrdPan .tots .price .prc{ font-weight: 700; color:var( --colors-main03); font-size: 22rem; }
 .uiPdOrdPan .tots .price .prc .i{font-family: "Roboto";}
 .uiPdOrdPan .tots .price .prc .s{}
 
@@ -959,7 +959,7 @@ nav.location .loc>li .menu>li .bt .t{}
 .cartNavs .btns .zims .btZZim.on{background-image: url(http://localhost/mpnp/3rdDesign/images/icon_bar_save_on@2x.png);}
 .cartNavs .btns .obts{display:flex;width: 100%;}
 .cartNavs .btns .obts .btCart{ font-weight: 700; }
-.cartNavs .btns .obts .btOrde{color: #ffffff; background:#669aff;}
+.cartNavs .btns .obts .btOrde{color: #ffffff; background: var( --colors-main03);}
 .cartNavs .btns .obts .btAlim{color: #ffffff;background:#273957;border-color: #273957;}
 .cartNavs .btns .obts .btAlim::before{ width:20px; height:20px; margin-right: 4px; margin-top: 4px; background: url(../../_images/shop/icon_shop_soldout_alarm@2x.png) no-repeat center;background-size: 20px auto; content:""; display:inline-block; vertical-align:middle;} /* APETQA-7672 211213 LSY */
 .cartNavs .btns .obts .btOrde[disabled]{color:#fff;background:#ddd;border-color:#ddd;}
@@ -1007,7 +1007,7 @@ nav.location .loc>li .menu>li .bt .t{}
 .cartNavs .btns .zims .btZZim.on{}
 .cartNavs .btns .obts{}
 .cartNavs .btns .obts .btCart{ }
-.cartNavs .btns .obts .btOrde{ border-color: #669aff; }
+.cartNavs .btns .obts .btOrde{ border-color: var( --colors-main03) }
 .cartNavs .btns .obts .btAlim{}
 .cartNavs .btns .obts .btAlim::before{}
 .cartNavs .btns .obts .btSold{color: #ffffff;background: #dddddd;border-color: #dddddd;}

@@ -1,6 +1,7 @@
 package kr.co.mpnp.user.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.util.List;
 
@@ -33,19 +34,16 @@ public class mainController {
 		int cnt=ms.CartTotalCnt(id);
 		model.addAttribute("CartCnt", cnt);
 	}
-		if(mainid==null) {
+		if(mainid==null || "".equals(mainid)) {
 		 mainid="m0001";
 		}
+		System.out.println("메인id :"+mainid);
 		 List<MainDomain> list =ms.searchPrdList(mainid);
-
-		
-				
-						
-				//view로 전송
-				model.addAttribute("prdList",list);
+		 //view로 전송
+		model.addAttribute("prdList",list);
 			
 		
-		System.out.println(session.getAttribute("id"));
+		
 		return"user/main/index";
 	}
 	

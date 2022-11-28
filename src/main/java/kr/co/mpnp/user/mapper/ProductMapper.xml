@@ -74,7 +74,7 @@ where id=#{id} and productid=#{productid}
 </select>
 
 <!-- 찜여부 -->
-<select id="selectConfirmWish" resultType="int" parameterType="productCartVO">
+<select id="selectConfirmWish" resultType="int" parameterType="WishLishVO">
 select count(*)
 from wish
 where id=#{id} and productid=#{productid}

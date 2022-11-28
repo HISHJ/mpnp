@@ -75,6 +75,20 @@
 		
 		
 		</script>
+		
+				 <style>
+ .page-num,.page-num-click{
+	font-size:18px;
+	font-weight:bold;
+	font-style: italic;
+}
+
+.page-num-click{
+	color:var( --colors-main03);
+}
+
+
+ </style>
 
 <!--라이브 앱과 연동을위한 JS -->
 <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
@@ -378,7 +392,7 @@ $('#goodsCount').text(goodsCount);
 	</div>
 </c:forEach>
 
-		<div class="page" style="width:464px;display:flex;justify-content: center;align-self: center;">
+		<div class="page" style="width:100%;display:flex;justify-content: center;align-self: center;">
 		<c:if test="${ not empty prdList  }" >
 			<c:if test="${ startNum ne 1 }">
 				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>

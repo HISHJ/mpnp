@@ -54,7 +54,34 @@
   
     <!--라이브 앱과 연동을위한 JS -->
     <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
-
+    <script type="text/javascript">
+      //검색API 클릭 이벤트(사용자 액션 로그 수집)
+      function userActionLog(contId, action, url, targetUrl){	
+        var mbrNo = "1319879";
+        if (mbrNo != "0") {
+          $.ajax({
+            type: 'POST'
+            , url : "/common/sendSearchEngineEvent"
+            , dataType: 'json'
+            , data : {
+              "logGb" : "ACTION"
+              , "mbr_no" : mbrNo
+              , "section" : "shop" 
+              , "content_id" : contId
+              , "action" : action
+              , "url" : (url != null && url) != '' ? url : document.location.href
+              , "targetUrl" : (targetUrl != null && targetUrl != '') ? targetUrl : document.location.href
+              , "litd" : ""
+              , "lttd" : ""
+              , "prclAddr" : ""
+              , "roadAddr" : ""
+              , "postNoNew" : ""
+              , "timestamp" : ""
+            }
+          });
+        }
+      }
+    </script>
      </head>
 <body class="body isCartNavs shop view isPc gnb_ac isFoot" style="">
 
@@ -72,7 +99,7 @@
 			}//end if
  
 		});
-	});
+ 
 //검색
 			
 	function search(){
@@ -86,7 +113,7 @@
 	}//search
 
 
-	
+
 </script>
  <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
@@ -356,6 +383,11 @@
                 <div class="gifts return_info" style="">
                   <div class="tit">주문 취소 안내</div>
                   <a href="javascript:;" class="bt more" onclick="ui.popBot.open('popReturnInfo',{'pop':true});">더보기</a>
+                 
+                 
+                 
+        
+
                   <article class="popBot popReturnInfo k0421" id="popReturnInfo">
                     <div class="pbd">
                       <div class="phd">
@@ -367,7 +399,10 @@
                       <div class="pct">
                         <main class="poptents bbs_content">
                           <section class="sect">
-                            <div class="cdt" id="rtnExcInfo"><p><b><span style="font-family: 돋움, dotum;">주문 취소 안내</span></b>&nbsp;</p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 취소/반품/교환 접수는 [ MY &gt; 나의 쇼핑정보 &gt; 주문/배송 ] 페이지에서 신청이 가능합니다.&nbsp;</span></font></p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">배송</span></b></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">•&nbsp;배송기간은 주문일(결제완료)로부터 2~7일 정도 소요될 수 있습니다. (영업일 및 일반택배 기준)&nbsp;&nbsp;</span></font></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 배송비는 판매자 기준에 따라 무료배송 또는 배송비가 부과됩니다.&nbsp;</span><br></font></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 도서, 산간지역의 경우 추가 배송비가 부과하지 않습니다. (업체배송일 경우 추가 배송비가 부과될 수 있습니다.)</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 국내배송만 가능하며, 해외배송은 불가합니다.</span><br></font></p><p><b><span style="font-family: 돋움, dotum;"><br></span></b></p><p><b><span style="font-family: 돋움, dotum;">취소</span></b></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 고객의 주문취소는 '입금대기', '결제완료', '배송준비중' 상태에서만 가능합니다. 단, 출고요청이 진행된 '배송준비중' 상태에서는 주문취소가 불가능 할 수 있습니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span>&nbsp;&nbsp;</p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">반품/교환/AS</span></b>&nbsp;</p><p><span style="color: rgb(125, 125, 125);">•&nbsp;반품/교환은 배송완료 후 7일 이내 가능하며, 배송비는 반품원인 제공자가 부담합니다.</span></p><p><span style="color: rgb(125, 125, 125);"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202104/4681c876-0cdc-4d04-9b66-f0dc7d930732.png" alt="img">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">반품/교환이 불가한 경우</span></font>&nbsp;</p><p><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202104/8542ad34-0232-4c9f-a99c-5a4e266208c7.png" alt="img">&nbsp;</p><p><span style="font-family: 굴림, gulim;"></span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">반품/교환 접수 없이 임의로 반품/교환하는 경우, 고객 주문건과의 연결이 늦어 처리가 지연될 수 있습니다.</span></font><br><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">교환 신청하였으나 재고가 부족한 경우 환불 처리 될 수 있습니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">교환은 동일 상품으로만 교환이 가능합니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">AS의 경우 상품 페이지에 있는 경우 판매자의 AS정책이 우선 적용됩니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">환불</span></b>&nbsp;</p><p><span style="color: rgb(125, 125, 125);">• 환불 소요 기한은 결제 수단에 따라 상이합니다.</span></p><div><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202206/52a273ef-4884-4abf-9a03-8346fb624cd1.png" alt="img"><br></div></div>
+                  				<div class="cdt" id="rtnExcInfo"><p><b><span style="font-family: 돋움, dotum;">주문 취소 안내</span></b>&nbsp;</p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 취소/반품/교환 접수는 [ MY &gt; 나의 쇼핑정보 &gt; 주문/배송 ] 페이지에서 신청이 가능합니다.&nbsp;</span></font></p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">배송</span></b></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">•&nbsp;배송기간은 주문일(결제완료)로부터 2~7일 정도 소요될 수 있습니다. (영업일 및 일반택배 기준)&nbsp;&nbsp;</span></font></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 배송비는 판매자 기준에 따라 무료배송 또는 배송비가 부과됩니다.&nbsp;</span><br></font></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 도서, 산간지역의 경우 추가 배송비가 부과하지 않습니다. (업체배송일 경우 추가 배송비가 부과될 수 있습니다.)</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 국내배송만 가능하며, 해외배송은 불가합니다.</span><br></font></p><p><b><span style="font-family: 돋움, dotum;"><br></span></b></p><p><b><span style="font-family: 돋움, dotum;">취소</span></b></p><p><font color="#acacac"><span style="color: rgb(125, 125, 125);">• 고객의 주문취소는 '입금대기', '결제완료', '배송준비중' 상태에서만 가능합니다. 단, 출고요청이 진행된 '배송준비중' 상태에서는 주문취소가 불가능 할 수 있습니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span>&nbsp;&nbsp;</p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">반품/교환/AS</span></b>&nbsp;</p><p><span style="color: rgb(125, 125, 125);">•&nbsp;반품/교환은 배송완료 후 7일 이내 가능하며, 배송비는 반품원인 제공자가 부담합니다.</span></p><p><span style="color: rgb(125, 125, 125);"><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202104/4681c876-0cdc-4d04-9b66-f0dc7d930732.png" alt="img">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">반품/교환이 불가한 경우</span></font>&nbsp;</p><p><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202104/8542ad34-0232-4c9f-a99c-5a4e266208c7.png" alt="img">&nbsp;</p><p><span style="font-family: 굴림, gulim;"></span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">반품/교환 접수 없이 임의로 반품/교환하는 경우, 고객 주문건과의 연결이 늦어 처리가 지연될 수 있습니다.</span></font><br><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">교환 신청하였으나 재고가 부족한 경우 환불 처리 될 수 있습니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">교환은 동일 상품으로만 교환이 가능합니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p><span style="color: rgb(125, 125, 125);">•&nbsp;</span><font color="#acacac"><span style="color: rgb(125, 125, 125);">AS의 경우 상품 페이지에 있는 경우 판매자의 AS정책이 우선 적용됩니다.</span></font><span style="color: rgb(125, 125, 125);">&nbsp;</span></p><p>&nbsp;</p><p><b><span style="font-family: 돋움, dotum;">환불</span></b>&nbsp;</p><p><span style="color: rgb(125, 125, 125);">• 환불 소요 기한은 결제 수단에 따라 상이합니다.</span></p><div><img src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/editor/policy/202206/52a273ef-4884-4abf-9a03-8346fb624cd1.png" alt="img"><br></div></div>
+                          			   <div class="obts">
+       
+                          
                           </section>
                         </main>
                       </div>
@@ -707,7 +742,7 @@
         </div>
       </main>
   
-      <article class="uiPdOrdPan" id="buycart"><!-- uiPdOrdPan -->
+      <article class="uiPdOrdPan" id="uiPdOrdPan"><!-- uiPdOrdPan -->
         <input type="hidden" name="goodsItemTotalAmt" id="goodsItemTotalAmt" value="7400">
         <button type="button" class="btDrag">열기/닫기</button>
         <div class="hdts">
@@ -719,34 +754,15 @@
 
   
   <div class="optpan">
-    <div class="inr" id="artuiPdOrdPan">
+    <div class="inr" id="artUiPdOrdPan">
   
       <div class="cdtwrap" style="max-height: 548.8px;">
 <script>
 $(function(){
-	
-	 //구매하기버튼
-		 $("#tempBtn").dblclick(function(){
-			 var number=$("#buyQty").val()*1;
-	
-		   $("#orderFrm").find("input[name='orders[0].prdCnt']").val(number);
-		
-		   $("#orderFrm").submit();
-		 })
-		
 
-	
-	//장바구니
-$("#addCart_btn").dblclick(function(){
-	 
-		addCart();
-
-})//click
-
-//찜
 $("#goodsWish").click(function(){
 		addWish();
-});//
+});//wish
 
 });//ready
 //로그인 여부
@@ -1017,7 +1033,7 @@ $.ajax({
         <div class="obts">
           <!-- 사전예약 상품이 아니면 -->
               <!-- 스탬프 상품은 장바구니 없음 -->
-                <button type="button" class="bt btCart" id="addCart_btn"><span class="t">장바구니</span></button>
+                <button type="button" class="bt btCart" id="addCart_btn" onclick="addCart()"><span class="t">장바구니</span></button>
               <!-- 판매가능 -->
                 <!-- 판매가능 -->
                     <button type="button" class="bt btOrde" id="tempBtn"><span class="t">구매하기</span></button>

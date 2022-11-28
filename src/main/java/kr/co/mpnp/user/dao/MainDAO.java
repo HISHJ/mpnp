@@ -115,16 +115,7 @@ public class MainDAO {
 		MainDAO mDAO= new MainDAO();
 		MainVO mVO  = new MainVO();
 		mVO.setMain_id("m0001");
-		// mDAO.selectProductList("m0001"); 
-		 System.out.println(mDAO.selectAllList(mVO));
-		System.out.println(mDAO.selectprdCnt(mVO));
-		System.out.println(mDAO.selectPrdList("m0001")); 
-		System.out.println(mDAO.TotalCnt("id007")); 
-		/*
-		 * System.out.println(mDAO.selectStar("pr_0000017"));
-		 * System.out.println(mDAO.selectReviewcnt("pr_0000017"));
-		 */
-		
+
 		
 	}
 

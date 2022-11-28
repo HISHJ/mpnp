@@ -203,24 +203,22 @@ private static ProductDAO pDAO;
 	}
 	
 	//Âò ¿©ºÎ
-	public boolean  selectcheckWish(ProductCartVO cVO) {
+	public int  selectcheckWish(WishListVO wVO) {
 		int check=0;
-		boolean wishChk=false;
+	
 		//1.MyBatisHandler¾ò±â
 		MyBatisHandler mbh = MyBatisHandler.getInstance();
 		SqlSession ss= mbh.getHandler();
 		
 
-		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",cVO);
-		if(check==0) {
-			wishChk=true;
-		}
+		check=	ss.selectOne("kr.co.mpnp.user.mapper.ProductMapper.selectConfirmWish",wVO);
+	
 		
 	
 		//3.¿¬°á²÷±â
 		mbh.closeHandler(ss);
 		
-		return wishChk;
+		return check;
 	
 		
 	}
@@ -232,15 +230,18 @@ private static ProductDAO pDAO;
 		
 		ProductDAO pDAO= new ProductDAO();
 		ProductVO pVO= new ProductVO();
+		WishListVO wVO= new WishListVO();
 		ProductCartVO cVO = new ProductCartVO();
-		cVO.setId("id001");
-		cVO.setProductid("p0010");
+		wVO.setId("id001");
+		wVO.setProductid("p00");
 		pVO.setsub_id("s0001");
-System.out.println(pDAO.selectprdList(pVO));
-System.out.println(pDAO.selectprdCnt(pVO));
-System.out.println(pDAO.selectcheckWish(cVO));
+//System.out.println(pDAO.selectprdList(pVO));
+//System.out.println(pDAO.selectprdCnt(pVO));
+//System.out.println(pDAO.selectcheckWish(wVO));
+//		System.out.println(pDAO.selectPrdDetail("p0001"));
+//		System.out.println(pDAO.selectprdCnt(pVO));
 		
-		
+		System.out.println(pDAO.selectcheckWish(wVO));
 	}
 
 }//class
