@@ -33,7 +33,7 @@ public class AdminLoginController {
 		AdminLoginService als=new AdminLoginService();
 		boolean flag=als.searchAdminLogin(alVO); 
 		
-		String url="admin/login/adminLogin";
+		String url="admin/login/adminLogin_fail";
 		
 		if(flag) {
 			session.setMaxInactiveInterval(60*30); //30Ка
