@@ -25,8 +25,11 @@ public class DestinationContoller {
 		System.out.println("DestinationController : id - "+id);
 		
 		DestinationService desService = new DestinationService(); 
+		// 2022-11-28 막바지 세션 아이디 테스트
+		//List<DestinationDomain> desList = desService.searchDes("test1126");
+		List<DestinationDomain> desList = desService.searchDes(id);
 		
-		List<DestinationDomain> desList = desService.searchDes("test1126");
+		
 		//for(DestinationDomain dd : desList) {
 			//System.out.println("DestinationContoller : destinationId - "+dd.getDestinationId());
 			//System.out.println("DestinationContoller : destinationId - "+dd.getDefaultFlag());
@@ -44,7 +47,10 @@ public class DestinationContoller {
 		
 		//System.out.println(dtVO.toString());
 		//String id = "id005";
-		dtVO.setId("test1126");
+		// 2022-11-28 막바지 세션 아이디 테스트
+		String id = (String)session.getAttribute("id");
+		//dtVO.setId("test1126");
+		dtVO.setId(id);
 		
 		//System.out.println("배송지추가 디폴트플래그 : "+dtVO.getDefaultFlag());
 		
@@ -64,8 +70,12 @@ public class DestinationContoller {
 	@RequestMapping(value="/des_modify_process.do", method=RequestMethod.GET)
 	public String desLModifyProcess(HttpSession session, DestinationVO dtVO, Model model) {
 		
+		
+		// 2022-11-28 막바지 세션 아이디 테스트
+		String id = (String)session.getAttribute("id");
+		dtVO.setId(id);
+		//dtVO.setId("test1126");
 		//System.out.println("배송지정보변경 dtVO : "+dtVO.toString());
-		dtVO.setId("test1126");
 		//System.out.println("배송지변경 디폴트플래그  : "+dtVO.getDefaultFlag());
 		
 		DestinationService desService = new DestinationService(); 

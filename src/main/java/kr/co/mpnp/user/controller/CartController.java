@@ -25,13 +25,12 @@ public class CartController {
 	@RequestMapping(value="/cart_list.do",method=RequestMethod.GET)
 	public String searchCartList(HttpSession session, Model model) {
 		
-		
+		// 2022-11-28 막바지 세션 아이디 테스트
 		String id = (String)session.getAttribute("id");
-		System.out.println("CartController : id - "+id);
-		
 		CartService cartService = new CartService(); 
 		
-		List<CartDomain> cartList = cartService.searchCartList("id002");
+		//List<CartDomain> cartList = cartService.searchCartList("id005");
+		List<CartDomain> cartList = cartService.searchCartList(id);
 		//for(CartDomain cd : cartList) {
 			//System.out.println("CartController : cartId - "+cd.getCartId());
 			//System.out.println("갖고있나 ? CartController : productId - "+cd.getProductId());
@@ -69,7 +68,9 @@ public class CartController {
 		//}
 		
 		List<CartVO> list = new ArrayList<CartVO>();
-		String id = "id002"; // session.getAttribute("id");
+		// 2022-11-28 막바지 세션 아이디 테스트
+		//String id = "id002"; // session.getAttribute("id");
+		String id = (String)session.getAttribute("id");
 		CartVO cVO = null;
 		for(String chk : chkArr) {
 			cVO = new CartVO();
@@ -106,8 +107,11 @@ public class CartController {
 		String cartId = cMap.get("cartId");
 		int cnt = Integer.parseInt(cMap.get("cnt"));
 		CartVO cVO = new CartVO();
+		// 2022-11-28 막바지 세션 아이디 테스트
 		//cVO.setMemberId((String)session.getAttribute("id"));
-		cVO.setMemberId("id002");
+		String id = (String)session.getAttribute("id");
+		//cVO.setMemberId("id002");
+		cVO.setMemberId(id);
 		cVO.setCartId(cartId);
 		cVO.setCnt(cnt);
 		

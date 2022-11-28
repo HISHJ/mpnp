@@ -34,8 +34,12 @@ public class ReviewController {
 		//System.out.println("ReviewController : id - "+id);
 		
 		ReviewService reviewService = new ReviewService(); 
+		// 2022-11-28 막바지 세션 아이디 테스트
+		//List<ReviewDomain> writableList = reviewService.searchWritableReview("id005");
+		List<ReviewDomain> writableList = reviewService.searchWritableReview(id);
 		
-		List<ReviewDomain> writableList = reviewService.searchWritableReview("id005");
+		
+		
 		//System.out.println("작성가능한 리뷰 갯수 확인 "+writableList.size());
 		//for(ReviewDomain rd : writableList) {
 			//System.out.println("ReviewController :  - "+rd.getPurchaseDate());
@@ -52,7 +56,7 @@ public class ReviewController {
 	}
 	
 	// 리뷰작성 폼
-	@RequestMapping(value="/add_review_form.do",method=RequestMethod.GET)
+	@RequestMapping(value="/add_review_form.do",method=RequestMethod.POST)
 	public String addReviewForm(HttpSession session, String orderDetailId,String name, String thImg, Model model) {
 		
 		//System.out.println(orderDetailId+" / "+name+" / "+thImg);
@@ -70,7 +74,9 @@ public class ReviewController {
 	public String addReviewProcess(HttpServletRequest request, HttpSession session, Model model) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
 		
-		File saveDir = new File("E:/dev/workspace_spring/upfileTest/"); // 저장경로얻기
+		//File saveDir = new File("E:/dev/workspace_spring/upfileTest/"); // 저장경로얻기
+		File saveDir = new File("E:/dev/workspace_spring/mpnp/src/main/webapp/upload/review/"); // 저장경로얻기
+		
 		int maxSize = 1024 * 1024 * 20 ; // byte * kb * mb * gb
 		String responseURL = "/day1104/upload_err";
 		
@@ -104,7 +110,9 @@ public class ReviewController {
 			//System.out.println("contents : "+contents);
 			//System.out.println("starScore : "+starScore);
 			
-			String id = "id005";
+			// 2022-11-28 막바지 세션 아이디 테스트
+			String id = (String)session.getAttribute("id");
+			//String id = "id005";
 			
 			ReviewVO rVO = new ReviewVO();
 			rVO.setId(id);
@@ -219,8 +227,11 @@ public class ReviewController {
 		//System.out.println("ReviewController : id - "+id);
 		
 		ReviewService reviewService = new ReviewService(); 
+		// 2022-11-28 막바지 세션 아이디 테스트
+		//List<ReviewDomain> writenList = reviewService.searchWritenReview("id005");
+		List<ReviewDomain> writenList = reviewService.searchWritenReview(id);
 		
-		List<ReviewDomain> writenList = reviewService.searchWritenReview("id005");
+		
 		//System.out.println("작성한리뷰 갯수 확인 "+writenList.size());
 		///////////////////////////////////
 		// 날짜 형식바꾸기 테스트

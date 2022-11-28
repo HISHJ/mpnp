@@ -73,7 +73,6 @@
 	}
 </style>
 
-
 <!--라이브 앱과 연동을위한 JS -->
 <script src="https://sgr.aboutpet.co.kr/web/runInit/v1.js"></script>
 <script type="text/javascript">
@@ -265,13 +264,14 @@ tr > .btnSet{
 		
 
 			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
-				<ul class="sm">
-					<li><a class="bt" href="/mypage/order/indexDeliveryList" data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
-					<li><a class="bt" href="/mypage/goodsCommentList" data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
-					<li><a class="bt" href="/mypage/info/indexPswdUpdate" data-content="0" data-url="/mypage/info/indexPswdUpdate" >비밀번호 설정</a></li>
-					<li><a class="bt" href="/mypage/info/indexManageCheck" data-content="0" data-url="/mypage/info/indexManageCheck" >회원정보 수정</a></li>
-				</ul>
-			</div>
+						<ul class="sm">
+							<li><a class="bt" href="order_information_form.do"" data-content="0">주문내역</a></li>
+							<li><a class="bt" href="writable_review_list.do"  data-content="0">상품 후기</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+							<li><a class="bt" href="des_list.do" data-content="0"  >배송지 관리</a></li>
+						</ul>
+					</div>
 
 			
 	</nav>
@@ -632,7 +632,8 @@ tr > .btnSet{
 									<div class="cdt">
 										<div class="tops">
 											<div class="pic">
-											사진 : <c:out value="${prdImg }"/></div>
+											<img src="http://localhost/mpnp/upload/product/${prdImg }">
+											<%-- 사진 : <c:out value="${prdImg }"/> --%></div>
 											<div class="name">
 												<div class="tit k0423"><c:out value="${prdName }"/></div>
 												<div class="stt k0423"></div>

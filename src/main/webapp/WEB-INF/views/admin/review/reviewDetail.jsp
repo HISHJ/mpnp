@@ -122,7 +122,10 @@ $(function(){
                                             <c:choose>
                                             <c:when test="${ requestScope.reviewDetail.reviewImgArr != null }">
                                             <c:forEach var="img" items="${ requestScope.reviewDetail.reviewImgArr }">
-                                             <div class="col-3"><c:out value="${img }"/><!-- img src로 나중에 바꾸면됨 --></div>
+                                             <div class="col-3"><%-- <c:out value="${img }"/>--%>
+                                             <img src="http://localhost/mpnp/upload/review/${img }" style="width:150px; height:150px; border-radius:20px; margin-right:20px;"/>
+                                             </div>
+                                             
                                              </c:forEach>
                                              </c:when>
                                              </c:choose>

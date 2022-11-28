@@ -150,19 +150,13 @@
 					<h2 class="bt bt_my">MY</h2>
 
 
-					<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate"
-						data-ui-tab-val="tab_my_cate_1" style="width: 200px;">
+					<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 						<ul class="sm">
-							<li><a class="bt" href="/mypage/order/indexDeliveryList"
-								data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
-							<li><a class="bt" href="/mypage/goodsCommentList"
-								data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
-							<li><a class="bt" href="/mypage/info/indexPswdUpdate"
-								data-content="0" data-url="/mypage/info/indexPswdUpdate">비밀번호
-									설정</a></li>
-							<li><a class="bt" href="/mypage/info/indexManageCheck"
-								data-content="0" data-url="/mypage/info/indexManageCheck">회원정보
-									수정</a></li>
+							<li><a class="bt" href="order_information_form.do" data-content="0">주문내역</a></li>
+							<li><a class="bt" href="writable_review_list.do"  data-content="0">상품 후기</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+							<li><a class="bt" href="des_list.do" data-content="0"  >배송지 관리</a></li>
 						</ul>
 					</div>
 
@@ -326,7 +320,7 @@
 						</ul>
 						<!--😎작성가능한 후기는 있는데 작성한 후기가 없는 경우-->
 						<!-- tab content -->
-						<form id="editFrm" action="writen_review_detail_form.do">
+						<form id="editFrm" action="writen_review_detail_form.do" >
 							<input type="hidden" value="" name="selReviewId" id="selReviewId">
 						</form>
 						<div class="uiTab_content writenTab" >
@@ -341,10 +335,12 @@
 											<div class="inr">
 												<div class="top">
 													<p class="pic">
-														<img
+														<!-- <img
 															src="https://vknfvtjnsgec6381690.cdn.ntruss.com/aboutPet/images/goods/GS251062051/PI000001260_1.jpg"
+															alt="상품" class="img"> -->
+															<img src="http://localhost/mpnp/upload/product/${writenReview.thImg }"
 															alt="상품" class="img">
-															<c:out value="${writenReview.thImg }"/>
+															<%-- <c:out value="${writenReview.thImg }"/> --%>
 													</p>
 													<div class="txt" style="margin-left:30px;">
 														<p class="t1"><c:out value="${writenReview.name }"/></p>

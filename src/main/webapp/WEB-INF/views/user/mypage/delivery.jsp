@@ -1,3 +1,4 @@
+<%@page import="kr.co.mpnp.user.service.MainService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" info="scriptlet의 사용"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -321,7 +322,24 @@ function dataReset(){
 	document.getElementById("addr2").value=null;
 	$("#defaultChk").prop("checked",false);
 }
+
+
+
+
+/* 2022-11-28 장바구니 갯수카운트 */
+<%
+MainService ms = new MainService();
+String id= (String)session.getAttribute("id");
+int cnt =0;
+if(id!=null){
+   cnt = ms.CartTotalCnt(id);
+}
+%> 
+ 
+ 
 </script>
+
+
 
 
 </head>
@@ -334,9 +352,6 @@ function dataReset(){
 			value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
 
 
-		<script>
-		
-		</script>
 		
 		
 		<!--팝업창-->
@@ -431,15 +446,96 @@ function dataReset(){
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
 		<div class="inr">
-
-<c:import	url="../../user/main/user_header.jsp">
-			<c:param name="id" value="${sessionScope.id }"></c:param>
-</c:import>
-
+			<div class="tdt">
+			<c:if test="${empty sessionScope.id }">
+				<ul class="menu">					
+					<li><a href="join_terms.do" class="bt">회원가입</a></li>
+		                <li><a href="login_form.do" class="bt">로그인</a></li>
+		                <!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
+				
+					</ul>
+					</c:if>
+					<c:if test="${not empty sessionScope.id }">
+						    <div class="usr" style="width:200px;">
+              <a class="rank_icon" href="javascript:rankBox();"><em class="lv welcome">웰컴</em></a>
+                <a href="javascript:;" class="name"><b class="t">${sessionScope.id }</b><i class="i">님</i></a>
+              <div class="sbm">
+                <ul class="sm">
+                <li><a href="pass_confirm_process.do" data-content="1319879" data-url="pass_confirm_process.do" class="bt">비밀번호 설정</a></li>
+                    <li><a href="pass_confirm_process.do" data-content="1319879" data-url="/mypage/info/indexManageDetail" class="bt">회원정보 수정</a></li>
+                    <li><a href="logout_process.do" data-content="1319879" data-url="/logout" class="bt">로그아웃</a></li>
+                  </ul>
+              </div>
+            </div>
+		</c:if>
+					
+			</div>
+			<div class="hdt">
+				<!-- mobile -->
+				<button class="mo-header-btnType02">취소</button><!-- on 클래스 추가 시 활성화 -->
+				<!-- // mobile -->
+				<button class="btnGnb" type="button">메뉴</button>
+<!-- -->
+				<h1 class="logo shop">
+					<a class="bt" href="index.do">AboutPet</a>
+				</h1>
+				<nav class="menushop">
+							<button type="button" class="bt st" id="headerTxt"></button>
+							<div class="list">
+								<ul class="menu">
+									<li class=""><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000173)"><b class="t" id="b_tag_300000174">강아지</b></a></li>
+									<li class="active"><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000174)"><b class="t" id="b_tag_300000174">고양이</b></a></li>
+								
+								</ul>
+							</div>
+						</nav>
+<!-- -->
+				<!-- mobile -->
+				<button class="mo-header-backNtn" onclick="storageHist.goBack();">뒤로</button>
+					<div class="mo-heade-tit"  >
+					<span class="tit"></span>
+								</div>
+				<div class="mo-header-rightBtn">
+						<button class="mo-header-btnType01">
+							<span class="mo-header-icon"></span>
+							</button>
+					</div>
+				<button class="mo-header-close"></button>
+				<!-- // mobile -->
+				<nav class="tmenu">
+					<ul class="list">
 			
+						<li id="liTag_10" class="active"><a href="index.do" class="bt">스토어</a></li> <!-- APET-1250 210728 kjh02  -->
+						<li id="liTag_00" class=""><a href="mypage_form.do" class="bt">MY</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="cdt" >
+						<div class="schs">
+						<form action="search_prd_list.do" method="get">
+								<div class="form ">
+									<div class="input del kwd">
+									<input id="srchWord" name="name"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." >
+									</div>
+									<button type="button" class="btnSch" onclick="search()">검색</button>
+								</div>
+									</form>
+							</div>
+						<div class="menu">
+							<a href="cart_list.do">
+							<button class="bt cart" type="button"  >
+							<!-- 2022-11-28 오후4:11 장바구니카운트 -->
+								<%-- <em class="n">${CartCnt}</em> --%>
+							   <em class="n"><%= cnt %></em>
+									</button></a>
+							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
+							<div class="alims" id ="alertDiv">
+							</div>
+						</div>
+						</div>
 </div>
 	</div>
-</header> 
+</header>
 
 
 
@@ -460,72 +556,48 @@ function dataReset(){
 					<h2 class="bt bt_my">MY</h2>
 
 
-					<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate"
-						data-ui-tab-val="tab_my_cate_1" style="width: 200px;">
+					<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 						<ul class="sm">
-							<li><a class="bt" href="/mypage/order/indexDeliveryList"
-								data-url="/mypage/order/indexDeliveryList" data-content="0">주문내역</a></li>
-							<li><a class="bt" href="/mypage/goodsCommentList"
-								data-url="/mypage/goodsCommentList" data-content="0">상품 후기</a></li>
-							<li><a class="bt" href="/mypage/info/indexPswdUpdate"
-								data-content="0" data-url="/mypage/info/indexPswdUpdate">비밀번호
-									설정</a></li>
-							<li><a class="bt" href="/mypage/info/indexManageCheck"
-								data-content="0" data-url="/mypage/info/indexManageCheck">회원정보
-									수정</a></li>
+							<li><a class="bt" href="order_information_form.do"" data-content="0">주문내역</a></li>
+							<li><a class="bt" href="writable_review_list.do"  data-content="0">상품 후기</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
+							<li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+							<li><a class="bt" href="des_list.do" data-content="0"  >배송지 관리</a></li>
 						</ul>
 					</div>
 
 
 				</nav>
 
-				<nav class="menushop" style="margin-top: 30px;">
-					<h2 class="bt bt_store">스토어</h2>
-					<div class="button_wrap">
-						<button type="button" class="bt st bt_dog active">강아지</button>
-						<button type="button" class="bt st  bt_cat">고양이</button>
-					</div>
+				<nav class="menushop">
+			<h2 class="bt bt_store">스토어</h2>
+			<div class="button_wrap">
+			<button type="button" class="bt st bt_dog active">강아지</button>
+			<button type="button" class="bt st  bt_cat">고양이</button>
+		</div>
 
-					<li class="open open_dog" id="tab_category_12565"
-						style="width: 200px;">
-						<ul class="sm">
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12673', '12565', 'N');"><b
-									class="t">강쥐사료</b></a></li>
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12675', '12565', 'N');"><b
-									class="t">간식</b></a></li>
-						</ul>
-						<ul class="sm_2">
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12685', '12565', 'N');"><b
-									class="t">패션/의류</b></a></li>
-							<li class=""><a class="bt"
-								href="javascript:setCateList('100000244', '12565', 'N');"><b
-									class="t">기타</b></a></li>
-						</ul>
-					</li>
+				<li class="open open_dog" id="tab_category_12565" style="width:200px;">
+								<ul class="sm">
+									<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">강쥐사료</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+								</ul>
+								<ul class="sm_2">
+									<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
+									<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+								 </ul> 
+				</li>
 
-					<li class="open open_cat" id="tab_category_12565"
-						style="width: 200px; display: none;">
-						<ul class="sm">
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12673', '12565', 'N');"><b
-									class="t">냥이사료</b></a></li>
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12675', '12565', 'N');"><b
-									class="t">간식</b></a></li>
-						</ul>
-						<ul class="sm_2">
-							<li class=""><a class="bt"
-								href="javascript:setCateList('12685', '12565', 'N');"><b
-									class="t">패션/의류</b></a></li>
-							<li class=""><a class="bt"
-								href="javascript:setCateList('100000244', '12565', 'N');"><b
-									class="t">기타</b></a></li>
-						</ul>
-					</li>
-				</nav>
+				<li class="open open_cat" id="tab_category_12565" style="width:200px;display:none;">
+					<ul class="sm">
+						<li class=""><a class="bt" href="javascript:setCateList('12673', '12565', 'N');"><b class="t">냥이사료</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('12675', '12565', 'N');"><b class="t">간식</b></a></li>
+					</ul>
+					<ul class="sm_2">
+						<li class=""><a class="bt" href="javascript:setCateList('12685', '12565', 'N');"><b class="t">패션/의류</b></a></li>
+						<li class=""><a class="bt" href="javascript:setCateList('100000244', '12565', 'N');"><b class="t">기타</b></a></li>
+					 </ul> 
+	</li>
+		</nav>
 
 			</div>
 
