@@ -217,7 +217,7 @@
 												<c:forEach items="${list}" var="list">
 													<div class="pic">
 														<!-- <a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051"> -->
-														<img style="cursor: default;" src="http://localhost/mpnp/upload/product/${list.prdImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.prdImg}">
+														<img style="cursor: default;" src="http://mpnp.sist.co.kr/mpnp/upload/product/${list.prdImg}" class="img" onerror="http://mpnp.sist.co.kr/mpnp/upload/product/${list.prdImg}">
 														
 													</div>
 													

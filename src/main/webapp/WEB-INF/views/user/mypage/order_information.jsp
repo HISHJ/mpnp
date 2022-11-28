@@ -449,7 +449,7 @@ function movePage( page ) {
 												<div class="tops" style="margin-bottom:30px;">
 													<div class="pic">
 														<a href="javascript:void(0);" data-content="C202210301001496" data-url="/mypage/order/indexDeliveryDetail?ordNo=C202210301001496" onclick="orderDeliveryListBtn.goOrderDetail('C202210301001496');return false;">
-														<img src="http://localhost/mpnp/upload/product/${list.thImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.thImg}'">
+														<img src="http://mpnp.sist.co.kr/mpnp/upload/product/${list.thImg}" class="img" onerror="http://mpnp.sist.co.kr/mpnp/upload/product/${list.thImg}'">
 														</a>
 													</div>
 													<div class="name">
