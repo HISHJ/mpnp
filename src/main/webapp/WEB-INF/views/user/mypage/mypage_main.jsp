@@ -1,3 +1,4 @@
+<%@page import="kr.co.mpnp.user.service.MainService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" info="scriptlet의 사용" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -177,6 +178,15 @@
 </style>
 
 </head>
+<%
+ MainService ms = new MainService();
+ String id= (String)session.getAttribute("id");
+ int cnt =0;
+ if(id!=null){
+	 cnt = ms.CartTotalCnt(id);
+ }
+
+%>
 
 <body class="body">
 
@@ -439,7 +449,7 @@
 		</li>
 		<li>
 			<a class="my4" href="cart_list.do">
-			<em class="n">2</em>
+			<em class="n"><%= cnt %></em>
 			<span>장바구니</span></a>
 		</li>
 	</ul>

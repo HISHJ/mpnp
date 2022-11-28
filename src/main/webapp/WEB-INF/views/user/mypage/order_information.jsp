@@ -413,7 +413,11 @@ function movePage( page ) {
   <input type="hidden" id="status" name="status" value="${list.status}" /> 
   </div>
   </c:forEach>				
-				
+  <div style="border-top:1px solid #f7f7f7;border-bottom:1px solid #f7f7f7;padding:5px 0px;;align-items: center;justify-content: center;text-align: center;">
+					<c:if test="${empty list}">
+						<span>주문이력이 존재하지 않습니다.😊</span>
+												</c:if>
+</div>
 					<c:forEach  items="${list}" var="list">
 					<div class="inr-box statusDeliveryList">
 		<div class="item-list">
@@ -479,27 +483,7 @@ function movePage( page ) {
 					
 					
 					</c:forEach>
-								<div class="page"  style="width:464px;display:flex;justify-content: center;align-self: center;">
-		<c:if test="${ not empty list   }">
-			<c:if test="${ startNum ne 1 }">
-				<a href="javascript:movePage(1)" class="page-num">&nbsp;&lt;&lt;&nbsp;</a>
-				<a href="javascript:movePage(${startNum ne 1 ? startNum-1 : 1})" class="page-num">&nbsp;&lt;&nbsp;</a>
-			</c:if>
-			<c:forEach step="1" var="i" begin="0" end="${ isLast }">
-				<a href="javascript:movePage(${ startNum+i })" ${ curPage eq startNum + i ?" class='page-num-click'" :" class='page-num'"}><c:out value="&nbsp;${ startNum+i }&nbsp;" escapeXml="false"/></a>
-			</c:forEach>
-			<c:if test="${ lastPage gt startNum+2 }">
-				<a href="javascript:movePage(${ startNum+3 })" class="page-num">&nbsp;&gt;&nbsp;</a>
-				<a href="javascript:movePage(${ lastPage })" class="page-num">&nbsp;&gt;&gt;&nbsp;</a>
-			</c:if>
-		</c:if>
-	</div>
 
-	<form name="hidFrm" id="hidFrm" action="order_information_form.do">
-		<input type="hidden" id="id" name="id" value="${param.id}">
-		<input type="text" id="id" name="id" value="${param.id}">
-		<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
-	</form> 
 					
 
  

@@ -513,7 +513,7 @@ li.open, div.ctset {
 										<div class="btt"><a href="javascript:;" class="btn sm btMod" onclick="orderDlvra.changeDlvrDemandPop();">변경</a></div>
 									</div>
 									<div class="pss" id="noExistDemand">
-										<textarea name="shipReq" id="shipReq" cols="93" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
+										<textarea name="shipReq" id="shipReq" cols="91" rows="5" placeholder="요청사항을 입력해주세요." style="border-radius: 3px;border: 1px solid #dddddd;padding:10px 10px;"></textarea>
 
 									</div>
 								</div>

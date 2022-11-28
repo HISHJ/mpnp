@@ -208,6 +208,7 @@
 					<li><a class="bt" href="writable_review_list.do" data-content="0">상품 후기</a></li>
 				<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
                     <li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+                    <li><a class="bt" href="des_list.do" data-content="0"  >배송지 관리</a></li>
 				</ul>
 			</div>
 

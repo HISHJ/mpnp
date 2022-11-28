@@ -216,15 +216,15 @@
 												<div class="tops">
 												<c:forEach items="${list}" var="list">
 													<div class="pic">
-														<a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
-														<img src="http://localhost/mpnp/upload/product/${list.prdImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.prdImg}">
-														</a>
+														<!-- <a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051"> -->
+														<img style="cursor: default;" src="http://localhost/mpnp/upload/product/${list.prdImg}" class="img" onerror="http://localhost/mpnp/upload/product/${list.prdImg}">
+														
 													</div>
 													
 													<div class="name">
 														<div class="tit k0421">
-															<a href="/goods/indexGoodsDetail?goodsId=GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
-																${list.prdName }</a>
+															
+																${list.prdName }
 														</div>
 														<div class="stt">
 
@@ -336,7 +336,7 @@
 						<div class="my_btnWrap t2">
 							<div class="btnSet">
 								<a href="javascript:void();" onClick="backOrderList()" data-content="" data-url="/mypage/order/indexDeliveryList" class="btn lg d">주문 목록</a>
-								<a href="/shop/home/" class="btn lg b">계속 쇼핑하기</a>
+								<a href="index.do" class="btn lg b">계속 쇼핑하기</a>
 							</div>
 							<form action="order_information_form.do" id="idFrm" name="idFrm">
 							  <input type="hidden" id="id" name="id" value="${moDom.memberId}">

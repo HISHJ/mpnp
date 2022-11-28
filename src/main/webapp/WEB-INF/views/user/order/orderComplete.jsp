@@ -68,7 +68,7 @@
 						  var discountRate = $("#order_payment_total_dc_amt").val();
 						  var actualPrice = $("#order_payment_total_pay_amt").val()*1;
 						  
-				  alert(actualPrice);
+				
 					  var deli_fee =0;
 					 
 					  if(prdSum < 30001){//sum이 (구매한 상품금액이 30000원 이하인 경우)
@@ -250,7 +250,7 @@
 				<div class="my_btnWrap">
 					<div class="btnSet">
 						<a href="order_detail_form.do?orderId=${mod1.orderId}" class="btn lg d">상세 주문내역</a>
-						<a href="/shop/home/" class="btn lg a">계속 쇼핑하기</a>
+						<a href="index.do" class="btn lg a">계속 쇼핑하기</a>
 					</div>
 				</div>
 			</div>
