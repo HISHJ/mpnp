@@ -541,7 +541,13 @@ checkbox{
 				
 				/* 0개 주문못하게 막아야함 */
 				var chkCnt = $("input:checkbox[name=cartIds]:checked").length;
-				alert("선택된 장바구니 갯수 : "+chkCnt);
+				//alert("선택된 장바구니 갯수 : "+chkCnt);
+				//alert("체크된값 확인 0 개면 안되게 하기위함"+chkCnt);
+				if(chkCnt<1){
+					alert("선택하신 상품이 없습니다.");
+					return;
+				}
+				
 				
 				if(confirm("선택하신 상품을 주문하시겠습니까?")){
 					//hidden 동적 추가
@@ -581,7 +587,7 @@ checkbox{
 
 	<!-- ************************************************************************ -->
 																	<!-- orderPayment_form_Test.do -->
-					<form id="cartForm" method="GET" name="form" action="orderPayment_form.do">
+					<form id="cartForm" method="POST" name="form" action="orderPayment_form.do">
 						<input type="hidden" name="fstPurchBeneTgYn" id="fstPurchBeneTgYn"
 							value="N">
 						<div class="allcheck scroll_fixed">
@@ -630,6 +636,8 @@ checkbox{
 									</div>
 									<!-- 업체 -->
 									<ul class="cartlist" id="cartList912" data-comp-no="912">
+									<c:choose>
+									<c:when  test="${ cartList.size() > 0 }">
 									<c:forEach var="cartItem" items="${cartList }">
 									<li>
 									<!-- 유설빈님 상품아이디 여기있어요 -->
@@ -692,6 +700,21 @@ checkbox{
 										</div>
 									</li>
 									</c:forEach>
+									</c:when>
+										<c:otherwise>
+										<!-- <li class="" style="min-height: 369px;"> -->
+											<!-- 내역 없을 경우 style block-->
+											<div class="inr-box noneBoxPoint" name="bfNoComment"
+												style="height: 150px;">
+												<section class="no_data i1 auto_h view">
+													<div class="inr">
+														<div class="msg">장바구니에 담긴 상품이 없습니다.</div>
+													</div>
+												</section>
+											</div>
+										<!-- </li> -->
+										</c:otherwise>
+									</c:choose>
 									</ul>
 
 									<div class="totset">
@@ -717,6 +740,7 @@ checkbox{
 									</div>
 
 								</section>
+								
 								<input type="hidden" name="dlvrcPlcAmt" data-dlvrc-plc-no="1"
 									data-comp-no="912" data-sale-psb-cd="00" id="dlvrcPlcAmt1"
 									value="0"> <input type="hidden" name="dlvrcPlcChkAmt"

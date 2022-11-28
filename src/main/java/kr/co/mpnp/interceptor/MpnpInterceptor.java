@@ -15,16 +15,16 @@ public class MpnpInterceptor implements HandlerInterceptor{
 	  String id = (String)request.getSession().getAttribute("id"); 
 	  String requestUrl = request.getRequestURL().toString(); 
 	  
-	  System.out.println("preHandle ÅÀÀ½");
-	  System.out.println("id : "+id);
-	  System.out.println("requestUrl : "+requestUrl);
+	  //System.out.println("preHandle ÅÀÀ½");
+	  //System.out.println("id : "+id);
+	  //System.out.println("requestUrl : "+requestUrl);
 	  // °ü¸®ÀÚ ·Î±×ÀÎ ¿©ºÎ
 	  String adminId = (String)request.getSession().getAttribute("adminId"); 
 	  String[] passPages = {"/login","/index","mainList","search","/prd","find","join","admin_login"};
 	  
 	  boolean passFlag = false;
 	  for(String page : passPages) {
-		  System.out.println(requestUrl+" ¾ê¶û "+page+" ¾ê¶û ºñ±³");
+		  //System.out.println(requestUrl+" ¾ê¶û "+page+" ¾ê¶û ºñ±³");
 		  if(requestUrl.contains(page)) {
 			  //adminFlag = true;
 			  passFlag = true;

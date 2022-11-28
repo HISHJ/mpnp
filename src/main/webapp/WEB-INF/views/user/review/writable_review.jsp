@@ -336,7 +336,7 @@
 										style="height: 473px;">
 										<section class="no_data i1 auto_h view">
 											<div class="inr">
-												<div class="msg">작성하신 후기가 없습니다.</div>
+												<div class="msg">후기를 작성가능한 상품이 없습니다.</div>
 											</div>
 										</section>
 									</div>

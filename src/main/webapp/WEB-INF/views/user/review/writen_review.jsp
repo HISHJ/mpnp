@@ -359,7 +359,7 @@
 														<div class="list">
 															<ul class="menu">
 																<li><button type="button" class="bt"
-																		onclick="editBtn('${writenReview.reviewId}')">수정</button></li>
+																		onclick="editBtn('${writenReview.reviewId}')">상세보기</button></li>
 																<li><button type="button" class="bt"
 																		onclick="removeBtn('${writenReview.reviewId}')">삭제</button></li>
 															</ul>
@@ -393,7 +393,7 @@
 										style="height: 746px;">
 										<section class="no_data i1 auto_h view">
 											<div class="inr">
-												<div class="msg">작성 가능한 상품 후기가 없습니다.</div>
+												<div class="msg">작성하신 상품후기가 없습니다.</div>
 											</div>
 										</section>
 									</div>
