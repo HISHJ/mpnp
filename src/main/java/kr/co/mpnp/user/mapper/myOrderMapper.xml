@@ -37,8 +37,6 @@ WHERE (r.ORDERID = o.ORDERID and r.PRODUCTID = p.PRODUCTID ) and o.id=#{id}
 and #{findStartDate}  <![CDATA[< ]]> to_char(o.inputdate,'yyyy-mm-dd') and to_char(o.inputdate,'yyyy-mm-dd') <![CDATA[ < ]]>#{findEndDate}
 </if>
 order by o.ORDERID
-offset (#{pageFlag}-1)*4 rows
-fetch next 4 rows only
 
 
 </select>

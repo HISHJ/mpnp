@@ -186,37 +186,7 @@ public class MyOrderService {
 	
 	
 
-	//////////////////////////////////////////////// 페이징////////////////////////////
-	// 전체 게시물수(왜 adminProductVO?)
-	public int totalCount(MyOrderVO moVO) {
-		int totalCnt =oDAO.selectTotalPageCount(moVO);
 
-		return totalCnt;
-	}// totalCount
-	
-	//마지막 페이지 수
-	public int lastPage(int totalCount) {
-		int lastPage=(int)Math.ceil((double) totalCount /4);
-		
-		return lastPage;
-	}
-	
-	//현재페이지 시작번호
-	public int startNum(int curPage) {
-		int startNum=curPage-(curPage-1)%3;
-		return startNum;
-		
-	}
-	//한페이지당 보여줄 페이지수
-	public int isLast(int lastPage,int startNum) {
-		int isLast =2; //0,1,2, 3페이지씩
-		if(startNum+3>lastPage) {
-			isLast= lastPage-startNum;
-			
-		}
-		return isLast;
-		
-	}
 	
 
 }// class

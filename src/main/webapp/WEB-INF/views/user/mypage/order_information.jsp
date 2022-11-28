@@ -340,11 +340,19 @@ $(function(){
 </script>
 
 <script type="text/javascript">
-function setThreeMonth(){
-	/* var data ={
+//페이징
+function movePage( page ) {
+	$("#pageFlag").val( page );
+	$("#hidFrm").submit();
+}
+
+
+
+/* function setThreeMonth(){
+	var data ={
 			findStartDate:$("#findEndDate").val()
 		
-	} */
+	} 
 	 
 	   $.ajax({
 		  url:"order_date_process.do",
@@ -366,15 +374,9 @@ function setThreeMonth(){
 	
 	  })//aajx 
 	  
-}
+} */
 
 
-
-//페이징
-function movePage( page ) {
-	$("#pageFlag").val( page );
-	$("#hidFrm").submit();
-}
 
 
 </script>
@@ -384,7 +386,7 @@ function movePage( page ) {
 
 
 
-</script>
+
 <!-- 날짜 전달 -->
 <form id="dateFrm" name="dateFrm" >
 <input type="hidden" name="findStartDate" id="findStartDate"/>
@@ -473,7 +475,7 @@ function movePage( page ) {
 					
 					</div>
 					
-					
+
 					
 					
 					</c:forEach>
@@ -495,7 +497,7 @@ function movePage( page ) {
 
 	<form name="hidFrm" id="hidFrm" action="order_information_form.do">
 		<input type="hidden" id="id" name="id" value="${param.id}">
-		<input type="text" id="memberId" name="memberId" value="${param.id}">
+		<input type="text" id="id" name="id" value="${param.id}">
 		<input type="hidden" id="pageFlag" name="pageFlag" value="${ empty param.pageFlag ? 1: param.pageFlag}">
 	</form> 
 					
