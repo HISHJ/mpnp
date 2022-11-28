@@ -52,8 +52,8 @@
                 <a href="javascript:;" class="name"><b class="t">${sessionScope.id }</b><i class="i">님</i></a>
               <div class="sbm">
                 <ul class="sm">
-                <li><a href="pass_confirm_process.do" data-content="1319879" data-url="pass_confirm_process.do" class="bt">비밀번호 설정</a></li>
-                    <li><a href="pass_confirm_process.do" data-content="1319879" data-url="/mypage/info/indexManageDetail" class="bt">회원정보 수정</a></li>
+                <li><a href="mypage_pass_confirm.do?what=updatePass" data-content="1319879" data-url="pass_confirm_process.do" class="bt">비밀번호 설정</a></li>
+                    <li><a href="mypage_pass_confirm.do?what=updateMemberInfo" data-content="1319879" data-url="/mypage/info/indexManageDetail" class="bt">회원정보 수정</a></li>
                     <li><a href="logout_process.do" data-content="1319879" data-url="/logout" class="bt">로그아웃</a></li>
                   </ul>
               </div>
