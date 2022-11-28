@@ -37,11 +37,10 @@ public class mainController {
 		if(mainid==null || "".equals(mainid)) {
 		 mainid="m0001";
 		}
-		System.out.println("메인id :"+mainid);
+
 		 List<MainDomain> list =ms.searchPrdList(mainid);
 		 //view로 전송
-		model.addAttribute("prdList",list);
-			
+
 		
 		
 		return"user/main/index";

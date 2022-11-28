@@ -276,7 +276,7 @@
                                     	
                                         <div class="dataTable-top"></div>
                                         <div class="row">
-                                             <div class="col-4"><img id="thImgPreview" class="img-thumbnail" alt="썸네일이미지" src="http://localhost/mpnp/images/${data.thimg }"></div> 
+                                             <div class="col-4"><img id="thImgPreview" class="img-thumbnail" alt="썸네일이미지" src="http://mpnp.sist.co.kr/mpnp/images/${data.thimg }"></div> 
                                         </div> 
                                         <div class="dataTable-top"></div>
                                         <div class="row">

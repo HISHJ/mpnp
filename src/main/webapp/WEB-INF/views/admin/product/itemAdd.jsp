@@ -41,7 +41,7 @@
    			var data ={
    				mainid : $("select[name=main_id]").val()
    			}
-   			console.log(data)
+   			
    			
    			$.ajax({
    				

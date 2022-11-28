@@ -365,7 +365,7 @@ $('#goodsCount').text(goodsCount);
 <div class="gd-item  amplitudeMainData airbridge" data-idx="0" data-index="1" data-goodsid="GI251033031" data-displayid="" data-displayname="" data-productid="GI251033031" data-productname="ANF 캣 홀리스틱 헬시 키튼 샘플 40g" data-brandid="356" data-brandname="ANF" data-categorypath="" data-price="500" data-discountprice="500" data-petgbcd="">
 		<a class="gd-link" href="prddetail.do?productid=${list.productid}" data-dispcornno="" data-disptype="10" data-idx="0" data-content="GI251033031" data-url="/goods/indexGoodsDetail?goodsId=GI251033031">
 			<div class="gd-thumb">
-				<img class="thumb-img" src="http://localhost/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="${list.productname }" onerror="http://localhost/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
+				<img class="thumb-img" src="http://mpnp.sist.co.kr/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4" alt="${list.productname }" onerror="http://mpnp.sist.co.kr/mpnp/upload/product/${list.thimg}?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
 				<div class="gd-flag">
 					</div>
 				<button class="btn-favorite " data-content="GI251033031" data-url="/goods/insertWish?goodsId=GI251033031" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251033031" data-target="goods">찜하기</button>
