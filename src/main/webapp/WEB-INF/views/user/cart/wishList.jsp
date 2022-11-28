@@ -613,7 +613,7 @@ function goPageWithClosingGnb(url) {
 												<a href="prddetail.do?productid=${list.productid}" class="pic">
 												
 												
-													<img class="img" src="http://localhost/mpnp/images/${list.thimg}.jpg?type=f&w=356&h=356&quality=100&align=4" onerror="this.src='/_images/mall/common/default_image.jpg'" alt="${list.name }">
+													<img class="img" src="http://localhost/mpnp/upload/product/${list.thimg}?type=f&w=356&h=356&quality=100&align=4" onerror="http://localhost/mpnp/upload/product/${list.thimg}'" alt="${list.name }">
 													</a>
 												<span class="bt zzim on" id="zzim" onclick="deleteZZim('${list.productid}')">즐겨찾기</span>
 											</div>

@@ -97,17 +97,7 @@ public class SearchService {
 		
 		return list;
 	}
-	public static void main(String[] args) {
-		
-		
-		SearchVO sVO =new SearchVO();
-		sVO.setName("g");
-		SearchService ss =new SearchService();
-		System.out.println(ss.TotalCnt(sVO));
-		 
-		
-		
-	}
+
 	
 	
 }//class

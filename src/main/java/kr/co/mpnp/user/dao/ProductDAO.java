@@ -226,23 +226,7 @@ private static ProductDAO pDAO;
 	
 	
 	
-	public static void main(String[] args) {
-		
-		ProductDAO pDAO= new ProductDAO();
-		ProductVO pVO= new ProductVO();
-		WishListVO wVO= new WishListVO();
-		ProductCartVO cVO = new ProductCartVO();
-		wVO.setId("id001");
-		wVO.setProductid("p00");
-		pVO.setsub_id("s0001");
-//System.out.println(pDAO.selectprdList(pVO));
-//System.out.println(pDAO.selectprdCnt(pVO));
-//System.out.println(pDAO.selectcheckWish(wVO));
-//		System.out.println(pDAO.selectPrdDetail("p0001"));
-//		System.out.println(pDAO.selectprdCnt(pVO));
-		
-		System.out.println(pDAO.selectcheckWish(wVO));
-	}
+
 
 }//class
 

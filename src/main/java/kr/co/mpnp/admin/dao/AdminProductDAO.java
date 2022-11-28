@@ -234,26 +234,6 @@ public int updateProduct(AdminProductVO apVO) {
 	return cnt;
 }
 
-	public static void main(String[] args) {
-		
-		AdminProductDAO apDAO = new AdminProductDAO();
-		AdminProductVO apVO = new AdminProductVO();
-		//apVO.setname("µµ");
-		apVO.setmain_id("m0001");
-		//apVO.setsub_id("s000");
-	//System.out.println(apDAO.selectPrd(apVO));
-//System.out.println(apDAO.selectPrdDetail("pr_0000073"));
-		List<String> list = new ArrayList<String>(Arrays.asList("A"));
-//	System.out.println(apDAO.selectPrdImg("pr_0000073"));
 
-		//System.out.println(apDAO.selectCategory("m0001"));
-	//System.out.println(apVO);
-//	System.out.println(apDAO.insertProduct(apVO));
-//System.out.println(apDAO.selectProductId());
-	
-	apVO.setProductid("pr_0000073");
-	System.out.println(apDAO.updateProduct(apVO));
-	
-	}
 
 }

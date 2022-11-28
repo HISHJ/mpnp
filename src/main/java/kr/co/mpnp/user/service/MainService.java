@@ -70,14 +70,7 @@ public class MainService {
 			return isLast;
 			
 		}//isLast
-	public static void main(String[] args) {
-			
-	MainService ms= new MainService();
-			System.out.println(ms.CartTotalCnt("id001"));
-			
-		}
 
-	
 
 
 }// class

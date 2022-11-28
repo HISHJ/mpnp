@@ -104,16 +104,7 @@ public class AdminProductService {
 	
 	//상품이미지
 
-	public static void main(String[] args) {
-		AdminProductService as=new AdminProductService();
-		try {
-			System.out.println(as.SubCategory("m0001"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
-	}
+
 	
 	
 }

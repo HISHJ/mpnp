@@ -110,24 +110,7 @@ public class ProductService {
 	
 
 	
-	public static void main(String[] args) {
-	ProductService ps=new ProductService();	
-	ProductCartVO	cVO= new ProductCartVO();
-			cVO.setId("id010");
-			cVO.setProductid("p0001");
-//			
-//		ProductVO pVO= new ProductVO();
-//		pVO.setsub_id("s0001");
-//			System.out.println(ps.searchPrdCnt(pVO));
-//			 int result=ps.addWish(cVO);
-			int check=ps.addCart(cVO);
-		//	System.out.println("result : "+result);
-			System.out.println("result : "+check);
-		//	System.out.println(ps.addWish(cVO));
-//		System.out.println(ps.checkWish(cVO));
-//		System.out.println(ps.checkWish(cVO));
-	}
-
+	
 	
 
 }//class

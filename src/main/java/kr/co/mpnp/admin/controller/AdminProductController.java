@@ -54,9 +54,19 @@ public class AdminProductController {
 	
 	@RequestMapping(value="admin_prdList.do", method=GET)
 	public  String searchPrdList(HttpSession session,AdminProductVO apVO ,Model model) throws SQLException {
-		List<AdminProductDomain > list=as.SearchPrdList(apVO);
+	
+		boolean loginFlag =false;
 		
-		model.addAttribute("product",list );
+	
+		
+		if(session.getAttribute("adminId")!=null) {
+			List<AdminProductDomain > list=as.SearchPrdList(apVO);
+			model.addAttribute("product",list );
+		}else {
+	
+		}
+		
+	
 	
 		return "admin/product/itemBoard";
 		
@@ -122,7 +132,7 @@ public class AdminProductController {
 			e.printStackTrace();
 		}
 			
-	return "admin/product/itemBoard";
+	return result+" ";
 
 		
 	

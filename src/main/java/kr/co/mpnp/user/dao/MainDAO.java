@@ -110,13 +110,6 @@ public class MainDAO {
 	
 
 	
-	public static void main(String[] args) {
-		
-		MainDAO mDAO= new MainDAO();
-		MainVO mVO  = new MainVO();
-		mVO.setMain_id("m0001");
 
-		
-	}
 
 }//class

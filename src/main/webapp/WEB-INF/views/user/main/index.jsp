@@ -16,10 +16,10 @@
 <link href="common/favicon/favicon.ico" rel="shrtcut icon">
 <link href="common/favicon/android-icon-192x192.png" rel="apple-touch-icon-precomposed">
 
-<link rel="stylesheet" href="http://localhost/mpnp/3rdDesign/common/css/headerFooter.css">
-<link rel="stylesheet" type="text/css" href="http://localhost/mpnp/3rdDesign/_css/main.style.pc.css">
+<link rel="stylesheet" href="http://mpnp.sist.co.kr/3rdDesign/common/css/headerFooter.css">
+<link rel="stylesheet" type="text/css" href="http://mpnp.sist.co.kr/3rdDesign/_css/main.style.pc.css">
    <link rel="stylesheet" type="text/css" href="https://vknfvtjnsgec6381690.cdn.ntruss.com/_css/jquery-ui.css">
-<script type="text/javascript" src="http://localhost/mpnp/3rdDesign/_script/crypto.js"></script>
+<script type="text/javascript" src="http://mpnp.sist.co.kr/3rdDesign/_script/crypto.js"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/webHookPolicy.js?v=22102810"></script>
 <script type="text/javascript" src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/errHandler.min.js?v=22102810" userInfo="%7B%22mbrNo%22%3A0%2C%22appName%22%3A%22FRONT%22%2C%22sessionIp%22%3A%22211.244.65.66%22%2C%22appEnv%22%3A%22PRD%22%2C%22sessionId%22%3A%22NjliOTliYTEtMzM2Mi00OWE0LTk4NGQtODNkNDY1NDliOTMx%22%7D" webHookErrWebUrl="https://petsbe.webhook.office.com/webhookb2/6846f755-9900-4b13-8eb6-7c7a01c9abde@2ebad8bd-5697-4302-afcf-7b617ee135ff/IncomingWebhook/287ff9c2be6c4aecba75d0f1f665a86c/89d2885b-4579-4313-be4c-a1c2f9998d81"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery-3.3.1.min.js" ></script>
@@ -31,11 +31,11 @@
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/jquery/jquery.form.min.js" ></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/swiper.min.js"></script>
 <script type="text/javascript"  src="https://vknfvtjnsgec6381690.cdn.ntruss.com/_script/clipboard.min.js"></script>
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
-<script type="text/javascript"  src="http://localhost/mpnp/3rdDesign/_script/popup.js" ></script>
-<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui.js"></script>
-<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/ui_shop.js"></script>
-<script type="text/javascript"    src="http://localhost/mpnp/3rdDesign/_script/deviceChk.js"></script>   <!-- // APP용 Device, Device OS, 위도, 경도 추가 -->
+<script type="text/javascript"  src="http://mpnp.sist.co.kr/3rdDesign/_script/common.js?modifiedDate=20221013" ></script>
+<script type="text/javascript"  src="http://mpnp.sist.co.kr/3rdDesign/_script/popup.js" ></script>
+<script type="text/javascript"    src="http://mpnp.sist.co.kr/3rdDesign/_script/ui.js"></script>
+<script type="text/javascript"    src="http://mpnp.sist.co.kr/3rdDesign/_script/ui_shop.js"></script>
+<script type="text/javascript"    src="http://mpnp.sist.co.kr/3rdDesign/_script/deviceChk.js"></script>   <!-- // APP용 Device, Device OS, 위도, 경도 추가 -->
 
   <!--google icons-->
    <link rel="stylesheet"
@@ -576,7 +576,7 @@ else{
 	<li class="swiper-slide swiper-slide-active" id="shortcut_2362" data-bnrdscrt="사료" data-bnrtext="사료샘플" style="width: 76.5px; margin-right: 36px;">
 		<a href="javascript:setCateList('s0001');" class="box recent" >
 					<div class="gds">
-						<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-petfood-dry3x.jpg" alt="사료샘플" class="img">
+						<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-dog-petfood-dry3x.jpg" alt="사료샘플" class="img">
 						<!-- <img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/display/2362/5609de03-c91b-462a-bf66-3822e5e56b2f.jpg?type=f&amp;w=150&amp;h=150&amp;quality=90&amp;align=4" alt="사료샘플" class="img"> -->
 					</div>
 					<div class="tt">사료</div>
@@ -586,7 +586,7 @@ else{
 	<li class="swiper-slide" id="shortcut_2367" data-bnrdscrt="간식" data-bnrtext="간식" style="width: 76.5px; margin-right: 36px;">
 		<a href="javascript:setCateList('s0002');" class="box recent" >
 					<div class="gds">
-						<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-sanck-handmade3x.jpg" alt="건식" class="img">
+						<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-dog-sanck-handmade3x.jpg" alt="건식" class="img">
 					</div>
 					<div class="tt">간식</div>
 				</a>
@@ -595,7 +595,7 @@ else{
 			<li class="swiper-slide" id="shortcut_2380" data-bnrdscrt="패션/의류" data-bnrtext="패션/의류">
 				<a href="javascript:setCateList('s0003');" class="box recent" >
 							<div class="gds">
-								<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-supplies-clothes3x.jpg" alt="패션/의류" class="img">
+								<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-dog-supplies-clothes3x.jpg" alt="패션/의류" class="img">
 							</div>
 							<div class="tt">패션/의류</div>
 						</a>
@@ -603,7 +603,7 @@ else{
 			<li class="swiper-slide" id="shortcut_2376" data-bnrdscrt="기타" data-bnrtext="기타">
 				<a href="javascript:setCateList('s0004');" class="box recent" >
 							<div class="gds">
-								<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-dog-supplies-toy3x.jpg" alt="펫가전" class="img">
+								<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-dog-supplies-toy3x.jpg" alt="펫가전" class="img">
 							</div>
 							<div class="tt">기타</div>
 						</a>
@@ -623,7 +623,7 @@ else{
 		<li class="swiper-slide swiper-slide-active" id="shortcut_2362" data-bnrdscrt="사료" data-bnrtext="사료샘플" style="width: 76.5px; margin-right: 36px;">
 			<a href="javascript:setCateList('s0005');" class="box recent" >
 						<div class="gds">
-							<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-petfood-dry3x.jpg" alt="사료샘플" class="img">
+							<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-cat-petfood-dry3x.jpg" alt="사료샘플" class="img">
 							<!-- <img src="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images/display/2362/5609de03-c91b-462a-bf66-3822e5e56b2f.jpg?type=f&amp;w=150&amp;h=150&amp;quality=90&amp;align=4" alt="사료샘플" class="img"> -->
 						</div>
 						<div class="tt">사료</div>
@@ -633,7 +633,7 @@ else{
 		<li class="swiper-slide" id="shortcut_2367" data-bnrdscrt="간식" data-bnrtext="간식" style="width: 76.5px; margin-right: 36px;">
 			<a href="javascript:setCateList('s0006');" class="box recent" >
 						<div class="gds">
-							<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-sanck-pouch3x.jpg" alt="건식" class="img">
+							<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-cat-sanck-pouch3x.jpg" alt="건식" class="img">
 						</div>
 						<div class="tt">간식</div>
 					</a>
@@ -642,7 +642,7 @@ else{
 				<li class="swiper-slide" id="shortcut_2380" data-bnrdscrt="패션/의류" data-bnrtext="패션/의류">
 					<a href="javascript:setCateList('s0007');" class="box recent" >
 								<div class="gds">
-									<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-supplies-scratcher3x.jpg" alt="패션/의류" class="img">
+									<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-cat-supplies-scratcher3x.jpg" alt="패션/의류" class="img">
 								</div>
 								<div class="tt">패션/의류</div>
 							</a>
@@ -650,7 +650,7 @@ else{
 				<li class="swiper-slide" id="shortcut_2376" data-bnrdscrt="기타" data-bnrtext="기타">
 					<a href="javascript:setCateList('s0008');" class="box recent" >
 								<div class="gds">
-									<img src="http://localhost/mpnp/3rdDesign/common/images/button-kategorie-third-cat-petfood-adult3x.jpg" alt="펫가전" class="img">
+									<img src="http://mpnp.sist.co.kr/3rdDesign/common/images/button-kategorie-third-cat-petfood-adult3x.jpg" alt="펫가전" class="img">
 								</div>
 								<div class="tt">기타</div>
 							</a>
@@ -787,7 +787,7 @@ var gogoSwiper = (function() {
 		
 				<a class="gd-link all_items" href="prddetail.do?productid=${data.productid}">
 						<div class="gd-thumb">
-			<img class="thumb-img" src="http://localhost/mpnp/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="http://localhost/mpnp/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
+			<img class="thumb-img" src="http://mpnp.sist.co.kr/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4"onerror="http://mpnp.sist.co.kr/upload/product/${data.thimg }?type=f&amp;w=288&amp;h=288&amp;quality=90&amp;align=4'">
 								<div class="gd-flag">
 									</div>
 								<button class="btn-favorite " data-content="GI251053225" data-url="/goods/insertWish?goodsId=GI251053225" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GI251053225" data-target="goods">찜하기</button>
@@ -837,7 +837,7 @@ var gogoSwiper = (function() {
 </div>
 </div> -->
 
-<%-- <script type="text/javascript">
+ <script type="text/javascript">
 $(function() {
 var slidesPerColumn = 1, slidesPerGroup = 4;
 
@@ -901,7 +901,7 @@ if (petShopMainResult.focus.indexOf('OnlyApet') > -1) {
 		}
 }
 });
-</script> --%>
+</script> 
 </div>
 	</section>
 		
@@ -1226,7 +1226,10 @@ $(function() {
 				
 				</ul>
 			</div>
-	<div class="copy">© copyright (c) www.aboutpet.co.kr all rights reserved.</div>
+			
+	<div class="copy">
+	<a href="admin_login_form.do">
+	© copyright (c) www.aboutpet.co.kr all rights reserved.</a></div>
 	<div class="info escrow">
 			
 		</div>

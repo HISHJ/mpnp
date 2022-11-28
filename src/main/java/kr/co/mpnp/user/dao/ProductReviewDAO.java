@@ -78,15 +78,7 @@ public class ProductReviewDAO {
 	}
 
 	
-	public static void main(String[] args) {
-		
-		ProductReviewDAO pDAO = new ProductReviewDAO();
-		
-	 System.out.println(pDAO.selectProductReview("p0001"));
-		System.out.println(pDAO.selectStarCnt("p0001"));
-	
-	}
-	
+
 	
 	
 	

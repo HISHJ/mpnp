@@ -63,74 +63,21 @@
 <!-- 기본 컨텐츠 -->
 	<div class="wrap" id="wrap">
 		<input type="hidden" id="viewJsonData" value="%7B%22vod_group_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Flist%3Fchannel_id%3D%22%2C%22vod_group_move_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fmove_vod%2F%22%2C%22vod_group_add_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fplaylist%2Fadd_item%2F%22%2C%22vod_upload_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fupload%2F%22%2C%22vod_chnl_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fchannel%2Flist%22%2C%22fo_mois_post_confmKey%22%3A%22U01TX0FVVEgyMDIxMDMzMDEwMzEzMDExMDk4MTk%3D%22%2C%22vod_api_chnl_id_log%22%3A%22aboutpet_log%22%2C%22vod_info_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2Finfo%2F%22%2C%22vod_group_chnl_ord_api_url%22%3Anull%2C%22vod_list_api_url%22%3A%22https%3A%2F%2Fsgr.aboutpet.co.kr%2Fv1%2Fvod%2Fvideo%2F%22%2C%22vod_group_default%22%3A%22unclassified%22%2C%22vod_api_chnl_id_tv%22%3A%22aboutpet_tv%22%7D">
-		
-
-<header class="header pc cu mode0" data-header="set0" id="header_pc">
+			
+			 <header class="header pc cu mode0" data-header="set0" id="header_pc">
 	<input type="password" style="display:none;"/><!-- 크롬 패스워드 자동완성 방지 -->
 	<div class="hdr">
 		<div class="inr">
-			<div class="tdt">
-				<ul class="menu">					
-					<li><a href="/join/indexTerms?header=Y&goSns=Y" class="bt">회원가입</a></li>
-		                <li><a href="javascript:clickLogin();" class="bt">로그인</a></li>
-		                <!-- <li><a href="javascript:;" class="bt">로그인/회원가입</a></li> -->
-				
-					</ul>
-			</div>
-			<div class="hdt">
-				<!-- mobile -->
-				<button class="mo-header-btnType02">취소</button><!-- on 클래스 추가 시 활성화 -->
-				<!-- // mobile -->
-				<button class="btnGnb" type="button">메뉴</button>
-<!-- -->
-				<h1 class="logo shop">
-					<a class="bt" href="javascript:goShopDeleteCookie();">AboutPet</a>
-				</h1>
-				<nav class="menushop">
-							<button type="button" class="bt st" id="headerTxt"></button>
-							<div class="list">
-								<ul class="menu">
-									<li class=""><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000173)"><b class="t" id="b_tag_300000174">강아지</b></a></li>
-									<li class="active"><a class="bt" href="javascript:void(0);" onclick="sendDispClsfNo(300000174)"><b class="t" id="b_tag_300000174">고양이</b></a></li>
-								
-								</ul>
-							</div>
-						</nav>
-<!-- -->
-				<!-- mobile -->
-				<button class="mo-header-backNtn" onclick="storageHist.goBack();">뒤로</button>
-					<div class="mo-heade-tit"  >
-					<span class="tit"></span>
-								</div>
-				<div class="mo-header-rightBtn">
-						<button class="mo-header-btnType01">
-							<span class="mo-header-icon"></span>
-							</button>
-					</div>
-				<button class="mo-header-close"></button>
-				<!-- // mobile -->
+
+<c:import	url="../../user/main/user_header.jsp">
+			<c:param name="id" value="${sessionScope.id }"></c:param>
+</c:import>
+
 			
-			</div>
-			<div class="cdt" >
-						<div class="schs">
-								<form action="search_prd_list.do" method="get">
-								<div class="form " style="margin-right:70px !important;width:900px !important; ">
-									<div class="input del kwd">
-									<input id="srchWord" name="name"  type="search" maxlength="50" value="" autocomplete="off" placeholder="검색어를 입력해주세요." ></div>
-									<button type="submit" class="btnSch">검색</button>
-								</div>
-									</form>
-							</div>
-						<div class="menu">
-							
-							<button id="srchClsBtn" class="bt close" type="button" style="display: none;" onclick="searchCommon.srchClsBtn();">닫기</button>
-							<div class="alims" id ="alertDiv">
-							</div>
-						</div>
-						</div>
 </div>
 	</div>
-</header>
+</header> 
+
 
 		
 		
@@ -196,7 +143,7 @@ function movePage( page ) {
 							<div class="gd-item amplitudeMainData airbridge swiper-slide active" data-idx="0" data-index="1" data-goodsid="GS251062051" data-displayid="" data-displayname="" data-productid="GS251062051" data-productname="[2+1] 펫모닝 바베큐 PMD-159 (랜덤발송)" data-brandid="" data-brandname="" data-categorypath="" data-price="9000" data-discountprice="3400" data-petgbcd="" style="margin-right: 10px;">
 		<a class="gd-link" href="prddetail.do?productid=${result.productid}" data-dispcornno="" data-disptype="commonSearchHist" data-idx="0" data-content="GS251062051" data-url="/goods/indexGoodsDetail?goodsId=GS251062051">
 			 <div class="gd-thumb">
-				<img class="thumb-img" src="http://localhost/mpnp/upload/product/${result.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="this.src='../../_images/common/img_default_thumbnail_2@2x.png'">
+				<img class="thumb-img" src="http://localhost/mpnp/upload/product/${result.thimg}?type=f&amp;w=178&amp;h=178&amp;quality=90&amp;align=4" alt="${result.productname}" onerror="http://localhost/mpnp/upload/product/${result.thimg}">
 				<div class="gd-flag">
 					</div>
 				<!-- <button class="btn-favorite " data-content="GS251062051" data-url="/goods/insertWish?goodsId=GS251062051" data-disp-clsf-no="300000174" data-action="interest" data-yn="N" data-goods-id="GS251062051" data-target="goods">찜하기</button>

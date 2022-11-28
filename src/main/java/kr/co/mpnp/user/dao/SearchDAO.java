@@ -99,18 +99,7 @@ private static SearchDAO searchDAO;
 
 	}
 	
-	public static void main(String[] args) {
-		
-		SearchDAO shDAO= new SearchDAO();
-		SearchVO sVO =new SearchVO();
-		sVO.setName("g");
-		System.out.println(shDAO.selectTotalCnt(sVO));
-		 System.out.println(shDAO.selectProduct(sVO));
-		 
-		 
-		
-		
-	}
+
 	
 	
 }
