@@ -383,7 +383,7 @@
 		<div class="my_user_photo">
 			<a title="프로필수정하기">
 			<c:choose>
-				<c:when test="${not empty mypageMain.pfimg }"><img src="http://localhost/mpnp/upload_pf/${mypageMain.pfimg }" class="img"> </c:when>
+				<c:when test="${not empty mypageMain.pfimg }"><img src="http://localhost/mpnp/upload/pfimg/${mypageMain.pfimg }" class="img"> </c:when>
 				<c:otherwise><img src="http://localhost/mpnp/3rdAdmin/img/no_img.jpg" class="img"> </c:otherwise>
 			</c:choose>
 				<button class="btn_profile_edit"><span class="hide_txt">수정</span></button>

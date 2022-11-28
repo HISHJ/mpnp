@@ -27,7 +27,10 @@
       <script type="text/javascript">
       $(function(){
     	  $("#btnRemoveMember").click(function(){
+    		  var id=$("#id").val();
+    		  if(confirm("아이디 '"+id+"'을 삭제하시겠습니까")){
 	    		$("#removeMemberFrm").submit();
+    		  }
   		 });
     	  
     	  $("#btnModifyGrade").click(function(){
@@ -60,6 +63,7 @@
                                         <div class="dataTable-top"></div>
                                         <div class="row">
                                             <div class="col-3"><b>아이디</b></div> <div class="col-4">${member.id }</div>
+                                            <input type="hidden" id="id" name="id" value="${member.id }">
                                         </div>
                                         <div class="dataTable-top"></div>
                                         <div class="row">

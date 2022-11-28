@@ -58,7 +58,7 @@ insert into member (id,nick,name,pass,phone,status,gradeid,inputdate
 values(#{id},#{nick},#{name},#{pass},#{phone},
 #{status},#{gradeid},to_char(sysdate,'yyyy-MM-dd')
 	<if test="pfimg!=null">
-	 	,pfimg=#{pfimg}
+	 	,#{pfimg}
 	</if>
 	)
 </insert>

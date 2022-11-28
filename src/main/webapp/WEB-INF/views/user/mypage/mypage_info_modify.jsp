@@ -195,10 +195,11 @@
 
 			<div class="ctset ctset1 active" data-ui-tab-ctn="tab_my_cate" data-ui-tab-val="tab_my_cate_1" style="width:200px;">
 				<ul class="sm">
-					<li><a class="bt" href="order_information_form.do">주문내역</a></li>
-					<li><a class="bt" href="writable_review_list.do" data-content="0">상품 후기</a></li>
+					<li><a class="bt" href="order_information_form.do"" data-content="0">주문내역</a></li>
+					<li><a class="bt" href="writable_review_list.do"  data-content="0">상품 후기</a></li>
 					<li><a class="bt" href="mypage_pass_confirm.do?what=updatePass">비밀번호 설정</a></li>
-                    <li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+					<li><a class="bt" href="mypage_pass_confirm.do?what=updateMemberInfo" >회원정보 수정</a></li>
+					<li><a class="bt" href="des_list.do" data-content="0"  >배송지 관리</a></li>
 				</ul>
 			</div>
 
@@ -294,6 +295,7 @@
 								<div class="my-picture">
 									<p class="picture">
 										<img id="pfThumb" class="thumb" data-original="https://cdudsyowwnmx6388661.cdn.ntruss.com/aboutPet/images?type=f&w=720&h=720&quality=70&align=4" src="http://localhost/mpnp/upload_pf/${requestScope.mypage.pfimg }" alt="" onerror="this.style.display='none'" onload="this.style.display='inline'">
+										<c:if test="${not empty requestScope.mypage.pfimg }"><img src="http://localhost/mpnp/upload/pfimg/${requestScope.mypage.pfimg }" class="img" style="height: auto"> </c:if>
 									</p>
 									<button type="button" class="btn edit" id="imgBtn" onclick="document.all.pfimg.click()"></button>
 									<input type="file" id="pfimg" name="pfimg" style="display: none" onchange="thImgSet(this)">

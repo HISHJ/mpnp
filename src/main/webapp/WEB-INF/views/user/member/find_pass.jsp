@@ -195,7 +195,7 @@
 							
 								<div id="ck_cont">
 									<div class="form_w form1">
-										<form id="findPassFrm" action="m_findpass_process.do">
+										<form id="findPassFrm" action="m_findpass_process.do" method="post">
 										<ul class="form">
 											<li>
 												<label for="name" class="tt">아이디</label>

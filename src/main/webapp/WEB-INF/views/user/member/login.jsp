@@ -157,7 +157,7 @@
       </div>
       <!-- // PC 타이틀 모바일에서 제거  -->
       <div class="fake-pop">
-        <form id="loginFrm" action="login_process.do">
+        <form id="loginFrm" action="login_process.do" method="post">
           <div class="pct">
             <div class="poptents">
               

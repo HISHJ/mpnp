@@ -1,13 +1,14 @@
 package kr.co.mpnp.user.controller;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.co.mpnp.user.domain.MemberDomain;
 import kr.co.mpnp.user.service.MemberService;
@@ -25,7 +26,7 @@ public class MemberController {
 		return "user/member/login";
 	}//loginForm
 	
-	@RequestMapping(value = "/login_process.do", method=GET )
+	@RequestMapping(value = "/login_process.do", method=POST )
 	public String loginProcess(HttpSession session,MemberVO mVO,Model model) {
 		
 		MemberService ms=new MemberService();
@@ -57,7 +58,7 @@ public class MemberController {
 		return "user/member/find_id";
 	}//findIdForm
 	
-	@RequestMapping(value = "/m_findid_process.do", method=GET )
+	@RequestMapping(value = "/m_findid_process.do", method=POST )
 	public String findIdProcess(MemberVO mVO, Model model) {
 		
 		MemberService ms=new MemberService();
@@ -74,7 +75,7 @@ public class MemberController {
 		return "user/member/find_pass";
 	}//findPassForm
 	
-	@RequestMapping(value = "/m_findpass_process.do", method=GET )
+	@RequestMapping(value = "/m_findpass_process.do", method=POST )
 	public String findPassProcess(HttpSession session, MemberVO mVO, Model model) {
 		String url="user/member/find_pass_fail";
 		MemberService ms=new MemberService();
@@ -116,43 +117,5 @@ public class MemberController {
 		
 		return "user/member/login"; //
 	}//passModifyProcess
-	
-	
-	
-	//여기 밑에부터는 고민 ... 
-//	@RequestMapping(value = "/m_info_chk.do", method=GET )
-//	public String memberChkForm() {
-//		
-//		return "";
-//	}//memberChkForm
-//	
-//	@RequestMapping(value = "/m_info_form.do", method=GET )
-//	public String memberForm(HttpSession session, String str, Model model) {
-//		
-//		return "";
-//	}//memberForm
-	
-//	@RequestMapping(value = "/m_info_modify_process.do", method=GET )
-//	public String memberModifyProcess(HttpServletRequest request, Model model) {
-//		
-//		return "";
-//	}//memberModifyProcess
-//	
-//	@RequestMapping(value = "/m_quit_form.do", method=GET )
-//	public String memberQuitForm() {
-//		
-//		return "";
-//	}//memberQuitForm
-//	
-//	@RequestMapping(value = "/m_quit_process.do", method=GET )
-//	public String memberQuitProcess(HttpSession session, String str, Model model) {
-//		
-//		return "";
-//	}//memberQuitProcess
-	
-	
-	//// ★ 탈퇴하고 나서 잘가라는 탈퇴 페이지 모여주는 컨트롤러도 추가해야할듯 
-	
-	
 
 }//class

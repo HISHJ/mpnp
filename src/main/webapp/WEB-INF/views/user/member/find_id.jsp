@@ -194,7 +194,7 @@
 								<div id="ck_cont">
 									<div class="form_w form1">
 										
-										<form id="findIdFrm" action="m_findid_process.do">
+										<form id="findIdFrm" action="m_findid_process.do" method="post">
 										<ul class="form">
 											<li>
 												<label for="name" class="tt">이름</label>

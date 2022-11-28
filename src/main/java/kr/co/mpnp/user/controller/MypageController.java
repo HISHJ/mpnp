@@ -12,13 +12,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.mpnp.user.dao.MypageDAO;
 import kr.co.mpnp.user.domain.MypageDomain;
 import kr.co.mpnp.user.service.MypageService;
 import kr.co.mpnp.user.vo.MypageVO;
@@ -73,7 +70,7 @@ public class MypageController {
 	}//mypagePassForm
 	
 	//비번확인 
-	@RequestMapping(value = "/pass_confirm_process.do", method=GET )
+	@RequestMapping(value = "/pass_confirm_process.do", method=POST )
 	public String mypagePassProcess(HttpSession session, MypageVO mVO, String what, Model model) {
 		//여기서 회원정보 수정인지, 비번변경인지 나눠서 url 들어가야해
 		//그걸 어떻게 하는걸까 -> 함 ㅇㅇ
@@ -90,15 +87,11 @@ public class MypageController {
 		//회원정보 페이지에 값 보여주기
 		MypageDomain md= ms.searchMemberInfo(id);
 		mVO.setId(id);
-		System.out.println("myController 핸드폰번호"+md.getPhone());
-		System.out.println("myController 아이디"+md.getId()); 
-		System.out.println("myController 이름"+md.getName());
-		System.out.println("myController 프사"+md.getPfimg());
-		System.out.println("myController 등급"+md.getGradeid());
-		
-		
-		//ms.searchPass(mVO); // 도랏냐 비번 달라도 들어간다. 처리하기. jsp 에서함
-		//System.out.println(ms.searchPass(mVO));
+//		System.out.println("myController 핸드폰번호"+md.getPhone());
+//		System.out.println("myController 아이디"+md.getId()); 
+//		System.out.println("myController 이름"+md.getName());
+//		System.out.println("myController 프사"+md.getPfimg());
+//		System.out.println("myController 등급"+md.getGradeid());
 		
 		if("updatePass".equals(what)) {//비번설정
 			System.out.println("비번 맞고 비번 설정임");
@@ -166,7 +159,7 @@ public class MypageController {
 	}//memberQuitForm
 	
 	//회원탈퇴
-	@RequestMapping(value = "/m_quit_process.do", method=GET )
+	@RequestMapping(value = "/m_quit_process.do", method=POST )
 	public String memberQuitProcess(HttpSession session, MypageVO mVO, Model model) {
 		
 		MypageService ms=new MypageService();

@@ -74,43 +74,8 @@ public class JoinController {
 			e.printStackTrace();
 		}
 		
-		
-//		mVO.setId(request.getParameter("id"));
-//		mVO.setPass(request.getParameter("pass"));
-//		mVO.setName(request.getParameter("name"));
-//		mVO.setPhone(request.getParameter("phone"));
-//		mVO.setNick(request.getParameter("nick"));
-//		mVO.setStatus(request.getParameter("status"));
-//		mVO.setGradeid(request.getParameter("gradeid"));
-		
-		
 		JoinService js= new JoinService();
 		js.addMember(mVO);
-		
-		
-		
-//		File savePfImg=new File("E:/dev/workspace_spring/mpnp/src/main/webapp/upload_pfimg");
-//		int maxSize=1024*1024*20; //Byte, KB, MB, GB
-//		String responseURL="";
-//		try {
-//			MultipartRequest mr=new MultipartRequest(request, saveDir.getAbsolutePath(),
-//					maxSize,"UTF-8", new DefaultFileRenamePolicy());
-//			//3.파라메터 받기(VO에 넣어야한다면 VO를 생성하여 값 넣는다)
-//			UploadVO uVO=new UploadVO();
-//			uVO.setUploader(mr.getParameter("uploader"));
-//			uVO.setAge(Integer.parseInt(mr.getParameter("age")));
-//			uVO.setUpfile(mr.getFilesystemName("upfile"));
-//			
-//			//JSP에서 입력값을 보여주기 위해 model에 VO를 넣는다
-//			model.addAttribute("viewData",uVO);
-//			
-//			responseURL="/day1104/upload_success";
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
-		
-		
 		return "user/join/signUp_result";
 	}//joinAddProcess
 	

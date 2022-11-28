@@ -82,7 +82,7 @@ function chkNull(){
                                                 <label for="inputEmail">ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="pass" name="pass" type="text" placeholder="Password" value="sksi"/>
+                                                <input class="form-control" id="pass" name="pass" type="password" placeholder="Password" value="wpqkfehofk@"/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
 

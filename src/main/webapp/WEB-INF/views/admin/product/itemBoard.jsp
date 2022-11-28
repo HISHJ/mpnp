@@ -116,7 +116,7 @@ if( session.getAttribute("adminId") == null){
     </head>
     <body class="sb-nav-fixed">
   <!-- 여기서부터 <nav>-->
-<jsp:include page="admin_common_header.jsp"/>      
+ <c:import url="http://localhost/mpnp/3rdAdmin/admin_common_header.jsp"/>
 <!-- -여기까지 <div id="layoutSidenav_content"> 전  -->
             <div id="layoutSidenav_content">
                     <div class="container-fluid px-4">
