@@ -8,7 +8,7 @@ import java.util.Date;
 public class MyOrderVO {
 	 private String id, orderId, review_chk,deliveryId, deliveryName, zipcode, addr, addrDetail, phone, receiver, shipReq, orderStatus,
 	  orderDetailId, prdtId, prdName, thImg, findStartDate, findEndDate,inputDateS,cartID;
-	  private int actualPrice, totalPrdCnt, productPrice, totalPageCnt, totalPage, currentPage, startNum, endNum, pageScale, pageFlag=1;
+	  private int actualPrice, totalPrdCnt, productPrice, totalPageCnt, totalPage, currentPage, startNum, endNum, pageScale;
 	  private Date inputDate, completionDate;
 
 	  public MyOrderVO() {
@@ -18,9 +18,9 @@ public class MyOrderVO {
 			String zipcode, String addr, String addrDetail, String phone, String receiver, String shipReq,
 			String orderStatus, String orderDetailId, String prdtId, String prdName, String thImg, String findStartDate,
 			String findEndDate, String inputDateS, String cartID, int actualPrice, int totalPrdCnt, int productPrice,
-			int totalPageCnt, int totalPage, int currentPage, int startNum, int endNum, int pageScale, int pageFlag,
-			Date inputDate, Date completionDate) {
-		
+			int totalPageCnt, int totalPage, int currentPage, int startNum, int endNum, int pageScale, Date inputDate,
+			Date completionDate) {
+	
 		this.id = id;
 		this.orderId = orderId;
 		this.review_chk = review_chk;
@@ -50,264 +50,255 @@ public class MyOrderVO {
 		this.startNum = startNum;
 		this.endNum = endNum;
 		this.pageScale = pageScale;
-		this.pageFlag = pageFlag;
 		this.inputDate = inputDate;
 		this.completionDate = completionDate;
 	}
 
-	public String getId() {
+	public synchronized String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public synchronized void setId(String id) {
 		this.id = id;
 	}
 
-	public String getOrderId() {
+	public synchronized String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public synchronized void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
-	public String getReview_chk() {
+	public synchronized String getReview_chk() {
 		return review_chk;
 	}
 
-	public void setReview_chk(String review_chk) {
+	public synchronized void setReview_chk(String review_chk) {
 		this.review_chk = review_chk;
 	}
 
-	public String getDeliveryId() {
+	public synchronized String getDeliveryId() {
 		return deliveryId;
 	}
 
-	public void setDeliveryId(String deliveryId) {
+	public synchronized void setDeliveryId(String deliveryId) {
 		this.deliveryId = deliveryId;
 	}
 
-	public String getDeliveryName() {
+	public synchronized String getDeliveryName() {
 		return deliveryName;
 	}
 
-	public void setDeliveryName(String deliveryName) {
+	public synchronized void setDeliveryName(String deliveryName) {
 		this.deliveryName = deliveryName;
 	}
 
-	public String getZipcode() {
+	public synchronized String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(String zipcode) {
+	public synchronized void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
 
-	public String getAddr() {
+	public synchronized String getAddr() {
 		return addr;
 	}
 
-	public void setAddr(String addr) {
+	public synchronized void setAddr(String addr) {
 		this.addr = addr;
 	}
 
-	public String getAddrDetail() {
+	public synchronized String getAddrDetail() {
 		return addrDetail;
 	}
 
-	public void setAddrDetail(String addrDetail) {
+	public synchronized void setAddrDetail(String addrDetail) {
 		this.addrDetail = addrDetail;
 	}
 
-	public String getPhone() {
+	public synchronized String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public synchronized void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public String getReceiver() {
+	public synchronized String getReceiver() {
 		return receiver;
 	}
 
-	public void setReceiver(String receiver) {
+	public synchronized void setReceiver(String receiver) {
 		this.receiver = receiver;
 	}
 
-	public String getShipReq() {
+	public synchronized String getShipReq() {
 		return shipReq;
 	}
 
-	public void setShipReq(String shipReq) {
+	public synchronized void setShipReq(String shipReq) {
 		this.shipReq = shipReq;
 	}
 
-	public String getOrderStatus() {
+	public synchronized String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(String orderStatus) {
+	public synchronized void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
-	public String getOrderDetailId() {
+	public synchronized String getOrderDetailId() {
 		return orderDetailId;
 	}
 
-	public void setOrderDetailId(String orderDetailId) {
+	public synchronized void setOrderDetailId(String orderDetailId) {
 		this.orderDetailId = orderDetailId;
 	}
 
-	public String getPrdtId() {
+	public synchronized String getPrdtId() {
 		return prdtId;
 	}
 
-	public void setPrdtId(String prdtId) {
+	public synchronized void setPrdtId(String prdtId) {
 		this.prdtId = prdtId;
 	}
 
-	public String getPrdName() {
+	public synchronized String getPrdName() {
 		return prdName;
 	}
 
-	public void setPrdName(String prdName) {
+	public synchronized void setPrdName(String prdName) {
 		this.prdName = prdName;
 	}
 
-	public String getThImg() {
+	public synchronized String getThImg() {
 		return thImg;
 	}
 
-	public void setThImg(String thImg) {
+	public synchronized void setThImg(String thImg) {
 		this.thImg = thImg;
 	}
 
-	public String getFindStartDate() {
+	public synchronized String getFindStartDate() {
 		return findStartDate;
 	}
 
-	public void setFindStartDate(String findStartDate) {
+	public synchronized void setFindStartDate(String findStartDate) {
 		this.findStartDate = findStartDate;
 	}
 
-	public String getFindEndDate() {
+	public synchronized String getFindEndDate() {
 		return findEndDate;
 	}
 
-	public void setFindEndDate(String findEndDate) {
+	public synchronized void setFindEndDate(String findEndDate) {
 		this.findEndDate = findEndDate;
 	}
 
-	public String getInputDateS() {
+	public synchronized String getInputDateS() {
 		return inputDateS;
 	}
 
-	public void setInputDateS(String inputDateS) {
+	public synchronized void setInputDateS(String inputDateS) {
 		this.inputDateS = inputDateS;
 	}
 
-	public String getCartID() {
+	public synchronized String getCartID() {
 		return cartID;
 	}
 
-	public void setCartID(String cartID) {
+	public synchronized void setCartID(String cartID) {
 		this.cartID = cartID;
 	}
 
-	public int getActualPrice() {
+	public synchronized int getActualPrice() {
 		return actualPrice;
 	}
 
-	public void setActualPrice(int actualPrice) {
+	public synchronized void setActualPrice(int actualPrice) {
 		this.actualPrice = actualPrice;
 	}
 
-	public int getTotalPrdCnt() {
+	public synchronized int getTotalPrdCnt() {
 		return totalPrdCnt;
 	}
 
-	public void setTotalPrdCnt(int totalPrdCnt) {
+	public synchronized void setTotalPrdCnt(int totalPrdCnt) {
 		this.totalPrdCnt = totalPrdCnt;
 	}
 
-	public int getProductPrice() {
+	public synchronized int getProductPrice() {
 		return productPrice;
 	}
 
-	public void setProductPrice(int productPrice) {
+	public synchronized void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
 
-	public int getTotalPageCnt() {
+	public synchronized int getTotalPageCnt() {
 		return totalPageCnt;
 	}
 
-	public void setTotalPageCnt(int totalPageCnt) {
+	public synchronized void setTotalPageCnt(int totalPageCnt) {
 		this.totalPageCnt = totalPageCnt;
 	}
 
-	public int getTotalPage() {
+	public synchronized int getTotalPage() {
 		return totalPage;
 	}
 
-	public void setTotalPage(int totalPage) {
+	public synchronized void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
 
-	public int getCurrentPage() {
+	public synchronized int getCurrentPage() {
 		return currentPage;
 	}
 
-	public void setCurrentPage(int currentPage) {
+	public synchronized void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
-	public int getStartNum() {
+	public synchronized int getStartNum() {
 		return startNum;
 	}
 
-	public void setStartNum(int startNum) {
+	public synchronized void setStartNum(int startNum) {
 		this.startNum = startNum;
 	}
 
-	public int getEndNum() {
+	public synchronized int getEndNum() {
 		return endNum;
 	}
 
-	public void setEndNum(int endNum) {
+	public synchronized void setEndNum(int endNum) {
 		this.endNum = endNum;
 	}
 
-	public int getPageScale() {
+	public synchronized int getPageScale() {
 		return pageScale;
 	}
 
-	public void setPageScale(int pageScale) {
+	public synchronized void setPageScale(int pageScale) {
 		this.pageScale = pageScale;
 	}
 
-	public int getPageFlag() {
-		return pageFlag;
-	}
-
-	public void setPageFlag(int pageFlag) {
-		this.pageFlag = pageFlag;
-	}
-
-	public Date getInputDate() {
+	public synchronized Date getInputDate() {
 		return inputDate;
 	}
 
-	public void setInputDate(Date inputDate) {
+	public synchronized void setInputDate(Date inputDate) {
 		this.inputDate = inputDate;
 	}
 
-	public Date getCompletionDate() {
+	public synchronized Date getCompletionDate() {
 		return completionDate;
 	}
 
-	public void setCompletionDate(Date completionDate) {
+	public synchronized void setCompletionDate(Date completionDate) {
 		this.completionDate = completionDate;
 	}
 
@@ -321,8 +312,8 @@ public class MyOrderVO {
 				+ findEndDate + ", inputDateS=" + inputDateS + ", cartID=" + cartID + ", actualPrice=" + actualPrice
 				+ ", totalPrdCnt=" + totalPrdCnt + ", productPrice=" + productPrice + ", totalPageCnt=" + totalPageCnt
 				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage + ", startNum=" + startNum + ", endNum="
-				+ endNum + ", pageScale=" + pageScale + ", pageFlag=" + pageFlag + ", inputDate=" + inputDate
-				+ ", completionDate=" + completionDate + "]";
+				+ endNum + ", pageScale=" + pageScale + ", inputDate=" + inputDate + ", completionDate="
+				+ completionDate + "]";
 	}
 
 	

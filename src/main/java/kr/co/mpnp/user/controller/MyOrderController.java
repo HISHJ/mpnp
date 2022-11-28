@@ -36,20 +36,10 @@ public class MyOrderController {
 		 url = "/user/mypage/order_information";
 		}
 		
+
 		//페이징
 		//페이징변수
-		int totalData =moServ.totalCount(mvo);
-		int lastPage = moServ.lastPage(totalData);
-		int curPage = mvo.getPageFlag();
-		int startNum = moServ.startNum(curPage);
-		int isLast = moServ.isLast(lastPage, startNum);
-				
-		//view로 전송
-		model.addAttribute("totalData", totalData);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("startNum", startNum);
-		model.addAttribute("isLast", isLast);
-		model.addAttribute("curPage", curPage);
+		
 	
 		
 		
