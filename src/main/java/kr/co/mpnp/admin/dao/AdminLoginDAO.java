@@ -28,7 +28,7 @@ public class AdminLoginDAO {
 		//1.MyBatis Handler얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		System.out.println(alVO.getId()+"/"+alVO.getPass()); //값 잘 받아짐
+		//System.out.println(alVO.getId()+"/"+alVO.getPass()); //값 잘 받아짐
 				
 		//2.쿼리문실행
 		int cnt=ss.selectOne("kr.co.mpnp.admin.mapper.adminLoginMapper.selectAdminLogin",alVO);
@@ -36,10 +36,10 @@ public class AdminLoginDAO {
 			//ss.commit();//select할땐 필요없는 거아니야 ?  
 			flag=true;
 		}else {
-			System.out.println("로그인에 실패하였습니다");
+			//System.out.println("로그인에 실패하였습니다");
 		}
 		//cnt 테스트
-		System.out.println(cnt+"건");
+		//System.out.println(cnt+"건");
 				
 		//3.MyBatis Handler 끊기
 		mbh.closeHandler(ss);
@@ -53,18 +53,18 @@ public class AdminLoginDAO {
 		//1.MyBatis Handler얻기
 		MyBatisHandler mbh=MyBatisHandler.getInstance();
 		SqlSession ss=mbh.getHandler();
-		System.out.println("세션에 있는 아이디..."+alVO.getId()); //null인데 관리자는 뭐
+		//System.out.println("세션에 있는 아이디..."+alVO.getId()); //null인데 관리자는 뭐
 		
 		//2.쿼리문실행
 		int cnt=ss.update("kr.co.mpnp.admin.mapper.adminLoginMapper.updateAdminPass",alVO);
 		if(cnt!=0) {
-			System.out.println(alVO.getNewpass()+"으로 비번 변경완료");
+			//System.out.println(alVO.getNewpass()+"으로 비번 변경완료");
 			ss.commit();//와 이거 잊지말자 .... 
 		}else {
-			System.out.println("실패하였습니다");
+			//System.out.println("실패하였습니다");
 		}
 		//cnt 테스트
-		System.out.println(cnt+"건");
+		//System.out.println(cnt+"건");
 		
 		//3.MyBatis Handler 끊기
 		mbh.closeHandler(ss);

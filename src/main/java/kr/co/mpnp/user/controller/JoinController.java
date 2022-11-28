@@ -42,7 +42,7 @@ public class JoinController {
 		//ajax 사용할건데 페이지 이동이 있으면 되나 ? 
 		
 		JoinService js=new JoinService();
-		System.out.println("중복환인 return 값 "+js.searchDupChk(id));
+//		System.out.println("중복환인 return 값 "+js.searchDupChk(id));
 		
 		return js.searchDupChk(id);
 	}//joinDupChk

@@ -107,7 +107,7 @@ public class MemberController {
 		// param으로 받으면 안되고 세션꺼를 받아와야해 > 마이페이지에서 패스 수정할땐 말이야
 		
 		String id=(String)session.getAttribute("id");
-		System.out.println("마이페이지 비번 수정 프로세스 아이디 "+id);
+		//System.out.println("마이페이지 비번 수정 프로세스 아이디 "+id);
 		
 		mVO.setId(id);
 		

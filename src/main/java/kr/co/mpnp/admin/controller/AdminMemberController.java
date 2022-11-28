@@ -67,7 +67,7 @@ public class AdminMemberController {
 	//멤버삭제
 	@RequestMapping(value = "/admin_m_remove_process.do", method=GET )
 	public String adminMRemoveProcess(String id, HttpSession session, Model model) {
-		System.out.println("멤버삭제 !"+id);
+//		System.out.println("멤버삭제 !"+id);
 		
 		//member table 상태 '탈퇴'로 update
 		AdminMemberService ams=new AdminMemberService();
@@ -84,8 +84,8 @@ public class AdminMemberController {
 	@RequestMapping(value = "/admin_m_grade_process.do", method = GET)
 	public String adminGradeProcess(HttpSession session, AdminMemberVO amVO, Model model) {
 		session.getAttribute("adminId"); 
-		System.out.println("등급수정 !"+amVO.getGradeid());
-		System.out.println("수정할 아이디 !"+session.getAttribute("adminId")); //불러옴
+//		System.out.println("등급수정 !"+amVO.getGradeid());
+//		System.out.println("수정할 아이디 !"+session.getAttribute("adminId")); //불러옴
 		
 		AdminMemberService ams=new AdminMemberService();
 		ams.modifyMemberGrade(amVO);

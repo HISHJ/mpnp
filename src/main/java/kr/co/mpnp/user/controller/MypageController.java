@@ -42,7 +42,7 @@ public class MypageController {
 			model.addAttribute("mypageMain",md);
 		}
 		
-		System.out.println("세션아이디"+session.getAttribute("id"));
+		//System.out.println("세션아이디"+session.getAttribute("id"));
 		
 		return url;
 	}//mypageForm
@@ -60,8 +60,8 @@ public class MypageController {
 			MypageService ms=new MypageService();
 			MypageDomain md= ms.searchMemberInfo(id);
 			model.addAttribute("onlyForPass", md);
-			System.out.println("세션에 아이디: "+session.getAttribute("id")); //들어오고
-			System.out.println("왓"+what); //들어옴
+//			System.out.println("세션에 아이디: "+session.getAttribute("id")); //들어오고
+//			System.out.println("왓"+what); //들어옴
 			
 			url="user/mypage/pass_confirm";
 		}
@@ -78,7 +78,7 @@ public class MypageController {
 		String url="";
 		String id=(String) session.getAttribute("id");
 		
-		System.out.println("프로세스 왓"+what); //들어온ㄷ ㅏ!
+//		System.out.println("프로세스 왓"+what); //들어온ㄷ ㅏ!
 		
 		//비번확인
 		MypageService ms=new MypageService();
@@ -94,12 +94,12 @@ public class MypageController {
 //		System.out.println("myController 등급"+md.getGradeid());
 		
 		if("updatePass".equals(what)) {//비번설정
-			System.out.println("비번 맞고 비번 설정임");
+//			System.out.println("비번 맞고 비번 설정임");
 			model.addAttribute("passFind", md);
 			url="user/member/pass_modify";
 		}else{//회원정보수정
 			//("updateMemberInfo".equals(what))
-			System.out.println("비번 맞고 회원정보수정임");
+//			System.out.println("비번 맞고 회원정보수정임");
 			model.addAttribute("mypage",md);  
 			url="user/mypage/mypage_info_modify";
 		}
@@ -116,7 +116,7 @@ public class MypageController {
 	public String mypageModifyProcess(HttpServletRequest request, Model model) {
 		
 		MypageVO mVO=new MypageVO();
-		System.out.println("회원정보수정 아이디!!"+request.getAttribute("id"));//null
+//		System.out.println("회원정보수정 아이디!!"+request.getAttribute("id"));//null
 
 		
 		File saveDir=new File("C:/Users/user/git/mpnp/src/main/webapp/upload/pfimg");
@@ -134,8 +134,8 @@ public class MypageController {
 			mVO.setNick(mr.getParameter("nick"));
 			mVO.setGradeid(mr.getParameter("gradeid"));
 			
-			System.out.println("회원정보수정 pfimg"+mVO.getPfimg());
-			System.out.println("회원정보수정 gid"+mVO.getGradeid());
+//			System.out.println("회원정보수정 pfimg"+mVO.getPfimg());
+//			System.out.println("회원정보수정 gid"+mVO.getGradeid());
 			model.addAttribute("mypageMain",mVO);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -35,7 +35,7 @@ public class  AdminMemberDAO {
 			// 쿼리 실행
 			list = ss.selectList("kr.co.mpnp.adminMemberMapper.selectMember",amVO);
 
-			System.out.println(list);
+			//System.out.println(list);
 
 			// 연결끊기
 			mbh.closeHandler(ss);
@@ -54,7 +54,7 @@ public class  AdminMemberDAO {
 		// 쿼리 실행
 		list = ss.selectList("kr.co.mpnp.adminMemberMapper.selectGrade",amVO);
 		
-		System.out.println(list);
+		//System.out.println(list);
 		
 		// 연결끊기
 		mbh.closeHandler(ss);
@@ -72,7 +72,7 @@ public class  AdminMemberDAO {
 		// 쿼리 실행
 		amd = ss.selectOne("kr.co.mpnp.adminMemberMapper.selectMemberDetail",id);
 
-		System.out.println(amd);
+		//System.out.println(amd);
 
 		// 연결끊기
 		mbh.closeHandler(ss);
@@ -90,13 +90,13 @@ public class  AdminMemberDAO {
 		//2.쿼리문실행
 		int cnt=ss.update("kr.co.mpnp.adminMemberMapper.updateMember",id);
 		if(cnt!=0) {
-			System.out.println("아이디: "+id+" 탈퇴처리되었습니다");
+			//System.out.println("아이디: "+id+" 탈퇴처리되었습니다");
 			ss.commit();//와 이거 잊지말자 .... 
 		}else {
-			System.out.println("실패하였습니다");
+			//System.out.println("실패하였습니다");
 		}
 		//cnt 테스트
-		System.out.println(cnt+"건");
+		//System.out.println(cnt+"건");
 		
 		//3.MyBatis Handler 끊기
 		mbh.closeHandler(ss);
@@ -113,18 +113,18 @@ public class  AdminMemberDAO {
 		SqlSession ss=mbh.getHandler();
 		
 		//session에서 받아온 id가 null 이다 ? 어떻게 해결해야하지? jsp form안에 hidden으로 값 줌
-		System.out.println("DAO값 "+amVO.getId()+"/"+amVO.getGradeid());
+		//System.out.println("DAO값 "+amVO.getId()+"/"+amVO.getGradeid());
 		
 		//2.쿼리문실행
 		int cnt=ss.update("kr.co.mpnp.adminMemberMapper.updateMemberGrade",amVO);
 		if(cnt!=0) {
-			System.out.println(amVO.getGradeid()+"으로 회원등급변경");
+			//System.out.println(amVO.getGradeid()+"으로 회원등급변경");
 			ss.commit();
 		}else {
-			System.out.println("등급변경에 실패하였습니다");
+			//System.out.println("등급변경에 실패하였습니다");
 		}
 		//cnt 테스트
-		System.out.println(cnt+"건");
+		//System.out.println(cnt+"건");
 		
 		//3.MyBatis Handler 끊기
 		mbh.closeHandler(ss);

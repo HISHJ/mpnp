@@ -75,8 +75,8 @@ public class AdminLoginController {
 		AdminLoginService als=new AdminLoginService();
 		
 		alVO.setId(id);
-		System.out.println("관리자 비번변경 controller id "+id);
-		System.out.println("관리자 비번변경 controller pass "+alVO.getPass());
+//		System.out.println("관리자 비번변경 controller id "+id);
+//		System.out.println("관리자 비번변경 controller pass "+alVO.getPass());
 		boolean passChk=als.searchAdminLogin(alVO); 
 		if(passChk) { //아이디 비번 맞으면
 			als.modifyAdminPass(alVO);
