@@ -39,7 +39,7 @@ public class OrderController {
      }
 
 	// 주문페이지로 이동(ok)
-	@RequestMapping(value = "/orderPayment_form.do", method =GET)
+	@RequestMapping(value = "/orderPayment_form.do", method = POST)
 	public String orderPayment(HttpSession session,OrderVO oVO,OrdersInfoVO oIfVO ,  Model model) {
 		String url="redirect:login_form.do";
 		String id = (String) session.getAttribute("id");

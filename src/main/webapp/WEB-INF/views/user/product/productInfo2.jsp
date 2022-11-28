@@ -271,7 +271,7 @@
 							 })//end ready
 							</script>
 							
-							<form action="orderPayment_form.do" method="get" id="orderFrm" name="orderFrm">
+							<form action="orderPayment_form.do" method="post" id="orderFrm" name="orderFrm">
 								<input type="hidden" name="orders[0].prdId" value="${data.productid}" />
 								<input type="hidden" name="orders[0].prdCnt" />
 							</form>

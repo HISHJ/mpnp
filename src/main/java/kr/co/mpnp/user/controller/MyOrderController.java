@@ -47,16 +47,7 @@ public class MyOrderController {
 		return url;
 	}// searchOrderList
 	
-	/*
-	 * //날짜 조회
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/order_date_process.do", method=GET) public String
-	 * searchDate(HttpSession session,MyOrderVO mvo,Model model) { MyOrderService
-	 * moServ = new MyOrderService(); mvo.setId("test1126"); String jsonObj =
-	 * moServ.searchDate(mvo); return jsonObj; }//
-	 */	
+
 
 	// 선택주문취소(,주문상세코드)
 	@ResponseBody

@@ -103,10 +103,10 @@ public class AdminGradeContorller {
 	@RequestMapping(value = "/admin_g_modify_process.do",  method = {GET,POST})
 	public String adminGModifyProcess(HttpSession session,AdminGradeVO agVO,Model model) {
 	
-		  System.out.println("업데이트 테스트"+agVO);
+		 // System.out.println("업데이트 테스트"+agVO);
 		  AdminGradeService agServ = new AdminGradeService(); 
 		  int cnt = agServ.modifyGradeInfo(agVO);
-		  System.out.println(cnt + "건 변경");
+		 // System.out.println(cnt + "건 변경");
 		 model.addAttribute("cnt ",cnt );
 		  
 		return "/admin/grade/gradeDetail_modify_process";
