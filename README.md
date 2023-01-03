@@ -44,6 +44,7 @@
   <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
   <img src="https://img.shields.io/badge/Ajax-23C8D2?style=for-the-badge&logo=Java&logoColor=white">
   <img src="https://img.shields.io/badge/MyBatis-512BD4?style=for-the-badge&logo=Java&logoColor=white">
+   <img src="https://img.shields.io/badge/JSTL-FF6D70?style=for-the-badge&logo=Java&logoColor=white">
 </div>
 
 ## :pushpin: 담당역할
